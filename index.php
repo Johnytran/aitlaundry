@@ -16,6 +16,7 @@ if (version_compare(PHP_VERSION, JOOMLA_MINIMUM_PHP, '<'))
 	die('Your host needs to use PHP ' . JOOMLA_MINIMUM_PHP . ' or higher to run this version of Joomla!');
 }
 // andy test
+//pablo test
 // Saves the start time and memory usage.
 $startTime = microtime(1);
 $startMem  = memory_get_usage();
