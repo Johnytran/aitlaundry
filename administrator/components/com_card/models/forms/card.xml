@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+  <fieldset>
+    <field name="id" type="text" readonly="true" class="readonly" default="0" description="JGLOBAL_FIELD_ID_DESC"/>
+    <field name="cardnumber" label="COM_CARD_FORM_LBL_CARD_CARDNUMBER" description="COM_CARD_FORM_DESC_CARD_CARDNUMBER" hint="COM_CARD_FORM_LBL_CARD_CARDNUMBER"/>
+    <field name="type" type="text" label="COM_CARD_FORM_LBL_CARD_TYPE" description="COM_CARD_FORM_DESC_CARD_TYPE" hint="COM_CARD_FORM_LBL_CARD_TYPE"/>
+    <field name="bank" type="text" label="COM_CARD_FORM_LBL_CARD_BANK" description="COM_CARD_FORM_DESC_CARD_BANK" hint="COM_CARD_FORM_LBL_CARD_BANK"/>
+    <field name="cardholder" type="text" label="COM_CARD_FORM_LBL_CARD_CARDHOLDER" description="COM_CARD_FORM_DESC_CARD_CARDHOLDER" hint="COM_CARD_FORM_LBL_CARD_CARDHOLDER"/>
+    <field name="expirydate" default="0000-00-00" type="calendar" class="inputbox" filter="safehtml" label="COM_CARD_FORM_LBL_CARD_EXPIRYDATE" description="COM_CARD_FORM_DESC_CARD_EXPIRYDATE" hint="COM_CARD_FORM_LBL_CARD_EXPIRYDATE"/>
+    <field name="secrectnumber" label="COM_CARD_FORM_LBL_CARD_SECRECTNUMBER" description="COM_CARD_FORM_DESC_CARD_SECRECTNUMBER" hint="COM_CARD_FORM_LBL_CARD_SECRECTNUMBER"/>
+    <field name="ordering"/>
+    <field name="state" default="1" type="list" label="JSTATUS" description="JFIELD_PUBLISHED_DESC" class="inputbox" size="1">
+      <option value="1">JPUBLISHED</option>
+      <option value="0">JUNPUBLISHED</option>
+      <option value="2">JARCHIVED</option>
+      <option value="-2">JTRASHED</option>
+    </field>
+    <field name="checked_out" type="hidden" filter="unset"/>
+    <field name="checked_out_time" default="0000-00-00 00:00:00" type="hidden" filter="unset"/>
+    <field name="created_by" type="createdby" default="0" label="COM_CARD_FORM_LBL_CARD_CREATED_BY" description="COM_CARD_FORM_DESC_CARD_CREATED_BY" hidden="true" hint="COM_CARD_FORM_LBL_CARD_CREATED_BY"/>
+    <field name="modified_by" type="modifiedby" default="0" label="COM_CARD_FORM_LBL_CARD_MODIFIED_BY" description="COM_CARD_FORM_DESC_CARD_MODIFIED_BY" hidden="true" hint="COM_CARD_FORM_LBL_CARD_MODIFIED_BY"/>
+    <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
+  </fieldset>
+</form>
