@@ -129,7 +129,7 @@ class ServicessViewServicess extends JViewLegacy
 				JToolBarHelper::divider();
 			}
 		}
-
+		//print_r($this->items);
 		if ($canDo->get('core.admin'))
 		{
 			JToolBarHelper::preferences('com_servicess');

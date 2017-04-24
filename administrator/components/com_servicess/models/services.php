@@ -95,7 +95,7 @@ class ServicessModelServices extends JModelAdmin
 	{
 		// Check the session for previously entered form data.
 		$data = JFactory::getApplication()->getUserState('com_servicess.edit.services.data', array());
-
+		
 		if (empty($data))
 		{
 			if ($this->item === null)
@@ -107,7 +107,7 @@ class ServicessModelServices extends JModelAdmin
 			// Support for 'multiple' field
 			$data->comboid = json_decode($data->comboid);
 		}
-
+		//print_r($data);die;
 		return $data;
 	}
 
@@ -126,7 +126,8 @@ class ServicessModelServices extends JModelAdmin
 		{
 			// Do any procesing on fields here if needed
 		}
-
+		//print_r($item);
+		//die;
 		return $item;
 	}
 

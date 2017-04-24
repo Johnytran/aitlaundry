@@ -191,21 +191,23 @@ class ServicessModelServicess extends JModelList
 	public function getItems()
 	{
 		$items = parent::getItems();
+		$db = JFactory::getDBO();
+
 
 		foreach ($items as $oneItem) {
 
 				// Get the title of every option selected.
 
 				$options = json_decode($oneItem->comboid);
-
-				$options_text = array();
-
-				foreach ((array) $options as $option)
+				$db->setQuery("Select name from #__combos_combo WHERE id in(".implode(',', $options).")");
+				$optionsName = $db->loadAssocList();
+				
+				foreach ((array) $optionsName as $option)
 				{
-					$options_text[] = JText::_('COM_SERVICESS_SERVICESS_COMBOID_OPTION_' . strtoupper($option));
+					$options_text[] = $option["name"];
 				}
 
-				$oneItem->comboid = !empty($options_text) ? implode(',', $options_text) : $oneItem->comboid;
+				$oneItem->comboid = !empty($options_text) ? implode(', ', $options_text) : $oneItem->comboid;
 		}
 		return $items;
 	}
