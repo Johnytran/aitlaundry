@@ -113,11 +113,21 @@ if (JPluginHelper::isEnabled('system', 'debug') && ($app->get('debug_lang', 0) |
 	<!--[if lt IE 9]><script src="<?php echo JUri::root(true); ?>/media/jui/js/html5.js"></script><![endif]-->
 </head>
 <body class="site <?php echo $option . " view-" . $view . " layout-" . $layout . " task-" . $task . " itemid-" . $itemid . " "; ?>">
+	
+	<style>
+		.btn-primary{
+			background-image: linear-gradient(to bottom,#FFC107,#FF9800) !important;
+			border-color: initial !important;
+		}
+		.btn-primary:hover{
+			background-color: #FF9800 !important;
+		}
+	</style>
 	<!-- Container -->
 	<div class="container">
 		<div id="content">
 			<!-- Begin Content -->
-			<div id="element-box" class="login well">
+			<div id="element-box" class="login well" style="text-align: center;">
 				<?php if ($loginLogoFile = $this->params->get('loginLogoFile')) : ?>
 					<img src="<?php echo JUri::root() . $loginLogoFile; ?>" alt="<?php echo $sitename; ?>" />
 				<?php else: ?>
@@ -134,11 +144,10 @@ if (JPluginHelper::isEnabled('system', 'debug') && ($app->get('debug_lang', 0) |
 		</div>
 	</div>
 	<div class="navbar<?php echo $color_is_light ? ' navbar-inverse' : ''; ?> navbar-fixed-bottom hidden-phone">
-		<p class="pull-right">
+		<p class="pull-center">
 			&copy; <?php echo date('Y'); ?> <?php echo $sitename; ?>
 		</p>
-		<a class="login-joomla hasTooltip" href="https://www.joomla.org" target="_blank" title="<?php echo JHtml::tooltipText('TPL_ISIS_ISFREESOFTWARE'); ?>"><span class="icon-joomla"></span></a>
-		<a href="<?php echo $frontEndUri->toString(); ?>" target="_blank" class="pull-left"><span class="icon-out-2"></span><?php echo JText::_('COM_LOGIN_RETURN_TO_SITE_HOME_PAGE'); ?></a>
+		
 	</div>
 	<jdoc:include type="modules" name="debug" style="none" />
 </body>
