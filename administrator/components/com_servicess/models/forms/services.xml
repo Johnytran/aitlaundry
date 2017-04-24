@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+  <fieldset>
+    <field name="id" type="text" readonly="true" class="readonly" default="0" description="JGLOBAL_FIELD_ID_DESC"/>
+    <field name="name" type="text" label="COM_SERVICESS_FORM_LBL_SERVICES_NAME" description="COM_SERVICESS_FORM_DESC_SERVICES_NAME" hint="COM_SERVICESS_FORM_LBL_SERVICES_NAME"/>
+    <field name="price" type="text" label="COM_SERVICESS_FORM_LBL_SERVICES_PRICE" description="COM_SERVICESS_FORM_DESC_SERVICES_PRICE" hint="COM_SERVICESS_FORM_LBL_SERVICES_PRICE"/>
+    <field name="comboid" type="sql" required="true" multiple="true" label="COM_SERVICESS_FORM_LBL_SERVICES_COMBOID" description="COM_SERVICESS_FORM_DESC_SERVICES_COMBOID" hint="COM_SERVICESS_FORM_LBL_SERVICES_COMBOID"
+    	query = "SELECT id, name FROM #__combos_combo" key_field="id"
+    >
+      
+    </field>
+    <field name="description" type="editor" filter="JComponentHelper::filterText" label="COM_SERVICESS_FORM_LBL_SERVICES_DESCRIPTION" description="COM_SERVICESS_FORM_DESC_SERVICES_DESCRIPTION" hint="COM_SERVICESS_FORM_LBL_SERVICES_DESCRIPTION"/>
+    <field name="ordering"/>
+    <field name="state" default="1" type="list" label="JSTATUS" description="JFIELD_PUBLISHED_DESC" class="inputbox" size="1">
+      <option value="1">JPUBLISHED</option>
+      <option value="0">JUNPUBLISHED</option>
+      <option value="2">JARCHIVED</option>
+      <option value="-2">JTRASHED</option>
+    </field>
+    <field name="checked_out" type="hidden" filter="unset"/>
+    <field name="checked_out_time" default="0000-00-00 00:00:00" type="hidden" filter="unset"/>
+    <field name="created_by" type="createdby" default="0" label="COM_SERVICESS_FORM_LBL_SERVICES_CREATED_BY" description="COM_SERVICESS_FORM_DESC_SERVICES_CREATED_BY" hidden="true" hint="COM_SERVICESS_FORM_LBL_SERVICES_CREATED_BY"/>
+    <field name="modified_by" type="modifiedby" default="0" label="COM_SERVICESS_FORM_LBL_SERVICES_MODIFIED_BY" description="COM_SERVICESS_FORM_DESC_SERVICES_MODIFIED_BY" hidden="true" hint="COM_SERVICESS_FORM_LBL_SERVICES_MODIFIED_BY"/>
+    <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
+    <field name="filter_comboid" label="COM_SERVICESS_FORM_LBL_SERVICES_COMBOID" type="list" onchange="this.form.submit();">
+      <option value="">COM_SERVICESS_SERVICESS_COMBOID_OPTION_</option>
+    </field>
+  </fieldset>
+</form>
