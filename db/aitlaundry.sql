@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2017 at 09:11 PM
+-- Generation Time: Apr 24, 2017 at 10:08 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -280,7 +280,15 @@ CREATE TABLE IF NOT EXISTS `fv5oz_combos_combo` (
   `created_by` int(11) NOT NULL,
   `modified_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `fv5oz_combos_combo`
+--
+
+INSERT INTO `fv5oz_combos_combo` (`id`, `name`, `description`, `ordering`, `state`, `checked_out`, `checked_out_time`, `created_by`, `modified_by`) VALUES
+(1, 'A week', '', 1, 1, 0, '0000-00-00 00:00:00', 106, 106),
+(2, 'A month', '', 2, 1, 0, '0000-00-00 00:00:00', 106, 106);
 
 -- --------------------------------------------------------
 
@@ -1613,7 +1621,7 @@ CREATE TABLE IF NOT EXISTS `fv5oz_services` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `comboid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `comboid` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL,
@@ -1622,7 +1630,14 @@ CREATE TABLE IF NOT EXISTS `fv5oz_services` (
   `created_by` int(11) NOT NULL,
   `modified_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `fv5oz_services`
+--
+
+INSERT INTO `fv5oz_services` (`id`, `name`, `price`, `comboid`, `description`, `ordering`, `state`, `checked_out`, `checked_out_time`, `created_by`, `modified_by`) VALUES
+(1, 'Iron', '$50', '["1","2"]', '', 1, 1, 0, '0000-00-00 00:00:00', 106, 106);
 
 -- --------------------------------------------------------
 
@@ -1648,7 +1663,7 @@ CREATE TABLE IF NOT EXISTS `fv5oz_session` (
 --
 
 INSERT INTO `fv5oz_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-('bm8a3f5afg2bkahhgi4pdranv7', 1, 0, '1493060892', 'joomla|s:1520:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo0OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToxNztzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTMwNjA2MDg7czo0OiJsYXN0IjtpOjE0OTMwNjA4OTE7czozOiJub3ciO2k6MTQ5MzA2MDg5Mjt9czo1OiJ0b2tlbiI7czozMjoiMFFKcHhMWm5kOWJ0YlRJZzNvdnVBMno4Q3p0bTBSQUEiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMzoiY29tX2luc3RhbGxlciI7Tzo4OiJzdGRDbGFzcyI6NDp7czo3OiJtZXNzYWdlIjtzOjA6IiI7czoxNzoiZXh0ZW5zaW9uX21lc3NhZ2UiO3M6MDoiIjtzOjY6Im1hbmFnZSI7Tzo4OiJzdGRDbGFzcyI6Mzp7czo2OiJmaWx0ZXIiO2E6NTp7czo2OiJzZWFyY2giO3M6MzoiY29tIjtzOjY6InN0YXR1cyI7czowOiIiO3M6OToiY2xpZW50X2lkIjtzOjA6IiI7czo0OiJ0eXBlIjtzOjA6IiI7czo2OiJmb2xkZXIiO3M6MDoiIjt9czo0OiJsaXN0IjthOjI6e3M6MTI6ImZ1bGxvcmRlcmluZyI7czo4OiJuYW1lIEFTQyI7czo1OiJsaW1pdCI7czoyOiIyMCI7fXM6MTA6ImxpbWl0c3RhcnQiO2k6MDt9czoxMjoicmVkaXJlY3RfdXJsIjtOO31zOjEzOiJjb21fc2VydmljZXNzIjtPOjg6InN0ZENsYXNzIjoyOntzOjk6InNlcnZpY2VzcyI7Tzo4OiJzdGRDbGFzcyI6MTp7czo4OiJvcmRlcmNvbCI7czo2OiJhLm5hbWUiO31zOjQ6ImVkaXQiO086ODoic3RkQ2xhc3MiOjE6e3M6ODoic2VydmljZXMiO086ODoic3RkQ2xhc3MiOjE6e3M6NDoiZGF0YSI7Tjt9fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MTtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9czo0OiJ1c2VyIjtPOjU6IkpVc2VyIjoxOntzOjI6ImlkIjtzOjM6IjEwNiI7fXM6MTE6ImFwcGxpY2F0aW9uIjtPOjg6InN0ZENsYXNzIjoxOntzOjU6InF1ZXVlIjtOO319fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fQ==";', 106, 'admin');
+('bm8a3f5afg2bkahhgi4pdranv7', 1, 0, '1493064286', 'joomla|s:1768:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo0OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToxMTg7czo1OiJ0aW1lciI7Tzo4OiJzdGRDbGFzcyI6Mzp7czo1OiJzdGFydCI7aToxNDkzMDYwNjA4O3M6NDoibGFzdCI7aToxNDkzMDY0Mjg2O3M6Mzoibm93IjtpOjE0OTMwNjQyODY7fXM6NToidG9rZW4iO3M6MzI6IjBRSnB4TFpuZDlidGJUSWczb3Z1QTJ6OEN6dG0wUkFBIjt9czo4OiJyZWdpc3RyeSI7TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjM6e3M6MTM6ImNvbV9pbnN0YWxsZXIiO086ODoic3RkQ2xhc3MiOjQ6e3M6NzoibWVzc2FnZSI7czowOiIiO3M6MTc6ImV4dGVuc2lvbl9tZXNzYWdlIjtzOjA6IiI7czo2OiJtYW5hZ2UiO086ODoic3RkQ2xhc3MiOjM6e3M6NjoiZmlsdGVyIjthOjU6e3M6Njoic2VhcmNoIjtzOjM6ImNvbSI7czo2OiJzdGF0dXMiO3M6MDoiIjtzOjk6ImNsaWVudF9pZCI7czowOiIiO3M6NDoidHlwZSI7czowOiIiO3M6NjoiZm9sZGVyIjtzOjA6IiI7fXM6NDoibGlzdCI7YToyOntzOjEyOiJmdWxsb3JkZXJpbmciO3M6ODoibmFtZSBBU0MiO3M6NToibGltaXQiO3M6MjoiMjAiO31zOjEwOiJsaW1pdHN0YXJ0IjtpOjA7fXM6MTI6InJlZGlyZWN0X3VybCI7Tjt9czoxMzoiY29tX3NlcnZpY2VzcyI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo5OiJzZXJ2aWNlc3MiO086ODoic3RkQ2xhc3MiOjE6e3M6ODoib3JkZXJjb2wiO3M6NjoiYS5uYW1lIjt9czo0OiJlZGl0IjtPOjg6InN0ZENsYXNzIjoxOntzOjg6InNlcnZpY2VzIjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6ImRhdGEiO047czoyOiJpZCI7YTowOnt9fX19czoxMDoiY29tX2NvbWJvcyI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo2OiJjb21ib3MiO086ODoic3RkQ2xhc3MiOjE6e3M6ODoib3JkZXJjb2wiO3M6NjoiYS5uYW1lIjt9czo0OiJlZGl0IjtPOjg6InN0ZENsYXNzIjoxOntzOjU6ImNvbWJvIjtPOjg6InN0ZENsYXNzIjoxOntzOjQ6ImRhdGEiO047fX19fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjE7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fXM6NDoidXNlciI7Tzo1OiJKVXNlciI6MTp7czoyOiJpZCI7czozOiIxMDYiO31zOjExOiJhcHBsaWNhdGlvbiI7Tzo4OiJzdGRDbGFzcyI6MTp7czo1OiJxdWV1ZSI7Tjt9fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjowO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO30=";', 106, 'admin');
 
 -- --------------------------------------------------------
 
