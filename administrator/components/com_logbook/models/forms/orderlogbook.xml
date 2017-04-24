@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+  <fieldset>
+    <field name="logid" label="COM_LOGBOOK_FORM_LBL_LOGBOOK_LOGID" description="COM_LOGBOOK_FORM_DESC_LOGBOOK_LOGID" hidden="true" hint="COM_LOGBOOK_FORM_LBL_LOGBOOK_LOGID"/>
+    <field name="note" type="textarea" label="COM_LOGBOOK_FORM_LBL_LOGBOOK_NOTE" description="COM_LOGBOOK_FORM_DESC_LOGBOOK_NOTE" hint="COM_LOGBOOK_FORM_LBL_LOGBOOK_NOTE"/>
+    <field name="status" default="1" label="COM_LOGBOOK_FORM_LBL_LOGBOOK_STATUS" description="COM_LOGBOOK_FORM_DESC_LOGBOOK_STATUS" hint="COM_LOGBOOK_FORM_LBL_LOGBOOK_STATUS"/>
+    <field name="datetimemodify" default="0000-00-00 00:00:00" type="calendar" class="inputbox" filter="safehtml" format="%Y-%m-%d %H:%M:%S" label="COM_LOGBOOK_FORM_LBL_LOGBOOK_DATETIMEMODIFY" description="COM_LOGBOOK_FORM_DESC_LOGBOOK_DATETIMEMODIFY" hint="COM_LOGBOOK_FORM_LBL_LOGBOOK_DATETIMEMODIFY"/>
+    <field name="ordering"/>
+    <field name="checked_out" type="hidden" filter="unset"/>
+    <field name="checked_out_time" default="0000-00-00 00:00:00" type="hidden" filter="unset"/>
+    <field name="created_by" type="createdby" default="0" label="COM_LOGBOOK_FORM_LBL_LOGBOOK_CREATED_BY" description="COM_LOGBOOK_FORM_DESC_LOGBOOK_CREATED_BY" hidden="true" hint="COM_LOGBOOK_FORM_LBL_LOGBOOK_CREATED_BY"/>
+    <field name="modified_by" type="modifiedby" default="0" label="COM_LOGBOOK_FORM_LBL_LOGBOOK_MODIFIED_BY" description="COM_LOGBOOK_FORM_DESC_LOGBOOK_MODIFIED_BY" hidden="true" hint="COM_LOGBOOK_FORM_LBL_LOGBOOK_MODIFIED_BY"/>
+    <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
+  </fieldset>
+</form>

@@ -54,7 +54,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_order/css/form.css');
 			<div class="span10 form-horizontal">
 				<fieldset class="adminform">
 
-									<input type="hidden" name="jform[orderid]" value="<?php echo $this->item->orderid; ?>" />
+									<input type="hidden" name="jform[id]" value="<?php echo $this->item->id; ?>" />
 				<?php echo $this->form->renderField('ordernote'); ?>
 				<?php echo $this->form->renderField('comboid'); ?>
 				<?php echo $this->form->renderField('paymentid'); ?>

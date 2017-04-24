@@ -176,7 +176,7 @@ if (!empty($this->extra_sidebar))
 					<?php endif; ?>
 
 									<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_ORDERID', 'a.`orderid`', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_ID', 'a.`id`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_ORDERNOTE', 'a.`ordernote`', $listDirn, $listOrder); ?>
@@ -270,7 +270,7 @@ if (!empty($this->extra_sidebar))
 
 										<td>
 
-					<?php echo $item->orderid; ?>
+					<?php echo $item->id; ?>
 				</td>				<td>
 
 					<?php echo $item->ordernote; ?>

@@ -1,7 +1,6 @@
 CREATE TABLE IF NOT EXISTS `#__order` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 
-`orderid` INT(11)  NOT NULL ,
 `ordernote` TEXT NOT NULL ,
 `comboid` INT(11)  NOT NULL ,
 `paymentid` INT(11)  NOT NULL ,

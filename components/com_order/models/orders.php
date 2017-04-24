@@ -31,7 +31,7 @@ class OrderModelOrders extends JModelList
 		if (empty($config['filter_fields']))
 		{
 			$config['filter_fields'] = array(
-				'orderid', 'a.orderid',
+				'id', 'a.id',
 				'ordernote', 'a.ordernote',
 				'comboid', 'a.comboid',
 				'paymentid', 'a.paymentid',

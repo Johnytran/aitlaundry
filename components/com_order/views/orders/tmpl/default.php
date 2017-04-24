@@ -37,7 +37,7 @@ $canDelete  = $user->authorise('core.delete', 'com_order');
 			<?php endif; ?>
 
 							<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_ORDERID', 'a.orderid', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_ID', 'a.id', $listDirn, $listOrder); ?>
 				</th>
 				<th class=''>
 				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_ORDERNOTE', 'a.ordernote', $listDirn, $listOrder); ?>
@@ -109,7 +109,7 @@ $canDelete  = $user->authorise('core.delete', 'com_order');
 
 								<td>
 
-					<?php echo $item->orderid; ?>
+					<?php echo $item->id; ?>
 				</td>
 				<td>
 				<?php if (isset($item->checked_out) && $item->checked_out) : ?>

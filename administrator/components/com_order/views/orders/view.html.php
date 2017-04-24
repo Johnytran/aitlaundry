@@ -149,7 +149,7 @@ class OrderViewOrders extends JViewLegacy
 	protected function getSortFields()
 	{
 		return array(
-			'a.`orderid`' => JText::_('COM_ORDER_ORDERS_ORDERID'),
+			'a.`id`' => JText::_('JGRID_HEADING_ID'),
 			'a.`ordernote`' => JText::_('COM_ORDER_ORDERS_ORDERNOTE'),
 			'a.`comboid`' => JText::_('COM_ORDER_ORDERS_COMBOID'),
 			'a.`paymentid`' => JText::_('COM_ORDER_ORDERS_PAYMENTID'),
