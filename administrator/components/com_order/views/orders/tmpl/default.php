@@ -208,9 +208,7 @@ if (!empty($this->extra_sidebar))
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_STATUS', 'a.`status`', $listDirn, $listOrder); ?>
 				</th>
-				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_USERID', 'a.`userid`', $listDirn, $listOrder); ?>
-				</th>
+				
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_CREATED_BY', 'a.`created_by`', $listDirn, $listOrder); ?>
 				</th>
@@ -309,9 +307,6 @@ if (!empty($this->extra_sidebar))
 				</td>				<td>
 
 					<?php echo $item->status; ?>
-				</td>				<td>
-
-					<?php echo $item->userid; ?>
 				</td>				<td>
 
 					<?php echo $item->created_by; ?>
