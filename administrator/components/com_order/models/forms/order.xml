@@ -20,7 +20,6 @@
     <field name="ordering"/>
     <field name="checked_out" type="hidden" filter="unset"/>
     <field name="checked_out_time" default="0000-00-00 00:00:00" type="hidden" filter="unset"/>
-    <field name="userid" type="user" label="COM_ORDER_FORM_LBL_ORDER_USERID" description="COM_ORDER_FORM_DESC_ORDER_USERID" hint="COM_ORDER_FORM_LBL_ORDER_USERID"/>
     <field name="created_by" type="createdby" default="0" label="COM_ORDER_FORM_LBL_ORDER_CREATED_BY" description="COM_ORDER_FORM_DESC_ORDER_CREATED_BY" hidden="true" hint="COM_ORDER_FORM_LBL_ORDER_CREATED_BY"/>
     <field name="modified_by" type="modifiedby" default="0" label="COM_ORDER_FORM_LBL_ORDER_MODIFIED_BY" description="COM_ORDER_FORM_DESC_ORDER_MODIFIED_BY" hidden="true" hint="COM_ORDER_FORM_LBL_ORDER_MODIFIED_BY"/>
     <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
