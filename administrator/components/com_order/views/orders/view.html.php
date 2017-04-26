@@ -55,6 +55,10 @@ class OrderViewOrders extends JViewLegacy
             'index.php?option=com_orderlogbook&view=orderlogbooks', 'orderlogbooks'
         );
 		
+		JHtmlSidebar::addEntry(
+            'LogBook',
+            'index.php?option=com_logbook&view=logbooks', 'logbooks'
+        );
 		$this->sidebar = JHtmlSidebar::render();
 		
 		parent::display($tpl);
