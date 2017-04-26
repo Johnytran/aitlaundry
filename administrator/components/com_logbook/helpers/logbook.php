@@ -34,7 +34,7 @@ class LogbookHelpersLogbook
 
 		JHtmlSidebar::addEntry(
 			JText::_('COM_LOGBOOK_TITLE_ORDERLOGBOOKS'),
-			'index.php?option=com_logbook&view=orderlogbooks',
+			'index.php?option=com_orderlogbook',
 			$vName == 'orderlogbooks'
 		);
 	}
