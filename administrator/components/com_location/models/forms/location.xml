@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+  <fieldset>
+    <field name="id" type="text" readonly="true" class="readonly" default="0" description="JGLOBAL_FIELD_ID_DESC"/>
+    <field name="postcode" label="COM_LOCATION_FORM_LBL_LOCATION_POSTCODE" description="COM_LOCATION_FORM_DESC_LOCATION_POSTCODE" hint="COM_LOCATION_FORM_LBL_LOCATION_POSTCODE"/>
+    <field name="suburbname" label="COM_LOCATION_FORM_LBL_LOCATION_SUBURBNAME" description="COM_LOCATION_FORM_DESC_LOCATION_SUBURBNAME" hint="COM_LOCATION_FORM_LBL_LOCATION_SUBURBNAME"/>
+    <field name="latitude" label="COM_LOCATION_FORM_LBL_LOCATION_LATITUDE" description="COM_LOCATION_FORM_DESC_LOCATION_LATITUDE" hint="COM_LOCATION_FORM_LBL_LOCATION_LATITUDE"/>
+    <field name="longitude" label="COM_LOCATION_FORM_LBL_LOCATION_LONGITUDE" description="COM_LOCATION_FORM_DESC_LOCATION_LONGITUDE" hint="COM_LOCATION_FORM_LBL_LOCATION_LONGITUDE"/>
+    <field name="ordering"/>
+    <field name="state" default="1" type="list" label="JSTATUS" description="JFIELD_PUBLISHED_DESC" class="inputbox" size="1">
+      <option value="1">JPUBLISHED</option>
+      <option value="0">JUNPUBLISHED</option>
+      <option value="2">JARCHIVED</option>
+      <option value="-2">JTRASHED</option>
+    </field>
+    <field name="checked_out" type="hidden" filter="unset"/>
+    <field name="checked_out_time" default="0000-00-00 00:00:00" type="hidden" filter="unset"/>
+    <field name="created_by" type="createdby" default="0" label="COM_LOCATION_FORM_LBL_LOCATION_CREATED_BY" description="COM_LOCATION_FORM_DESC_LOCATION_CREATED_BY" hidden="true" hint="COM_LOCATION_FORM_LBL_LOCATION_CREATED_BY"/>
+    <field name="modified_by" type="modifiedby" default="0" label="COM_LOCATION_FORM_LBL_LOCATION_MODIFIED_BY" description="COM_LOCATION_FORM_DESC_LOCATION_MODIFIED_BY" hidden="true" hint="COM_LOCATION_FORM_LBL_LOCATION_MODIFIED_BY"/>
+    <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
+  </fieldset>
+</form>
