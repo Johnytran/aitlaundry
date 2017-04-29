@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2017 at 01:10 AM
+-- Generation Time: Apr 29, 2017 at 05:04 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `fv5oz_assets` (
 --
 
 INSERT INTO `fv5oz_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `title`, `rules`) VALUES
-(1, 0, 0, 119, 0, 'root.1', 'Root Asset', '{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.login.offline":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
+(1, 0, 0, 117, 0, 'root.1', 'Root Asset', '{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.login.offline":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
 (2, 1, 1, 2, 1, 'com_admin', 'com_admin', '{}'),
 (3, 1, 3, 6, 1, 'com_banners', 'com_banners', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (4, 1, 7, 8, 1, 'com_cache', 'com_cache', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
@@ -104,8 +104,7 @@ INSERT INTO `fv5oz_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 (64, 1, 109, 110, 1, 'com_order', 'com_order', '{"core.manage":{"1":1}}'),
 (65, 1, 111, 112, 1, 'com_logbook', 'com_logbook', '{"core.manage":{"1":1}}'),
 (66, 1, 113, 114, 1, 'com_orderlogbook', 'com_orderlogbook', '{"core.manage":{"1":1}}'),
-(67, 1, 115, 116, 1, 'com_card', 'com_card', '{"core.manage":{"1":1}}'),
-(68, 1, 117, 118, 1, 'com_userextra', 'com_userextra', '{"core.manage":{"1":1}}');
+(68, 1, 115, 116, 1, 'com_userextra', 'com_userextra', '{"core.manage":{"1":1}}');
 
 -- --------------------------------------------------------
 
@@ -212,36 +211,6 @@ CREATE TABLE IF NOT EXISTS `fv5oz_banner_tracks` (
   KEY `idx_track_type` (`track_type`),
   KEY `idx_banner_id` (`banner_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `fv5oz_card`
---
-
-CREATE TABLE IF NOT EXISTS `fv5oz_card` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `cardnumber` bigint(30) NOT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `bank` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cardholder` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `expirydate` date NOT NULL,
-  `secrectnumber` int(11) NOT NULL,
-  `ordering` int(11) NOT NULL,
-  `state` tinyint(1) NOT NULL,
-  `checked_out` int(11) NOT NULL,
-  `checked_out_time` datetime NOT NULL,
-  `created_by` int(11) NOT NULL,
-  `modified_by` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `fv5oz_card`
---
-
-INSERT INTO `fv5oz_card` (`id`, `cardnumber`, `type`, `bank`, `cardholder`, `expirydate`, `secrectnumber`, `ordering`, `state`, `checked_out`, `checked_out_time`, `created_by`, `modified_by`) VALUES
-(1, 324, 'Credit Card', 'fdas', 'dfsaf', '2017-04-21', 243, 1, 1, 0, '0000-00-00 00:00:00', 106, 106);
 
 -- --------------------------------------------------------
 
@@ -523,7 +492,6 @@ INSERT INTO `fv5oz_content_types` (`type_id`, `type_title`, `type_alias`, `table
 (23, 'Order', 'com_order.order', '{"special":{"dbtable":"#__order","key":"id","type":"Order","prefix":"RderTable"}}', '', '', '', '{"formFile":"administrator/components/com_order/models/forms/order.xml", "hideFields":["checked_out","checked_out_time","params","language" ,"deliverynote"], "ignoreChanges":["modified_by", "modified", "checked_out", "checked_out_time"], "convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"group_id","targetTable":"#__usergroups","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"}]}'),
 (24, 'Logbook', 'com_logbook.logbook', '{"special":{"dbtable":"#__logbook","key":"id","type":"Logbook","prefix":"LogbookTable"}}', '', '', '', '{"formFile":"administrator/components/com_logbook/models/forms/logbook.xml", "hideFields":["checked_out","checked_out_time","params","language" ,"note"], "ignoreChanges":["modified_by", "modified", "checked_out", "checked_out_time"], "convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"group_id","targetTable":"#__usergroups","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"}]}'),
 (25, 'Order Logbook', 'com_orderlogbook.orderlogbook', '{"special":{"dbtable":"#__orderlogbook","key":"id","type":"Orderlogbook","prefix":"RderlogbookTable"}}', '', '', '', '{"formFile":"administrator/components/com_orderlogbook/models/forms/orderlogbook.xml", "hideFields":["checked_out","checked_out_time","params","language"], "ignoreChanges":["modified_by", "modified", "checked_out", "checked_out_time"], "convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"group_id","targetTable":"#__usergroups","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"}]}'),
-(26, 'Card', 'com_card.card', '{"special":{"dbtable":"#__card","key":"id","type":"Card","prefix":"ArdTable"}}', '', '', '', '{"formFile":"administrator/components/com_card/models/forms/card.xml", "hideFields":["checked_out","checked_out_time","params","language"], "ignoreChanges":["modified_by", "modified", "checked_out", "checked_out_time"], "convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"group_id","targetTable":"#__usergroups","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"}]}'),
 (27, 'User', 'com_userextra.user', '{"special":{"dbtable":"#__userextra_","key":"id","type":"User","prefix":"UserextraTable"}}', '', '', '', '{"formFile":"administrator/components/com_userextra/models/forms/user.xml", "hideFields":["checked_out","checked_out_time","params","language"], "ignoreChanges":["modified_by", "modified", "checked_out", "checked_out_time"], "convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"group_id","targetTable":"#__usergroups","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"}]}');
 
 -- --------------------------------------------------------
@@ -603,7 +571,7 @@ INSERT INTO `fv5oz_extensions` (`extension_id`, `name`, `type`, `element`, `fold
 (31, 'com_ajax', 'component', 'com_ajax', '', 1, 1, 1, 1, '{"name":"com_ajax","type":"component","creationDate":"August 2013","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.2.0","description":"COM_AJAX_XML_DESCRIPTION","group":"","filename":"ajax"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (32, 'com_postinstall', 'component', 'com_postinstall', '', 1, 0, 1, 1, '{"name":"com_postinstall","type":"component","creationDate":"September 2013","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.2.0","description":"COM_POSTINSTALL_XML_DESCRIPTION","group":""}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (102, 'LIB_PHPUTF8', 'library', 'phputf8', '', 0, 1, 1, 1, '{"name":"LIB_PHPUTF8","type":"library","creationDate":"2006","author":"Harry Fuecks","copyright":"Copyright various authors","authorEmail":"hfuecks@gmail.com","authorUrl":"http:\\/\\/sourceforge.net\\/projects\\/phputf8","version":"0.5","description":"LIB_PHPUTF8_XML_DESCRIPTION","group":"","filename":"phputf8"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(103, 'LIB_JOOMLA', 'library', 'joomla', '', 0, 1, 1, 1, '{"name":"LIB_JOOMLA","type":"library","creationDate":"2008","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"https:\\/\\/www.joomla.org","version":"13.1","description":"LIB_JOOMLA_XML_DESCRIPTION","group":"","filename":"joomla"}', '{"mediaversion":"7b808f9d51ee0f1593de0c37714e8cf5"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(103, 'LIB_JOOMLA', 'library', 'joomla', '', 0, 1, 1, 1, '{"name":"LIB_JOOMLA","type":"library","creationDate":"2008","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"https:\\/\\/www.joomla.org","version":"13.1","description":"LIB_JOOMLA_XML_DESCRIPTION","group":"","filename":"joomla"}', '{"mediaversion":"556b85f576f62ab0aac96acac18d6fa0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (104, 'LIB_IDNA', 'library', 'idna_convert', '', 0, 1, 1, 1, '{"name":"LIB_IDNA","type":"library","creationDate":"2004","author":"phlyLabs","copyright":"2004-2011 phlyLabs Berlin, http:\\/\\/phlylabs.de","authorEmail":"phlymail@phlylabs.de","authorUrl":"http:\\/\\/phlylabs.de","version":"0.8.0","description":"LIB_IDNA_XML_DESCRIPTION","group":"","filename":"idna_convert"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (105, 'FOF', 'library', 'fof', '', 0, 1, 1, 1, '{"name":"FOF","type":"library","creationDate":"2015-04-22 13:15:32","author":"Nicholas K. Dionysopoulos \\/ Akeeba Ltd","copyright":"(C)2011-2015 Nicholas K. Dionysopoulos","authorEmail":"nicholas@akeebabackup.com","authorUrl":"https:\\/\\/www.akeebabackup.com","version":"2.4.3","description":"LIB_FOF_XML_DESCRIPTION","group":"","filename":"fof"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (106, 'LIB_PHPASS', 'library', 'phpass', '', 0, 1, 1, 1, '{"name":"LIB_PHPASS","type":"library","creationDate":"2004-2006","author":"Solar Designer","copyright":"","authorEmail":"solar@openwall.com","authorUrl":"http:\\/\\/www.openwall.com\\/phpass\\/","version":"0.3","description":"LIB_PHPASS_XML_DESCRIPTION","group":"","filename":"phpass"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -717,7 +685,6 @@ INSERT INTO `fv5oz_extensions` (`extension_id`, `name`, `type`, `element`, `fold
 (812, 'com_order', 'component', 'com_order', '', 1, 1, 0, 0, '{"name":"com_order","type":"component","creationDate":"2017-04-24","author":"AIT Laundry","copyright":"2017 AIT Laundry","authorEmail":"aitlaundry@gmail.com","authorUrl":"http:\\/\\/","version":"CVS: 1.0.0","description":"Provide order management for the laundry","group":"","filename":"order"}', '{"save_history":"0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (813, 'com_logbook', 'component', 'com_logbook', '', 1, 1, 0, 0, '{"name":"com_logbook","type":"component","creationDate":"2017-04-24","author":"AIT Laundry","copyright":"2017 AIT Laundry","authorEmail":"aitlaundry@gmail.com","authorUrl":"http:\\/\\/","version":"CVS: 1.0.0","description":"Provide Logbook for the Laundry","group":"","filename":"logbook"}', '{"save_history":"0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (814, 'com_orderlogbook', 'component', 'com_orderlogbook', '', 1, 1, 0, 0, '{"name":"com_orderlogbook","type":"component","creationDate":"2017-04-24","author":"AIT Laundry","copyright":"2017 AIT Laundry","authorEmail":"aitlaundry@gmail.com","authorUrl":"http:\\/\\/","version":"CVS: 1.0.0","description":"Provide Logbook for Order","group":"","filename":"orderlogbook"}', '{"save_history":"0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(815, 'com_card', 'component', 'com_card', '', 1, 1, 0, 0, '{"name":"com_card","type":"component","creationDate":"2017-04-24","author":"AIT Laundry","copyright":"2017 AIT Laundry","authorEmail":"aitlaundry@gmail.com","authorUrl":"http:\\/\\/","version":"CVS: 1.0.0","description":"Provide management to Card","group":"","filename":"card"}', '{"save_history":"0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (816, 'com_userextra', 'component', 'com_userextra', '', 1, 1, 0, 0, '{"name":"com_userextra","type":"component","creationDate":"2017-04-26","author":"AIT Laundry","copyright":"2017 AIT Laundry","authorEmail":"aitlaundry@gmail.com","authorUrl":"http:\\/\\/","version":"CVS: 1.0.0","description":"","group":"","filename":"userextra"}', '{"save_history":"0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
@@ -1374,7 +1341,7 @@ CREATE TABLE IF NOT EXISTS `fv5oz_menu` (
 --
 
 INSERT INTO `fv5oz_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `link`, `type`, `published`, `parent_id`, `level`, `component_id`, `checked_out`, `checked_out_time`, `browserNav`, `access`, `img`, `template_style_id`, `params`, `lft`, `rgt`, `home`, `language`, `client_id`) VALUES
-(1, '', 'Menu_Item_Root', 'root', '', '', '', '', 1, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', 0, 75, 0, '*', 0),
+(1, '', 'Menu_Item_Root', 'root', '', '', '', '', 1, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', 0, 71, 0, '*', 0),
 (2, 'menu', 'com_banners', 'Banners', '', 'Banners', 'index.php?option=com_banners', 'component', 0, 1, 1, 4, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners', 0, '', 1, 10, 0, '*', 1),
 (3, 'menu', 'com_banners', 'Banners', '', 'Banners/Banners', 'index.php?option=com_banners', 'component', 0, 2, 2, 4, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners', 0, '', 2, 3, 0, '*', 1),
 (4, 'menu', 'com_banners_categories', 'Categories', '', 'Banners/Categories', 'index.php?option=com_categories&extension=com_banners', 'component', 0, 2, 2, 6, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners-cat', 0, '', 4, 5, 0, '*', 1),
@@ -1408,10 +1375,8 @@ INSERT INTO `fv5oz_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `l
 (124, 'main', 'COM_LOGBOOK_TITLE_ORDERLOGBOOKS', 'com-logbook-title-orderlogbooks', '', 'com-logbook/com-logbook-title-orderlogbooks', 'index.php?option=com_orderlogbook', 'component', 0, 122, 2, 813, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_logbook/images/s_orderlogbooks.png', 0, '{}', 60, 61, 0, '', 1),
 (125, 'main', 'COM_ORDERLOGBOOK', 'com-orderlogbook', '', 'com-orderlogbook', 'index.php?option=com_orderlogbook', 'component', 0, 1, 1, 814, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_orderlogbook/images/s_com_orderlogbook.png', 0, '{}', 63, 66, 0, '', 1),
 (126, 'main', 'COM_ORDERLOGBOOK_TITLE_ORDERLOGBOOKS', 'com-orderlogbook-title-orderlogbooks', '', 'com-orderlogbook/com-orderlogbook-title-orderlogbooks', 'index.php?option=com_orderlogbook&view=orderlogbooks', 'component', 0, 125, 2, 814, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_orderlogbook/images/s_orderlogbooks.png', 0, '{}', 64, 65, 0, '', 1),
-(127, 'main', 'COM_CARD', 'com-card', '', 'com-card', 'index.php?option=com_card', 'component', 0, 1, 1, 815, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_card/images/s_com_card.png', 0, '{}', 67, 70, 0, '', 1),
-(128, 'main', 'COM_CARD_TITLE_CARDS', 'com-card-title-cards', '', 'com-card/com-card-title-cards', 'index.php?option=com_card&view=cards', 'component', 0, 127, 2, 815, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_card/images/s_cards.png', 0, '{}', 68, 69, 0, '', 1),
-(129, 'main', 'COM_USEREXTRA', 'com-userextra', '', 'com-userextra', 'index.php?option=com_userextra', 'component', 0, 1, 1, 816, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_userextra/images/s_com_userextra.png', 0, '{}', 71, 74, 0, '', 1),
-(130, 'main', 'COM_USEREXTRA_TITLE_USERS', 'com-userextra-title-users', '', 'com-userextra/com-userextra-title-users', 'index.php?option=com_userextra&view=users', 'component', 0, 129, 2, 816, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_userextra/images/s_users.png', 0, '{}', 72, 73, 0, '', 1);
+(129, 'main', 'COM_USEREXTRA', 'com-userextra', '', 'com-userextra', 'index.php?option=com_userextra', 'component', 0, 1, 1, 816, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_userextra/images/s_com_userextra.png', 0, '{}', 67, 70, 0, '', 1),
+(130, 'main', 'COM_USEREXTRA_TITLE_USERS', 'com-userextra-title-users', '', 'com-userextra/com-userextra-title-users', 'index.php?option=com_userextra&view=users', 'component', 0, 129, 2, 816, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_userextra/images/s_users.png', 0, '{}', 68, 69, 0, '', 1);
 
 -- --------------------------------------------------------
 
@@ -1824,7 +1789,8 @@ CREATE TABLE IF NOT EXISTS `fv5oz_session` (
 --
 
 INSERT INTO `fv5oz_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-('i4idg2requmkaipbtcc3epf5k0', 1, 0, '1493248155', 'joomla|s:1100:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTo2O3M6NToidGltZXIiO086ODoic3RkQ2xhc3MiOjM6e3M6NToic3RhcnQiO2k6MTQ5MzI0ODEyMjtzOjQ6Imxhc3QiO2k6MTQ5MzI0ODE1MDtzOjM6Im5vdyI7aToxNDkzMjQ4MTU0O31zOjU6InRva2VuIjtzOjMyOiIzZGFhMDRYQmRDZVpyWG0wODRkSHJITTM1VDhKZGFwcSI7fXM6ODoicmVnaXN0cnkiO086MjQ6Ikpvb21sYVxSZWdpc3RyeVxSZWdpc3RyeSI6Mzp7czo3OiIAKgBkYXRhIjtPOjg6InN0ZENsYXNzIjoxOntzOjE0OiJjb21fY2F0ZWdvcmllcyI7Tzo4OiJzdGRDbGFzcyI6MTp7czoxMDoiY2F0ZWdvcmllcyI7Tzo4OiJzdGRDbGFzcyI6MTp7czo3OiJjb250ZW50IjtPOjg6InN0ZENsYXNzIjoyOntzOjY6ImZpbHRlciI7Tzo4OiJzdGRDbGFzcyI6MTp7czo5OiJleHRlbnNpb24iO3M6MTE6ImNvbV9jb250ZW50Ijt9czo0OiJsaXN0IjthOjQ6e3M6OToiZGlyZWN0aW9uIjtzOjM6ImFzYyI7czo1OiJsaW1pdCI7czoyOiIyMCI7czo4OiJvcmRlcmluZyI7czo1OiJhLmxmdCI7czo1OiJzdGFydCI7ZDowO319fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MTtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9czo0OiJ1c2VyIjtPOjU6IkpVc2VyIjoxOntzOjI6ImlkIjtzOjM6IjEwNyI7fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 107, 'manager');
+('0lp67i7kbio7rkotvo1dqlkas3', 1, 0, '1493434842', 'joomla|s:1520:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo0OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTo0MTtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTM0Mjc4OTU7czo0OiJsYXN0IjtpOjE0OTM0MzQ4MTE7czozOiJub3ciO2k6MTQ5MzQzNDg0Mjt9czo1OiJ0b2tlbiI7czozMjoiU3JKMU9LTFVveXZuNFoybHhsS0N1UGJOSWJtaDlaNmMiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMzoiY29tX3VzZXJleHRyYSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo1OiJ1c2VycyI7Tzo4OiJzdGRDbGFzcyI6MTp7czo4OiJvcmRlcmNvbCI7czoxMDoiYS51c2VybmFtZSI7fXM6NDoiZWRpdCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJ1c2VyIjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6ImRhdGEiO047czoyOiJpZCI7YToxOntpOjA7aToxMDg7fX19fXM6MTM6ImNvbV9pbnN0YWxsZXIiO086ODoic3RkQ2xhc3MiOjM6e3M6NzoibWVzc2FnZSI7czowOiIiO3M6MTc6ImV4dGVuc2lvbl9tZXNzYWdlIjtzOjA6IiI7czo2OiJtYW5hZ2UiO086ODoic3RkQ2xhc3MiOjM6e3M6NjoiZmlsdGVyIjthOjU6e3M6Njoic2VhcmNoIjtzOjQ6ImNhcmQiO3M6Njoic3RhdHVzIjtzOjA6IiI7czo5OiJjbGllbnRfaWQiO3M6MDoiIjtzOjQ6InR5cGUiO3M6MDoiIjtzOjY6ImZvbGRlciI7czowOiIiO31zOjQ6Imxpc3QiO2E6Mjp7czoxMjoiZnVsbG9yZGVyaW5nIjtzOjg6Im5hbWUgQVNDIjtzOjU6ImxpbWl0IjtzOjI6IjIwIjt9czoxMDoibGltaXRzdGFydCI7aTowO319fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjE7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fXM6NDoidXNlciI7Tzo1OiJKVXNlciI6MTp7czoyOiJpZCI7czozOiIxMDYiO31zOjExOiJhcHBsaWNhdGlvbiI7Tzo4OiJzdGRDbGFzcyI6MTp7czo1OiJxdWV1ZSI7Tjt9fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjowO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO30=";', 106, 'admin'),
+('ftcib9c0podo3nn6u1gvrgvge6', 0, 1, '1493431836', 'joomla|s:712:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToxO3M6NToidGltZXIiO086ODoic3RkQ2xhc3MiOjM6e3M6NToic3RhcnQiO2k6MTQ5MzQzMTgzNTtzOjQ6Imxhc3QiO2k6MTQ5MzQzMTgzNTtzOjM6Im5vdyI7aToxNDkzNDMxODM1O31zOjU6InRva2VuIjtzOjMyOiI3ekIyd3N3b3k1VENHZm1qdnN5a1dYWDJmRXgxU2JFTSI7fXM6ODoicmVnaXN0cnkiO086MjQ6Ikpvb21sYVxSZWdpc3RyeVxSZWdpc3RyeSI6Mzp7czo3OiIAKgBkYXRhIjtPOjg6InN0ZENsYXNzIjowOnt9czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MTtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9czo0OiJ1c2VyIjtPOjU6IkpVc2VyIjoxOntzOjI6ImlkIjtpOjA7fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 0, '');
 
 -- --------------------------------------------------------
 
@@ -2230,15 +2196,16 @@ CREATE TABLE IF NOT EXISTS `fv5oz_users` (
   KEY `idx_block` (`block`),
   KEY `username` (`username`),
   KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=108 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=109 ;
 
 --
 -- Dumping data for table `fv5oz_users`
 --
 
 INSERT INTO `fv5oz_users` (`id`, `firstName`, `name`, `lastName`, `homePhone`, `mobilePhone`, `address`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`) VALUES
-(106, 'Super User', 'admin', '', '', '', '', 'admin', 'aitlaundry@gmail.com', '$2y$10$a/6j6HvIKqcyfPvHlVJd3.jVFMXYHepZuM36p7Kap.kOj0au7ORHa', 0, 1, '2017-04-10 22:44:44', '2017-04-26 23:08:41', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
-(107, 'gfdgfds', 'manager', '', '', '', '', 'manager', '5527@ait.nsw.edu.au', '$2y$10$4Ov8ixQreBzMTijs2HAiZ.6qq5.mflVhDeUtRtAL7cQZ/0VaLehd6', 0, 0, '2017-04-12 02:01:41', '2017-04-26 23:08:48', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0);
+(106, 'Super User', 'admin', '', '', '', '', 'admin', 'aitlaundry@gmail.com', '$2y$10$a/6j6HvIKqcyfPvHlVJd3.jVFMXYHepZuM36p7Kap.kOj0au7ORHa', 0, 1, '2017-04-10 22:44:44', '2017-04-29 01:05:10', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(107, 'gfdgfds', 'manager', '', '', '', '', 'manager', '5527@ait.nsw.edu.au', '$2y$10$4Ov8ixQreBzMTijs2HAiZ.6qq5.mflVhDeUtRtAL7cQZ/0VaLehd6', 0, 0, '2017-04-12 02:01:41', '2017-04-28 01:04:56', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(108, '', '', '', '', '', 'dasf', 'tesat', 'dsf@fdasf.com', '123456', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', 0, '', '', 0);
 
 -- --------------------------------------------------------
 

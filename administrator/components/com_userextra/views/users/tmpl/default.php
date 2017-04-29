@@ -9,6 +9,8 @@
 
 // No direct access
 defined('_JEXEC') or die;
+//echo '<pre>';
+//print_r($this->items);die;
 
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/');
 JHtml::_('bootstrap.tooltip');
@@ -267,16 +269,16 @@ if (!empty($this->extra_sidebar))
 
 				</td>				<td>
 
-					<?php echo $item->firstname; ?>
+					<?php echo $item->firstName; ?>
 				</td>				<td>
 
-					<?php echo $item->lastname; ?>
+					<?php echo $item->lastName; ?>
 				</td>				<td>
 
-					<?php echo $item->homephone; ?>
+					<?php echo $item->homePhone; ?>
 				</td>				<td>
 
-					<?php echo $item->mobilephone; ?>
+					<?php echo $item->mobilePhone; ?>
 				</td>				<td>
 
 					<?php echo $item->email; ?>
