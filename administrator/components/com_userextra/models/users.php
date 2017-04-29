@@ -120,35 +120,39 @@ class UserextraModelUsers extends JModelList
 
 		// Select the required fields from the table.
 		$query->select(
-			$this->getState(
-				'list.select', 'DISTINCT a.*'
-			)
+			"*"
 		);
-		$query->from('`#__userextra_` AS a');
 
-		// Join over the users for the checked out user
-		$query->select("uc.name AS uEditor");
-		$query->join("LEFT", "#__users AS uc ON uc.id=a.checked_out");
+		// $query->select(
+		// 	$this->getState(
+		// 		'list.select', 'DISTINCT a.*'
+		// 	)
+		// );
+		$query->from('`#__users` AS a');
 
-		// Join over the user field 'created_by'
-		$query->select('`created_by`.name AS `created_by`');
-		$query->join('LEFT', '#__users AS `created_by` ON `created_by`.id = a.`created_by`');
+		// // Join over the users for the checked out user
+		// $query->select("uc.name AS uEditor");
+		// $query->join("LEFT", "#__users AS uc ON uc.id=a.checked_out");
 
-		// Join over the user field 'modified_by'
-		$query->select('`modified_by`.name AS `modified_by`');
-		$query->join('LEFT', '#__users AS `modified_by` ON `modified_by`.id = a.`modified_by`');
+		// // Join over the user field 'created_by'
+		// $query->select('`created_by`.name AS `created_by`');
+		// $query->join('LEFT', '#__users AS `created_by` ON `created_by`.id = a.`created_by`');
+
+		// // Join over the user field 'modified_by'
+		// $query->select('`modified_by`.name AS `modified_by`');
+		// $query->join('LEFT', '#__users AS `modified_by` ON `modified_by`.id = a.`modified_by`');
 
 		// Filter by published state
-		$published = $this->getState('filter.state');
+		// $published = $this->getState('filter.state');
 
-		if (is_numeric($published))
-		{
-			$query->where('a.state = ' . (int) $published);
-		}
-		elseif ($published === '')
-		{
-			$query->where('(a.state IN (0, 1))');
-		}
+		// if (is_numeric($published))
+		// {
+		// 	$query->where('a.state = ' . (int) $published);
+		// }
+		// elseif ($published === '')
+		// {
+		// 	$query->where('(a.state IN (0, 1))');
+		// }
 
 		// Filter by search in title
 		$search = $this->getState('filter.search');
@@ -161,19 +165,19 @@ class UserextraModelUsers extends JModelList
 			}
 			else
 			{
-				$search = $db->Quote('%' . $db->escape($search, true) . '%');
-				$query->where('( a.username LIKE ' . $search . '  OR  a.firstname LIKE ' . $search . '  OR  a.lastname LIKE ' . $search . '  OR  a.homephone LIKE ' . $search . '  OR  a.mobilephone LIKE ' . $search . '  OR  a.email LIKE ' . $search . ' )');
+				// $search = $db->Quote('%' . $db->escape($search, true) . '%');
+				// $query->where('( a.username LIKE ' . $search . '  OR  a.firstname LIKE ' . $search . '  OR  a.lastname LIKE ' . $search . '  OR  a.homephone LIKE ' . $search . '  OR  a.mobilephone LIKE ' . $search . '  OR  a.email LIKE ' . $search . ' )');
 			}
 		}
 
 		// Add the list ordering clause.
-		$orderCol  = $this->state->get('list.ordering');
-		$orderDirn = $this->state->get('list.direction');
+		//$orderCol  = $this->state->get('list.ordering');
+		// $orderDirn = $this->state->get('list.direction');
 
-		if ($orderCol && $orderDirn)
-		{
-			$query->order($db->escape($orderCol . ' ' . $orderDirn));
-		}
+		// if ($orderCol && $orderDirn)
+		// {
+		// 	$query->order($db->escape($orderCol . ' ' . $orderDirn));
+		// }
 
 		return $query;
 	}
@@ -186,7 +190,7 @@ class UserextraModelUsers extends JModelList
 	public function getItems()
 	{
 		$items = parent::getItems();
-
+		//print_r($items);die;
 		return $items;
 	}
 }

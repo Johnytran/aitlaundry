@@ -38,6 +38,7 @@ class UserextraViewUsers extends JViewLegacy
 	{
 		$this->state = $this->get('State');
 		$this->items = $this->get('Items');
+		//print_r($this->items);die;
 		$this->pagination = $this->get('Pagination');
 
 		// Check for errors.

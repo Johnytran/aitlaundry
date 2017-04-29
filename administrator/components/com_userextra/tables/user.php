@@ -27,7 +27,7 @@ class UserextraTableuser extends JTable
 	public function __construct(&$db)
 	{
 		JObserverMapper::addObserverClassToClass('JTableObserverContenthistory', 'UserextraTableuser', array('typeAlias' => 'com_userextra.user'));
-		parent::__construct('#__userextra_', 'id', $db);
+		parent::__construct('#__users', 'id', $db);
 	}
 
 	/**

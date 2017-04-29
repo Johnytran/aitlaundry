@@ -43,7 +43,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_userextra/css/form.css');
 </script>
 
 <form
-	action="<?php echo JRoute::_('index.php?option=com_userextra&layout=edit&id=' . (int) $this->item->id); ?>"
+	action="<?php echo JRoute::_('index.php?option=com_userextr&layout=edit&id=' . (int) $this->item->id); ?>"
 	method="post" enctype="multipart/form-data" name="adminForm" id="user-form" class="form-validate">
 
 	<div class="form-horizontal">
@@ -56,7 +56,9 @@ $document->addStyleSheet(JUri::root() . 'media/com_userextra/css/form.css');
 
 									<input type="hidden" name="jform[id]" value="<?php echo $this->item->id; ?>" />
 				<?php echo $this->form->renderField('username'); ?>
+				<?php echo $this->form->renderField('name'); ?>
 				<?php echo $this->form->renderField('password'); ?>
+				<?php echo $this->form->renderField('password2'); ?>
 				<?php echo $this->form->renderField('firstname'); ?>
 				<?php echo $this->form->renderField('lastname'); ?>
 				<input type="hidden" name="jform[name]" value="<?php echo $this->item->name; ?>" />
@@ -64,10 +66,10 @@ $document->addStyleSheet(JUri::root() . 'media/com_userextra/css/form.css');
 				<?php echo $this->form->renderField('mobilephone'); ?>
 				<?php echo $this->form->renderField('address'); ?>
 				<?php echo $this->form->renderField('email'); ?>
-				<input type="hidden" name="jform[ordering]" value="<?php echo $this->item->ordering; ?>" />
-				<input type="hidden" name="jform[state]" value="<?php echo $this->item->state; ?>" />
-				<input type="hidden" name="jform[checked_out]" value="<?php echo $this->item->checked_out; ?>" />
-				<input type="hidden" name="jform[checked_out_time]" value="<?php echo $this->item->checked_out_time; ?>" />
+				<!-- <input type="hidden" name="jform[ordering]" value="<?php echo $this->item->ordering; ?>" /> -->
+				<!-- <input type="hidden" name="jform[state]" value="<?php echo $this->item->state; ?>" /> -->
+				<!-- <input type="hidden" name="jform[checked_out]" value="<?php echo $this->item->checked_out; ?>" /> -->
+				<!-- <input type="hidden" name="jform[checked_out_time]" value="<?php echo $this->item->checked_out_time; ?>" /> -->
 
 				<?php echo $this->form->renderField('created_by'); ?>
 				<?php echo $this->form->renderField('modified_by'); ?>
