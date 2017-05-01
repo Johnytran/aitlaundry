@@ -43,7 +43,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_userextra/css/form.css');
 </script>
 
 <form
-	action="<?php echo JRoute::_('index.php?option=com_userextr&layout=edit&id=' . (int) $this->item->id); ?>"
+	action="<?php echo JRoute::_('index.php?option=com_userextra&layout=edit&id=' . (int) $this->item->id); ?>"
 	method="post" enctype="multipart/form-data" name="adminForm" id="user-form" class="form-validate">
 
 	<div class="form-horizontal">

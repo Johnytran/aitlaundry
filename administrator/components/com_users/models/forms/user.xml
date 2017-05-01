@@ -14,6 +14,35 @@
 			required="true"
 			size="30"
 		/>
+		<field name="firstName" type="text"
+			description="first name"
+			label="First Name"
+			size="30"
+		/>
+
+		<field name="lastName" type="text"
+			description="last name"
+			label="Last Name"
+			size="30"
+		/>
+
+		<field name="homePhone" type="text"
+			description="home phone"
+			label="Home Phone"
+			size="30"
+		/>
+		
+		<field name="mobilePhone" type="text"
+			description="mobile phone"
+			label="Mobile Phone"
+			size="30"
+		/>
+
+		<field name="address" type="text"
+			description="address"
+			label="Address"
+			size="60"
+		/>
 
 		<field name="password" type="password"
 			autocomplete="off"

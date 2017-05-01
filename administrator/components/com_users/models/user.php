@@ -105,6 +105,7 @@ class UsersModelUser extends JModelAdmin
 		$plugin = JPluginHelper::getPlugin('user', 'joomla');
 		$pluginParams = new Registry($plugin->params);
 
+
 		// Get the form.
 		$form = $this->loadForm('com_users.user', 'user', array('control' => 'jform', 'load_data' => $loadData));
 
@@ -292,6 +293,7 @@ class UsersModelUser extends JModelAdmin
 			$user->load($pk);
 		}
 
+		//print_r($data); die;
 		// Bind the data.
 		if (!$user->bind($data))
 		{

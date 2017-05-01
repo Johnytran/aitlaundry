@@ -44,6 +44,10 @@ class UserextraTableuser extends JTable
 	public function bind($array, $ignore = '')
 	{
 		$input = JFactory::getApplication()->input;
+		//echo '<pre>';
+		//$data = $input->get('firstname'); 
+		//print_r($_POST['jform']['firstname']);
+		//die;
 		$task = $input->getString('task', '');
 
 		if ($array['id'] == 0 && empty($array['created_by']))
@@ -92,6 +96,11 @@ class UserextraTableuser extends JTable
 		{
 			$this->setRules($array['rules']);
 		}
+		print_r($_POST);
+		//die;
+		//$array['firstName'] = $_POST['jform']['firstname'];
+		//$array['lastName'] = $_POST['jform']['lastname'];
+		//print_r($array);die;
 
 		return parent::bind($array, $ignore);
 	}
