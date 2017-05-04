@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.1.14
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2017 at 07:13 AM
--- Server version: 5.7.14
--- PHP Version: 5.6.25
+-- Generation Time: May 05, 2017 at 01:29 AM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `aitlaundry`
@@ -26,23 +26,27 @@ SET time_zone = "+00:00";
 -- Table structure for table `fv5oz_assets`
 --
 
-CREATE TABLE `fv5oz_assets` (
-  `id` int(10) UNSIGNED NOT NULL COMMENT 'Primary Key',
+CREATE TABLE IF NOT EXISTS `fv5oz_assets` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
   `parent_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set parent.',
   `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
-  `level` int(10) UNSIGNED NOT NULL COMMENT 'The cached level in the nested tree.',
+  `level` int(10) unsigned NOT NULL COMMENT 'The cached level in the nested tree.',
   `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The unique name for the asset.\n',
   `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The descriptive title for the asset.',
-  `rules` varchar(5120) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded access control.'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `rules` varchar(5120) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded access control.',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_asset_name` (`name`),
+  KEY `idx_lft_rgt` (`lft`,`rgt`),
+  KEY `idx_parent_id` (`parent_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=72 ;
 
 --
 -- Dumping data for table `fv5oz_assets`
 --
 
 INSERT INTO `fv5oz_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `title`, `rules`) VALUES
-(1, 0, 0, 119, 0, 'root.1', 'Root Asset', '{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.login.offline":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
+(1, 0, 0, 121, 0, 'root.1', 'Root Asset', '{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.login.offline":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
 (2, 1, 1, 2, 1, 'com_admin', 'com_admin', '{}'),
 (3, 1, 3, 6, 1, 'com_banners', 'com_banners', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (4, 1, 7, 8, 1, 'com_cache', 'com_cache', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
@@ -57,51 +61,52 @@ INSERT INTO `fv5oz_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 (13, 1, 29, 30, 1, 'com_mailto', 'com_mailto', '{}'),
 (14, 1, 31, 32, 1, 'com_massmail', 'com_massmail', '{}'),
 (15, 1, 33, 34, 1, 'com_media', 'com_media', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":{"5":1}}'),
-(16, 1, 35, 38, 1, 'com_menus', 'com_menus', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(17, 1, 39, 40, 1, 'com_messages', 'com_messages', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
-(18, 1, 41, 72, 1, 'com_modules', 'com_modules', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(19, 1, 73, 76, 1, 'com_newsfeeds', 'com_newsfeeds', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(20, 1, 77, 78, 1, 'com_plugins', 'com_plugins', '{"core.admin":{"7":1},"core.manage":[],"core.edit":[],"core.edit.state":[]}'),
-(21, 1, 79, 80, 1, 'com_redirect', 'com_redirect', '{"core.admin":{"7":1},"core.manage":[]}'),
-(22, 1, 81, 82, 1, 'com_search', 'com_search', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
-(23, 1, 83, 84, 1, 'com_templates', 'com_templates', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(24, 1, 85, 88, 1, 'com_users', 'com_users', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(26, 1, 89, 90, 1, 'com_wrapper', 'com_wrapper', '{}'),
+(16, 1, 35, 40, 1, 'com_menus', 'com_menus', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(17, 1, 41, 42, 1, 'com_messages', 'com_messages', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
+(18, 1, 43, 76, 1, 'com_modules', 'com_modules', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(19, 1, 77, 80, 1, 'com_newsfeeds', 'com_newsfeeds', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(20, 1, 81, 82, 1, 'com_plugins', 'com_plugins', '{"core.admin":{"7":1},"core.manage":[],"core.edit":[],"core.edit.state":[]}'),
+(21, 1, 83, 84, 1, 'com_redirect', 'com_redirect', '{"core.admin":{"7":1},"core.manage":[]}'),
+(22, 1, 85, 86, 1, 'com_search', 'com_search', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
+(23, 1, 87, 88, 1, 'com_templates', 'com_templates', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(24, 1, 89, 92, 1, 'com_users', 'com_users', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(26, 1, 93, 94, 1, 'com_wrapper', 'com_wrapper', '{}'),
 (27, 8, 18, 19, 2, 'com_content.category.2', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
 (28, 3, 4, 5, 2, 'com_banners.category.3', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (29, 7, 14, 15, 2, 'com_contact.category.4', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(30, 19, 74, 75, 2, 'com_newsfeeds.category.5', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(32, 24, 86, 87, 1, 'com_users.category.7', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(33, 1, 91, 92, 1, 'com_finder', 'com_finder', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
-(34, 1, 93, 94, 1, 'com_joomlaupdate', 'com_joomlaupdate', '{"core.admin":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}'),
-(35, 1, 95, 96, 1, 'com_tags', 'com_tags', '{"core.admin":[],"core.manage":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}'),
-(36, 1, 97, 98, 1, 'com_contenthistory', 'com_contenthistory', '{}'),
-(37, 1, 99, 100, 1, 'com_ajax', 'com_ajax', '{}'),
-(38, 1, 101, 102, 1, 'com_postinstall', 'com_postinstall', '{}'),
-(39, 18, 42, 43, 2, 'com_modules.module.1', 'Main Menu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(40, 18, 44, 45, 2, 'com_modules.module.2', 'Login', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(41, 18, 46, 47, 2, 'com_modules.module.3', 'Popular Articles', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(42, 18, 48, 49, 2, 'com_modules.module.4', 'Recently Added Articles', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(43, 18, 50, 51, 2, 'com_modules.module.8', 'Toolbar', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(44, 18, 52, 53, 2, 'com_modules.module.9', 'Quick Icons', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(45, 18, 54, 55, 2, 'com_modules.module.10', 'Logged-in Users', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(46, 18, 56, 57, 2, 'com_modules.module.12', 'Admin Menu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(47, 18, 58, 59, 2, 'com_modules.module.13', 'Admin Submenu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(48, 18, 60, 61, 2, 'com_modules.module.14', 'User Status', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(49, 18, 62, 63, 2, 'com_modules.module.15', 'Title', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(50, 18, 64, 65, 2, 'com_modules.module.16', 'Login Form', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(51, 18, 66, 67, 2, 'com_modules.module.17', 'Breadcrumbs', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(52, 18, 68, 69, 2, 'com_modules.module.79', 'Multilanguage status', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(53, 18, 70, 71, 2, 'com_modules.module.86', 'Joomla Version', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(30, 19, 78, 79, 2, 'com_newsfeeds.category.5', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(32, 24, 90, 91, 1, 'com_users.category.7', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(33, 1, 95, 96, 1, 'com_finder', 'com_finder', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
+(34, 1, 97, 98, 1, 'com_joomlaupdate', 'com_joomlaupdate', '{"core.admin":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}'),
+(35, 1, 99, 100, 1, 'com_tags', 'com_tags', '{"core.admin":[],"core.manage":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}'),
+(36, 1, 101, 102, 1, 'com_contenthistory', 'com_contenthistory', '{}'),
+(37, 1, 103, 104, 1, 'com_ajax', 'com_ajax', '{}'),
+(38, 1, 105, 106, 1, 'com_postinstall', 'com_postinstall', '{}'),
+(39, 18, 44, 45, 2, 'com_modules.module.1', 'Main Menu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(40, 18, 46, 47, 2, 'com_modules.module.2', 'Login', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(41, 18, 48, 49, 2, 'com_modules.module.3', 'Popular Articles', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(42, 18, 50, 51, 2, 'com_modules.module.4', 'Recently Added Articles', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(43, 18, 52, 53, 2, 'com_modules.module.8', 'Toolbar', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(44, 18, 54, 55, 2, 'com_modules.module.9', 'Quick Icons', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(45, 18, 56, 57, 2, 'com_modules.module.10', 'Logged-in Users', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(46, 18, 58, 59, 2, 'com_modules.module.12', 'Admin Menu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(47, 18, 60, 61, 2, 'com_modules.module.13', 'Admin Submenu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(48, 18, 62, 63, 2, 'com_modules.module.14', 'User Status', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(49, 18, 64, 65, 2, 'com_modules.module.15', 'Title', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(50, 18, 66, 67, 2, 'com_modules.module.16', 'Login Form', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(51, 18, 68, 69, 2, 'com_modules.module.17', 'Breadcrumbs', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(52, 18, 70, 71, 2, 'com_modules.module.79', 'Multilanguage status', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(53, 18, 72, 73, 2, 'com_modules.module.86', 'Joomla Version', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (54, 16, 36, 37, 2, 'com_menus.menu.1', 'Main Menu', '{}'),
-(59, 1, 103, 104, 1, 'com_servicess', 'com_servicess', '{"core.manage":{"1":1}}'),
-(61, 1, 105, 106, 1, 'com_combos', 'com_combos', '{"core.manage":{"1":1}}'),
-(62, 1, 107, 108, 1, 'com_payment', 'com_payment', '{}'),
-(64, 1, 109, 110, 1, 'com_order', 'com_order', '{"core.manage":{"1":1}}'),
-(65, 1, 111, 112, 1, 'com_logbook', 'com_logbook', '{"core.manage":{"1":1}}'),
-(66, 1, 113, 114, 1, 'com_orderlogbook', 'com_orderlogbook', '{"core.manage":{"1":1}}'),
-(68, 1, 115, 116, 1, 'com_userextra', 'com_userextra', '{"core.manage":{"1":1}}'),
-(69, 1, 117, 118, 1, 'com_location', 'com_location', '{}');
+(59, 1, 107, 108, 1, 'com_servicess', 'com_servicess', '{"core.manage":{"1":1}}'),
+(61, 1, 109, 110, 1, 'com_combos', 'com_combos', '{"core.manage":{"1":1}}'),
+(62, 1, 111, 112, 1, 'com_payment', 'com_payment', '{}'),
+(64, 1, 113, 114, 1, 'com_order', 'com_order', '{"core.manage":{"1":1}}'),
+(65, 1, 115, 116, 1, 'com_logbook', 'com_logbook', '{"core.manage":{"1":1}}'),
+(66, 1, 117, 118, 1, 'com_orderlogbook', 'com_orderlogbook', '{"core.manage":{"1":1}}'),
+(69, 1, 119, 120, 1, 'com_location', 'com_location', '{}'),
+(70, 16, 38, 39, 2, 'com_menus.menu.2', 'System Menu', '{}'),
+(71, 18, 74, 75, 2, 'com_modules.module.87', 'BT Google Maps', '{}');
 
 -- --------------------------------------------------------
 
@@ -109,10 +114,12 @@ INSERT INTO `fv5oz_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 -- Table structure for table `fv5oz_associations`
 --
 
-CREATE TABLE `fv5oz_associations` (
+CREATE TABLE IF NOT EXISTS `fv5oz_associations` (
   `id` int(11) NOT NULL COMMENT 'A reference to the associated item.',
   `context` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The context of the associated item.',
-  `key` char(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The key for the association computed from an md5 on associated ids.'
+  `key` char(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The key for the association computed from an md5 on associated ids.',
+  PRIMARY KEY (`context`,`id`),
+  KEY `idx_key` (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -121,8 +128,8 @@ CREATE TABLE `fv5oz_associations` (
 -- Table structure for table `fv5oz_banners`
 --
 
-CREATE TABLE `fv5oz_banners` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_banners` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `cid` int(11) NOT NULL DEFAULT '0',
   `type` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -132,10 +139,10 @@ CREATE TABLE `fv5oz_banners` (
   `clicks` int(11) NOT NULL DEFAULT '0',
   `clickurl` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `state` tinyint(3) NOT NULL DEFAULT '0',
-  `catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `catid` int(10) unsigned NOT NULL DEFAULT '0',
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `custombannercode` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sticky` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `sticky` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `ordering` int(11) NOT NULL DEFAULT '0',
   `metakey` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -144,19 +151,25 @@ CREATE TABLE `fv5oz_banners` (
   `purchase_type` tinyint(4) NOT NULL DEFAULT '-1',
   `track_clicks` tinyint(4) NOT NULL DEFAULT '-1',
   `track_impressions` tinyint(4) NOT NULL DEFAULT '-1',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `reset` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_by` int(10) unsigned NOT NULL DEFAULT '0',
   `created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
+  `version` int(10) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `idx_state` (`state`),
+  KEY `idx_own_prefix` (`own_prefix`),
+  KEY `idx_metakey_prefix` (`metakey_prefix`(100)),
+  KEY `idx_banner_catid` (`catid`),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -164,22 +177,25 @@ CREATE TABLE `fv5oz_banners` (
 -- Table structure for table `fv5oz_banner_clients`
 --
 
-CREATE TABLE `fv5oz_banner_clients` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_banner_clients` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `contact` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `extrainfo` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `state` tinyint(3) NOT NULL DEFAULT '0',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `metakey` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `own_prefix` tinyint(4) NOT NULL DEFAULT '0',
   `metakey_prefix` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `purchase_type` tinyint(4) NOT NULL DEFAULT '-1',
   `track_clicks` tinyint(4) NOT NULL DEFAULT '-1',
-  `track_impressions` tinyint(4) NOT NULL DEFAULT '-1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `track_impressions` tinyint(4) NOT NULL DEFAULT '-1',
+  PRIMARY KEY (`id`),
+  KEY `idx_own_prefix` (`own_prefix`),
+  KEY `idx_metakey_prefix` (`metakey_prefix`(100))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -187,11 +203,15 @@ CREATE TABLE `fv5oz_banner_clients` (
 -- Table structure for table `fv5oz_banner_tracks`
 --
 
-CREATE TABLE `fv5oz_banner_tracks` (
+CREATE TABLE IF NOT EXISTS `fv5oz_banner_tracks` (
   `track_date` datetime NOT NULL,
-  `track_type` int(10) UNSIGNED NOT NULL,
-  `banner_id` int(10) UNSIGNED NOT NULL,
-  `count` int(10) UNSIGNED NOT NULL DEFAULT '0'
+  `track_type` int(10) unsigned NOT NULL,
+  `banner_id` int(10) unsigned NOT NULL,
+  `count` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`track_date`,`track_type`,`banner_id`),
+  KEY `idx_track_date` (`track_date`),
+  KEY `idx_track_type` (`track_type`),
+  KEY `idx_banner_id` (`banner_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -200,13 +220,13 @@ CREATE TABLE `fv5oz_banner_tracks` (
 -- Table structure for table `fv5oz_categories`
 --
 
-CREATE TABLE `fv5oz_categories` (
-  `id` int(11) NOT NULL,
-  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
-  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+CREATE TABLE IF NOT EXISTS `fv5oz_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
+  `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `lft` int(11) NOT NULL DEFAULT '0',
   `rgt` int(11) NOT NULL DEFAULT '0',
-  `level` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `level` int(10) unsigned NOT NULL DEFAULT '0',
   `path` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `extension` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -214,21 +234,29 @@ CREATE TABLE `fv5oz_categories` (
   `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `description` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `published` tinyint(1) NOT NULL DEFAULT '0',
-  `checked_out` int(11) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(11) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `access` int(10) unsigned NOT NULL DEFAULT '0',
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `metadesc` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The meta description for the page.',
   `metakey` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The meta keywords for the page.',
   `metadata` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded metadata properties.',
-  `created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `modified_user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `hits` int(10) unsigned NOT NULL DEFAULT '0',
   `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `version` int(10) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `cat_idx` (`extension`,`published`,`access`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_path` (`path`(100)),
+  KEY `idx_left_right` (`lft`,`rgt`),
+  KEY `idx_alias` (`alias`(100)),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `fv5oz_categories`
@@ -248,8 +276,8 @@ INSERT INTO `fv5oz_categories` (`id`, `asset_id`, `parent_id`, `lft`, `rgt`, `le
 -- Table structure for table `fv5oz_combos_combo`
 --
 
-CREATE TABLE `fv5oz_combos_combo` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_combos_combo` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `ordering` int(11) NOT NULL,
@@ -257,8 +285,9 @@ CREATE TABLE `fv5oz_combos_combo` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
-  `modified_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `modified_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `fv5oz_combos_combo`
@@ -274,8 +303,8 @@ INSERT INTO `fv5oz_combos_combo` (`id`, `name`, `description`, `ordering`, `stat
 -- Table structure for table `fv5oz_contact_details`
 --
 
-CREATE TABLE `fv5oz_contact_details` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_contact_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `con_position` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -289,15 +318,15 @@ CREATE TABLE `fv5oz_contact_details` (
   `misc` mediumtext COLLATE utf8mb4_unicode_ci,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_to` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `default_con` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `default_con` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `published` tinyint(1) NOT NULL DEFAULT '0',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `ordering` int(11) NOT NULL DEFAULT '0',
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
   `catid` int(11) NOT NULL DEFAULT '0',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `access` int(10) unsigned NOT NULL DEFAULT '0',
   `mobile` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `webpage` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `sortname1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -305,20 +334,29 @@ CREATE TABLE `fv5oz_contact_details` (
   `sortname3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_by` int(10) unsigned NOT NULL DEFAULT '0',
   `created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
   `metakey` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `metadesc` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `metadata` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `featured` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Set if contact is featured.',
+  `featured` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Set if contact is featured.',
   `xreference` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'A reference to enable linkages to external data sets.',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `version` int(10) unsigned NOT NULL DEFAULT '1',
+  `hits` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_state` (`published`),
+  KEY `idx_catid` (`catid`),
+  KEY `idx_createdby` (`created_by`),
+  KEY `idx_featured_catid` (`featured`,`catid`),
+  KEY `idx_language` (`language`),
+  KEY `idx_xreference` (`xreference`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -326,38 +364,47 @@ CREATE TABLE `fv5oz_contact_details` (
 -- Table structure for table `fv5oz_content`
 --
 
-CREATE TABLE `fv5oz_content` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
+CREATE TABLE IF NOT EXISTS `fv5oz_content` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `introtext` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `fulltext` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `state` tinyint(3) NOT NULL DEFAULT '0',
-  `catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `catid` int(10) unsigned NOT NULL DEFAULT '0',
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_by` int(10) unsigned NOT NULL DEFAULT '0',
   `created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `images` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `urls` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `attribs` varchar(5120) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `version` int(10) unsigned NOT NULL DEFAULT '1',
   `ordering` int(11) NOT NULL DEFAULT '0',
   `metakey` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `metadesc` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `access` int(10) unsigned NOT NULL DEFAULT '0',
+  `hits` int(10) unsigned NOT NULL DEFAULT '0',
   `metadata` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `featured` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Set if article is featured.',
+  `featured` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Set if article is featured.',
   `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The language code for the article.',
-  `xreference` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'A reference to enable linkages to external data sets.'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `xreference` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'A reference to enable linkages to external data sets.',
+  PRIMARY KEY (`id`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_state` (`state`),
+  KEY `idx_catid` (`catid`),
+  KEY `idx_createdby` (`created_by`),
+  KEY `idx_featured_catid` (`featured`,`catid`),
+  KEY `idx_language` (`language`),
+  KEY `idx_xreference` (`xreference`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -365,13 +412,17 @@ CREATE TABLE `fv5oz_content` (
 -- Table structure for table `fv5oz_contentitem_tag_map`
 --
 
-CREATE TABLE `fv5oz_contentitem_tag_map` (
+CREATE TABLE IF NOT EXISTS `fv5oz_contentitem_tag_map` (
   `type_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `core_content_id` int(10) UNSIGNED NOT NULL COMMENT 'PK from the core content table',
+  `core_content_id` int(10) unsigned NOT NULL COMMENT 'PK from the core content table',
   `content_item_id` int(11) NOT NULL COMMENT 'PK from the content type table',
-  `tag_id` int(10) UNSIGNED NOT NULL COMMENT 'PK from the tag table',
+  `tag_id` int(10) unsigned NOT NULL COMMENT 'PK from the tag table',
   `tag_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Date of most recent save for this tag-item',
-  `type_id` mediumint(8) NOT NULL COMMENT 'PK from the content_type table'
+  `type_id` mediumint(8) NOT NULL COMMENT 'PK from the content_type table',
+  UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`),
+  KEY `idx_tag_type` (`tag_id`,`type_id`),
+  KEY `idx_date_id` (`tag_date`,`tag_id`),
+  KEY `idx_core_content_id` (`core_content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Maps items from content tables to tags';
 
 -- --------------------------------------------------------
@@ -380,9 +431,10 @@ CREATE TABLE `fv5oz_contentitem_tag_map` (
 -- Table structure for table `fv5oz_content_frontpage`
 --
 
-CREATE TABLE `fv5oz_content_frontpage` (
+CREATE TABLE IF NOT EXISTS `fv5oz_content_frontpage` (
   `content_id` int(11) NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0'
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -391,11 +443,12 @@ CREATE TABLE `fv5oz_content_frontpage` (
 -- Table structure for table `fv5oz_content_rating`
 --
 
-CREATE TABLE `fv5oz_content_rating` (
+CREATE TABLE IF NOT EXISTS `fv5oz_content_rating` (
   `content_id` int(11) NOT NULL DEFAULT '0',
-  `rating_sum` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `rating_count` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `lastip` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
+  `rating_sum` int(10) unsigned NOT NULL DEFAULT '0',
+  `rating_count` int(10) unsigned NOT NULL DEFAULT '0',
+  `lastip` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -404,16 +457,18 @@ CREATE TABLE `fv5oz_content_rating` (
 -- Table structure for table `fv5oz_content_types`
 --
 
-CREATE TABLE `fv5oz_content_types` (
-  `type_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_content_types` (
+  `type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `type_alias` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `table` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `rules` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `field_mappings` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `router` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `content_history_options` varchar(5120) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'JSON string for com_contenthistory options'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `content_history_options` varchar(5120) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'JSON string for com_contenthistory options',
+  PRIMARY KEY (`type_id`),
+  KEY `idx_alias` (`type_alias`(100))
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `fv5oz_content_types`
@@ -439,7 +494,6 @@ INSERT INTO `fv5oz_content_types` (`type_id`, `type_title`, `type_alias`, `table
 (23, 'Order', 'com_order.order', '{"special":{"dbtable":"#__order","key":"id","type":"Order","prefix":"RderTable"}}', '', '', '', '{"formFile":"administrator/components/com_order/models/forms/order.xml", "hideFields":["checked_out","checked_out_time","params","language" ,"deliverynote"], "ignoreChanges":["modified_by", "modified", "checked_out", "checked_out_time"], "convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"group_id","targetTable":"#__usergroups","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"}]}'),
 (24, 'Logbook', 'com_logbook.logbook', '{"special":{"dbtable":"#__logbook","key":"id","type":"Logbook","prefix":"LogbookTable"}}', '', '', '', '{"formFile":"administrator/components/com_logbook/models/forms/logbook.xml", "hideFields":["checked_out","checked_out_time","params","language" ,"note"], "ignoreChanges":["modified_by", "modified", "checked_out", "checked_out_time"], "convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"group_id","targetTable":"#__usergroups","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"}]}'),
 (25, 'Order Logbook', 'com_orderlogbook.orderlogbook', '{"special":{"dbtable":"#__orderlogbook","key":"id","type":"Orderlogbook","prefix":"RderlogbookTable"}}', '', '', '', '{"formFile":"administrator/components/com_orderlogbook/models/forms/orderlogbook.xml", "hideFields":["checked_out","checked_out_time","params","language"], "ignoreChanges":["modified_by", "modified", "checked_out", "checked_out_time"], "convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"group_id","targetTable":"#__usergroups","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"}]}'),
-(27, 'User', 'com_userextra.user', '{"special":{"dbtable":"#__userextra_","key":"id","type":"User","prefix":"UserextraTable"}}', '', '', '', '{"formFile":"administrator/components/com_userextra/models/forms/user.xml", "hideFields":["checked_out","checked_out_time","params","language"], "ignoreChanges":["modified_by", "modified", "checked_out", "checked_out_time"], "convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"group_id","targetTable":"#__usergroups","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"}]}'),
 (28, 'Location', 'com_location.location', '{"special":{"dbtable":"#__location","key":"id","type":"Location","prefix":"LocationTable"}}', '', '', '', '{"formFile":"administrator/components/com_location/models/forms/location.xml", "hideFields":["checked_out","checked_out_time","params","language"], "ignoreChanges":["modified_by", "modified", "checked_out", "checked_out_time"], "convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"group_id","targetTable":"#__usergroups","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"}]}');
 
 -- --------------------------------------------------------
@@ -448,9 +502,9 @@ INSERT INTO `fv5oz_content_types` (`type_id`, `type_title`, `type_alias`, `table
 -- Table structure for table `fv5oz_core_log_searches`
 --
 
-CREATE TABLE `fv5oz_core_log_searches` (
+CREATE TABLE IF NOT EXISTS `fv5oz_core_log_searches` (
   `search_term` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0'
+  `hits` int(10) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -459,25 +513,29 @@ CREATE TABLE `fv5oz_core_log_searches` (
 -- Table structure for table `fv5oz_extensions`
 --
 
-CREATE TABLE `fv5oz_extensions` (
-  `extension_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_extensions` (
+  `extension_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `element` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `folder` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `client_id` tinyint(3) NOT NULL,
   `enabled` tinyint(3) NOT NULL DEFAULT '1',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `access` int(10) unsigned NOT NULL DEFAULT '1',
   `protected` tinyint(3) NOT NULL DEFAULT '0',
   `manifest_cache` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `custom_data` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `system_data` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `ordering` int(11) DEFAULT '0',
-  `state` int(11) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `state` int(11) DEFAULT '0',
+  PRIMARY KEY (`extension_id`),
+  KEY `element_clientid` (`element`,`client_id`),
+  KEY `element_folder_clientid` (`element`,`folder`,`client_id`),
+  KEY `extension` (`type`,`element`,`folder`,`client_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=819 ;
 
 --
 -- Dumping data for table `fv5oz_extensions`
@@ -486,7 +544,7 @@ CREATE TABLE `fv5oz_extensions` (
 INSERT INTO `fv5oz_extensions` (`extension_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) VALUES
 (1, 'com_mailto', 'component', 'com_mailto', '', 0, 1, 1, 1, '{"name":"com_mailto","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.\\t","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_MAILTO_XML_DESCRIPTION","group":"","filename":"mailto"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (2, 'com_wrapper', 'component', 'com_wrapper', '', 0, 1, 1, 1, '{"name":"com_wrapper","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.\\n\\t","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_WRAPPER_XML_DESCRIPTION","group":"","filename":"wrapper"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(3, 'com_admin', 'component', 'com_admin', '', 1, 1, 1, 1, '{"name":"com_admin","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_ADMIN_XML_DESCRIPTION","group":""}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(3, 'com_admin', 'component', 'com_admin', '', 1, 0, 0, 1, '{"name":"com_admin","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_ADMIN_XML_DESCRIPTION","group":""}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (4, 'com_banners', 'component', 'com_banners', '', 1, 0, 1, 0, '{"name":"com_banners","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_BANNERS_XML_DESCRIPTION","group":"","filename":"banners"}', '{"purchase_type":"3","track_impressions":"0","track_clicks":"0","metakey_prefix":"","save_history":"1","history_limit":10}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (5, 'com_cache', 'component', 'com_cache', '', 1, 1, 1, 1, '{"name":"com_cache","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_CACHE_XML_DESCRIPTION","group":""}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (6, 'com_categories', 'component', 'com_categories', '', 1, 1, 1, 1, '{"name":"com_categories","type":"component","creationDate":"December 2007","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_CATEGORIES_XML_DESCRIPTION","group":""}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -507,7 +565,7 @@ INSERT INTO `fv5oz_extensions` (`extension_id`, `name`, `type`, `element`, `fold
 (22, 'com_content', 'component', 'com_content', '', 1, 1, 0, 1, '{"name":"com_content","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_CONTENT_XML_DESCRIPTION","group":"","filename":"content"}', '{"article_layout":"_:default","show_title":"1","link_titles":"1","show_intro":"1","show_category":"1","link_category":"1","show_parent_category":"0","link_parent_category":"0","show_author":"1","link_author":"0","show_create_date":"0","show_modify_date":"0","show_publish_date":"1","show_item_navigation":"1","show_vote":"0","show_readmore":"1","show_readmore_title":"1","readmore_limit":"100","show_icons":"1","show_print_icon":"1","show_email_icon":"1","show_hits":"1","show_noauth":"0","show_publishing_options":"1","show_article_options":"1","save_history":"1","history_limit":10,"show_urls_images_frontend":"0","show_urls_images_backend":"1","targeta":0,"targetb":0,"targetc":0,"float_intro":"left","float_fulltext":"left","category_layout":"_:blog","show_category_title":"0","show_description":"0","show_description_image":"0","maxLevel":"1","show_empty_categories":"0","show_no_articles":"1","show_subcat_desc":"1","show_cat_num_articles":"0","show_base_description":"1","maxLevelcat":"-1","show_empty_categories_cat":"0","show_subcat_desc_cat":"1","show_cat_num_articles_cat":"1","num_leading_articles":"1","num_intro_articles":"4","num_columns":"2","num_links":"4","multi_column_order":"0","show_subcategory_content":"0","show_pagination_limit":"1","filter_field":"hide","show_headings":"1","list_show_date":"0","date_format":"","list_show_hits":"1","list_show_author":"1","orderby_pri":"order","orderby_sec":"rdate","order_date":"published","show_pagination":"2","show_pagination_results":"1","show_feed_link":"1","feed_summary":"0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (23, 'com_config', 'component', 'com_config', '', 1, 1, 0, 1, '{"name":"com_config","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_CONFIG_XML_DESCRIPTION","group":""}', '{"filters":{"1":{"filter_type":"NH","filter_tags":"","filter_attributes":""},"9":{"filter_type":"BL","filter_tags":"","filter_attributes":""},"6":{"filter_type":"BL","filter_tags":"","filter_attributes":""},"7":{"filter_type":"NONE","filter_tags":"","filter_attributes":""},"2":{"filter_type":"NH","filter_tags":"","filter_attributes":""},"3":{"filter_type":"BL","filter_tags":"","filter_attributes":""},"4":{"filter_type":"BL","filter_tags":"","filter_attributes":""},"5":{"filter_type":"BL","filter_tags":"","filter_attributes":""},"8":{"filter_type":"NONE","filter_tags":"","filter_attributes":""}}}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (24, 'com_redirect', 'component', 'com_redirect', '', 1, 0, 0, 1, '{"name":"com_redirect","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_REDIRECT_XML_DESCRIPTION","group":""}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(25, 'com_users', 'component', 'com_users', '', 1, 1, 0, 1, '{"name":"com_users","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_USERS_XML_DESCRIPTION","group":"","filename":"users"}', '{"allowUserRegistration":"0","new_usertype":"2","guest_usergroup":"9","sendpassword":"1","useractivation":"2","mail_to_admin":"1","captcha":"","frontend_userparams":"1","site_language":"0","change_login_name":"0","reset_count":"10","reset_time":"1","minimum_length":"4","minimum_integers":"0","minimum_symbols":"0","minimum_uppercase":"0","save_history":"1","history_limit":5,"mailSubjectPrefix":"","mailBodySuffix":""}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(25, 'com_users', 'component', 'com_users', '', 1, 1, 0, 1, '{"name":"com_users","type":"component","creationDate":"April 2006","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_USERS_XML_DESCRIPTION","group":"","filename":"users"}', '{"allowUserRegistration":"1","new_usertype":"2","guest_usergroup":"9","sendpassword":"0","useractivation":"2","mail_to_admin":"1","captcha":"","frontend_userparams":"1","site_language":"0","change_login_name":"0","reset_count":"10","reset_time":"1","minimum_length":"4","minimum_integers":"0","minimum_symbols":"0","minimum_uppercase":"0","save_history":"1","history_limit":5,"mailSubjectPrefix":"","mailBodySuffix":""}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (27, 'com_finder', 'component', 'com_finder', '', 1, 0, 0, 0, '{"name":"com_finder","type":"component","creationDate":"August 2011","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.0.0","description":"COM_FINDER_XML_DESCRIPTION","group":"","filename":"finder"}', '{"show_description":"1","description_length":255,"allow_empty_query":"0","show_url":"1","show_advanced":"1","expand_advanced":"0","show_date_filters":"0","highlight_terms":"1","opensearch_name":"","opensearch_description":"","batch_size":"50","memory_table_limit":30000,"title_multiplier":"1.7","text_multiplier":"0.7","meta_multiplier":"1.2","path_multiplier":"2.0","misc_multiplier":"0.3","stemmer":"snowball"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (28, 'com_joomlaupdate', 'component', 'com_joomlaupdate', '', 1, 0, 0, 1, '{"name":"com_joomlaupdate","type":"component","creationDate":"February 2012","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.6.2","description":"COM_JOOMLAUPDATE_XML_DESCRIPTION","group":""}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (29, 'com_tags', 'component', 'com_tags', '', 1, 0, 1, 1, '{"name":"com_tags","type":"component","creationDate":"December 2013","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.1.0","description":"COM_TAGS_XML_DESCRIPTION","group":"","filename":"tags"}', '{"tag_layout":"_:default","save_history":"1","history_limit":5,"show_tag_title":"0","tag_list_show_tag_image":"0","tag_list_show_tag_description":"0","tag_list_image":"","show_tag_num_items":"0","tag_list_orderby":"title","tag_list_orderby_direction":"ASC","show_headings":"0","tag_list_show_date":"0","tag_list_show_item_image":"0","tag_list_show_item_description":"0","tag_list_item_maximum_characters":0,"return_any_or_all":"1","include_children":"0","maximum":200,"tag_list_language_filter":"all","tags_layout":"_:default","all_tags_orderby":"title","all_tags_orderby_direction":"ASC","all_tags_show_tag_image":"0","all_tags_show_tag_descripion":"0","all_tags_tag_maximum_characters":20,"all_tags_show_tag_hits":"0","filter_field":"1","show_pagination_limit":"1","show_pagination":"2","show_pagination_results":"1","tag_field_ajax_mode":"1","show_feed_link":"1"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -515,7 +573,7 @@ INSERT INTO `fv5oz_extensions` (`extension_id`, `name`, `type`, `element`, `fold
 (31, 'com_ajax', 'component', 'com_ajax', '', 1, 1, 1, 1, '{"name":"com_ajax","type":"component","creationDate":"August 2013","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.2.0","description":"COM_AJAX_XML_DESCRIPTION","group":"","filename":"ajax"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (32, 'com_postinstall', 'component', 'com_postinstall', '', 1, 0, 1, 1, '{"name":"com_postinstall","type":"component","creationDate":"September 2013","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.2.0","description":"COM_POSTINSTALL_XML_DESCRIPTION","group":""}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (102, 'LIB_PHPUTF8', 'library', 'phputf8', '', 0, 1, 1, 1, '{"name":"LIB_PHPUTF8","type":"library","creationDate":"2006","author":"Harry Fuecks","copyright":"Copyright various authors","authorEmail":"hfuecks@gmail.com","authorUrl":"http:\\/\\/sourceforge.net\\/projects\\/phputf8","version":"0.5","description":"LIB_PHPUTF8_XML_DESCRIPTION","group":"","filename":"phputf8"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(103, 'LIB_JOOMLA', 'library', 'joomla', '', 0, 1, 1, 1, '{"name":"LIB_JOOMLA","type":"library","creationDate":"2008","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"https:\\/\\/www.joomla.org","version":"13.1","description":"LIB_JOOMLA_XML_DESCRIPTION","group":"","filename":"joomla"}', '{"mediaversion":"b4a69d1d491c58aadd67891bb543a670"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(103, 'LIB_JOOMLA', 'library', 'joomla', '', 0, 1, 1, 1, '{"name":"LIB_JOOMLA","type":"library","creationDate":"2008","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"https:\\/\\/www.joomla.org","version":"13.1","description":"LIB_JOOMLA_XML_DESCRIPTION","group":"","filename":"joomla"}', '{"mediaversion":"c7658b0630cd99c21b2f52d63b8234de"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (104, 'LIB_IDNA', 'library', 'idna_convert', '', 0, 1, 1, 1, '{"name":"LIB_IDNA","type":"library","creationDate":"2004","author":"phlyLabs","copyright":"2004-2011 phlyLabs Berlin, http:\\/\\/phlylabs.de","authorEmail":"phlymail@phlylabs.de","authorUrl":"http:\\/\\/phlylabs.de","version":"0.8.0","description":"LIB_IDNA_XML_DESCRIPTION","group":"","filename":"idna_convert"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (105, 'FOF', 'library', 'fof', '', 0, 1, 1, 1, '{"name":"FOF","type":"library","creationDate":"2015-04-22 13:15:32","author":"Nicholas K. Dionysopoulos \\/ Akeeba Ltd","copyright":"(C)2011-2015 Nicholas K. Dionysopoulos","authorEmail":"nicholas@akeebabackup.com","authorUrl":"https:\\/\\/www.akeebabackup.com","version":"2.4.3","description":"LIB_FOF_XML_DESCRIPTION","group":"","filename":"fof"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (106, 'LIB_PHPASS', 'library', 'phpass', '', 0, 1, 1, 1, '{"name":"LIB_PHPASS","type":"library","creationDate":"2004-2006","author":"Solar Designer","copyright":"","authorEmail":"solar@openwall.com","authorUrl":"http:\\/\\/www.openwall.com\\/phpass\\/","version":"0.3","description":"LIB_PHPASS_XML_DESCRIPTION","group":"","filename":"phpass"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -629,8 +687,8 @@ INSERT INTO `fv5oz_extensions` (`extension_id`, `name`, `type`, `element`, `fold
 (812, 'com_order', 'component', 'com_order', '', 1, 1, 0, 0, '{"name":"com_order","type":"component","creationDate":"2017-04-24","author":"AIT Laundry","copyright":"2017 AIT Laundry","authorEmail":"aitlaundry@gmail.com","authorUrl":"http:\\/\\/","version":"CVS: 1.0.0","description":"Provide order management for the laundry","group":"","filename":"order"}', '{"save_history":"0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (813, 'com_logbook', 'component', 'com_logbook', '', 1, 1, 0, 0, '{"name":"com_logbook","type":"component","creationDate":"2017-04-24","author":"AIT Laundry","copyright":"2017 AIT Laundry","authorEmail":"aitlaundry@gmail.com","authorUrl":"http:\\/\\/","version":"CVS: 1.0.0","description":"Provide Logbook for the Laundry","group":"","filename":"logbook"}', '{"save_history":"0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (814, 'com_orderlogbook', 'component', 'com_orderlogbook', '', 1, 1, 0, 0, '{"name":"com_orderlogbook","type":"component","creationDate":"2017-04-24","author":"AIT Laundry","copyright":"2017 AIT Laundry","authorEmail":"aitlaundry@gmail.com","authorUrl":"http:\\/\\/","version":"CVS: 1.0.0","description":"Provide Logbook for Order","group":"","filename":"orderlogbook"}', '{"save_history":"0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(816, 'com_userextra', 'component', 'com_userextra', '', 1, 1, 0, 0, '{"name":"com_userextra","type":"component","creationDate":"2017-04-26","author":"AIT Laundry","copyright":"2017 AIT Laundry","authorEmail":"aitlaundry@gmail.com","authorUrl":"http:\\/\\/","version":"CVS: 1.0.0","description":"","group":"","filename":"userextra"}', '{"save_history":"0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(817, 'com_location', 'component', 'com_location', '', 1, 1, 0, 0, '{"name":"com_location","type":"component","creationDate":"2017-04-28","author":"AIT Laundry","copyright":"2017 AIT Laundry","authorEmail":"aitlaundry@gmail.com","authorUrl":"http:\\/\\/","version":"CVS: 1.0.0","description":"Provide location management","group":"","filename":"location"}', '{"save_history":"0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
+(817, 'com_location', 'component', 'com_location', '', 1, 1, 0, 0, '{"name":"com_location","type":"component","creationDate":"2017-04-28","author":"AIT Laundry","copyright":"2017 AIT Laundry","authorEmail":"aitlaundry@gmail.com","authorUrl":"http:\\/\\/","version":"CVS: 1.0.0","description":"Provide location management","group":"","filename":"location"}', '{"save_history":"0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(818, 'BT Google Maps', 'module', 'mod_bt_googlemaps', '', 0, 1, 0, 0, '{"name":"BT Google Maps","type":"module","creationDate":"Jun 2012","author":"BowThemes","copyright":"Copyright (C) 2016 Bowthemes. All rights reserved.","authorEmail":"support@bowthemes.com","authorUrl":"http:\\/\\/www.bowthemes.com","version":"2.1.0","description":"\\n\\t\\n\\t\\t<div class=\\"bt_description\\">\\n\\t\\t\\t<h3>BT Google Maps Module Version 2.1.0<\\/h3>\\t\\t\\t\\n\\t\\t\\t<a href=\\"http:\\/\\/bowthemes.com\\" target=\\"_blank\\"><img src=\\"..\\/modules\\/mod_bt_googlemaps\\/admin\\/images\\/mod_bt_googlemaps.png\\"><\\/a>\\n\\t\\t\\t<p>Bring google maps to your website by the simplest & easiest way. Using Google Maps version 3 services, BT Google Maps support you input both Address and Coordinate, create your custom marker with title, images, description...\\n\\t\\t\\t<\\/p>\\n\\t\\t\\t<br clear=\\"both\\" \\/>\\n\\t\\t\\t<h3>Features<\\/h3>\\n\\t\\t\\t<ul class=\\"list-style\\">\\n\\t\\t\\t\\t<li>Google Maps Version 3 (Latest)<\\/li>\\n\\t\\t\\t\\t<li>Support both input types: Address and Coordinate <\\/li>\\n\\t\\t\\t\\t<li>Retrieving lat\\/long of location using Geocoder<\\/li>\\n\\t\\t\\t\\t<li>Auto-Detect Language<\\/li>\\n\\t\\t\\t\\t<li>Streetview, MapOverview, ZoomControl, PanControl, ScaleControl, MapTypeControl<\\/li>\\n\\t\\t\\t\\t<li>Support Multiple Marker( Easy customize title, icon, description popup)<\\/li>\\n\\t\\t\\t\\t<li>Weather & cloud layers<\\/li>\\n\\t\\t\\t\\t<li>Support custom map style<\\/li>\\n\\t\\t\\t\\t<li>Support custom inforwindow style<\\/li>\\n\\t\\t\\t\\t<li>Multiple module instances<\\/li>\\t\\n\\t\\t\\t\\t<li>The configuration is very easy and simple<\\/li>\\t\\t\\t\\t\\n\\t\\t\\t\\t<li>Compatibility with Joomla 1.6, 1.7, 2.5 & Joomla 3.x<\\/li>\\n\\t\\t\\t\\t<li>Cross Browser Support: IE7+, Firefox 2+, Safari 3+, Chrome 8+, Opera 9+<\\/li>\\n\\t\\t\\t<\\/ul>\\n\\t\\t\\t<h3>Upgrade versions<\\/h3>\\n\\t\\t\\t<p>\\n\\t\\t\\t\\tYour current versions is 2.1.0. <a target=\\"_blank\\" href=\\"http:\\/\\/bowthemes.com\\/bt-google-map.html\\">Find our latest versions now<\\/a>\\n\\t\\t\\t<\\/p>\\n\\t\\t\\t<h3>Userful links<\\/h3>\\n\\t\\t\\t<ul>\\n\\t\\t\\t\\t<li><a target=\\"_blank\\" href=\\"http:\\/\\/bowthemes.com\\/bt-google-map.html\\">Video tutorials<\\/a><\\/li>\\n\\t\\t\\t\\t<li><a target=\\"_blank\\" href=\\"http:\\/\\/bowthemes.com\\/forums\\/27-bt-google-map-module\\/\\">Report bug<\\/a><\\/li>\\n\\t\\t\\t\\t<li><a target=\\"_blank\\" href=\\"http:\\/\\/bowthemes.com\\/forums\\/27-bt-google-map-module\\/\\">Forum support<\\/a><\\/li>\\n\\t\\t\\t<\\/ul>\\n\\t\\t\\t<h3>About bow themes & copyright<\\/h3>\\t\\n\\t\\t\\t<p>\\n\\t\\t\\t\\tBow Themes is Professional Joomla template provider. We are focused on creating unique, attractive and clean templates without loosing flexibility and simplicity of customization\\n\\t\\t\\t<\\/p>\\n\\t\\t\\tCopyright (C) 2016 BowThemes\\t\\n\\n\\t\\t<\\/div>\\n\\t\\t<style>\\n\\t\\t\\t.bt_description{\\n\\t\\t\\t\\ttext-align: left;\\n\\t\\t\\t}\\n\\t\\t\\t.bt_description h3{\\n\\t\\t\\t\\ttext-transform: uppercase;\\n\\t\\t\\t\\tmargin: 20px 0px 10px 0px;\\n\\t\\t\\t}\\n\\t\\t\\t.bt_description img{\\n\\t\\t\\t\\tfloat:left;\\n\\t\\t\\t\\tmargin:5px 5px 5px 0px;\\n\\t\\t\\t}\\n\\t\\t\\t.bt_description p,.bt_description li{\\n\\t\\t\\t\\tlist-style: none outside none;\\n\\t\\t\\t\\tpadding: 5px 5px 5px 20px;\\t\\t\\t\\t\\n\\t\\t\\t}\\n\\t\\t\\t\\n\\t\\t\\t.bt_description ul.list-style li{\\n\\t\\t\\t\\tbackground:url(..\\/modules\\/mod_bt_googlemaps\\/admin\\/images\\/tick.png) 0px 6px no-repeat;\\n\\t\\t\\t\\tpadding-left:30px;\\n\\t\\t\\t\\tline-height:15px;\\n\\t\\t\\t}\\n\\t\\t<\\/style>\\n\\t\\t\\n\\t","group":"","filename":"mod_bt_googlemaps"}', '{"mapType":"roadmap","mapCenterType":"address","mapCenterAddress":"New York, United States","mapCenterCoordinate":"40.7143528, -74.0059731","width":"auto","height":"350","zoom":"13","zoomControl":"true","panControl":"true","mapTypeControl":"true","scaleControl":"true","overviewMapControl":"true","streetViewControl":"true","draggable":"true","disableDoubleClickZoom":"false","scrollwheel":"true","enable_map_api":"1","map_api":"","weather":"0","temperatureUnit":"f","replace_marker_icon":"1","display_weather_info":"1","enable-style":"0","style-title":"BT Map","createNewOrApplyDefaultStyle":"createNew","enable-custom-infobox":"0","boxcss":"background :#ffffff,\\r\\nopacity : 0.85,\\r\\nwidth : 280px,\\r\\nheight :100px,\\r\\nborder : 1px solid grey,\\r\\nborderRadius:3px,\\r\\npadding : 10px,\\r\\nboxShadow:30px 10px 10px 1px grey","pixelOffset":"-150,-155","closeBoxMargin":"-9px","closeBoxURL":"","cache":"1","cache_time":"900"}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -638,22 +696,23 @@ INSERT INTO `fv5oz_extensions` (`extension_id`, `name`, `type`, `element`, `fold
 -- Table structure for table `fv5oz_finder_filters`
 --
 
-CREATE TABLE `fv5oz_finder_filters` (
-  `filter_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_filters` (
+  `filter_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_by` int(10) UNSIGNED NOT NULL,
+  `created_by` int(10) unsigned NOT NULL,
   `created_by_alias` varchar(255) NOT NULL,
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `map_count` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `map_count` int(10) unsigned NOT NULL DEFAULT '0',
   `data` text NOT NULL,
-  `params` mediumtext
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `params` mediumtext,
+  PRIMARY KEY (`filter_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -661,8 +720,8 @@ CREATE TABLE `fv5oz_finder_filters` (
 -- Table structure for table `fv5oz_finder_links`
 --
 
-CREATE TABLE `fv5oz_finder_links` (
-  `link_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links` (
+  `link_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL,
   `route` varchar(255) NOT NULL,
   `title` varchar(400) DEFAULT NULL,
@@ -677,11 +736,18 @@ CREATE TABLE `fv5oz_finder_links` (
   `publish_end_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `start_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `end_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `list_price` double UNSIGNED NOT NULL DEFAULT '0',
-  `sale_price` double UNSIGNED NOT NULL DEFAULT '0',
+  `list_price` double unsigned NOT NULL DEFAULT '0',
+  `sale_price` double unsigned NOT NULL DEFAULT '0',
   `type_id` int(11) NOT NULL,
-  `object` mediumblob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `object` mediumblob NOT NULL,
+  PRIMARY KEY (`link_id`),
+  KEY `idx_type` (`type_id`),
+  KEY `idx_title` (`title`(100)),
+  KEY `idx_md5` (`md5sum`),
+  KEY `idx_url` (`url`(75)),
+  KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`),
+  KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -689,10 +755,13 @@ CREATE TABLE `fv5oz_finder_links` (
 -- Table structure for table `fv5oz_finder_links_terms0`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms0` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms0` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -701,10 +770,13 @@ CREATE TABLE `fv5oz_finder_links_terms0` (
 -- Table structure for table `fv5oz_finder_links_terms1`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms1` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms1` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -713,10 +785,13 @@ CREATE TABLE `fv5oz_finder_links_terms1` (
 -- Table structure for table `fv5oz_finder_links_terms2`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms2` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms2` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -725,10 +800,13 @@ CREATE TABLE `fv5oz_finder_links_terms2` (
 -- Table structure for table `fv5oz_finder_links_terms3`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms3` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms3` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -737,10 +815,13 @@ CREATE TABLE `fv5oz_finder_links_terms3` (
 -- Table structure for table `fv5oz_finder_links_terms4`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms4` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms4` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -749,10 +830,13 @@ CREATE TABLE `fv5oz_finder_links_terms4` (
 -- Table structure for table `fv5oz_finder_links_terms5`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms5` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms5` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -761,10 +845,13 @@ CREATE TABLE `fv5oz_finder_links_terms5` (
 -- Table structure for table `fv5oz_finder_links_terms6`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms6` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms6` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -773,10 +860,13 @@ CREATE TABLE `fv5oz_finder_links_terms6` (
 -- Table structure for table `fv5oz_finder_links_terms7`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms7` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms7` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -785,10 +875,13 @@ CREATE TABLE `fv5oz_finder_links_terms7` (
 -- Table structure for table `fv5oz_finder_links_terms8`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms8` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms8` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -797,10 +890,13 @@ CREATE TABLE `fv5oz_finder_links_terms8` (
 -- Table structure for table `fv5oz_finder_links_terms9`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms9` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms9` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -809,10 +905,13 @@ CREATE TABLE `fv5oz_finder_links_terms9` (
 -- Table structure for table `fv5oz_finder_links_termsa`
 --
 
-CREATE TABLE `fv5oz_finder_links_termsa` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_termsa` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -821,10 +920,13 @@ CREATE TABLE `fv5oz_finder_links_termsa` (
 -- Table structure for table `fv5oz_finder_links_termsb`
 --
 
-CREATE TABLE `fv5oz_finder_links_termsb` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_termsb` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -833,10 +935,13 @@ CREATE TABLE `fv5oz_finder_links_termsb` (
 -- Table structure for table `fv5oz_finder_links_termsc`
 --
 
-CREATE TABLE `fv5oz_finder_links_termsc` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_termsc` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -845,10 +950,13 @@ CREATE TABLE `fv5oz_finder_links_termsc` (
 -- Table structure for table `fv5oz_finder_links_termsd`
 --
 
-CREATE TABLE `fv5oz_finder_links_termsd` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_termsd` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -857,10 +965,13 @@ CREATE TABLE `fv5oz_finder_links_termsd` (
 -- Table structure for table `fv5oz_finder_links_termse`
 --
 
-CREATE TABLE `fv5oz_finder_links_termse` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_termse` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -869,10 +980,13 @@ CREATE TABLE `fv5oz_finder_links_termse` (
 -- Table structure for table `fv5oz_finder_links_termsf`
 --
 
-CREATE TABLE `fv5oz_finder_links_termsf` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_termsf` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -881,14 +995,20 @@ CREATE TABLE `fv5oz_finder_links_termsf` (
 -- Table structure for table `fv5oz_finder_taxonomy`
 --
 
-CREATE TABLE `fv5oz_finder_taxonomy` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_taxonomy` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
-  `state` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
-  `access` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `ordering` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `state` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `access` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `ordering` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `parent_id` (`parent_id`),
+  KEY `state` (`state`),
+  KEY `ordering` (`ordering`),
+  KEY `access` (`access`),
+  KEY `idx_parent_published` (`parent_id`,`state`,`access`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `fv5oz_finder_taxonomy`
@@ -903,9 +1023,12 @@ INSERT INTO `fv5oz_finder_taxonomy` (`id`, `parent_id`, `title`, `state`, `acces
 -- Table structure for table `fv5oz_finder_taxonomy_map`
 --
 
-CREATE TABLE `fv5oz_finder_taxonomy_map` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `node_id` int(10) UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_taxonomy_map` (
+  `link_id` int(10) unsigned NOT NULL,
+  `node_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`node_id`),
+  KEY `link_id` (`link_id`),
+  KEY `node_id` (`node_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -914,17 +1037,22 @@ CREATE TABLE `fv5oz_finder_taxonomy_map` (
 -- Table structure for table `fv5oz_finder_terms`
 --
 
-CREATE TABLE `fv5oz_finder_terms` (
-  `term_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_terms` (
+  `term_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
-  `common` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `phrase` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `weight` float UNSIGNED NOT NULL DEFAULT '0',
+  `common` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `phrase` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `weight` float unsigned NOT NULL DEFAULT '0',
   `soundex` varchar(75) NOT NULL,
   `links` int(10) NOT NULL DEFAULT '0',
-  `language` char(3) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `language` char(3) NOT NULL DEFAULT '',
+  PRIMARY KEY (`term_id`),
+  UNIQUE KEY `idx_term` (`term`),
+  KEY `idx_term_phrase` (`term`,`phrase`),
+  KEY `idx_stem_phrase` (`stem`,`phrase`),
+  KEY `idx_soundex_phrase` (`soundex`,`phrase`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -932,9 +1060,11 @@ CREATE TABLE `fv5oz_finder_terms` (
 -- Table structure for table `fv5oz_finder_terms_common`
 --
 
-CREATE TABLE `fv5oz_finder_terms_common` (
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_terms_common` (
   `term` varchar(75) NOT NULL,
-  `language` varchar(3) NOT NULL
+  `language` varchar(3) NOT NULL,
+  KEY `idx_word_lang` (`term`,`language`),
+  KEY `idx_lang` (`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -953,7 +1083,7 @@ INSERT INTO `fv5oz_finder_terms_common` (`term`, `language`) VALUES
 ('ani', 'en'),
 ('any', 'en'),
 ('are', 'en'),
-('aren\'t', 'en'),
+('aren''t', 'en'),
 ('as', 'en'),
 ('at', 'en'),
 ('be', 'en'),
@@ -968,7 +1098,7 @@ INSERT INTO `fv5oz_finder_terms_common` (`term`, `language`) VALUES
 ('in', 'en'),
 ('into', 'en'),
 ('is', 'en'),
-('isn\'t', 'en'),
+('isn''t', 'en'),
 ('it', 'en'),
 ('its', 'en'),
 ('me', 'en'),
@@ -1064,14 +1194,16 @@ INSERT INTO `fv5oz_finder_terms_common` (`term`, `language`) VALUES
 -- Table structure for table `fv5oz_finder_tokens`
 --
 
-CREATE TABLE `fv5oz_finder_tokens` (
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_tokens` (
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
-  `common` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `phrase` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `weight` float UNSIGNED NOT NULL DEFAULT '1',
-  `context` tinyint(1) UNSIGNED NOT NULL DEFAULT '2',
-  `language` char(3) NOT NULL DEFAULT ''
+  `common` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `phrase` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `weight` float unsigned NOT NULL DEFAULT '1',
+  `context` tinyint(1) unsigned NOT NULL DEFAULT '2',
+  `language` char(3) NOT NULL DEFAULT '',
+  KEY `idx_word` (`term`),
+  KEY `idx_context` (`context`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -1080,18 +1212,20 @@ CREATE TABLE `fv5oz_finder_tokens` (
 -- Table structure for table `fv5oz_finder_tokens_aggregate`
 --
 
-CREATE TABLE `fv5oz_finder_tokens_aggregate` (
-  `term_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_tokens_aggregate` (
+  `term_id` int(10) unsigned NOT NULL,
   `map_suffix` char(1) NOT NULL,
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
-  `common` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `phrase` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `term_weight` float UNSIGNED NOT NULL,
-  `context` tinyint(1) UNSIGNED NOT NULL DEFAULT '2',
-  `context_weight` float UNSIGNED NOT NULL,
-  `total_weight` float UNSIGNED NOT NULL,
-  `language` char(3) NOT NULL DEFAULT ''
+  `common` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `phrase` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `term_weight` float unsigned NOT NULL,
+  `context` tinyint(1) unsigned NOT NULL DEFAULT '2',
+  `context_weight` float unsigned NOT NULL,
+  `total_weight` float unsigned NOT NULL,
+  `language` char(3) NOT NULL DEFAULT '',
+  KEY `token` (`term`),
+  KEY `keyword_id` (`term_id`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -1100,11 +1234,13 @@ CREATE TABLE `fv5oz_finder_tokens_aggregate` (
 -- Table structure for table `fv5oz_finder_types`
 --
 
-CREATE TABLE `fv5oz_finder_types` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_types` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
-  `mime` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `mime` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title` (`title`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1112,8 +1248,8 @@ CREATE TABLE `fv5oz_finder_types` (
 -- Table structure for table `fv5oz_languages`
 --
 
-CREATE TABLE `fv5oz_languages` (
-  `lang_id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_languages` (
+  `lang_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `asset_id` int(11) NOT NULL,
   `lang_code` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1125,9 +1261,15 @@ CREATE TABLE `fv5oz_languages` (
   `metadesc` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `sitename` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `published` int(11) NOT NULL DEFAULT '0',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `access` int(10) unsigned NOT NULL DEFAULT '0',
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`lang_id`),
+  UNIQUE KEY `idx_sef` (`sef`),
+  UNIQUE KEY `idx_image` (`image`),
+  UNIQUE KEY `idx_langcode` (`lang_code`),
+  KEY `idx_access` (`access`),
+  KEY `idx_ordering` (`ordering`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `fv5oz_languages`
@@ -1142,8 +1284,8 @@ INSERT INTO `fv5oz_languages` (`lang_id`, `asset_id`, `lang_code`, `title`, `tit
 -- Table structure for table `fv5oz_location`
 --
 
-CREATE TABLE `fv5oz_location` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_location` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `postcode` int(11) NOT NULL,
   `suburbname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `latitude` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1153,8 +1295,9 @@ CREATE TABLE `fv5oz_location` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
-  `modified_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `modified_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1162,8 +1305,8 @@ CREATE TABLE `fv5oz_location` (
 -- Table structure for table `fv5oz_logbook`
 --
 
-CREATE TABLE `fv5oz_logbook` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_logbook` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `logid` int(11) NOT NULL,
   `note` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint(1) NOT NULL,
@@ -1172,8 +1315,9 @@ CREATE TABLE `fv5oz_logbook` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
-  `modified_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `modified_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1181,8 +1325,8 @@ CREATE TABLE `fv5oz_logbook` (
 -- Table structure for table `fv5oz_menu`
 --
 
-CREATE TABLE `fv5oz_menu` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `menutype` varchar(24) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The type of menu this item belongs to. FK to #__menu_types.menutype',
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The display title of the menu item.',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'The SEF alias of the menu item.',
@@ -1191,29 +1335,37 @@ CREATE TABLE `fv5oz_menu` (
   `link` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The actually link the menu item refers to.',
   `type` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The type of link: Component, URL, Alias, Separator',
   `published` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'The published state of the menu link.',
-  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '1' COMMENT 'The parent menu item in the menu tree.',
-  `level` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'The relative level in the tree.',
-  `component_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to #__extensions.id',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to #__users.id',
+  `parent_id` int(10) unsigned NOT NULL DEFAULT '1' COMMENT 'The parent menu item in the menu tree.',
+  `level` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'The relative level in the tree.',
+  `component_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to #__extensions.id',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to #__users.id',
   `checked_out_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'The time the menu item was checked out.',
   `browserNav` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'The click behaviour of the link.',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'The access level required to view the menu item.',
+  `access` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'The access level required to view the menu item.',
   `img` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The image of the menu item.',
-  `template_style_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `template_style_id` int(10) unsigned NOT NULL DEFAULT '0',
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded data for the menu item.',
   `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
-  `home` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Indicates if this menu item is the home or default page.',
+  `home` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Indicates if this menu item is the home or default page.',
   `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `client_id` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `client_id` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`(100),`language`),
+  KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`),
+  KEY `idx_menutype` (`menutype`),
+  KEY `idx_left_right` (`lft`,`rgt`),
+  KEY `idx_alias` (`alias`(100)),
+  KEY `idx_path` (`path`(100)),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=138 ;
 
 --
 -- Dumping data for table `fv5oz_menu`
 --
 
 INSERT INTO `fv5oz_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `link`, `type`, `published`, `parent_id`, `level`, `component_id`, `checked_out`, `checked_out_time`, `browserNav`, `access`, `img`, `template_style_id`, `params`, `lft`, `rgt`, `home`, `language`, `client_id`) VALUES
-(1, '', 'Menu_Item_Root', 'root', '', '', '', '', 1, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', 0, 75, 0, '*', 0),
+(1, '', 'Menu_Item_Root', 'root', '', '', '', '', 1, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', 0, 73, 0, '*', 0),
 (2, 'menu', 'com_banners', 'Banners', '', 'Banners', 'index.php?option=com_banners', 'component', 0, 1, 1, 4, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners', 0, '', 1, 10, 0, '*', 1),
 (3, 'menu', 'com_banners', 'Banners', '', 'Banners/Banners', 'index.php?option=com_banners', 'component', 0, 2, 2, 4, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners', 0, '', 2, 3, 0, '*', 1),
 (4, 'menu', 'com_banners_categories', 'Categories', '', 'Banners/Categories', 'index.php?option=com_categories&extension=com_banners', 'component', 0, 2, 2, 6, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners-cat', 0, '', 4, 5, 0, '*', 1),
@@ -1247,10 +1399,9 @@ INSERT INTO `fv5oz_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `l
 (124, 'main', 'COM_LOGBOOK_TITLE_ORDERLOGBOOKS', 'com-logbook-title-orderlogbooks', '', 'com-logbook/com-logbook-title-orderlogbooks', 'index.php?option=com_orderlogbook', 'component', 0, 122, 2, 813, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_logbook/images/s_orderlogbooks.png', 0, '{}', 60, 61, 0, '', 1),
 (125, 'main', 'COM_ORDERLOGBOOK', 'com-orderlogbook', '', 'com-orderlogbook', 'index.php?option=com_orderlogbook', 'component', 0, 1, 1, 814, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_orderlogbook/images/s_com_orderlogbook.png', 0, '{}', 63, 66, 0, '', 1),
 (126, 'main', 'COM_ORDERLOGBOOK_TITLE_ORDERLOGBOOKS', 'com-orderlogbook-title-orderlogbooks', '', 'com-orderlogbook/com-orderlogbook-title-orderlogbooks', 'index.php?option=com_orderlogbook&view=orderlogbooks', 'component', 0, 125, 2, 814, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_orderlogbook/images/s_orderlogbooks.png', 0, '{}', 64, 65, 0, '', 1),
-(129, 'main', 'COM_USEREXTRA', 'com-userextra', '', 'com-userextra', 'index.php?option=com_userextra', 'component', 0, 1, 1, 816, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_userextra/images/s_com_userextra.png', 0, '{}', 67, 70, 0, '', 1),
-(130, 'main', 'COM_USEREXTRA_TITLE_USERS', 'com-userextra-title-users', '', 'com-userextra/com-userextra-title-users', 'index.php?option=com_userextra&view=users', 'component', 0, 129, 2, 816, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_userextra/images/s_users.png', 0, '{}', 68, 69, 0, '', 1),
-(135, 'main', 'COM_LOCATION', 'com-location', '', 'com-location', 'index.php?option=com_location', 'component', 0, 1, 1, 817, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_location/images/s_com_location.png', 0, '{}', 71, 74, 0, '', 1),
-(136, 'main', 'COM_LOCATION_TITLE_LOCATIONS', 'com-location-title-locations', '', 'com-location/com-location-title-locations', 'index.php?option=com_location&view=locations', 'component', 0, 135, 2, 817, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_location/images/s_locations.png', 0, '{}', 72, 73, 0, '', 1);
+(135, 'main', 'COM_LOCATION', 'com-location', '', 'com-location', 'index.php?option=com_location', 'component', 0, 1, 1, 817, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_location/images/s_com_location.png', 0, '{}', 67, 70, 0, '', 1),
+(136, 'main', 'COM_LOCATION_TITLE_LOCATIONS', 'com-location-title-locations', '', 'com-location/com-location-title-locations', 'index.php?option=com_location&view=locations', 'component', 0, 135, 2, 817, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_location/images/s_locations.png', 0, '{}', 68, 69, 0, '', 1),
+(137, 'mainmenu', 'Get Started', 'get-started', '', 'get-started', 'index.php?option=com_users&view=registration', 'component', 1, 1, 1, 25, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"menu_show":1,"page_title":"","show_page_heading":"1","page_heading":"Get Started","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 71, 72, 0, '*', 0);
 
 -- --------------------------------------------------------
 
@@ -1258,20 +1409,23 @@ INSERT INTO `fv5oz_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `l
 -- Table structure for table `fv5oz_menu_types`
 --
 
-CREATE TABLE `fv5oz_menu_types` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_menu_types` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `asset_id` int(11) NOT NULL,
   `menutype` varchar(24) COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` varchar(48) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_menutype` (`menutype`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `fv5oz_menu_types`
 --
 
 INSERT INTO `fv5oz_menu_types` (`id`, `asset_id`, `menutype`, `title`, `description`) VALUES
-(1, 0, 'mainmenu', 'Main Menu', 'The main menu for the site');
+(1, 0, 'mainmenu', 'Main Menu', 'The main menu for the site'),
+(2, 70, 'system-menu', 'System Menu', '');
 
 -- --------------------------------------------------------
 
@@ -1279,17 +1433,31 @@ INSERT INTO `fv5oz_menu_types` (`id`, `asset_id`, `menutype`, `title`, `descript
 -- Table structure for table `fv5oz_messages`
 --
 
-CREATE TABLE `fv5oz_messages` (
-  `message_id` int(10) UNSIGNED NOT NULL,
-  `user_id_from` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `user_id_to` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `folder_id` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+CREATE TABLE IF NOT EXISTS `fv5oz_messages` (
+  `message_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id_from` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_id_to` int(10) unsigned NOT NULL DEFAULT '0',
+  `folder_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `date_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `state` tinyint(1) NOT NULL DEFAULT '0',
-  `priority` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `priority` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `message` text COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`message_id`),
+  KEY `useridto_state` (`user_id_to`,`state`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `fv5oz_messages`
+--
+
+INSERT INTO `fv5oz_messages` (`message_id`, `user_id_from`, `user_id_to`, `folder_id`, `date_time`, `state`, `priority`, `subject`, `message`) VALUES
+(1, 0, 0, 0, '2017-05-04 02:00:03', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: dfd'),
+(2, 0, 0, 0, '2017-05-04 22:08:38', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: fdsa'),
+(3, 0, 0, 0, '2017-05-04 22:18:41', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: testetestsert'),
+(4, 0, 0, 0, '2017-05-04 22:22:36', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: testetestsert'),
+(5, 0, 0, 0, '2017-05-04 22:25:22', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: sss'),
+(6, 0, 0, 0, '2017-05-04 22:33:55', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: sef');
 
 -- --------------------------------------------------------
 
@@ -1297,10 +1465,11 @@ CREATE TABLE `fv5oz_messages` (
 -- Table structure for table `fv5oz_messages_cfg`
 --
 
-CREATE TABLE `fv5oz_messages_cfg` (
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+CREATE TABLE IF NOT EXISTS `fv5oz_messages_cfg` (
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `cfg_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `cfg_value` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
+  `cfg_value` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1309,26 +1478,30 @@ CREATE TABLE `fv5oz_messages_cfg` (
 -- Table structure for table `fv5oz_modules`
 --
 
-CREATE TABLE `fv5oz_modules` (
-  `id` int(11) NOT NULL,
-  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
+CREATE TABLE IF NOT EXISTS `fv5oz_modules` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
   `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `ordering` int(11) NOT NULL DEFAULT '0',
   `position` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `published` tinyint(1) NOT NULL DEFAULT '0',
   `module` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `showtitle` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `access` int(10) unsigned NOT NULL DEFAULT '0',
+  `showtitle` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `client_id` tinyint(4) NOT NULL DEFAULT '0',
-  `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `published` (`published`,`access`),
+  KEY `newsfeeds` (`module`,`published`),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=88 ;
 
 --
 -- Dumping data for table `fv5oz_modules`
@@ -1349,7 +1522,8 @@ INSERT INTO `fv5oz_modules` (`id`, `asset_id`, `title`, `note`, `content`, `orde
 (16, 50, 'Login Form', '', '', 7, 'position-7', 106, '2017-04-24 23:05:03', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_login', 1, 1, '{"greeting":"1","name":"0"}', 0, '*'),
 (17, 51, 'Breadcrumbs', '', '', 1, 'position-2', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_breadcrumbs', 1, 1, '{"moduleclass_sfx":"","showHome":"1","homeText":"","showComponent":"1","separator":"","cache":"0","cache_time":"0","cachemode":"itemid"}', 0, '*'),
 (79, 52, 'Multilanguage status', '', '', 1, 'status', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'mod_multilangstatus', 3, 1, '{"layout":"_:default","moduleclass_sfx":"","cache":"0"}', 1, '*'),
-(86, 53, 'Joomla Version', '', '', 1, 'footer', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_version', 3, 1, '{"format":"short","product":"1","layout":"_:default","moduleclass_sfx":"","cache":"0"}', 1, '*');
+(86, 53, 'Joomla Version', '', '', 1, 'footer', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_version', 3, 1, '{"format":"short","product":"1","layout":"_:default","moduleclass_sfx":"","cache":"0"}', 1, '*'),
+(87, 71, 'BT Google Maps', '', '', 0, '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'mod_bt_googlemaps', 1, 1, '', 0, '*');
 
 -- --------------------------------------------------------
 
@@ -1357,9 +1531,10 @@ INSERT INTO `fv5oz_modules` (`id`, `asset_id`, `title`, `note`, `content`, `orde
 -- Table structure for table `fv5oz_modules_menu`
 --
 
-CREATE TABLE `fv5oz_modules_menu` (
+CREATE TABLE IF NOT EXISTS `fv5oz_modules_menu` (
   `moduleid` int(11) NOT NULL DEFAULT '0',
-  `menuid` int(11) NOT NULL DEFAULT '0'
+  `menuid` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`moduleid`,`menuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1391,27 +1566,27 @@ INSERT INTO `fv5oz_modules_menu` (`moduleid`, `menuid`) VALUES
 -- Table structure for table `fv5oz_newsfeeds`
 --
 
-CREATE TABLE `fv5oz_newsfeeds` (
+CREATE TABLE IF NOT EXISTS `fv5oz_newsfeeds` (
   `catid` int(11) NOT NULL DEFAULT '0',
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `link` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `published` tinyint(1) NOT NULL DEFAULT '0',
-  `numarticles` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `cache_time` int(10) UNSIGNED NOT NULL DEFAULT '3600',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `numarticles` int(10) unsigned NOT NULL DEFAULT '1',
+  `cache_time` int(10) unsigned NOT NULL DEFAULT '3600',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `ordering` int(11) NOT NULL DEFAULT '0',
   `rtl` tinyint(4) NOT NULL DEFAULT '0',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `access` int(10) unsigned NOT NULL DEFAULT '0',
   `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_by` int(10) unsigned NOT NULL DEFAULT '0',
   `created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
   `metakey` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `metadesc` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `metadata` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1419,10 +1594,18 @@ CREATE TABLE `fv5oz_newsfeeds` (
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `images` text COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `version` int(10) unsigned NOT NULL DEFAULT '1',
+  `hits` int(10) unsigned NOT NULL DEFAULT '0',
+  `images` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_state` (`published`),
+  KEY `idx_catid` (`catid`),
+  KEY `idx_createdby` (`created_by`),
+  KEY `idx_language` (`language`),
+  KEY `idx_xreference` (`xreference`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1430,8 +1613,8 @@ CREATE TABLE `fv5oz_newsfeeds` (
 -- Table structure for table `fv5oz_order`
 --
 
-CREATE TABLE `fv5oz_order` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_order` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ordernote` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `comboid` int(11) NOT NULL,
   `paymentid` int(11) NOT NULL,
@@ -1446,8 +1629,9 @@ CREATE TABLE `fv5oz_order` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
-  `modified_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `modified_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `fv5oz_order`
@@ -1463,8 +1647,8 @@ INSERT INTO `fv5oz_order` (`id`, `ordernote`, `comboid`, `paymentid`, `datetimec
 -- Table structure for table `fv5oz_orderlogbook`
 --
 
-CREATE TABLE `fv5oz_orderlogbook` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_orderlogbook` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `orderid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `ordering` int(11) NOT NULL,
@@ -1472,8 +1656,9 @@ CREATE TABLE `fv5oz_orderlogbook` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
-  `modified_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `modified_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1481,12 +1666,13 @@ CREATE TABLE `fv5oz_orderlogbook` (
 -- Table structure for table `fv5oz_overrider`
 --
 
-CREATE TABLE `fv5oz_overrider` (
-  `id` int(10) NOT NULL COMMENT 'Primary Key',
+CREATE TABLE IF NOT EXISTS `fv5oz_overrider` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
   `constant` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `string` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `file` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `file` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1494,8 +1680,8 @@ CREATE TABLE `fv5oz_overrider` (
 -- Table structure for table `fv5oz_payment`
 --
 
-CREATE TABLE `fv5oz_payment` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_payment` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `ordering` int(11) NOT NULL,
@@ -1503,8 +1689,9 @@ CREATE TABLE `fv5oz_payment` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
-  `modified_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `modified_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `fv5oz_payment`
@@ -1520,8 +1707,8 @@ INSERT INTO `fv5oz_payment` (`id`, `type`, `description`, `ordering`, `state`, `
 -- Table structure for table `fv5oz_postinstall_messages`
 --
 
-CREATE TABLE `fv5oz_postinstall_messages` (
-  `postinstall_message_id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_postinstall_messages` (
+  `postinstall_message_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `extension_id` bigint(20) NOT NULL DEFAULT '700' COMMENT 'FK to #__extensions',
   `title_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Lang key for the title',
   `description_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Lang key for description',
@@ -1534,8 +1721,9 @@ CREATE TABLE `fv5oz_postinstall_messages` (
   `condition_file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'RAD URI to file holding display condition method',
   `condition_method` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Display condition method, must return boolean',
   `version_introduced` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '3.2.0' COMMENT 'Version when this message was introduced',
-  `enabled` tinyint(3) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `enabled` tinyint(3) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`postinstall_message_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `fv5oz_postinstall_messages`
@@ -1553,18 +1741,21 @@ INSERT INTO `fv5oz_postinstall_messages` (`postinstall_message_id`, `extension_i
 -- Table structure for table `fv5oz_redirect_links`
 --
 
-CREATE TABLE `fv5oz_redirect_links` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_redirect_links` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `old_url` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL,
   `new_url` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `referer` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL,
   `comment` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `hits` int(10) unsigned NOT NULL DEFAULT '0',
   `published` tinyint(4) NOT NULL,
   `created_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `header` smallint(3) NOT NULL DEFAULT '301'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `header` smallint(3) NOT NULL DEFAULT '301',
+  PRIMARY KEY (`id`),
+  KEY `idx_old_url` (`old_url`(100)),
+  KEY `idx_link_modifed` (`modified_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1572,9 +1763,10 @@ CREATE TABLE `fv5oz_redirect_links` (
 -- Table structure for table `fv5oz_schemas`
 --
 
-CREATE TABLE `fv5oz_schemas` (
+CREATE TABLE IF NOT EXISTS `fv5oz_schemas` (
   `extension_id` int(11) NOT NULL,
-  `version_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
+  `version_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`extension_id`,`version_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1590,8 +1782,8 @@ INSERT INTO `fv5oz_schemas` (`extension_id`, `version_id`) VALUES
 -- Table structure for table `fv5oz_services`
 --
 
-CREATE TABLE `fv5oz_services` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_services` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `comboid` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1601,8 +1793,9 @@ CREATE TABLE `fv5oz_services` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
-  `modified_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `modified_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `fv5oz_services`
@@ -1617,14 +1810,17 @@ INSERT INTO `fv5oz_services` (`id`, `name`, `price`, `comboid`, `description`, `
 -- Table structure for table `fv5oz_session`
 --
 
-CREATE TABLE `fv5oz_session` (
+CREATE TABLE IF NOT EXISTS `fv5oz_session` (
   `session_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `client_id` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
-  `guest` tinyint(4) UNSIGNED DEFAULT '1',
+  `client_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `guest` tinyint(4) unsigned DEFAULT '1',
   `time` varchar(14) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `data` mediumtext COLLATE utf8mb4_unicode_ci,
   `userid` int(11) DEFAULT '0',
-  `username` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT ''
+  `username` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  PRIMARY KEY (`session_id`),
+  KEY `userid` (`userid`),
+  KEY `time` (`time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1632,9 +1828,8 @@ CREATE TABLE `fv5oz_session` (
 --
 
 INSERT INTO `fv5oz_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-('0lp67i7kbio7rkotvo1dqlkas3', 1, 0, '1493434842', 'joomla|s:1520:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo0OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTo0MTtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTM0Mjc4OTU7czo0OiJsYXN0IjtpOjE0OTM0MzQ4MTE7czozOiJub3ciO2k6MTQ5MzQzNDg0Mjt9czo1OiJ0b2tlbiI7czozMjoiU3JKMU9LTFVveXZuNFoybHhsS0N1UGJOSWJtaDlaNmMiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMzoiY29tX3VzZXJleHRyYSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo1OiJ1c2VycyI7Tzo4OiJzdGRDbGFzcyI6MTp7czo4OiJvcmRlcmNvbCI7czoxMDoiYS51c2VybmFtZSI7fXM6NDoiZWRpdCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJ1c2VyIjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6ImRhdGEiO047czoyOiJpZCI7YToxOntpOjA7aToxMDg7fX19fXM6MTM6ImNvbV9pbnN0YWxsZXIiO086ODoic3RkQ2xhc3MiOjM6e3M6NzoibWVzc2FnZSI7czowOiIiO3M6MTc6ImV4dGVuc2lvbl9tZXNzYWdlIjtzOjA6IiI7czo2OiJtYW5hZ2UiO086ODoic3RkQ2xhc3MiOjM6e3M6NjoiZmlsdGVyIjthOjU6e3M6Njoic2VhcmNoIjtzOjQ6ImNhcmQiO3M6Njoic3RhdHVzIjtzOjA6IiI7czo5OiJjbGllbnRfaWQiO3M6MDoiIjtzOjQ6InR5cGUiO3M6MDoiIjtzOjY6ImZvbGRlciI7czowOiIiO31zOjQ6Imxpc3QiO2E6Mjp7czoxMjoiZnVsbG9yZGVyaW5nIjtzOjg6Im5hbWUgQVNDIjtzOjU6ImxpbWl0IjtzOjI6IjIwIjt9czoxMDoibGltaXRzdGFydCI7aTowO319fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjE7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fXM6NDoidXNlciI7Tzo1OiJKVXNlciI6MTp7czoyOiJpZCI7czozOiIxMDYiO31zOjExOiJhcHBsaWNhdGlvbiI7Tzo4OiJzdGRDbGFzcyI6MTp7czo1OiJxdWV1ZSI7Tjt9fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjowO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO30=";', 106, 'admin'),
-('ftcib9c0podo3nn6u1gvrgvge6', 0, 1, '1493431836', 'joomla|s:712:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToxO3M6NToidGltZXIiO086ODoic3RkQ2xhc3MiOjM6e3M6NToic3RhcnQiO2k6MTQ5MzQzMTgzNTtzOjQ6Imxhc3QiO2k6MTQ5MzQzMTgzNTtzOjM6Im5vdyI7aToxNDkzNDMxODM1O31zOjU6InRva2VuIjtzOjMyOiI3ekIyd3N3b3k1VENHZm1qdnN5a1dYWDJmRXgxU2JFTSI7fXM6ODoicmVnaXN0cnkiO086MjQ6Ikpvb21sYVxSZWdpc3RyeVxSZWdpc3RyeSI6Mzp7czo3OiIAKgBkYXRhIjtPOjg6InN0ZENsYXNzIjowOnt9czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MTtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9czo0OiJ1c2VyIjtPOjU6IkpVc2VyIjoxOntzOjI6ImlkIjtpOjA7fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 0, ''),
-('nk2an0iac34ki7nq4dittoo0h2', 1, 0, '1493363589', 'joomla|s:1328:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo0OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTozMjtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTMzNjMzMzc7czo0OiJsYXN0IjtpOjE0OTMzNjM1ODg7czozOiJub3ciO2k6MTQ5MzM2MzU4OTt9czo1OiJ0b2tlbiI7czozMjoibWkwZzZjSzM5YW10ODlORmxlVXI2SFhDc1N2dHUyaTYiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6Mzp7czoxMzoiY29tX3VzZXJleHRyYSI7Tzo4OiJzdGRDbGFzcyI6MTp7czo1OiJ1c2VycyI7Tzo4OiJzdGRDbGFzcyI6MTp7czo4OiJvcmRlcmNvbCI7czoxMDoiYS51c2VybmFtZSI7fX1zOjEzOiJjb21faW5zdGFsbGVyIjtPOjg6InN0ZENsYXNzIjozOntzOjc6Im1lc3NhZ2UiO3M6MDoiIjtzOjE3OiJleHRlbnNpb25fbWVzc2FnZSI7czowOiIiO3M6MTI6InJlZGlyZWN0X3VybCI7Tjt9czoxMjoiY29tX2xvY2F0aW9uIjtPOjg6InN0ZENsYXNzIjoyOntzOjk6ImxvY2F0aW9ucyI7Tzo4OiJzdGRDbGFzcyI6MTp7czo4OiJvcmRlcmNvbCI7czoxMDoiYS5wb3N0Y29kZSI7fXM6NDoiZWRpdCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo4OiJsb2NhdGlvbiI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJkYXRhIjtOO319fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjoxO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086NToiSlVzZXIiOjE6e3M6MjoiaWQiO3M6MzoiMTA2Ijt9czoxMToiYXBwbGljYXRpb24iO086ODoic3RkQ2xhc3MiOjE6e3M6NToicXVldWUiO047fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 106, 'admin');
+('3u9beltj7kcifundfqee80b375', 0, 1, '1493939394', 'joomla|s:1284:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo0OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTozNjtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTM5MzMzNTg7czo0OiJsYXN0IjtpOjE0OTM5MzgzNjY7czozOiJub3ciO2k6MTQ5MzkzOTM5NDt9czo1OiJ0b2tlbiI7czozMjoib21CTEpzTWNPSlN0bWRxVkd3SWt0VWRpQkZNOEVmRHQiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6MTp7czo5OiJjb21fdXNlcnMiO086ODoic3RkQ2xhc3MiOjE6e3M6MTI6InJlZ2lzdHJhdGlvbiI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJkYXRhIjthOjEwOntzOjk6ImZpcnN0TmFtZSI7czoyOiIyMiI7czo4OiJsYXN0TmFtZSI7czoxOiIzIjtzOjg6InVzZXJuYW1lIjtzOjM6InNlZiI7czo5OiJwYXNzd29yZDEiO3M6NjoiMTIzNDU2IjtzOjk6InBhc3N3b3JkMiI7czo2OiIxMjM0NTYiO3M6NjoiZW1haWwxIjtzOjExOiIxc2RAZmRhLmNvbSI7czo2OiJlbWFpbDIiO3M6MTE6IjFzZEBmZGEuY29tIjtzOjExOiJtb2JpbGVQaG9uZSI7czo2OiIxMjM0NTYiO3M6OToiaG9tZVBob25lIjtzOjY6IjEyMzQ1NiI7czo3OiJhZGRyZXNzIjtzOjc6InNkYWZhZHMiO319fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjoxO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086NToiSlVzZXIiOjE6e3M6MjoiaWQiO2k6MDt9czoxMToiYXBwbGljYXRpb24iO086ODoic3RkQ2xhc3MiOjE6e3M6NToicXVldWUiO047fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 0, ''),
+('rloae2hmsk2911258ladhbtm77', 1, 0, '1493940373', 'joomla|s:2288:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo0OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTo2ODtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTM5MzMzMjU7czo0OiJsYXN0IjtpOjE0OTM5NDAzNzE7czozOiJub3ciO2k6MTQ5Mzk0MDM3Mzt9czo1OiJ0b2tlbiI7czozMjoiQkZQczJNcFVEZ2tXUXdpVTA2RDRhemxaSUQ4ejdyYmgiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6NTp7czo5OiJjb21fdXNlcnMiO086ODoic3RkQ2xhc3MiOjE6e3M6NDoiZWRpdCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJ1c2VyIjtPOjg6InN0ZENsYXNzIjoyOntzOjI6ImlkIjthOjA6e31zOjQ6ImRhdGEiO047fX19czoxMzoiY29tX3VzZXJleHRyYSI7Tzo4OiJzdGRDbGFzcyI6MTp7czo1OiJ1c2VycyI7Tzo4OiJzdGRDbGFzcyI6MTp7czo4OiJvcmRlcmNvbCI7czoxMDoiYS51c2VybmFtZSI7fX1zOjEzOiJjb21faW5zdGFsbGVyIjtPOjg6InN0ZENsYXNzIjo0OntzOjc6Im1lc3NhZ2UiO3M6MDoiIjtzOjE3OiJleHRlbnNpb25fbWVzc2FnZSI7czowOiIiO3M6NjoibWFuYWdlIjtPOjg6InN0ZENsYXNzIjozOntzOjY6ImZpbHRlciI7YTo1OntzOjY6InNlYXJjaCI7czowOiIiO3M6Njoic3RhdHVzIjtzOjE6IjEiO3M6OToiY2xpZW50X2lkIjtzOjE6IjEiO3M6NDoidHlwZSI7czo5OiJjb21wb25lbnQiO3M6NjoiZm9sZGVyIjtzOjA6IiI7fXM6NDoibGlzdCI7YToyOntzOjEyOiJmdWxsb3JkZXJpbmciO3M6ODoibmFtZSBBU0MiO3M6NToibGltaXQiO3M6MjoiMjAiO31zOjEwOiJsaW1pdHN0YXJ0IjtpOjA7fXM6MTI6InJlZGlyZWN0X3VybCI7Tjt9czo5OiJjb21fbWVudXMiO086ODoic3RkQ2xhc3MiOjI6e3M6NToiaXRlbXMiO086ODoic3RkQ2xhc3MiOjM6e3M6ODoibWVudXR5cGUiO3M6ODoibWFpbm1lbnUiO3M6MTA6ImxpbWl0c3RhcnQiO2k6MDtzOjQ6Imxpc3QiO2E6NDp7czo5OiJkaXJlY3Rpb24iO3M6MzoiYXNjIjtzOjU6ImxpbWl0IjtzOjI6IjIwIjtzOjg6Im9yZGVyaW5nIjtzOjU6ImEubGZ0IjtzOjU6InN0YXJ0IjtkOjA7fX1zOjQ6ImVkaXQiO086ODoic3RkQ2xhc3MiOjE6e3M6NDoiaXRlbSI7Tzo4OiJzdGRDbGFzcyI6NDp7czoyOiJpZCI7YTowOnt9czo0OiJkYXRhIjtOO3M6NDoidHlwZSI7TjtzOjQ6ImxpbmsiO047fX19czoxMjoiY29tX2xvY2F0aW9uIjtPOjg6InN0ZENsYXNzIjoyOntzOjk6ImxvY2F0aW9ucyI7Tzo4OiJzdGRDbGFzcyI6MTp7czo4OiJvcmRlcmNvbCI7czoxMDoiYS5wb3N0Y29kZSI7fXM6NDoiZWRpdCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo4OiJsb2NhdGlvbiI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJkYXRhIjtOO319fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjoxO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086NToiSlVzZXIiOjE6e3M6MjoiaWQiO3M6MzoiMTA2Ijt9czoxMToiYXBwbGljYXRpb24iO086ODoic3RkQ2xhc3MiOjE6e3M6NToicXVldWUiO047fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 106, 'admin');
 
 -- --------------------------------------------------------
 
@@ -1642,38 +1837,46 @@ INSERT INTO `fv5oz_session` (`session_id`, `client_id`, `guest`, `time`, `data`,
 -- Table structure for table `fv5oz_tags`
 --
 
-CREATE TABLE `fv5oz_tags` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+CREATE TABLE IF NOT EXISTS `fv5oz_tags` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `lft` int(11) NOT NULL DEFAULT '0',
   `rgt` int(11) NOT NULL DEFAULT '0',
-  `level` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `level` int(10) unsigned NOT NULL DEFAULT '0',
   `path` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `description` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `published` tinyint(1) NOT NULL DEFAULT '0',
-  `checked_out` int(11) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(11) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `access` int(10) unsigned NOT NULL DEFAULT '0',
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `metadesc` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The meta description for the page.',
   `metakey` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The meta keywords for the page.',
   `metadata` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded metadata properties.',
-  `created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `modified_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `modified_user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `images` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `urls` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `hits` int(10) unsigned NOT NULL DEFAULT '0',
   `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `version` int(10) unsigned NOT NULL DEFAULT '1',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `tag_idx` (`published`,`access`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_path` (`path`(100)),
+  KEY `idx_left_right` (`lft`,`rgt`),
+  KEY `idx_alias` (`alias`(100)),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `fv5oz_tags`
@@ -1688,14 +1891,17 @@ INSERT INTO `fv5oz_tags` (`id`, `parent_id`, `lft`, `rgt`, `level`, `path`, `tit
 -- Table structure for table `fv5oz_template_styles`
 --
 
-CREATE TABLE `fv5oz_template_styles` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_template_styles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `template` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `client_id` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `client_id` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `home` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `params` text COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_template` (`template`),
+  KEY `idx_home` (`home`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `fv5oz_template_styles`
@@ -1713,11 +1919,15 @@ INSERT INTO `fv5oz_template_styles` (`id`, `template`, `client_id`, `home`, `tit
 -- Table structure for table `fv5oz_ucm_base`
 --
 
-CREATE TABLE `fv5oz_ucm_base` (
-  `ucm_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_ucm_base` (
+  `ucm_id` int(10) unsigned NOT NULL,
   `ucm_item_id` int(10) NOT NULL,
   `ucm_type_id` int(11) NOT NULL,
-  `ucm_language_id` int(11) NOT NULL
+  `ucm_language_id` int(11) NOT NULL,
+  PRIMARY KEY (`ucm_id`),
+  KEY `idx_ucm_item_id` (`ucm_item_id`),
+  KEY `idx_ucm_type_id` (`ucm_type_id`),
+  KEY `idx_ucm_language_id` (`ucm_language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1726,40 +1936,53 @@ CREATE TABLE `fv5oz_ucm_base` (
 -- Table structure for table `fv5oz_ucm_content`
 --
 
-CREATE TABLE `fv5oz_ucm_content` (
-  `core_content_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_ucm_content` (
+  `core_content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `core_type_alias` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'FK to the content types table',
   `core_title` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
   `core_alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `core_body` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `core_state` tinyint(1) NOT NULL DEFAULT '0',
   `core_checked_out_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `core_checked_out_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `core_access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `core_checked_out_user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `core_access` int(10) unsigned NOT NULL DEFAULT '0',
   `core_params` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `core_featured` tinyint(4) UNSIGNED NOT NULL DEFAULT '0',
+  `core_featured` tinyint(4) unsigned NOT NULL DEFAULT '0',
   `core_metadata` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded metadata properties.',
-  `core_created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `core_created_user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `core_created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `core_created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `core_modified_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Most recent user that modified',
+  `core_modified_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Most recent user that modified',
   `core_modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `core_language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL,
   `core_publish_up` datetime NOT NULL,
   `core_publish_down` datetime NOT NULL,
-  `core_content_item_id` int(10) UNSIGNED DEFAULT NULL COMMENT 'ID from the individual type table',
-  `asset_id` int(10) UNSIGNED DEFAULT NULL COMMENT 'FK to the #__assets table.',
+  `core_content_item_id` int(10) unsigned DEFAULT NULL COMMENT 'ID from the individual type table',
+  `asset_id` int(10) unsigned DEFAULT NULL COMMENT 'FK to the #__assets table.',
   `core_images` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `core_urls` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `core_hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `core_version` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `core_hits` int(10) unsigned NOT NULL DEFAULT '0',
+  `core_version` int(10) unsigned NOT NULL DEFAULT '1',
   `core_ordering` int(11) NOT NULL DEFAULT '0',
   `core_metakey` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `core_metadesc` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `core_catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `core_catid` int(10) unsigned NOT NULL DEFAULT '0',
   `core_xreference` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'A reference to enable linkages to external data sets.',
-  `core_type_id` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Contains core content data in name spaced fields';
+  `core_type_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`core_content_id`),
+  KEY `tag_idx` (`core_state`,`core_access`),
+  KEY `idx_access` (`core_access`),
+  KEY `idx_alias` (`core_alias`(100)),
+  KEY `idx_language` (`core_language`),
+  KEY `idx_title` (`core_title`(100)),
+  KEY `idx_modified_time` (`core_modified_time`),
+  KEY `idx_created_time` (`core_created_time`),
+  KEY `idx_content_type` (`core_type_alias`(100)),
+  KEY `idx_core_modified_user_id` (`core_modified_user_id`),
+  KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`),
+  KEY `idx_core_created_user_id` (`core_created_user_id`),
+  KEY `idx_core_type_id` (`core_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Contains core content data in name spaced fields' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1767,18 +1990,21 @@ CREATE TABLE `fv5oz_ucm_content` (
 -- Table structure for table `fv5oz_ucm_history`
 --
 
-CREATE TABLE `fv5oz_ucm_history` (
-  `version_id` int(10) UNSIGNED NOT NULL,
-  `ucm_item_id` int(10) UNSIGNED NOT NULL,
-  `ucm_type_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_ucm_history` (
+  `version_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ucm_item_id` int(10) unsigned NOT NULL,
+  `ucm_type_id` int(10) unsigned NOT NULL,
   `version_note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Optional version name',
   `save_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `editor_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `character_count` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Number of characters in this version.',
+  `editor_user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `character_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Number of characters in this version.',
   `sha1_hash` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'SHA1 hash of the version_data column.',
   `version_data` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'json-encoded string of version data',
-  `keep_forever` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=auto delete; 1=keep'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `keep_forever` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=auto delete; 1=keep',
+  PRIMARY KEY (`version_id`),
+  KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`),
+  KEY `idx_save_date` (`save_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1786,8 +2012,8 @@ CREATE TABLE `fv5oz_ucm_history` (
 -- Table structure for table `fv5oz_updates`
 --
 
-CREATE TABLE `fv5oz_updates` (
-  `update_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_updates` (
+  `update_id` int(11) NOT NULL AUTO_INCREMENT,
   `update_site_id` int(11) DEFAULT '0',
   `extension_id` int(11) DEFAULT '0',
   `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT '',
@@ -1800,8 +2026,9 @@ CREATE TABLE `fv5oz_updates` (
   `data` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `detailsurl` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `infourl` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extra_query` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Available Updates';
+  `extra_query` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  PRIMARY KEY (`update_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Available Updates' AUTO_INCREMENT=58 ;
 
 --
 -- Dumping data for table `fv5oz_updates`
@@ -1872,15 +2099,16 @@ INSERT INTO `fv5oz_updates` (`update_id`, `update_site_id`, `extension_id`, `nam
 -- Table structure for table `fv5oz_update_sites`
 --
 
-CREATE TABLE `fv5oz_update_sites` (
-  `update_site_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_update_sites` (
+  `update_site_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `type` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `location` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `enabled` int(11) DEFAULT '0',
   `last_check_timestamp` bigint(20) DEFAULT '0',
-  `extra_query` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Update Sites';
+  `extra_query` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  PRIMARY KEY (`update_site_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Update Sites' AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `fv5oz_update_sites`
@@ -1898,9 +2126,10 @@ INSERT INTO `fv5oz_update_sites` (`update_site_id`, `name`, `type`, `location`, 
 -- Table structure for table `fv5oz_update_sites_extensions`
 --
 
-CREATE TABLE `fv5oz_update_sites_extensions` (
+CREATE TABLE IF NOT EXISTS `fv5oz_update_sites_extensions` (
   `update_site_id` int(11) NOT NULL DEFAULT '0',
-  `extension_id` int(11) NOT NULL DEFAULT '0'
+  `extension_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`update_site_id`,`extension_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Links extensions to update sites';
 
 --
@@ -1916,41 +2145,21 @@ INSERT INTO `fv5oz_update_sites_extensions` (`update_site_id`, `extension_id`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fv5oz_userextra_`
---
-
-CREATE TABLE `fv5oz_userextra_` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `firstname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lastname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `homephone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mobilephone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ordering` int(11) NOT NULL,
-  `state` tinyint(1) NOT NULL,
-  `checked_out` int(11) NOT NULL,
-  `checked_out_time` datetime NOT NULL,
-  `created_by` int(11) NOT NULL,
-  `modified_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `fv5oz_usergroups`
 --
 
-CREATE TABLE `fv5oz_usergroups` (
-  `id` int(10) UNSIGNED NOT NULL COMMENT 'Primary Key',
-  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Adjacency List Reference Id',
+CREATE TABLE IF NOT EXISTS `fv5oz_usergroups` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+  `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Adjacency List Reference Id',
   `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
-  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`),
+  KEY `idx_usergroup_title_lookup` (`title`),
+  KEY `idx_usergroup_adjacency_lookup` (`parent_id`),
+  KEY `idx_usergroup_nested_set_lookup` (`lft`,`rgt`) USING BTREE
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `fv5oz_usergroups`
@@ -1973,8 +2182,8 @@ INSERT INTO `fv5oz_usergroups` (`id`, `parent_id`, `lft`, `rgt`, `title`) VALUES
 -- Table structure for table `fv5oz_users`
 --
 
-CREATE TABLE `fv5oz_users` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `name` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `lastName` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1994,17 +2203,23 @@ CREATE TABLE `fv5oz_users` (
   `resetCount` int(11) NOT NULL DEFAULT '0' COMMENT 'Count of password resets since lastResetTime',
   `otpKey` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Two factor authentication encrypted keys',
   `otep` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'One time emergency passwords',
-  `requireReset` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Require user to reset password on next login'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `requireReset` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Require user to reset password on next login',
+  PRIMARY KEY (`id`),
+  KEY `idx_name` (`firstName`(100)),
+  KEY `idx_block` (`block`),
+  KEY `username` (`username`),
+  KEY `email` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=115 ;
 
 --
 -- Dumping data for table `fv5oz_users`
 --
 
 INSERT INTO `fv5oz_users` (`id`, `firstName`, `name`, `lastName`, `homePhone`, `mobilePhone`, `address`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`) VALUES
-(106, 'Super User', 'admin', '', '', '', '', 'admin', 'aitlaundry@gmail.com', '$2y$10$a/6j6HvIKqcyfPvHlVJd3.jVFMXYHepZuM36p7Kap.kOj0au7ORHa', 0, 1, '2017-04-10 22:44:44', '2017-04-28 07:08:59', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
-(107, 'gfdgfds', 'manager', '', '', '', '', 'manager', '5527@ait.nsw.edu.au', '$2y$10$4Ov8ixQreBzMTijs2HAiZ.6qq5.mflVhDeUtRtAL7cQZ/0VaLehd6', 0, 0, '2017-04-12 02:01:41', '2017-04-28 01:04:56', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
-(108, '', '', '', '', '', 'dasf', 'tesat', 'dsf@fdasf.com', '123456', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', 0, '', '', 0);
+(106, 'Super User', 'admin', '', '', '', '', 'admin', 'aitlaundry@gmail.com', '$2y$10$a/6j6HvIKqcyfPvHlVJd3.jVFMXYHepZuM36p7Kap.kOj0au7ORHa', 0, 1, '2017-04-10 22:44:44', '2017-05-04 21:28:53', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(107, 'gfdgfds', 'manager', 'fads', 'fdsa', 'fdsa', 'fafdasfdsafdsf', 'manager', '5527@ait.nsw.edu.au', '$2y$10$4Ov8ixQreBzMTijs2HAiZ.6qq5.mflVhDeUtRtAL7cQZ/0VaLehd6', 0, 0, '2017-04-12 02:01:41', '2017-05-04 01:23:56', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(113, '22', '111111111 3', '3', '123456', '123456', 'sdafads', 'sss', 'sd@fda.com', '$2y$10$zn1Q5Jk4E2tQyiEENmRjN.z8EfeP9RGbTssriD0c05XRErqUu1WyC', 0, 0, '2017-05-04 22:25:20', '0000-00-00 00:00:00', '20b5407d26c2cec2e48f28f80451379d', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
+(114, '22', '22 3', '3', '123456', '123456', 'sdafads', 'sef', '1sd@fda.com', '$2y$10$h9Minaup1IipzSqZkYZUoO4BE15BkSz8whMAtVBlP7XgzwFhTEch6', 0, 0, '2017-05-04 22:33:53', '0000-00-00 00:00:00', 'd27cdeb2a95d8cb6e8d542583fd50039', '{}', '0000-00-00 00:00:00', 0, '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -2012,15 +2227,20 @@ INSERT INTO `fv5oz_users` (`id`, `firstName`, `name`, `lastName`, `homePhone`, `
 -- Table structure for table `fv5oz_user_keys`
 --
 
-CREATE TABLE `fv5oz_user_keys` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_user_keys` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `series` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `invalid` tinyint(4) NOT NULL,
   `time` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `uastring` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `uastring` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `series` (`series`),
+  UNIQUE KEY `series_2` (`series`),
+  UNIQUE KEY `series_3` (`series`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2028,23 +2248,26 @@ CREATE TABLE `fv5oz_user_keys` (
 -- Table structure for table `fv5oz_user_notes`
 --
 
-CREATE TABLE `fv5oz_user_notes` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
+CREATE TABLE IF NOT EXISTS `fv5oz_user_notes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `catid` int(10) unsigned NOT NULL DEFAULT '0',
   `subject` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `state` tinyint(3) NOT NULL DEFAULT '0',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_user_id` int(10) UNSIGNED NOT NULL,
+  `modified_user_id` int(10) unsigned NOT NULL,
   `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `review_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_category_id` (`catid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2052,11 +2275,12 @@ CREATE TABLE `fv5oz_user_notes` (
 -- Table structure for table `fv5oz_user_profiles`
 --
 
-CREATE TABLE `fv5oz_user_profiles` (
+CREATE TABLE IF NOT EXISTS `fv5oz_user_profiles` (
   `user_id` int(11) NOT NULL,
   `profile_key` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `profile_value` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ordering` int(11) NOT NULL DEFAULT '0'
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Simple user profile storage table';
 
 -- --------------------------------------------------------
@@ -2065,9 +2289,10 @@ CREATE TABLE `fv5oz_user_profiles` (
 -- Table structure for table `fv5oz_user_usergroup_map`
 --
 
-CREATE TABLE `fv5oz_user_usergroup_map` (
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__users.id',
-  `group_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__usergroups.id'
+CREATE TABLE IF NOT EXISTS `fv5oz_user_usergroup_map` (
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__users.id',
+  `group_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__usergroups.id',
+  PRIMARY KEY (`user_id`,`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2076,7 +2301,9 @@ CREATE TABLE `fv5oz_user_usergroup_map` (
 
 INSERT INTO `fv5oz_user_usergroup_map` (`user_id`, `group_id`) VALUES
 (106, 8),
-(107, 6);
+(107, 6),
+(113, 2),
+(114, 2);
 
 -- --------------------------------------------------------
 
@@ -2084,7 +2311,7 @@ INSERT INTO `fv5oz_user_usergroup_map` (`user_id`, `group_id`) VALUES
 -- Table structure for table `fv5oz_utf8_conversion`
 --
 
-CREATE TABLE `fv5oz_utf8_conversion` (
+CREATE TABLE IF NOT EXISTS `fv5oz_utf8_conversion` (
   `converted` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -2101,12 +2328,14 @@ INSERT INTO `fv5oz_utf8_conversion` (`converted`) VALUES
 -- Table structure for table `fv5oz_viewlevels`
 --
 
-CREATE TABLE `fv5oz_viewlevels` (
-  `id` int(10) UNSIGNED NOT NULL COMMENT 'Primary Key',
+CREATE TABLE IF NOT EXISTS `fv5oz_viewlevels` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
   `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `ordering` int(11) NOT NULL DEFAULT '0',
-  `rules` varchar(5120) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded access control.'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `rules` varchar(5120) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded access control.',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_assetgroup_title_lookup` (`title`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `fv5oz_viewlevels`
@@ -2125,15 +2354,16 @@ INSERT INTO `fv5oz_viewlevels` (`id`, `title`, `ordering`, `rules`) VALUES
 -- Table structure for table `fv50z_card`
 --
 
-CREATE TABLE `fv50z_card` (
-  `cardID` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv50z_card` (
+  `cardID` int(11) NOT NULL AUTO_INCREMENT,
   `cardNumber` bigint(30) NOT NULL,
   `cardHolder` varchar(200) NOT NULL,
   `expiryDate` date NOT NULL,
   `secretNumber` int(11) NOT NULL,
   `type` varchar(150) NOT NULL,
-  `bank` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `bank` varchar(250) NOT NULL,
+  PRIMARY KEY (`cardID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2141,12 +2371,13 @@ CREATE TABLE `fv50z_card` (
 -- Table structure for table `fv50z_combos`
 --
 
-CREATE TABLE `fv50z_combos` (
-  `comboID` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv50z_combos` (
+  `comboID` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(200) NOT NULL,
   `description` text NOT NULL,
-  `published` tinyint(4) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `published` tinyint(4) NOT NULL,
+  PRIMARY KEY (`comboID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -2154,9 +2385,10 @@ CREATE TABLE `fv50z_combos` (
 -- Table structure for table `fv50z_comboservice`
 --
 
-CREATE TABLE `fv50z_comboservice` (
+CREATE TABLE IF NOT EXISTS `fv50z_comboservice` (
   `serviceID` int(11) NOT NULL,
-  `comboID` int(11) NOT NULL
+  `comboID` int(11) NOT NULL,
+  PRIMARY KEY (`serviceID`,`comboID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2165,12 +2397,13 @@ CREATE TABLE `fv50z_comboservice` (
 -- Table structure for table `fv50z_logbook`
 --
 
-CREATE TABLE `fv50z_logbook` (
-  `logID` int(20) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv50z_logbook` (
+  `logID` int(20) NOT NULL AUTO_INCREMENT,
   `dateTimeModify` datetime NOT NULL,
   `status` tinyint(4) NOT NULL,
-  `note` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `note` text NOT NULL,
+  PRIMARY KEY (`logID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2178,10 +2411,11 @@ CREATE TABLE `fv50z_logbook` (
 -- Table structure for table `fv50z_orderlogbook`
 --
 
-CREATE TABLE `fv50z_orderlogbook` (
+CREATE TABLE IF NOT EXISTS `fv50z_orderlogbook` (
   `logID` int(11) NOT NULL,
   `orderID` int(11) NOT NULL,
-  `userID` int(11) NOT NULL
+  `userID` int(11) NOT NULL,
+  PRIMARY KEY (`logID`,`orderID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2190,892 +2424,14 @@ CREATE TABLE `fv50z_orderlogbook` (
 -- Table structure for table `fv50z_payment`
 --
 
-CREATE TABLE `fv50z_payment` (
-  `paymentID` int(20) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv50z_payment` (
+  `paymentID` int(20) NOT NULL AUTO_INCREMENT,
   `type` varchar(200) NOT NULL,
   `description` text NOT NULL,
-  `userID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `userID` int(11) NOT NULL,
+  PRIMARY KEY (`paymentID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `fv5oz_assets`
---
-ALTER TABLE `fv5oz_assets`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_asset_name` (`name`),
-  ADD KEY `idx_lft_rgt` (`lft`,`rgt`),
-  ADD KEY `idx_parent_id` (`parent_id`);
-
---
--- Indexes for table `fv5oz_associations`
---
-ALTER TABLE `fv5oz_associations`
-  ADD PRIMARY KEY (`context`,`id`),
-  ADD KEY `idx_key` (`key`);
-
---
--- Indexes for table `fv5oz_banners`
---
-ALTER TABLE `fv5oz_banners`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_state` (`state`),
-  ADD KEY `idx_own_prefix` (`own_prefix`),
-  ADD KEY `idx_metakey_prefix` (`metakey_prefix`(100)),
-  ADD KEY `idx_banner_catid` (`catid`),
-  ADD KEY `idx_language` (`language`);
-
---
--- Indexes for table `fv5oz_banner_clients`
---
-ALTER TABLE `fv5oz_banner_clients`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_own_prefix` (`own_prefix`),
-  ADD KEY `idx_metakey_prefix` (`metakey_prefix`(100));
-
---
--- Indexes for table `fv5oz_banner_tracks`
---
-ALTER TABLE `fv5oz_banner_tracks`
-  ADD PRIMARY KEY (`track_date`,`track_type`,`banner_id`),
-  ADD KEY `idx_track_date` (`track_date`),
-  ADD KEY `idx_track_type` (`track_type`),
-  ADD KEY `idx_banner_id` (`banner_id`);
-
---
--- Indexes for table `fv5oz_categories`
---
-ALTER TABLE `fv5oz_categories`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `cat_idx` (`extension`,`published`,`access`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_path` (`path`(100)),
-  ADD KEY `idx_left_right` (`lft`,`rgt`),
-  ADD KEY `idx_alias` (`alias`(100)),
-  ADD KEY `idx_language` (`language`);
-
---
--- Indexes for table `fv5oz_combos_combo`
---
-ALTER TABLE `fv5oz_combos_combo`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_contact_details`
---
-ALTER TABLE `fv5oz_contact_details`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_state` (`published`),
-  ADD KEY `idx_catid` (`catid`),
-  ADD KEY `idx_createdby` (`created_by`),
-  ADD KEY `idx_featured_catid` (`featured`,`catid`),
-  ADD KEY `idx_language` (`language`),
-  ADD KEY `idx_xreference` (`xreference`);
-
---
--- Indexes for table `fv5oz_content`
---
-ALTER TABLE `fv5oz_content`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_state` (`state`),
-  ADD KEY `idx_catid` (`catid`),
-  ADD KEY `idx_createdby` (`created_by`),
-  ADD KEY `idx_featured_catid` (`featured`,`catid`),
-  ADD KEY `idx_language` (`language`),
-  ADD KEY `idx_xreference` (`xreference`);
-
---
--- Indexes for table `fv5oz_contentitem_tag_map`
---
-ALTER TABLE `fv5oz_contentitem_tag_map`
-  ADD UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`),
-  ADD KEY `idx_tag_type` (`tag_id`,`type_id`),
-  ADD KEY `idx_date_id` (`tag_date`,`tag_id`),
-  ADD KEY `idx_core_content_id` (`core_content_id`);
-
---
--- Indexes for table `fv5oz_content_frontpage`
---
-ALTER TABLE `fv5oz_content_frontpage`
-  ADD PRIMARY KEY (`content_id`);
-
---
--- Indexes for table `fv5oz_content_rating`
---
-ALTER TABLE `fv5oz_content_rating`
-  ADD PRIMARY KEY (`content_id`);
-
---
--- Indexes for table `fv5oz_content_types`
---
-ALTER TABLE `fv5oz_content_types`
-  ADD PRIMARY KEY (`type_id`),
-  ADD KEY `idx_alias` (`type_alias`(100));
-
---
--- Indexes for table `fv5oz_extensions`
---
-ALTER TABLE `fv5oz_extensions`
-  ADD PRIMARY KEY (`extension_id`),
-  ADD KEY `element_clientid` (`element`,`client_id`),
-  ADD KEY `element_folder_clientid` (`element`,`folder`,`client_id`),
-  ADD KEY `extension` (`type`,`element`,`folder`,`client_id`);
-
---
--- Indexes for table `fv5oz_finder_filters`
---
-ALTER TABLE `fv5oz_finder_filters`
-  ADD PRIMARY KEY (`filter_id`);
-
---
--- Indexes for table `fv5oz_finder_links`
---
-ALTER TABLE `fv5oz_finder_links`
-  ADD PRIMARY KEY (`link_id`),
-  ADD KEY `idx_type` (`type_id`),
-  ADD KEY `idx_title` (`title`(100)),
-  ADD KEY `idx_md5` (`md5sum`),
-  ADD KEY `idx_url` (`url`(75)),
-  ADD KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`),
-  ADD KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`);
-
---
--- Indexes for table `fv5oz_finder_links_terms0`
---
-ALTER TABLE `fv5oz_finder_links_terms0`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms1`
---
-ALTER TABLE `fv5oz_finder_links_terms1`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms2`
---
-ALTER TABLE `fv5oz_finder_links_terms2`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms3`
---
-ALTER TABLE `fv5oz_finder_links_terms3`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms4`
---
-ALTER TABLE `fv5oz_finder_links_terms4`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms5`
---
-ALTER TABLE `fv5oz_finder_links_terms5`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms6`
---
-ALTER TABLE `fv5oz_finder_links_terms6`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms7`
---
-ALTER TABLE `fv5oz_finder_links_terms7`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms8`
---
-ALTER TABLE `fv5oz_finder_links_terms8`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms9`
---
-ALTER TABLE `fv5oz_finder_links_terms9`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_termsa`
---
-ALTER TABLE `fv5oz_finder_links_termsa`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_termsb`
---
-ALTER TABLE `fv5oz_finder_links_termsb`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_termsc`
---
-ALTER TABLE `fv5oz_finder_links_termsc`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_termsd`
---
-ALTER TABLE `fv5oz_finder_links_termsd`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_termse`
---
-ALTER TABLE `fv5oz_finder_links_termse`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_termsf`
---
-ALTER TABLE `fv5oz_finder_links_termsf`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_taxonomy`
---
-ALTER TABLE `fv5oz_finder_taxonomy`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `parent_id` (`parent_id`),
-  ADD KEY `state` (`state`),
-  ADD KEY `ordering` (`ordering`),
-  ADD KEY `access` (`access`),
-  ADD KEY `idx_parent_published` (`parent_id`,`state`,`access`);
-
---
--- Indexes for table `fv5oz_finder_taxonomy_map`
---
-ALTER TABLE `fv5oz_finder_taxonomy_map`
-  ADD PRIMARY KEY (`link_id`,`node_id`),
-  ADD KEY `link_id` (`link_id`),
-  ADD KEY `node_id` (`node_id`);
-
---
--- Indexes for table `fv5oz_finder_terms`
---
-ALTER TABLE `fv5oz_finder_terms`
-  ADD PRIMARY KEY (`term_id`),
-  ADD UNIQUE KEY `idx_term` (`term`),
-  ADD KEY `idx_term_phrase` (`term`,`phrase`),
-  ADD KEY `idx_stem_phrase` (`stem`,`phrase`),
-  ADD KEY `idx_soundex_phrase` (`soundex`,`phrase`);
-
---
--- Indexes for table `fv5oz_finder_terms_common`
---
-ALTER TABLE `fv5oz_finder_terms_common`
-  ADD KEY `idx_word_lang` (`term`,`language`),
-  ADD KEY `idx_lang` (`language`);
-
---
--- Indexes for table `fv5oz_finder_tokens`
---
-ALTER TABLE `fv5oz_finder_tokens`
-  ADD KEY `idx_word` (`term`),
-  ADD KEY `idx_context` (`context`);
-
---
--- Indexes for table `fv5oz_finder_tokens_aggregate`
---
-ALTER TABLE `fv5oz_finder_tokens_aggregate`
-  ADD KEY `token` (`term`),
-  ADD KEY `keyword_id` (`term_id`);
-
---
--- Indexes for table `fv5oz_finder_types`
---
-ALTER TABLE `fv5oz_finder_types`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `title` (`title`);
-
---
--- Indexes for table `fv5oz_languages`
---
-ALTER TABLE `fv5oz_languages`
-  ADD PRIMARY KEY (`lang_id`),
-  ADD UNIQUE KEY `idx_sef` (`sef`),
-  ADD UNIQUE KEY `idx_image` (`image`),
-  ADD UNIQUE KEY `idx_langcode` (`lang_code`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_ordering` (`ordering`);
-
---
--- Indexes for table `fv5oz_location`
---
-ALTER TABLE `fv5oz_location`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_logbook`
---
-ALTER TABLE `fv5oz_logbook`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_menu`
---
-ALTER TABLE `fv5oz_menu`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`(100),`language`),
-  ADD KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`),
-  ADD KEY `idx_menutype` (`menutype`),
-  ADD KEY `idx_left_right` (`lft`,`rgt`),
-  ADD KEY `idx_alias` (`alias`(100)),
-  ADD KEY `idx_path` (`path`(100)),
-  ADD KEY `idx_language` (`language`);
-
---
--- Indexes for table `fv5oz_menu_types`
---
-ALTER TABLE `fv5oz_menu_types`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_menutype` (`menutype`);
-
---
--- Indexes for table `fv5oz_messages`
---
-ALTER TABLE `fv5oz_messages`
-  ADD PRIMARY KEY (`message_id`),
-  ADD KEY `useridto_state` (`user_id_to`,`state`);
-
---
--- Indexes for table `fv5oz_messages_cfg`
---
-ALTER TABLE `fv5oz_messages_cfg`
-  ADD UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`);
-
---
--- Indexes for table `fv5oz_modules`
---
-ALTER TABLE `fv5oz_modules`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `published` (`published`,`access`),
-  ADD KEY `newsfeeds` (`module`,`published`),
-  ADD KEY `idx_language` (`language`);
-
---
--- Indexes for table `fv5oz_modules_menu`
---
-ALTER TABLE `fv5oz_modules_menu`
-  ADD PRIMARY KEY (`moduleid`,`menuid`);
-
---
--- Indexes for table `fv5oz_newsfeeds`
---
-ALTER TABLE `fv5oz_newsfeeds`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_state` (`published`),
-  ADD KEY `idx_catid` (`catid`),
-  ADD KEY `idx_createdby` (`created_by`),
-  ADD KEY `idx_language` (`language`),
-  ADD KEY `idx_xreference` (`xreference`);
-
---
--- Indexes for table `fv5oz_order`
---
-ALTER TABLE `fv5oz_order`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_orderlogbook`
---
-ALTER TABLE `fv5oz_orderlogbook`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_overrider`
---
-ALTER TABLE `fv5oz_overrider`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_payment`
---
-ALTER TABLE `fv5oz_payment`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_postinstall_messages`
---
-ALTER TABLE `fv5oz_postinstall_messages`
-  ADD PRIMARY KEY (`postinstall_message_id`);
-
---
--- Indexes for table `fv5oz_redirect_links`
---
-ALTER TABLE `fv5oz_redirect_links`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_old_url` (`old_url`(100)),
-  ADD KEY `idx_link_modifed` (`modified_date`);
-
---
--- Indexes for table `fv5oz_schemas`
---
-ALTER TABLE `fv5oz_schemas`
-  ADD PRIMARY KEY (`extension_id`,`version_id`);
-
---
--- Indexes for table `fv5oz_services`
---
-ALTER TABLE `fv5oz_services`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_session`
---
-ALTER TABLE `fv5oz_session`
-  ADD PRIMARY KEY (`session_id`),
-  ADD KEY `userid` (`userid`),
-  ADD KEY `time` (`time`);
-
---
--- Indexes for table `fv5oz_tags`
---
-ALTER TABLE `fv5oz_tags`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `tag_idx` (`published`,`access`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_path` (`path`(100)),
-  ADD KEY `idx_left_right` (`lft`,`rgt`),
-  ADD KEY `idx_alias` (`alias`(100)),
-  ADD KEY `idx_language` (`language`);
-
---
--- Indexes for table `fv5oz_template_styles`
---
-ALTER TABLE `fv5oz_template_styles`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_template` (`template`),
-  ADD KEY `idx_home` (`home`);
-
---
--- Indexes for table `fv5oz_ucm_base`
---
-ALTER TABLE `fv5oz_ucm_base`
-  ADD PRIMARY KEY (`ucm_id`),
-  ADD KEY `idx_ucm_item_id` (`ucm_item_id`),
-  ADD KEY `idx_ucm_type_id` (`ucm_type_id`),
-  ADD KEY `idx_ucm_language_id` (`ucm_language_id`);
-
---
--- Indexes for table `fv5oz_ucm_content`
---
-ALTER TABLE `fv5oz_ucm_content`
-  ADD PRIMARY KEY (`core_content_id`),
-  ADD KEY `tag_idx` (`core_state`,`core_access`),
-  ADD KEY `idx_access` (`core_access`),
-  ADD KEY `idx_alias` (`core_alias`(100)),
-  ADD KEY `idx_language` (`core_language`),
-  ADD KEY `idx_title` (`core_title`(100)),
-  ADD KEY `idx_modified_time` (`core_modified_time`),
-  ADD KEY `idx_created_time` (`core_created_time`),
-  ADD KEY `idx_content_type` (`core_type_alias`(100)),
-  ADD KEY `idx_core_modified_user_id` (`core_modified_user_id`),
-  ADD KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`),
-  ADD KEY `idx_core_created_user_id` (`core_created_user_id`),
-  ADD KEY `idx_core_type_id` (`core_type_id`);
-
---
--- Indexes for table `fv5oz_ucm_history`
---
-ALTER TABLE `fv5oz_ucm_history`
-  ADD PRIMARY KEY (`version_id`),
-  ADD KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`),
-  ADD KEY `idx_save_date` (`save_date`);
-
---
--- Indexes for table `fv5oz_updates`
---
-ALTER TABLE `fv5oz_updates`
-  ADD PRIMARY KEY (`update_id`);
-
---
--- Indexes for table `fv5oz_update_sites`
---
-ALTER TABLE `fv5oz_update_sites`
-  ADD PRIMARY KEY (`update_site_id`);
-
---
--- Indexes for table `fv5oz_update_sites_extensions`
---
-ALTER TABLE `fv5oz_update_sites_extensions`
-  ADD PRIMARY KEY (`update_site_id`,`extension_id`);
-
---
--- Indexes for table `fv5oz_userextra_`
---
-ALTER TABLE `fv5oz_userextra_`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_usergroups`
---
-ALTER TABLE `fv5oz_usergroups`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`),
-  ADD KEY `idx_usergroup_title_lookup` (`title`),
-  ADD KEY `idx_usergroup_adjacency_lookup` (`parent_id`),
-  ADD KEY `idx_usergroup_nested_set_lookup` (`lft`,`rgt`) USING BTREE;
-
---
--- Indexes for table `fv5oz_users`
---
-ALTER TABLE `fv5oz_users`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_name` (`firstName`(100)),
-  ADD KEY `idx_block` (`block`),
-  ADD KEY `username` (`username`),
-  ADD KEY `email` (`email`);
-
---
--- Indexes for table `fv5oz_user_keys`
---
-ALTER TABLE `fv5oz_user_keys`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `series` (`series`),
-  ADD UNIQUE KEY `series_2` (`series`),
-  ADD UNIQUE KEY `series_3` (`series`),
-  ADD KEY `user_id` (`user_id`);
-
---
--- Indexes for table `fv5oz_user_notes`
---
-ALTER TABLE `fv5oz_user_notes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_user_id` (`user_id`),
-  ADD KEY `idx_category_id` (`catid`);
-
---
--- Indexes for table `fv5oz_user_profiles`
---
-ALTER TABLE `fv5oz_user_profiles`
-  ADD UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`);
-
---
--- Indexes for table `fv5oz_user_usergroup_map`
---
-ALTER TABLE `fv5oz_user_usergroup_map`
-  ADD PRIMARY KEY (`user_id`,`group_id`);
-
---
--- Indexes for table `fv5oz_viewlevels`
---
-ALTER TABLE `fv5oz_viewlevels`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_assetgroup_title_lookup` (`title`);
-
---
--- Indexes for table `fv50z_card`
---
-ALTER TABLE `fv50z_card`
-  ADD PRIMARY KEY (`cardID`);
-
---
--- Indexes for table `fv50z_combos`
---
-ALTER TABLE `fv50z_combos`
-  ADD PRIMARY KEY (`comboID`);
-
---
--- Indexes for table `fv50z_comboservice`
---
-ALTER TABLE `fv50z_comboservice`
-  ADD PRIMARY KEY (`serviceID`,`comboID`);
-
---
--- Indexes for table `fv50z_logbook`
---
-ALTER TABLE `fv50z_logbook`
-  ADD PRIMARY KEY (`logID`);
-
---
--- Indexes for table `fv50z_orderlogbook`
---
-ALTER TABLE `fv50z_orderlogbook`
-  ADD PRIMARY KEY (`logID`,`orderID`);
-
---
--- Indexes for table `fv50z_payment`
---
-ALTER TABLE `fv50z_payment`
-  ADD PRIMARY KEY (`paymentID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `fv5oz_assets`
---
-ALTER TABLE `fv5oz_assets`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key', AUTO_INCREMENT=70;
---
--- AUTO_INCREMENT for table `fv5oz_banners`
---
-ALTER TABLE `fv5oz_banners`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_banner_clients`
---
-ALTER TABLE `fv5oz_banner_clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_categories`
---
-ALTER TABLE `fv5oz_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `fv5oz_combos_combo`
---
-ALTER TABLE `fv5oz_combos_combo`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `fv5oz_contact_details`
---
-ALTER TABLE `fv5oz_contact_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_content`
---
-ALTER TABLE `fv5oz_content`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_content_types`
---
-ALTER TABLE `fv5oz_content_types`
-  MODIFY `type_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
---
--- AUTO_INCREMENT for table `fv5oz_extensions`
---
-ALTER TABLE `fv5oz_extensions`
-  MODIFY `extension_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=818;
---
--- AUTO_INCREMENT for table `fv5oz_finder_filters`
---
-ALTER TABLE `fv5oz_finder_filters`
-  MODIFY `filter_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_finder_links`
---
-ALTER TABLE `fv5oz_finder_links`
-  MODIFY `link_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_finder_taxonomy`
---
-ALTER TABLE `fv5oz_finder_taxonomy`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `fv5oz_finder_terms`
---
-ALTER TABLE `fv5oz_finder_terms`
-  MODIFY `term_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_finder_types`
---
-ALTER TABLE `fv5oz_finder_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_languages`
---
-ALTER TABLE `fv5oz_languages`
-  MODIFY `lang_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `fv5oz_location`
---
-ALTER TABLE `fv5oz_location`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_logbook`
---
-ALTER TABLE `fv5oz_logbook`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_menu`
---
-ALTER TABLE `fv5oz_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
---
--- AUTO_INCREMENT for table `fv5oz_menu_types`
---
-ALTER TABLE `fv5oz_menu_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `fv5oz_messages`
---
-ALTER TABLE `fv5oz_messages`
-  MODIFY `message_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_modules`
---
-ALTER TABLE `fv5oz_modules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
---
--- AUTO_INCREMENT for table `fv5oz_newsfeeds`
---
-ALTER TABLE `fv5oz_newsfeeds`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_order`
---
-ALTER TABLE `fv5oz_order`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `fv5oz_orderlogbook`
---
-ALTER TABLE `fv5oz_orderlogbook`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_overrider`
---
-ALTER TABLE `fv5oz_overrider`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key';
---
--- AUTO_INCREMENT for table `fv5oz_payment`
---
-ALTER TABLE `fv5oz_payment`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `fv5oz_postinstall_messages`
---
-ALTER TABLE `fv5oz_postinstall_messages`
-  MODIFY `postinstall_message_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `fv5oz_redirect_links`
---
-ALTER TABLE `fv5oz_redirect_links`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_services`
---
-ALTER TABLE `fv5oz_services`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `fv5oz_tags`
---
-ALTER TABLE `fv5oz_tags`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `fv5oz_template_styles`
---
-ALTER TABLE `fv5oz_template_styles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `fv5oz_ucm_content`
---
-ALTER TABLE `fv5oz_ucm_content`
-  MODIFY `core_content_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_ucm_history`
---
-ALTER TABLE `fv5oz_ucm_history`
-  MODIFY `version_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_updates`
---
-ALTER TABLE `fv5oz_updates`
-  MODIFY `update_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
---
--- AUTO_INCREMENT for table `fv5oz_update_sites`
---
-ALTER TABLE `fv5oz_update_sites`
-  MODIFY `update_site_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `fv5oz_userextra_`
---
-ALTER TABLE `fv5oz_userextra_`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_usergroups`
---
-ALTER TABLE `fv5oz_usergroups`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key', AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT for table `fv5oz_users`
---
-ALTER TABLE `fv5oz_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
---
--- AUTO_INCREMENT for table `fv5oz_user_keys`
---
-ALTER TABLE `fv5oz_user_keys`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_user_notes`
---
-ALTER TABLE `fv5oz_user_notes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_viewlevels`
---
-ALTER TABLE `fv5oz_viewlevels`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key', AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `fv50z_card`
---
-ALTER TABLE `fv50z_card`
-  MODIFY `cardID` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv50z_combos`
---
-ALTER TABLE `fv50z_combos`
-  MODIFY `comboID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `fv50z_logbook`
---
-ALTER TABLE `fv50z_logbook`
-  MODIFY `logID` int(20) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv50z_payment`
---
-ALTER TABLE `fv50z_payment`
-  MODIFY `paymentID` int(20) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
