@@ -25,10 +25,7 @@ JHtml::_('behavior.formvalidator');
 			<?php $fields = $this->form->getFieldset($fieldset->name);?>
 			<?php if (count($fields)):?>
 				<fieldset>
-				<?php // If the fieldset has a label set, display it as the legend. ?>
-				<?php if (isset($fieldset->label)): ?>
-					<legend><?php echo JText::_($fieldset->label);?></legend>
-				<?php endif;?>
+				
 				<?php // Iterate through the fields in the set and display them. ?>
 				<?php foreach ($fields as $field) : ?>
 					<?php // If the field is hidden, just display the input. ?>
