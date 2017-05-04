@@ -9,13 +9,24 @@
 		/>
 
 		<field
-			name="name"
+			name="firstName"
 			type="text"
-			description="COM_USERS_REGISTER_NAME_DESC"
+			description="first name"
 			filter="string"
-			label="COM_USERS_REGISTER_NAME_LABEL"
-			required="true"
+			label="First name"
 			size="30"
+			required="true"
+		/>
+
+
+		<field
+			name="lastName"
+			type="text"
+			description="last name"
+			filter="string"
+			label="Last name"
+			size="30"
+			required="true"
 		/>
 
 		<field
@@ -86,6 +97,36 @@
 			required="true"
 			size="30"
 			validate="equals"
+		/>
+
+		<field
+			name="mobilePhone"
+			type="text"
+			description="Mobile phone"
+			filter="string"
+			label="Mobile phone"
+			size="30"
+	
+		/>
+		<field
+			name="homePhone"
+			type="text"
+			description="Home phone"
+			filter="string"
+			label="Home phone"
+			size="30"
+			
+		/>
+
+		<field
+			name="address"
+			type="text"
+			description="Address"
+			filter="string"
+			label="Address"
+			size="230"
+			
+			
 		/>
 
 		<field

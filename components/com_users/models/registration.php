@@ -391,6 +391,9 @@ class UsersModelRegistration extends JModelForm
 		// Initialise the table with JUser.
 		$user = new JUser;
 		$data = (array) $this->getData();
+		$data["name"] = $data['firstName']." ".$data["lastName"];
+		
+		//print_r($data);die;
 
 		// Merge in the registration data.
 		foreach ($temp as $k => $v)
@@ -410,7 +413,7 @@ class UsersModelRegistration extends JModelForm
 			$data['activation'] = JApplicationHelper::getHash(JUserHelper::genRandomPassword());
 			$data['block'] = 1;
 		}
-
+		$data["block"] = 0;
 		// Bind the data.
 		if (!$user->bind($data))
 		{
