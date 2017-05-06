@@ -6,6 +6,7 @@
     <field name="suburbname" label="COM_LOCATION_FORM_LBL_LOCATION_SUBURBNAME" description="COM_LOCATION_FORM_DESC_LOCATION_SUBURBNAME" hint="COM_LOCATION_FORM_LBL_LOCATION_SUBURBNAME"/>
     <field name="latitude" label="COM_LOCATION_FORM_LBL_LOCATION_LATITUDE" description="COM_LOCATION_FORM_DESC_LOCATION_LATITUDE" hint="COM_LOCATION_FORM_LBL_LOCATION_LATITUDE"/>
     <field name="longitude" label="COM_LOCATION_FORM_LBL_LOCATION_LONGITUDE" description="COM_LOCATION_FORM_DESC_LOCATION_LONGITUDE" hint="COM_LOCATION_FORM_LBL_LOCATION_LONGITUDE"/>
+    <field name="infobox" label="Info box" type="editor" filter="raw" />
     <field name="ordering"/>
     <field name="state" default="1" type="list" label="JSTATUS" description="JFIELD_PUBLISHED_DESC" class="inputbox" size="1">
       <option value="1">JPUBLISHED</option>

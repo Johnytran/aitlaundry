@@ -40,8 +40,10 @@ else
 
 // Add JavaScript Frameworks
 JHtml::_('bootstrap.framework');
-
 $doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/template.js');
+$doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/jquery.omniselect.js');
+
+
 
 // Add Stylesheets
 $doc->addStyleSheetVersion($this->baseurl . '/templates/' . $this->template . '/css/template.css');

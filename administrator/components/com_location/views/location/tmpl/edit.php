@@ -59,6 +59,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_location/css/form.css');
 				<?php echo $this->form->renderField('suburbname'); ?>
 				<?php echo $this->form->renderField('latitude'); ?>
 				<?php echo $this->form->renderField('longitude'); ?>
+				<?php echo $this->form->renderField('infobox'); ?>
 				<input type="hidden" name="jform[ordering]" value="<?php echo $this->item->ordering; ?>" />
 				<?php echo $this->form->renderField('state'); ?>
 				<input type="hidden" name="jform[checked_out]" value="<?php echo $this->item->checked_out; ?>" />
