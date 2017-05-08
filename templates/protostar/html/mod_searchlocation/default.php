@@ -42,22 +42,26 @@ defined('_JEXEC') or die;
 		$arrayItem[] =  '['.$db->quote($value->suburbname).','.$value->latitude.','.$value->longitude.']';
 		$arrayDesc[] =  '['.$db->quote($value->infobox).']';
 		$arrayAddress[] =  $db->quote($value->suburbname);
+		$arrayAddress[] =  $db->quote($value->postcode);
 	}
 	//print_r($arrayItem);die;
 	//echo implode(',', $arrayAddress);die;
 ?>
 <script>
+	var allMarkers;
+	var bounds;
 	jQuery(function($) {
     // Asynchronously Load the map API 
     var map;
+	
     var script = document.createElement('script');
     script.src = "//maps.googleapis.com/maps/api/js?sensor=false&callback=initialize&key=AIzaSyAmgL1tXr-qF0GXLGXef0yBRdM37WV2aMg";
     document.body.appendChild(script);
 });
 
 function initialize() {
-    
-    var bounds = new google.maps.LatLngBounds();
+    allMarkers =  [];
+    bounds = new google.maps.LatLngBounds();
     var mapOptions = {
         mapTypeId: 'roadmap'
     };
@@ -89,6 +93,8 @@ function initialize() {
             title: markers[i][0]
         });
         
+        allMarkers.push(marker);
+        
         // Allow each marker to have an info window    
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
@@ -98,6 +104,7 @@ function initialize() {
         })(marker, i));
 
         // Automatically center the map fitting all markers on the screen
+
         map.fitBounds(bounds);
     }
 
@@ -116,10 +123,18 @@ function initialize() {
     <div id="map_canvas" class="mapping"></div>
 </div>
 <form>
-	<input type="text" name="search" class="search-box" placeholder="Enter an address here..." />
+	<input type="text" name="search" class="search-box search-location-box" placeholder="Enter an address or postal code here..." />
 </form>	
 <script type="text/javascript">
       jQuery(document).ready(function() {
+
+      	jQuery('.search-location-box').keyup(function(){
+      		//console.log(this.value);
+      		if(!this.value){
+      			map.fitBounds(bounds);
+      		}
+      	});
+
         var searchBox = jQuery('.search-box');
         var dataLocations = [];
         <?php foreach($rows as $key=>$value){
@@ -128,6 +143,7 @@ function initialize() {
         	dataLocations[<?php echo $key;?>]['surburb'] = <?php echo $db->quote($value->suburbname);?>;
         	dataLocations[<?php echo $key;?>]['longitude'] = <?php echo $db->quote($value->longitude);?>;
         	dataLocations[<?php echo $key;?>]['latitude'] = <?php echo $db->quote($value->latitude);?>;
+        	dataLocations[<?php echo $key;?>]['postcode'] = <?php echo $db->quote($value->postcode);?>;
         <?php }?>
         //console.log(dataLocations);
         searchBox.omniselect({
@@ -136,18 +152,29 @@ function initialize() {
         
         searchBox.on('omniselect:select', function(event, value) {
           //console.log('Selected: ' + value);
+          
           var longitude='', latitude='';
+          var currentMarkerPosition = null;
           if(dataLocations){
+          	//console.log(dataLocations.length);
+          	//console.log(dataLocations[0]);
           	for(var i=0; i<dataLocations.length; i++){
-          		if(dataLocations[i]['surburb']== value){
+          		if(dataLocations[i]['surburb']== value || dataLocations[i]['postcode']== value){
           			//console.log(dataLocations[i]['longitude']);
           			longitude = dataLocations[i]['longitude'];
           			latitude = dataLocations[i]['latitude'];
-          			var position = new google.maps.LatLng(latitude, longitude);
+          			currentMarkerPosition = new google.maps.LatLng(latitude, longitude);	
           			//console.log(position);
-          			map.panTo(position);
+          			map.panTo(currentMarkerPosition);
           			map.setZoom(18);
+          			new google.maps.event.trigger( allMarkers[i], 'click' );
+          			//console.log(allMarkers[i].getPosition());
+          			//console.log(allMarkers);
+
           		}
+         //  		for(var j=0; j<allMarkers.length;j++){
+      			// 	console.log(allMarkers[j].getPosition().equals(currentMarkerPosition));
+      			// }
           	}
 
           }
