@@ -33,6 +33,8 @@ defined('_JEXEC') or die;
 	$arrayItem = array();
 	$arrayDesc = array();
 	$arrayAddress = array();
+	// echo '<pre>';
+	// print_r($rows);die;
 	foreach($rows as $key=>$value){
 
 		//echo $value->latitude;
@@ -47,13 +49,14 @@ defined('_JEXEC') or die;
 <script>
 	jQuery(function($) {
     // Asynchronously Load the map API 
+    var map;
     var script = document.createElement('script');
     script.src = "//maps.googleapis.com/maps/api/js?sensor=false&callback=initialize&key=AIzaSyAmgL1tXr-qF0GXLGXef0yBRdM37WV2aMg";
     document.body.appendChild(script);
 });
 
 function initialize() {
-    var map;
+    
     var bounds = new google.maps.LatLngBounds();
     var mapOptions = {
         mapTypeId: 'roadmap'
@@ -118,13 +121,36 @@ function initialize() {
 <script type="text/javascript">
       jQuery(document).ready(function() {
         var searchBox = jQuery('.search-box');
-
+        var dataLocations = [];
+        <?php foreach($rows as $key=>$value){
+        	?>
+        	dataLocations[<?php echo $key;?>] = [];
+        	dataLocations[<?php echo $key;?>]['surburb'] = <?php echo $db->quote($value->suburbname);?>;
+        	dataLocations[<?php echo $key;?>]['longitude'] = <?php echo $db->quote($value->longitude);?>;
+        	dataLocations[<?php echo $key;?>]['latitude'] = <?php echo $db->quote($value->latitude);?>;
+        <?php }?>
+        //console.log(dataLocations);
         searchBox.omniselect({
           source: [<?php echo implode(',', $arrayAddress);?>]
         });
         
         searchBox.on('omniselect:select', function(event, value) {
-          console.log('Selected: ' + value);
+          //console.log('Selected: ' + value);
+          var longitude='', latitude='';
+          if(dataLocations){
+          	for(var i=0; i<dataLocations.length; i++){
+          		if(dataLocations[i]['surburb']== value){
+          			//console.log(dataLocations[i]['longitude']);
+          			longitude = dataLocations[i]['longitude'];
+          			latitude = dataLocations[i]['latitude'];
+          			var position = new google.maps.LatLng(latitude, longitude);
+          			//console.log(position);
+          			map.panTo(position);
+          			map.setZoom(18);
+          		}
+          	}
+
+          }
         });
 
         searchBox.on('omniselect:add', function(event, value) {
