@@ -28,6 +28,7 @@ $layout   = $app->input->getCmd('layout', '');
 $task     = $app->input->getCmd('task', '');
 $itemid   = $app->input->getCmd('Itemid', '');
 $sitename = $app->get('sitename');
+$userToken = JSession::getFormToken();
 
 ?>
 <!-- Google Fonts -->
@@ -93,7 +94,7 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 	            				<ul class="dropdown-menu userMenuDrop">
 	            					<li><a href="">Profile</a></li>
 	            					<li><a href="">Order</a></li>
-	            					<li><a href="">Sign out</a></li>
+	            					<li><a href="index.php?option=com_users&task=user.logout&<?php echo $userToken;?>=1&return=<?php echo base64_encode('index.php');?>">Sign out</a></li>
 	            				</ul>
 	            			</li>
 	            <?php }?>
