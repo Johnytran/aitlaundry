@@ -1,0 +1,744 @@
+
+body{
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+body h1{
+	text-align: center;
+	vertical-align: middle;
+	line-height: 30px; 
+	color: #faa634;
+}
+
+body h2{
+	text-align: center;
+	vertical-align: middle;
+	line-height: 30px; 
+	color: white;
+}
+
+header{
+	width: auto;
+	height: 115px;
+	background-color:white;
+    position:relative;
+        z-index: 3;
+    /*
+    position: absolute; 
+    z-index: 3;
+    top: 0;
+    */
+}
+
+
+/*NAVIGATION*/
+
+#navbarStyle{
+    max-width: 1280px;
+    /*overflow: hidden;*/
+    background-color: #faa634;
+	position: fixed;
+    width: 100%;
+    color: white;
+}
+
+#navbarStyle a{
+    color: white;
+    border-bottom: 2px solid #faa634;
+
+}
+
+.navbar-header{
+    text-align: center;
+}
+
+.navbar-right{
+    margin-top: 25px;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    background-color: #faa634;
+    border-bottom: 2px solid white;
+
+}
+
+#navbarStyle a:hover{
+    border-bottom: 2px solid white;
+}
+
+.navbar-default .navbar-toggle:focus, 
+.navbar-default .navbar-toggle:hover {
+    background-color: #faa634;
+    
+}
+navbar.less:444
+.navbar-default .navbar-toggle {
+    border-color: orange;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: white;
+    margin-left: 20px;
+}
+
+.btn-black{
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+}
+.btn-white{
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
+#howItWorks{
+	width: 100%;
+	height: 500px;
+	background-color:gray;
+	padding:10px 10px;
+	display: block;
+}
+
+.navbar-nav>li>.userMenuDrop{
+    background: black;
+
+}
+.navbar-nav>li>.userMenuDrop>li>a:focus, .navbar-nav>li>.userMenuDrop>li>a:hover{
+    background: none;
+
+}
+#navbarStyle .userMenuDrop a{
+    border-bottom: 1px solid #faa634
+}
+#navbarStyle .userMenuDrop a:hover{
+    color: #faa634;
+}
+/*************** MAIN / MOTTO / HOW ****************************/
+main {
+    letter-spacing: 2px;
+    font-family: 'Viga', sans-serif;
+    text-align:center;    
+    padding-bottom: 5px;
+
+}
+#banner{
+    padding:50px;
+    width 100%;
+    height:400px;
+    text-align:center;
+}
+h3#moto{
+  color:#cccccc;
+}
+span#impressed {
+ color:#faa634;
+}
+#how {
+  background-color:#333;
+  padding:20px;
+  margin-top:5px;
+}
+#how h1 {
+  margin:0;
+  padding:50px;
+  background-color:#333;
+  color:#faa634;
+}
+#how img {
+  max-width:150px;
+}
+#how2{
+  padding:50px;
+}
+#how2 p {
+  color:white;
+}
+.leftBorder{
+  border-left:2px solid white;
+}
+/*************** COMBOS **********************/
+#combos{
+    margin-top:5px;
+    background-color:#f2f2f2;
+    padding:0;
+}
+
+#combos p{
+    margin:0;
+}
+#combos h1 {
+    margin:0;
+    padding:50px;
+    background-color:#333;
+    color:#faa634;
+}
+#combos .combosection{
+    padding:50px 20px;
+}
+#combos .title {
+    background-color:#e65c00;
+    color:white;
+    border:2px solid black;
+}
+#combos .combobox{
+    border:1px solid #ccc;
+    box-shadow:1px 1px 3px black;
+    padding:0;
+    border-radius:5px;
+}
+#combos .combobox:hover {
+    box-shadow:1px 1px 15px #333;
+}
+#combos .combodescription{
+    padding:20px;
+    border-bottom:1px solid #ccc;
+    background-color:white;
+}
+#combos .combosubbox{
+    padding:20px;
+    border-bottom:1px solid #ccc;
+    background-color:white;
+}
+#combos .combosubbox:hover{
+    height:150px;
+    box-shadow:2px 2px 20px gray;
+}
+#combos .selectcombo h4 {
+    color:white;
+    margin:0;
+    padding:10px;
+    letter-spacing:5px;
+}
+#combos .selectcombo {
+    background-color:#333;
+
+}
+#combos .selectcombo:hover {
+
+}
+#combos .dropdownbox {
+    /*position: relative;*/
+}
+
+#combos .dropdownbox-content {
+    display: none;
+    /*position: absolute;*/
+    padding:10px 0;
+    z-index: 1;
+}
+
+#combos .dropdownbox:hover .dropdownbox-content {
+    display: block;
+}
+/*************** LOCATIONS **********************/
+}
+
+#locations{
+	width: 100%;
+	height: 500px;
+	background-color:gray;
+	padding:10px 10px;
+	margin-top:20px;	
+	display: block;
+}
+
+#mapCont{
+	width: 100%;
+	height: 400px;
+	margin:0 auto;
+	display: block;
+	text-align: center;	
+}
+
+#locations{
+    margin-top:5px;
+    background-color:#333;
+    padding:0;
+}
+#locations p{
+    color:#e6e6e6;
+    margin:0;
+    font-family:roboto;
+}
+#locations h1 {
+    margin:0;
+    padding:50px;
+    background-color:#333;
+    color:#faa634;
+}
+#searchbox {
+    border-radius:10px;
+    border:1px solid white;
+    padding:20px;
+    background-color:rgba(255,255,255,0.2);
+    
+}
+#locations .form-control, .btn, .btn-default {
+  	margin:0;
+}
+#mapCont {
+  	padding:40px 0;
+}
+
+
+
+/******************************* ABOUT PAGE *******************************/
+#abouttitle{
+    margin-top:5px;
+    background-color:#f2f2f2;
+    padding:0;
+}
+#abouttitle h1 {
+    margin:0;
+    padding:35px;
+    background-color:#333;
+    color:#faa634;
+}
+#aboutcontent {
+    margin:20px auto;
+    max-width: 1200px;
+    background-color: white;
+    padding:20px 40px;
+    border-radius:10px;
+    box-shadow:1px 1px 20px rgba(0,0,0,0.3);
+}
+#aboutcontent h4{
+    padding:30px;
+}
+#aboutcontent p {
+    padding:30px;
+    color:rgba(0,0,0,0.65);
+}
+#aboutcontent #team h4, h5{
+    margin:0;
+    padding:25px;
+}
+
+/******************************* TERMS / PRIVACY *******************************/
+#termstitle{
+    margin-top:5px;
+    background-color:#f2f2f2;
+    padding:0;
+}
+#termstitle h1 {
+    margin:0;
+    padding:35px;
+    background-color:#333;
+    color:#faa634;
+}
+#termscontent {
+    margin:20px auto;
+    max-width: 1200px;
+    background-color: white;
+    padding:20px 40px;
+    border-radius:10px;
+    box-shadow:1px 1px 20px rgba(0,0,0,0.3);
+    text-align: left;
+}
+#termscontent h4{
+    padding:30px;
+}
+#termscontent p {
+    padding:30px;
+    color:rgba(0,0,0,0.65);
+}
+
+/********************************* CONTACT US *********************************/
+ #contacttitle{
+    margin-top:5px;
+    background-color:#f2f2f2;
+    padding:0;
+}
+#contacttitle h1 {
+    margin:0;
+    padding:35px;
+    background-color:#333;
+    color:#faa634;
+}
+#contactcontent {
+    margin:20px auto;
+    max-width: 800px;
+    background-color: white;
+    padding:20px 40px;
+    border-radius:10px;
+    box-shadow:1px 1px 20px rgba(0,0,0,0.3);
+    text-align: center;
+}
+#contactcontent h4{
+    padding:30px;
+}
+#contactcontent p {   
+	padding:30px;
+    color:rgba(0,0,0,0.65);
+}
+
+/*FORM*/
+
+
+
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: black;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/*for the tabs on account page*/
+
+p.account{
+	color: #faa634;
+	overflow: hidden;
+    border: 1px solid p;
+    background-color: black;
+    font-size: 30px;
+	padding: 14px 16px;
+	text-align: center;
+}
+
+/* Style the tab */
+div.tab {
+	height: 63px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+	text-align: center;	
+    border-bottom: none;
+	
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+	color: black;
+	background-color: #ccc;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;	
+    border: 1px solid black;
+}
+
+div.tab div{
+	display:inline-block;	
+}
+
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+div.tab button.active {
+	background-color: white;	
+	border-bottom: none;
+}
+
+/*table*/
+
+
+
+table,th,td{
+	border: 1px solid black;
+    padding: 10px;
+}
+th{
+	border:none;
+	width: 30px;
+}
+td{
+	background:black;	
+	width: 150px;
+	border: 3px solid white;	
+	border-radius: 25px;
+	border-right-width: 30px;
+	color: orange;
+}
+table{
+	border:none;
+	margin: 0px;
+}
+#table1{	
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width:40%;
+}
+#table2{	
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width:40%;
+}
+
+tr{
+	border: 20px solid white; 
+}
+caption{
+	font-size: 30px;
+}
+#paymentTable td{
+	background:gray;	
+	color: black;	
+	width: 100px;
+}
+
+div.paymentTableHolder{
+	overflow: auto;
+}
+
+/* Style the tab content */
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+	box-sizing: initial;
+}
+
+/*DEFAULT ROWS AND COLUMNS*/
+.row{
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 1%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.column{
+    margin: 0;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background-color: rgba(255,255,255,0.5);
+    
+}
+
+.span1-3{
+    width: 33%;
+}
+
+.span1-2{
+    width: 50%;
+}
+
+.span1{
+    width: 100%;
+}
+
+
+.gettingStarted{
+    background-image: url("../images/gettingsart.jpg");
+    padding: 2%;
+}
+
+.gettingStarted label{
+    color: black;
+}
+
+
+.gettingStarted input{
+    color: black;
+}
+
+.btnStyle{
+    background-color: #faa634;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 3%;
+    border: 2px solid black;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+
+.container {
+    padding: 50px;
+    max-width: 600px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    /*z-index: 1; */
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; 
+    border: 1px solid #888;
+    max-width: 800px;
+}
+
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 80px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+
+/******************************* FOOTER *******************************/
+footer {
+    text-align:center;
+    color:#cccccc;
+    font-size:13px;
+    font-family:roboto;
+    padding:10px;
+    letter-spacing:3px;
+}
+footer a{
+    color:#faa634;
+    letter-spacing: 3px;
+    font-family: 'Viga', sans-serif;
+ }
+footer a:hover{
+    color:#feeacd;
+}
+footer a:active{
+     color:white;
+}
+div.space1{
+    margin-top:5px;
+}
+.space2{
+    margin-top:15px;
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+    
+@keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+
+/************             MEDIA SCREENS                 ***************/
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+}
+@media screen and (max-width: 400px) {
+   #table1{	
+		float:none;
+		width:100%;
+	}
+	#table2{	
+		float:none;
+		width:100%;
+	}
+    .row{
+        flex-direction: column;
+    }
+    .span1-2{
+        width: 100%;
+    }
+    .btn-black{
+        margin-bottom: 2px;
+    }
+    .leftBorder{
+        border: none;
+        
+    }
+}
+
+@media screen and (max-width: 905px) {
+	header{
+		height:192px;
+	}
+}
+@media screen and (max-width: 766px) {
+	header{
+		height:140px;
+	}
+}
+
+/* Change mt account stuff */
+@media screen and (max-width: 475px) {
+	div.tab{
+		height:165px;
+	}
+	div.tab div{
+	display:block;	
+	}
+	div.tab button {
+		float:none;
+		margin:0px;
+	}
+	div.tab button.active {		
+		border: 1px solid #ccc;
+	}
+	header{
+		height:150px;
+	}p.account{
+    font-size: 30px;
+}
+}
+
+
+

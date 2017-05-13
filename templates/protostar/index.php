@@ -29,15 +29,13 @@ $task     = $app->input->getCmd('task', '');
 $itemid   = $app->input->getCmd('Itemid', '');
 $sitename = $app->get('sitename');
 
-if($task == "edit" || $layout == "form" )
-{
-	$fullWidth = 1;
-}
-else
-{
-	$fullWidth = 0;
-}
+?>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Viga" rel="stylesheet">
 
+<!-- Bootstrap -->
+<link href="<?php echo $this->baseurl . '/templates/' . $this->template; ?>/css/bootstrap.min.css" rel="stylesheet">
+<?php
 // Add JavaScript Frameworks
 JHtml::_('bootstrap.framework');
 $doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/template.js');
@@ -46,83 +44,7 @@ $doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/j
 
 
 // Add Stylesheets
-$doc->addStyleSheetVersion($this->baseurl . '/templates/' . $this->template . '/css/template.css');
-
-// Use of Google Font
-if ($this->params->get('googleFont'))
-{
-	$doc->addStyleSheet('//fonts.googleapis.com/css?family=' . $this->params->get('googleFontName'));
-	$doc->addStyleDeclaration("
-	h1, h2, h3, h4, h5, h6, .site-title {
-		font-family: '" . str_replace('+', ' ', $this->params->get('googleFontName')) . "', sans-serif;
-	}");
-}
-
-// Template color
-if ($this->params->get('templateColor'))
-{
-	$doc->addStyleDeclaration("
-	body.site {
-		border-top: 3px solid " . $this->params->get('templateColor') . ";
-		background-color: " . $this->params->get('templateBackgroundColor') . ";
-	}
-	a {
-		color: " . $this->params->get('templateColor') . ";
-	}
-	.nav-list > .active > a,
-	.nav-list > .active > a:hover,
-	.dropdown-menu li > a:hover,
-	.dropdown-menu .active > a,
-	.dropdown-menu .active > a:hover,
-	.nav-pills > .active > a,
-	.nav-pills > .active > a:hover,
-	.btn-primary {
-		background: " . $this->params->get('templateColor') . ";
-	}");
-}
-
-// Check for a custom CSS file
-$userCss = JPATH_SITE . '/templates/' . $this->template . '/css/user.css';
-
-if (file_exists($userCss) && filesize($userCss) > 0)
-{
-	$this->addStyleSheetVersion($this->baseurl . '/templates/' . $this->template . '/css/user.css');
-}
-
-// Load optional RTL Bootstrap CSS
-JHtml::_('bootstrap.loadCss', false, $this->direction);
-
-// Adjusting content width
-if ($this->countModules('position-7') && $this->countModules('position-8'))
-{
-	$span = "span6";
-}
-elseif ($this->countModules('position-7') && !$this->countModules('position-8'))
-{
-	$span = "span9";
-}
-elseif (!$this->countModules('position-7') && $this->countModules('position-8'))
-{
-	$span = "span9";
-}
-else
-{
-	$span = "span12";
-}
-
-// Logo file or site title param
-if ($this->params->get('logoFile'))
-{
-	$logo = '<img src="' . JUri::root() . $this->params->get('logoFile') . '" alt="' . $sitename . '" />';
-}
-elseif ($this->params->get('sitetitle'))
-{
-	$logo = '<span class="site-title" title="' . $sitename . '">' . htmlspecialchars($this->params->get('sitetitle'), ENT_COMPAT, 'UTF-8') . '</span>';
-}
-else
-{
-	$logo = '<span class="site-title" title="' . $sitename . '">' . $sitename . '</span>';
-}
+$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myStyle.css');
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
@@ -139,82 +61,266 @@ else
 	. ($params->get('fluidContainer') ? ' fluid' : '');
 	echo ($this->direction == 'rtl' ? ' rtl' : '');
 ?>">
-	<!-- Body -->
-	<div class="body">
-		<div class="container<?php echo ($params->get('fluidContainer') ? '-fluid' : ''); ?>">
-			<!-- Header -->
-			<header class="header" role="banner">
-				<div class="header-inner clearfix">
-					<a class="brand pull-left" href="<?php echo $this->baseurl; ?>/">
-						<?php echo $logo; ?>
-						<?php if ($this->params->get('sitedescription')) : ?>
-							<?php echo '<div class="site-description">' . htmlspecialchars($this->params->get('sitedescription'), ENT_COMPAT, 'UTF-8') . '</div>'; ?>
-						<?php endif; ?>
-					</a>
-					<div class="header-search pull-right">
-						<jdoc:include type="modules" name="position-0" style="none" />
-					</div>
-				</div>
-			</header>
-			<?php if ($this->countModules('position-1')) : ?>
-				<nav class="navigation" role="navigation">
-					<div class="navbar pull-left">
-						<a class="btn btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</a>
-					</div>
-					<div class="nav-collapse">
-						<jdoc:include type="modules" name="position-1" style="none" />
-					</div>
-				</nav>
-			<?php endif; ?>
-			<jdoc:include type="modules" name="banner" style="xhtml" />
-			<div class="row-fluid">
-				<?php if ($this->countModules('position-8')) : ?>
-					<!-- Begin Sidebar -->
-					<div id="sidebar" class="span3">
-						<div class="sidebar-nav">
-							<jdoc:include type="modules" name="position-8" style="xhtml" />
-						</div>
-					</div>
-					<!-- End Sidebar -->
-				<?php endif; ?>
-				<main id="content" role="main" class="<?php echo $span; ?>">
-					<!-- Begin Content -->
-					<jdoc:include type="modules" name="position-3" style="xhtml" />
-					<jdoc:include type="message" />
-					<jdoc:include type="component" />
-					<jdoc:include type="modules" name="position-2" style="none" />
-					<jdoc:include type="modules" name="search-location" style="none" />
-					<!-- End Content -->
-				</main>
-				<?php if ($this->countModules('position-7')) : ?>
-					<div id="aside" class="span3">
-						<!-- Begin Right Sidebar -->
-						<jdoc:include type="modules" name="position-7" style="well" />
-						<!-- End Right Sidebar -->
-					</div>
-				<?php endif; ?>
-			</div>
+	<header>       
+	    <nav class="navbar navbar-default" id="navbarStyle">  
+	      <div class="container-fluid"> 
+	        <!-- Brand and toggle get grouped for better mobile display -->
+	        <div class="navbar-header">
+	            <a href="index.html"><img src="templates/<?php echo $this->template; ?>/images/logo_impress.jpg"/></a>
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	        </div>
+	        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	          <ul class="nav navbar-nav navbar-right">
+	            <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+	            <li><a href="#how">How it Works</a></li>
+	            <li><a href="#combos">Combos</a></li>
+	            <li><a href="#locations">Locations</a></li>
+	            <li><a href="about.html">About</a></li>
+	            <li><a href="contact.html">Contact us</a></li>
+	            <li><button type="button" class="btn btn-default btn-black" onclick="location.href='getStarted.html'" >Get Started</button></li>
+	            <?php if(!$user->id){?>
+	            			<li><button type="button" class="btn btn-default btn-white" onclick="document.getElementById('id01').style.display='block'">Login</button></li>
+	            <?php }else{ ?>
+	            			<li class="dropdown">
+	            				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+	            					<?php echo $user->username?></button>
+
+	            				<ul class="dropdown-menu userMenuDrop">
+	            					<li><a href="">Profile</a></li>
+	            					<li><a href="">Order</a></li>
+	            					<li><a href="">Sign out</a></li>
+	            				</ul>
+	            			</li>
+	            <?php }?>
+	          </ul>
+	        </div><!-- /.navbar-collapse -->
+	      </div><!-- /.container-fluid -->
+	    </nav>	
+	    
+		<!-- Login PopUP -->
+	    <div id="id01" class="modal">
+			<div class="modal-content animate">
+	            <div class="container">
+	                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+	                <jdoc:include type="modules" name="moduleLoginPos" style="none" />
+	            </div>
+		     </div>
 		</div>
+	</header>
+	<main>
+	 <!----------------------- FEATURE MOTTO --------------------->
+		<div class="row">
+		<div id="banner" class="container-fluid col-xs-12">
+			<h2 id="motto">Let our services get you <span id="impressed">IMPRESSED</span>!</h2>
+	  <p>BLA BLA BLA BLA BLA BLA BLA BLA</p>
+		</div>
+		</div>
+	<!--------------------------- HOW IT WORKS --------------------->
+		<div id="how" class="container-fluid">
+	<h1>How it works</h1>
+			<div id="how2" class="row">
+			  <div class="col-sm-3 col-xs-12">
+			    <img src="templates/<?php echo $this->template; ?>/images/laundry-icon.png">
+			    <p>CHOOSE YOUR COMBO</p>
+			  </div>
+			  <div class="col-sm-3 col-xs-12 leftBorder">
+			    <img src="templates/<?php echo $this->template; ?>/images/location_icon.png">
+			    <p>SET YOUR PREFERENCES</p>
+			  </div>
+			  <div class="col-md-3 col-xs-12 leftBorder">
+			    <img src="templates/<?php echo $this->template; ?>/images/Delivery-Icon.png">
+			    <p>WE WILL TAKE CARE OF IT</p>
+			  </div>
+			  <div class="col-md-3 col-xs-12 leftBorder">
+			    <button type="button" class="btn" onclick="document.getElementById('video').style.display='block'" style="padding:0; background-color:rgba(0,0,0,0);">
+			        <img id="play" src="templates/<?php echo $this->template; ?>/images/play.png">
+			      </button>
+			    <p id="playvideo">PLAY VIDEO</p>
+			 </div>
+			</div> 
+			
+			<!---------- video pop up------------>
+			<div id="video" class="modal">
+	  <div class="modal-content animate">
+	    <span onclick="document.getElementById('video').style.display='none'" class="close" title="Close Modal">&times;</span>
+	    <h2 style="text-align:center;">HOW IT WORKS</h2>
+	    <video width="400" controls>
+	      <source src="" type="">
+	    </video>
+	  </div>
 	</div>
-	<!-- Footer -->
-	<footer class="footer" role="contentinfo">
-		<div class="container<?php echo ($params->get('fluidContainer') ? '-fluid' : ''); ?>">
-			<hr />
-			<jdoc:include type="modules" name="footer" style="none" />
-			<p class="pull-right">
-				<a href="#" id="back-top">
-					<?php echo JText::_('TPL_PROTOSTAR_BACKTOTOP'); ?>
-				</a>
-			</p>
-			<p>
-				&copy; <?php echo date('Y'); ?> <?php echo $sitename; ?>
-			</p>
+
 		</div>
+	<!---------------- COMBOS ------------------->
+		<div id="combos" class="container-fluid">
+			<h1>Combos</h1>
+		  <div class="combosection container-fluid">
+	  <div class="container-fluid" style="padding:0px 30px 50px 30px;">
+		<h5>Little explaination of how the combo system works!</h5>
+	  </div>
+		    <!--------- SINGLE COMBO ------->
+		    <div id="single" class="col-sm-3 combobox">
+			  <img src="">
+			  here goes an image
+			  <div class="combodescription">
+			    <p>DESCRIPTION</p>
+			  </div>
+			  <div class="title">
+			    <h4>SINGLE</h4>
+			  </div>
+			  
+			  <div class="pricefrom">
+			    <p style="background-color:black; color:white;">$<span style="font-size:30px;">35</span>/mo</p>
+			  </div>
+			  <div class="combosubbox dropdownbox">
+	      <img class="washicon" src="">
+	      <p>10kg</p>
+	      <div class="dropdownbox-content">
+	        	this is an example for my website 
+	      </div>
+	    </div>
+			  <div class="combosubbox dropdownbox">
+			    <img class="ironingicon" src="">
+			    <p>Not Included</p>
+			    <div class="dropdownbox-content">
+	        	this is an example for my website 
+	      </div>
+			  </div>
+			  <div class="combosubbox dropdownbox">
+			    <img class="drycleanicon" src="">
+			    <p>5 clothing</p>
+			    <div class="dropdownbox-content">
+	        	this is an example for my website 
+	      </div>
+			  </div>
+			  <div class="combosubbox dropdownbox">
+			    <img class="deliveryicon" src="">
+			    <p>1 p.w</p>
+			    <div class="dropdownbox-content">
+	        	this is an example for my website 
+	      </div>
+			  </div>
+			  <div class="selectcombo">
+			    <h4>SELECT</h4>
+			  </div>
+			 
+			  </div>
+		  </div>
+		</div>
+		<style>
+		  
+		</style>
+		<!----------------------------------------------- LOCATIONS ------------------------------------------->
+		<div id="locations" clas="row">
+			<h1>Locations</h1>
+			<p style="margin-bottom: 35px;">Now servicing in select neighbourhoods in Sydney.</p>
+			<!-- SEARCHBOX -->
+			<div class="container" id="searchbox">
+	  <form action="/action_page.php">
+	    <div class="input-group">
+	      <input type="text" class="form-control" placeholder="Search" name="search">
+	      <div class="input-group-btn">
+	        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+	      </div>
+	    </div>
+	  </form>
+	</div>
+
+	<!---------------------------------------------- MAP ---------------------------------->
+			<div id="mapCont">
+				<div id="googleMap" style="width:80%;height:350px;display:inline-block;vertical-align: middle;">
+			</div>
+				<script>
+				function myMap() {
+				var mapProp= {
+					center:new google.maps.LatLng(-33.8861,-208.8111),
+					zoom:15,
+				};
+				var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+				}
+				</script>
+				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpJmA_uArYl6iuKYerNeUD6K0njKYoTzw&callback=myMap">
+				  
+				</script>
+			</div>
+			<!-------------------------------- Suburbs List ------------------------->
+		<div class="container-fluid row" style="padding:30px 0 50px 0;">
+			 <div class="col-sm-4">
+			   <div class="space2">
+			     <p>Sydney City 2000</p>
+			   </div>
+			   <div class="space2">
+			     <p>Sydney City 2000</p>
+			   </div>
+			   <div class="space2">
+			     <p>Sydney City 2000</p>
+			   </div>
+			 </div>
+			 <div class="col-sm-4">
+			   <div class="space2">
+			     <p>Sydney City 2000</p>
+			   </div>
+			   <div class="space2">
+			     <p>Sydney City 2000</p>
+			   </div>
+			   <div class="space2">
+			     <p>Sydney City 2000</p>
+			   </div>
+			 </div>
+			 <div class="col-sm-4">
+			   <div class="space2">
+			     <p>Sydney City 2000</p>
+			   </div>
+			   <div class="space2">
+			     <p>Sydney City 2000</p>
+			   </div>
+			   <div class="space2">
+			     <p>Sydney City 2000</p>
+			   </div>
+			 </div>
+		</div>
+		</div>
+	</main>
+	<!--------------------------------- FOOTER ------------------------------------>
+	<footer style="background-color:#4d4d4d; margin-top:2px;">
+	  <div class="container-fluid">
+	    <div class="space1">
+	      <div class="col-sm-4 space2">
+	          <div>
+	              <a href="termsandconditions.html">TERMS & CONDITIONS</a>
+	          </div>
+	          <div class="row space2">
+	              <a href="privacy.html">PRIVACY POLICY</a>
+	          </div>
+	      </div>
+	      <div class="col-sm-4 space2">
+	          <div>
+	              <a href="about.html">ABOUT US</a>
+	          </div>
+	          <div class="row space2">
+	              <a href="contact.html">CONTACT US</a>
+	          </div>
+	      </div>
+	      <div class="col-sm-4 space2">
+	          <div>
+	              <a href="about.html">TESTIMONIALS</a>
+	          </div>
+	          <div class="row space2">
+	              <a href="about.html">FAQ</a>
+	          </div>
+	      </div>
+	    </div>
+	    <div class="row">
+	        <div class="col-xs-12" style="margin-top:20px;">
+	                  &copy; AIT LAUNDRY - 2017
+	        </div>
+	    </div>
+	  </div>
 	</footer>
-	<jdoc:include type="modules" name="debug" style="none" />
-</body>
+	</body>
 </html>
