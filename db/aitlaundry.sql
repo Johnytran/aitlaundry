@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2017 at 03:41 AM
+-- Generation Time: May 13, 2017 at 04:06 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -1457,7 +1457,7 @@ CREATE TABLE IF NOT EXISTS `fv5oz_messages` (
   `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`message_id`),
   KEY `useridto_state` (`user_id_to`,`state`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `fv5oz_messages`
@@ -1469,7 +1469,8 @@ INSERT INTO `fv5oz_messages` (`message_id`, `user_id_from`, `user_id_to`, `folde
 (3, 0, 0, 0, '2017-05-04 22:18:41', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: testetestsert'),
 (4, 0, 0, 0, '2017-05-04 22:22:36', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: testetestsert'),
 (5, 0, 0, 0, '2017-05-04 22:25:22', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: sss'),
-(6, 0, 0, 0, '2017-05-04 22:33:55', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: sef');
+(6, 0, 0, 0, '2017-05-04 22:33:55', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: sef'),
+(7, 0, 0, 0, '2017-05-13 02:04:21', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: ddd');
 
 -- --------------------------------------------------------
 
@@ -1841,8 +1842,8 @@ CREATE TABLE IF NOT EXISTS `fv5oz_session` (
 --
 
 INSERT INTO `fv5oz_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-('864dn8drnrvnl2mu34hdn34p32', 0, 1, '1494638690', 'joomla|s:716:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToxNztzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTQ2Mzc1ODk7czo0OiJsYXN0IjtpOjE0OTQ2Mzg2ODk7czozOiJub3ciO2k6MTQ5NDYzODY5MDt9czo1OiJ0b2tlbiI7czozMjoiOUlQUU92dzY2a0xhRnQ0bnhqUXhUNlhWUWNmUzhLY2kiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6MDp7fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjE7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fXM6NDoidXNlciI7Tzo1OiJKVXNlciI6MTp7czoyOiJpZCI7aTowO319fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fQ==";', 0, ''),
-('orpaq0hnm57aoenqdoqharns21', 1, 0, '1494639653', 'joomla|s:1352:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo0OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToyNDtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTQ2MzU0OTA7czo0OiJsYXN0IjtpOjE0OTQ2Mzk2NTI7czozOiJub3ciO2k6MTQ5NDYzOTY1Mjt9czo1OiJ0b2tlbiI7czozMjoiWU1RalNXcmlXVGRIbDRkb0JHUHBmR0FBMzNHUDMwMHQiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMToiY29tX21vZHVsZXMiO086ODoic3RkQ2xhc3MiOjI6e3M6NDoiZWRpdCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo2OiJtb2R1bGUiO086ODoic3RkQ2xhc3MiOjI6e3M6MjoiaWQiO2E6MDp7fXM6NDoiZGF0YSI7Tjt9fXM6MzoiYWRkIjtPOjg6InN0ZENsYXNzIjoxOntzOjY6Im1vZHVsZSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMjoiZXh0ZW5zaW9uX2lkIjtOO3M6NjoicGFyYW1zIjtOO319fXM6OToiY29tX21lbnVzIjtPOjg6InN0ZENsYXNzIjoxOntzOjU6Iml0ZW1zIjtPOjg6InN0ZENsYXNzIjoyOntzOjg6Im1lbnV0eXBlIjtzOjA6IiI7czo0OiJsaXN0IjthOjQ6e3M6OToiZGlyZWN0aW9uIjtzOjM6ImFzYyI7czo1OiJsaW1pdCI7czoyOiIyMCI7czo4OiJvcmRlcmluZyI7czo1OiJhLmxmdCI7czo1OiJzdGFydCI7ZDowO319fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjoxO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086NToiSlVzZXIiOjE6e3M6MjoiaWQiO3M6MzoiMTA2Ijt9czoxMToiYXBwbGljYXRpb24iO086ODoic3RkQ2xhc3MiOjE6e3M6NToicXVldWUiO047fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 106, 'admin');
+('864dn8drnrvnl2mu34hdn34p32', 0, 1, '1494641062', 'joomla|s:1312:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo0OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTozMDtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTQ2Mzc1ODk7czo0OiJsYXN0IjtpOjE0OTQ2NDEwNjE7czozOiJub3ciO2k6MTQ5NDY0MTA2Mjt9czo1OiJ0b2tlbiI7czozMjoiOUlQUU92dzY2a0xhRnQ0bnhqUXhUNlhWUWNmUzhLY2kiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6MTp7czo5OiJjb21fdXNlcnMiO086ODoic3RkQ2xhc3MiOjE6e3M6MTI6InJlZ2lzdHJhdGlvbiI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJkYXRhIjthOjEwOntzOjk6ImZpcnN0TmFtZSI7czo1OiJnZnNkcSI7czo4OiJsYXN0TmFtZSI7czozOiJkZmEiO3M6ODoidXNlcm5hbWUiO3M6MzoiZGRkIjtzOjk6InBhc3N3b3JkMSI7czo2OiIxMjM0NTYiO3M6OToicGFzc3dvcmQyIjtzOjY6IjEyMzQ1NiI7czo2OiJlbWFpbDEiO3M6MTI6ImRzZkBmZHNhLmNvbSI7czo2OiJlbWFpbDIiO3M6MTI6ImRzZkBmZHNhLmNvbSI7czoxMToibW9iaWxlUGhvbmUiO3M6OToiMjEzMTU2MTU2IjtzOjk6ImhvbWVQaG9uZSI7czoxMDoiNTEzMjEzMjEyMyI7czo3OiJhZGRyZXNzIjtzOjEyOiJkZ2RzZmdzZGZnZmQiO319fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjoxO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086NToiSlVzZXIiOjE6e3M6MjoiaWQiO2k6MDt9czoxMToiYXBwbGljYXRpb24iO086ODoic3RkQ2xhc3MiOjE6e3M6NToicXVldWUiO047fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 0, ''),
+('orpaq0hnm57aoenqdoqharns21', 1, 0, '1494640479', 'joomla|s:1392:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo0OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToyNTtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTQ2MzU0OTA7czo0OiJsYXN0IjtpOjE0OTQ2Mzk2NTI7czozOiJub3ciO2k6MTQ5NDY0MDQ3OTt9czo1OiJ0b2tlbiI7czozMjoiWU1RalNXcmlXVGRIbDRkb0JHUHBmR0FBMzNHUDMwMHQiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMToiY29tX21vZHVsZXMiO086ODoic3RkQ2xhc3MiOjI6e3M6NDoiZWRpdCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo2OiJtb2R1bGUiO086ODoic3RkQ2xhc3MiOjI6e3M6MjoiaWQiO2E6MDp7fXM6NDoiZGF0YSI7Tjt9fXM6MzoiYWRkIjtPOjg6InN0ZENsYXNzIjoxOntzOjY6Im1vZHVsZSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMjoiZXh0ZW5zaW9uX2lkIjtOO3M6NjoicGFyYW1zIjtOO319fXM6OToiY29tX21lbnVzIjtPOjg6InN0ZENsYXNzIjoxOntzOjU6Iml0ZW1zIjtPOjg6InN0ZENsYXNzIjozOntzOjg6Im1lbnV0eXBlIjtzOjg6Im1haW5tZW51IjtzOjQ6Imxpc3QiO2E6NDp7czo5OiJkaXJlY3Rpb24iO3M6MzoiYXNjIjtzOjU6ImxpbWl0IjtzOjI6IjIwIjtzOjg6Im9yZGVyaW5nIjtzOjU6ImEubGZ0IjtzOjU6InN0YXJ0IjtkOjA7fXM6MTA6ImxpbWl0c3RhcnQiO2k6MDt9fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjoxO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086NToiSlVzZXIiOjE6e3M6MjoiaWQiO3M6MzoiMTA2Ijt9czoxMToiYXBwbGljYXRpb24iO086ODoic3RkQ2xhc3MiOjE6e3M6NToicXVldWUiO047fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 106, 'admin');
 
 -- --------------------------------------------------------
 
@@ -2222,7 +2223,7 @@ CREATE TABLE IF NOT EXISTS `fv5oz_users` (
   KEY `idx_block` (`block`),
   KEY `username` (`username`),
   KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=115 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=116 ;
 
 --
 -- Dumping data for table `fv5oz_users`
@@ -2232,7 +2233,8 @@ INSERT INTO `fv5oz_users` (`id`, `firstName`, `name`, `lastName`, `homePhone`, `
 (106, 'Super User', 'admin', '', '', '', '', 'admin', 'aitlaundry@gmail.com', '$2y$10$a/6j6HvIKqcyfPvHlVJd3.jVFMXYHepZuM36p7Kap.kOj0au7ORHa', 0, 1, '2017-04-10 22:44:44', '2017-05-13 01:05:45', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
 (107, 'gfdgfds', 'manager', 'fads', 'fdsa', 'fdsa', 'fafdasfdsafdsf', 'manager', '5527@ait.nsw.edu.au', '$2y$10$4Ov8ixQreBzMTijs2HAiZ.6qq5.mflVhDeUtRtAL7cQZ/0VaLehd6', 0, 0, '2017-04-12 02:01:41', '2017-05-04 01:23:56', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
 (113, '22', '111111111 3', '3', '123456', '123456', 'sdafads', 'sss', 'sd@fda.com', '$2y$10$zn1Q5Jk4E2tQyiEENmRjN.z8EfeP9RGbTssriD0c05XRErqUu1WyC', 0, 0, '2017-05-04 22:25:20', '0000-00-00 00:00:00', '20b5407d26c2cec2e48f28f80451379d', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
-(114, '22', '22 3', '3', '123456', '123456', 'sdafads', 'sef', '1sd@fda.com', '$2y$10$h9Minaup1IipzSqZkYZUoO4BE15BkSz8whMAtVBlP7XgzwFhTEch6', 0, 0, '2017-05-04 22:33:53', '0000-00-00 00:00:00', 'd27cdeb2a95d8cb6e8d542583fd50039', '{}', '0000-00-00 00:00:00', 0, '', '', 0);
+(114, '22', '22 3', '3', '123456', '123456', 'sdafads', 'sef', '1sd@fda.com', '$2y$10$h9Minaup1IipzSqZkYZUoO4BE15BkSz8whMAtVBlP7XgzwFhTEch6', 0, 0, '2017-05-04 22:33:53', '0000-00-00 00:00:00', 'd27cdeb2a95d8cb6e8d542583fd50039', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
+(115, 'gfsdq', 'gfsdq dfa', 'dfa', '5132132123', '213156156', 'dgdsfgsdfgfd', 'ddd', 'dsf@fdsa.com', '$2y$10$lgqZ093Ep9LxiEp/e53F7.bkH3xwQB/dB6DlZRBPE9gML36RM0KjC', 0, 0, '2017-05-13 02:04:18', '0000-00-00 00:00:00', '0ed78d1624ea56b811e76d3efb261e60', '{}', '0000-00-00 00:00:00', 0, '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -2316,7 +2318,8 @@ INSERT INTO `fv5oz_user_usergroup_map` (`user_id`, `group_id`) VALUES
 (106, 8),
 (107, 6),
 (113, 2),
-(114, 2);
+(114, 2),
+(115, 2);
 
 -- --------------------------------------------------------
 

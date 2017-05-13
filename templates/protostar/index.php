@@ -83,7 +83,11 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 	            <li><a href="#locations">Locations</a></li>
 	            <li><a href="about.html">About</a></li>
 	            <li><a href="contact.html">Contact us</a></li>
-	            <li><button type="button" class="btn btn-default btn-black" onclick="location.href='getStarted.html'" >Get Started</button></li>
+	            <li>
+	            	<?php $registerURL =  JRoute::_('index.php?option=com_users&view=registration&Itemid=137'); ?>
+	            	<button type="button" class="btn btn-default btn-black" 
+	            onclick="location.href='<?php echo $registerURL; ?>'" >Get Started</button>
+	            </li>
 	            <?php if(!$user->id){?>
 	            			<li><button type="button" class="btn btn-default btn-white" onclick="document.getElementById('id01').style.display='block'">Login</button></li>
 	            <?php }else{ ?>
@@ -114,6 +118,8 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 		</div>
 	</header>
 	<main>
+	<jdoc:include type="message" />
+	<jdoc:include type="component" />
 	 <!----------------------- FEATURE MOTTO --------------------->
 		<div class="row">
 		<div id="banner" class="container-fluid col-xs-12">
