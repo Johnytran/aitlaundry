@@ -57,21 +57,13 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 </head>
     <style>
     
-        #map_wrapper {
-            height: 400px;
-            max-width: 800px;
-            margin: 0 auto;
+        /*LOGIN BUTTON*/
+        .dropdown-menu{
+            background-color: black; 
+            z-index: 8;
         }
         
-        form{
-            max-width: 800px;
-            margin: 0 auto;
-        }
 
-        #map_canvas {
-            width: 100%;
-            height: 100%;
-        }
 
     </style>
 <body class="site <?php echo $option
@@ -353,7 +345,6 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 		<div id="locations" clas="row">
 			<h1>Locations</h1>
 			<p style="margin-bottom: 10px;">Now servicing in select neighbourhoods in Sydney.</p>
-            <p style="margin-bottom: 20px; color:#faa634">Enter your address or postcode to search availability</p>
 			<!-- SEARCHBOX -->
             <jdoc:include type="modules" name="moduleLocationSearch" style="none" />
 			<!-------------------------------- Suburbs List ------------------------->

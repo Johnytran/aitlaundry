@@ -9,14 +9,35 @@ defined('_JEXEC') or die;
 
 ?>
 <style>
-	#map_wrapper {
-	    height: 400px;
-	}
+        /*MAP SECTION*/
+        #map_wrapper {
+            height: 400px;
+            max-width: 800px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+        
+       
+        form{
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-	#map_canvas {
-	    width: 100%;
-	    height: 100%;
-	}
+        input{
+            max-width: 590px;
+            color: black;
+        }
+        #buttonID{
+            max-width: 200px;
+            padding: 10px;
+            border: 3px solid #faa634;
+            color: black;
+        }
+    
+        #map_canvas {
+            width: 100%;
+            height: 100%;
+        }
 </style>
 <?php
 	$db = JFactory::getDBO();
@@ -118,13 +139,13 @@ function initialize() {
 </script>
 
 
-
+<form>
+	<input type="text" name="search" class="search-box search-location-box" placeholder="Enter your address or postcode to search availability"/>
+    <button id="buttonID" class="btn btn-default search-box search-location-box" name="search">Search</button><br>
+</form>	
 <div id="map_wrapper">
     <div id="map_canvas" class="mapping"></div>
 </div>
-<form>
-	<input type="text" name="search" class="search-box search-location-box" placeholder="Enter an address or postal code here..." />
-</form>	
 <script type="text/javascript">
       jQuery(document).ready(function() {
 
