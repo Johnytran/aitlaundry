@@ -220,34 +220,7 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 			<h1>Locations</h1>
 			<p style="margin-bottom: 35px;">Now servicing in select neighbourhoods in Sydney.</p>
 			<!-- SEARCHBOX -->
-			<div class="container" id="searchbox">
-	  <form action="/action_page.php">
-	    <div class="input-group">
-	      <input type="text" class="form-control" placeholder="Search" name="search">
-	      <div class="input-group-btn">
-	        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-	      </div>
-	    </div>
-	  </form>
-	</div>
-
-	<!---------------------------------------------- MAP ---------------------------------->
-			<div id="mapCont">
-				<div id="googleMap" style="width:80%;height:350px;display:inline-block;vertical-align: middle;">
-			</div>
-				<script>
-				function myMap() {
-				var mapProp= {
-					center:new google.maps.LatLng(-33.8861,-208.8111),
-					zoom:15,
-				};
-				var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-				}
-				</script>
-				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpJmA_uArYl6iuKYerNeUD6K0njKYoTzw&callback=myMap">
-				  
-				</script>
-			</div>
+				<jdoc:include type="modules" name="moduleLocationSearch" style="none" />
 			<!-------------------------------- Suburbs List ------------------------->
 		<div class="container-fluid row" style="padding:30px 0 50px 0;">
 			 <div class="col-sm-4">
