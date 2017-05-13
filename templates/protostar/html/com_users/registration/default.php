@@ -14,11 +14,101 @@ JHtml::_('behavior.formvalidator');
 ?>
 <div class="registration<?php echo $this->pageclass_sfx?>">
 	<?php if ($this->params->get('show_page_heading')) : ?>
-		<div class="page-header">
-			<h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
-		</div>
+		<div id="abouttitle" class="container-fluid">
+                <h1>Get Started</h1>
+            </div>
 	<?php endif; ?>
+<style>
+    #member-registration{
+        max-width: 1278px;
+        margin: 0 auto;
+        border-radius: 0px;
+        
+    }
+    #member-registration .control-group{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 10px;
+    }
+    
+    #member-registration .controls{
+        width: 100%;
+    }
+    
+    #member-registration .control-label{
+        margin-left: 18%;
+    }
+    #member-registration .validate-email{
+        display: block;
+        width: 100%;
+        padding: 12px 20px;
+    }
+    #member-registration input{
+        max-width: 800px;
+        margin: 0 auto;  
+        
+    }
+    #member-registration .btn-primary{
+        background-color: #faa634;
+        border: 2px solid black;
+    }
+    #member-registration .btn-primary,
+    .btn-primary:hover,
+    .btn-primary:link,
+    .btn-primary:visited,
+    .btn-primary:active,
+    .btn-primary:focus {
+        background-color: #faa634;
+        border: 2px solid black;
+        color: black;
+        width: 250px;
+    }
+    
+    .btn-primary:active:hover,
+    .btn-primary.active:hover,
+    .open > .dropdown-toggle.btn-primary:hover,
+    .btn-primary:active:focus,
+    .btn-primary.active:focus,
+    .open > .dropdown-toggle.btn-primary:focus,
+    .btn-primary:active.focus,
+    .btn-primary.active.focus,
+    .open > .dropdown-toggle.btn-primary.focus{
+        background-color: #faa634;
+        border: 2px solid black;
+        color: black;
+        width: 250px;
+    }
+    
 
+    #jform_email1-lbl, #jform_email2-lbl{
+        margin-bottom: 10px;
+    }
+    
+    .controls a:focus, 
+    .controls a:hover {
+        color: black;
+        background-color: #faa634;       
+    }
+    
+    .controls a{
+        color: black;
+        border: 2px solid black;
+        background-color: white;
+        width: 250px;
+    }
+    
+    @media screen and (max-width: 400px) {
+        #member-registration .control-label{
+            margin-left: 1px;
+        }
+        #member-registration .btn{
+            margin-top: 10px;
+        }
+    }
+
+
+</style>
 	<form id="member-registration" action="<?php echo JRoute::_('index.php?option=com_users&task=registration.register'); ?>" method="post" class="form-validate form-horizontal well" enctype="multipart/form-data">
 		<?php // Iterate through the form fieldsets and display each one. ?>
 		<?php foreach ($this->form->getFieldsets() as $fieldset): ?>
