@@ -55,6 +55,25 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 	<jdoc:include type="head" />
 	<!--[if lt IE 9]><script src="<?php echo JUri::root(true); ?>/media/jui/js/html5.js"></script><![endif]-->
 </head>
+    <style>
+    
+        #map_wrapper {
+            height: 400px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        form{
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #map_canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
 <body class="site <?php echo $option
 	. ' view-' . $view
 	. ($layout ? ' layout-' . $layout : ' no-layout')
@@ -333,9 +352,10 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 		<!----------------------------------------------- LOCATIONS ------------------------------------------->
 		<div id="locations" clas="row">
 			<h1>Locations</h1>
-			<p style="margin-bottom: 35px;">Now servicing in select neighbourhoods in Sydney.</p>
+			<p style="margin-bottom: 10px;">Now servicing in select neighbourhoods in Sydney.</p>
+            <p style="margin-bottom: 20px; color:#faa634">Enter your address or postcode to search availability</p>
 			<!-- SEARCHBOX -->
-				<jdoc:include type="modules" name="moduleLocationSearch" style="none" />
+            <jdoc:include type="modules" name="moduleLocationSearch" style="none" />
 			<!-------------------------------- Suburbs List ------------------------->
 		<div class="container-fluid row" style="padding:30px 0 50px 0;">
 			 <div class="col-sm-4">
