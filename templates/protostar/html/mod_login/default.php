@@ -15,6 +15,18 @@ JHtml::_('behavior.keepalive');
 JHtml::_('bootstrap.tooltip');
 
 ?>
+<style>
+    .unstyled{
+        list-style: none;
+        
+     }
+    
+    .unstyled li{
+        margin-top: 10px;
+        
+    }
+
+</style>
 <form action="<?php echo JRoute::_('index.php', true, $params->get('usesecure')); ?>" method="post" id="login-form" class="form-inline">
 	<?php if ($params->get('pretext')) : ?>
 		<div class="pretext">

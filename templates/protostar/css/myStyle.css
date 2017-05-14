@@ -40,21 +40,27 @@ header{
     background-color: #faa634;
 	position: fixed;
     width: 100%;
-    color: white
+    color: white;
+    min-height: 170px;
+    height: auto;
+    text-align: center;
 }
 
 #navbarStyle a{
     color: white;
     border-bottom: 2px solid #faa634;
-
+    margin-right: 5px;
 }
 
+#navbarStyle img{
+    margin-top: 30px;
+}
 .navbar-header{
     text-align: center;
 }
 
 .navbar-right{
-    margin-top: 25px;
+    margin-top: 40px;
 }
 
 .navbar-default .navbar-nav > .active > a,
@@ -67,6 +73,7 @@ header{
 
 #navbarStyle a:hover{
     border-bottom: 2px solid white;
+    background-color: #faa634;
 }
 
 .navbar-default .navbar-toggle:focus, 
@@ -87,11 +94,14 @@ navbar.less:444
     background-color: black;
     color: white;
     border: 2px solid black;
+    width: 158px;
+   
 }
 .btn-white{
     background-color: white;
     color: black;
     border: 2px solid black;
+    width: 158px;
 }
 /*************** MAIN / MOTTO / HOW ****************************/
 main {
@@ -684,7 +694,14 @@ div.space1{
         width: 100%;
     }
     .btn-black{
-        margin-bottom: 2px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    
+    #navbarStyle a {
+        margin-bottom: 10px;
+        font-size: 16px;
+        
     }
     .leftBorder{
         border: none;
@@ -693,7 +710,32 @@ div.space1{
     .control-label{
         margin-left: 1px;
     }
+    #bs-example-navbar-collapse-1{
+        height: 590px;
+    }
+    ul.nav li.dropdown:hover > ul.dropdown-menu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        margin-left: 120px;
+        margin-top: 10px;
+    }
+    
+    .checkbox input[type=checkbox], 
+    .checkbox-inline input[type=checkbox], 
+    .radio input[type=radio], 
+    .radio-inline input[type=radio] {
+        position: absolute;
+        margin-top: 4px;
+        margin-left: 10px; 
+    }
 }
+
+
+@media (min-width: 979px) {
+
+}
+
 
 @media screen and (max-width: 905px) {
 	header{

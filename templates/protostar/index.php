@@ -58,9 +58,111 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
     <style>
     
         /*LOGIN BUTTON*/
-        .dropdown-menu{
-            background-color: black; 
-            z-index: 8;
+        
+        .btn-primary:focus,
+        .btn-primary.focus {
+            color: black; 
+            background-color: lightgray; 
+            border-color: gray;
+        }
+        .btn-primary:hover {
+            color: black; 
+            background-color: lightgray; 
+            border-color: gray;
+        }
+        .btn-primary:active,
+        .btn-primary.active,
+        .open > .dropdown-toggle.btn-primary {
+            color: black; 
+            background-color: lightgray; 
+            border-color: gray;
+        }
+        .btn-primary:active:hover,
+        .btn-primary.active:hover,
+        .open > .dropdown-toggle.btn-primary:hover,
+        .btn-primary:active:focus,
+        .btn-primary.active:focus,
+        .open > .dropdown-toggle.btn-primary:focus,
+        .btn-primary:active.focus,
+        .btn-primary.active.focus,
+        .open > .dropdown-toggle.btn-primary.focus {
+            color: black; 
+            background-color: lightgray; 
+            border-color: gray;
+        }
+        .btn-primary:active,
+        .btn-primary.active,
+        .open > .dropdown-toggle.btn-primary {
+            background-image: none;
+        }
+        
+        .btn-primary.disabled:hover,
+        .btn-primary[disabled]:hover,
+        fieldset[disabled] .btn-primary:hover,
+        .btn-primary.disabled:focus,
+        .btn-primary[disabled]:focus,
+        fieldset[disabled] .btn-primary:focus,
+        .btn-primary.disabled.focus,
+        .btn-primary[disabled].focus,
+        fieldset[disabled] .btn-primary.focus {
+            color: black; 
+            background-color: lightgray; 
+            border-color: gray;
+        }
+        .btn-primary .badge {
+            color: black; 
+            background-color: lightgray; 
+            border-color: gray;
+        }
+
+        /*     MENU       */
+        #userMenuDrop{
+            background-color: black;
+            color: black;
+        
+        }
+        .dropdown-menu {
+          position: relative;
+          top: 100%;
+          left: 0;
+          z-index: 1000;
+          display: none;
+          float: left;
+          max-width: 93px;
+          font-size: 14px;
+          text-align: center;
+          list-style: none;
+          -webkit-background-clip: padding-box;
+                  background-clip: padding-box;
+          border: 1px solid #ccc;
+          border: 1px solid rgba(0, 0, 0, .15);
+          border-radius: 4px;
+          -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+                  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+
+        }
+        
+        .open{
+            margin: 0;
+            max-width: 158px;
+            padding: 0;
+        }
+        
+        #userMenuDrop li:hover{
+            background-color: orange;
+            color: black;
+        
+        }
+        
+
+        .dropdown-menu>li>a {
+            display: block;
+            padding: 2px 20px;
+            clear: both;
+            font-weight: 400;
+            line-height: 1.42857143;
+            color: #333;
+            white-space: nowrap;
         }
         
 
@@ -104,10 +206,10 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 	            			<li><button type="button" class="btn btn-default btn-white" onclick="document.getElementById('id01').style.display='block'">Login</button></li>
 	            <?php }else{ ?>
 	            			<li class="dropdown">
-	            				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+	            				<button class="btn btn-primary dropdown-toggle btn-white" type="button" data-toggle="dropdown">
 	            					<?php echo $user->username?></button>
 
-	            				<ul class="dropdown-menu userMenuDrop">
+	            				<ul class="dropdown-menu" id="userMenuDrop">
 	            					<li><a href="">Profile</a></li>
 	            					<li><a href="">Order</a></li>
 	            					<li><a href="index.php?option=com_users&task=user.logout&<?php echo $userToken;?>=1&return=<?php echo base64_encode('index.php');?>">Sign out</a></li>
