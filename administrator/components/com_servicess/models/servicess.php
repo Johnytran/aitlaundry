@@ -198,16 +198,12 @@ class ServicessModelServicess extends JModelList
 
 				// Get the title of every option selected.
 
-				$options = json_decode($oneItem->comboid);
-				$db->setQuery("Select name from #__combos_combo WHERE id in(".implode(',', $options).")");
-				$optionsName = $db->loadAssocList();
 				
-				foreach ((array) $optionsName as $option)
-				{
-					$options_text[] = $option["name"];
-				}
+				$db->setQuery("Select name from #__combos_combo WHERE id in(".$oneItem->comboid.")");
+				$optionsName = $db->loadResult();
+	
 
-				$oneItem->comboid = !empty($options_text) ? implode(', ', $options_text) : $oneItem->comboid;
+				$oneItem->comboName = $optionsName;
 		}
 		return $items;
 	}

@@ -56,6 +56,7 @@ $document->addStyleSheet(JUri::root() . 'media/com_servicess/css/form.css');
 
 									<input type="hidden" name="jform[id]" value="<?php echo $this->item->id; ?>" />
 				<?php echo $this->form->renderField('name'); ?>
+				<?php echo $this->form->renderField('icon'); ?>
 				<?php echo $this->form->renderField('price'); ?>
 				<?php echo $this->form->renderField('comboid'); ?>
 				<?php echo $this->form->renderField('description'); ?>

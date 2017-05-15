@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2017 at 04:06 AM
+-- Generation Time: May 15, 2017 at 11:42 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -39,14 +39,14 @@ CREATE TABLE IF NOT EXISTS `fv5oz_assets` (
   UNIQUE KEY `idx_asset_name` (`name`),
   KEY `idx_lft_rgt` (`lft`,`rgt`),
   KEY `idx_parent_id` (`parent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=74 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=88 ;
 
 --
 -- Dumping data for table `fv5oz_assets`
 --
 
 INSERT INTO `fv5oz_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `title`, `rules`) VALUES
-(1, 0, 0, 121, 0, 'root.1', 'Root Asset', '{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.login.offline":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
+(1, 0, 0, 149, 0, 'root.1', 'Root Asset', '{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.login.offline":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
 (2, 1, 1, 2, 1, 'com_admin', 'com_admin', '{}'),
 (3, 1, 3, 6, 1, 'com_banners', 'com_banners', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (4, 1, 7, 8, 1, 'com_cache', 'com_cache', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
@@ -63,25 +63,25 @@ INSERT INTO `fv5oz_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 (15, 1, 33, 34, 1, 'com_media', 'com_media', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":{"5":1}}'),
 (16, 1, 35, 40, 1, 'com_menus', 'com_menus', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (17, 1, 41, 42, 1, 'com_messages', 'com_messages', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
-(18, 1, 43, 76, 1, 'com_modules', 'com_modules', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(19, 1, 77, 80, 1, 'com_newsfeeds', 'com_newsfeeds', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(20, 1, 81, 82, 1, 'com_plugins', 'com_plugins', '{"core.admin":{"7":1},"core.manage":[],"core.edit":[],"core.edit.state":[]}'),
-(21, 1, 83, 84, 1, 'com_redirect', 'com_redirect', '{"core.admin":{"7":1},"core.manage":[]}'),
-(22, 1, 85, 86, 1, 'com_search', 'com_search', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
-(23, 1, 87, 88, 1, 'com_templates', 'com_templates', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(24, 1, 89, 92, 1, 'com_users', 'com_users', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(26, 1, 93, 94, 1, 'com_wrapper', 'com_wrapper', '{}'),
+(18, 1, 43, 102, 1, 'com_modules', 'com_modules', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(19, 1, 103, 106, 1, 'com_newsfeeds', 'com_newsfeeds', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(20, 1, 107, 108, 1, 'com_plugins', 'com_plugins', '{"core.admin":{"7":1},"core.manage":[],"core.edit":[],"core.edit.state":[]}'),
+(21, 1, 109, 110, 1, 'com_redirect', 'com_redirect', '{"core.admin":{"7":1},"core.manage":[]}'),
+(22, 1, 111, 112, 1, 'com_search', 'com_search', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
+(23, 1, 113, 114, 1, 'com_templates', 'com_templates', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(24, 1, 115, 118, 1, 'com_users', 'com_users', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(26, 1, 119, 120, 1, 'com_wrapper', 'com_wrapper', '{}'),
 (27, 8, 18, 19, 2, 'com_content.category.2', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
 (28, 3, 4, 5, 2, 'com_banners.category.3', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (29, 7, 14, 15, 2, 'com_contact.category.4', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(30, 19, 78, 79, 2, 'com_newsfeeds.category.5', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(32, 24, 90, 91, 1, 'com_users.category.7', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(33, 1, 95, 96, 1, 'com_finder', 'com_finder', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
-(34, 1, 97, 98, 1, 'com_joomlaupdate', 'com_joomlaupdate', '{"core.admin":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}'),
-(35, 1, 99, 100, 1, 'com_tags', 'com_tags', '{"core.admin":[],"core.manage":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}'),
-(36, 1, 101, 102, 1, 'com_contenthistory', 'com_contenthistory', '{}'),
-(37, 1, 103, 104, 1, 'com_ajax', 'com_ajax', '{}'),
-(38, 1, 105, 106, 1, 'com_postinstall', 'com_postinstall', '{}'),
+(30, 19, 104, 105, 2, 'com_newsfeeds.category.5', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(32, 24, 116, 117, 1, 'com_users.category.7', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(33, 1, 121, 122, 1, 'com_finder', 'com_finder', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
+(34, 1, 123, 124, 1, 'com_joomlaupdate', 'com_joomlaupdate', '{"core.admin":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}'),
+(35, 1, 125, 126, 1, 'com_tags', 'com_tags', '{"core.admin":[],"core.manage":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}'),
+(36, 1, 127, 128, 1, 'com_contenthistory', 'com_contenthistory', '{}'),
+(37, 1, 129, 130, 1, 'com_ajax', 'com_ajax', '{}'),
+(38, 1, 131, 132, 1, 'com_postinstall', 'com_postinstall', '{}'),
 (39, 18, 44, 45, 2, 'com_modules.module.1', 'Main Menu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (40, 18, 46, 47, 2, 'com_modules.module.2', 'Login', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (41, 18, 48, 49, 2, 'com_modules.module.3', 'Popular Articles', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
@@ -98,15 +98,29 @@ INSERT INTO `fv5oz_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 (52, 18, 70, 71, 2, 'com_modules.module.79', 'Multilanguage status', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (53, 18, 72, 73, 2, 'com_modules.module.86', 'Joomla Version', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (54, 16, 36, 37, 2, 'com_menus.menu.1', 'Main Menu', '{}'),
-(59, 1, 107, 108, 1, 'com_servicess', 'com_servicess', '{"core.manage":{"1":1}}'),
-(61, 1, 109, 110, 1, 'com_combos', 'com_combos', '{"core.manage":{"1":1}}'),
-(62, 1, 111, 112, 1, 'com_payment', 'com_payment', '{}'),
-(64, 1, 113, 114, 1, 'com_order', 'com_order', '{"core.manage":{"1":1}}'),
-(65, 1, 115, 116, 1, 'com_logbook', 'com_logbook', '{"core.manage":{"1":1}}'),
-(66, 1, 117, 118, 1, 'com_orderlogbook', 'com_orderlogbook', '{"core.manage":{"1":1}}'),
-(69, 1, 119, 120, 1, 'com_location', 'com_location', '{}'),
+(59, 1, 133, 134, 1, 'com_servicess', 'com_servicess', '{"core.manage":{"1":1}}'),
+(61, 1, 135, 136, 1, 'com_combos', 'com_combos', '{"core.manage":{"1":1}}'),
+(62, 1, 137, 138, 1, 'com_payment', 'com_payment', '{}'),
+(64, 1, 139, 140, 1, 'com_order', 'com_order', '{"core.manage":{"1":1}}'),
+(65, 1, 141, 142, 1, 'com_logbook', 'com_logbook', '{"core.manage":{"1":1}}'),
+(66, 1, 143, 144, 1, 'com_orderlogbook', 'com_orderlogbook', '{"core.manage":{"1":1}}'),
+(69, 1, 145, 146, 1, 'com_location', 'com_location', '{}'),
 (70, 16, 38, 39, 2, 'com_menus.menu.2', 'System Menu', '{}'),
-(72, 18, 74, 75, 2, 'com_modules.module.88', 'AITLaundry search Location', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}');
+(72, 18, 74, 75, 2, 'com_modules.module.88', 'AITLaundry search Location', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
+(74, 18, 76, 77, 2, 'com_modules.module.89', 'JCK Manager', '{}'),
+(75, 18, 78, 79, 2, 'com_modules.module.90', 'Dashboard', '{}'),
+(76, 18, 80, 81, 2, 'com_modules.module.91', 'JCK Manager v6.4.4', '{}'),
+(77, 18, 82, 83, 2, 'com_modules.module.92', 'COM_JCKMAN_CPANEL_SLIDER_MANAGER_LABEL', '{}'),
+(78, 18, 84, 85, 2, 'com_modules.module.93', 'COM_JCKMAN_CPANEL_SLIDER_PLUGIN_LABEL', '{}'),
+(79, 18, 86, 87, 2, 'com_modules.module.94', 'COM_JCKMAN_CPANEL_SLIDER_SYSTEM_CHECK_LABEL', '{}'),
+(80, 18, 88, 89, 2, 'com_modules.module.95', 'COM_JCKMAN_CPANEL_SLIDER_SYSTEM_LAYOUT_MANAGER', '{}'),
+(81, 18, 90, 91, 2, 'com_modules.module.96', 'COM_JCKMAN_CPANEL_SLIDER_BACKUP_LABEL', '{}'),
+(82, 18, 92, 93, 2, 'com_modules.module.97', 'COM_JCKMAN_CPANEL_SLIDER_RESTORE_LABEL', '{}'),
+(83, 18, 94, 95, 2, 'com_modules.module.98', 'COM_JCKMAN_CPANEL_SLIDER_SYNC_LABEL', '{}'),
+(84, 1, 147, 148, 1, 'com_jckman', 'com_jckman', '{}'),
+(85, 18, 96, 97, 2, 'com_modules.module.99', 'Feature Photo', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
+(86, 18, 98, 99, 2, 'com_modules.module.100', 'How it works', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
+(87, 18, 100, 101, 2, 'com_modules.module.101', 'Combos', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}');
 
 -- --------------------------------------------------------
 
@@ -287,15 +301,16 @@ CREATE TABLE IF NOT EXISTS `fv5oz_combos_combo` (
   `created_by` int(11) NOT NULL,
   `modified_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `fv5oz_combos_combo`
 --
 
 INSERT INTO `fv5oz_combos_combo` (`id`, `name`, `description`, `ordering`, `state`, `checked_out`, `checked_out_time`, `created_by`, `modified_by`) VALUES
-(1, 'A week', '', 1, 1, 0, '0000-00-00 00:00:00', 106, 106),
-(2, 'A month', '', 2, 1, 0, '0000-00-00 00:00:00', 106, 106);
+(1, 'COUPLE', '<div class="container-fluid" style="box-sizing: border-box; padding: 30px 20px; margin-right: auto; margin-left: auto; color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">\r\n	<img src="http://localhost/AIT/aitlaundry/templates/protostar/images/couple.png" style="box-sizing: border-box; border: 0px; vertical-align: middle; max-width: 300px;" /></div>\r\n<div class="combodescription" style="box-sizing: border-box; padding: 20px; border-bottom: 1px solid rgb(204, 204, 204); color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">\r\n	<p style="box-sizing: border-box; margin: 0px;">\r\n		DESCRIPTION</p>\r\n</div>\r\n', 1, 1, 0, '0000-00-00 00:00:00', 106, 106),
+(2, 'SINGLE', '<div class="container-fluid" style="box-sizing: border-box; padding: 20px; margin-right: auto; margin-left: auto; color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">\r\n	<img src="http://localhost/AIT/aitlaundry/templates/protostar/images/single.png" style="box-sizing: border-box; border: 0px; vertical-align: middle; max-width: 200px;" /></div>\r\n<div class="combodescription" style="box-sizing: border-box; padding: 20px; border-bottom: 1px solid rgb(204, 204, 204); color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">\r\n	<p style="box-sizing: border-box; margin: 0px;">\r\n		DESCRIPTION</p>\r\n</div>\r\n', 2, 1, 0, '0000-00-00 00:00:00', 106, 106),
+(3, 'FAMILY', '<div class="container-fluid" style="box-sizing: border-box; padding: 30px 20px; margin-right: auto; margin-left: auto; color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">\r\n	<img src="http://localhost/AIT/aitlaundry/templates/protostar/images/family.png" style="box-sizing: border-box; border: 0px; vertical-align: middle; max-width: 300px;" /></div>\r\n<div class="combodescription" style="box-sizing: border-box; padding: 20px; border-bottom: 1px solid rgb(204, 204, 204); color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">\r\n	<p style="box-sizing: border-box; margin: 0px;">\r\n		DESCRIPTION</p>\r\n</div>\r\n', 3, 1, 0, '0000-00-00 00:00:00', 106, 106);
 
 -- --------------------------------------------------------
 
@@ -535,7 +550,7 @@ CREATE TABLE IF NOT EXISTS `fv5oz_extensions` (
   KEY `element_clientid` (`element`,`client_id`),
   KEY `element_folder_clientid` (`element`,`folder`,`client_id`),
   KEY `extension` (`type`,`element`,`folder`,`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=822 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=828 ;
 
 --
 -- Dumping data for table `fv5oz_extensions`
@@ -573,7 +588,7 @@ INSERT INTO `fv5oz_extensions` (`extension_id`, `name`, `type`, `element`, `fold
 (31, 'com_ajax', 'component', 'com_ajax', '', 1, 1, 1, 1, '{"name":"com_ajax","type":"component","creationDate":"August 2013","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.2.0","description":"COM_AJAX_XML_DESCRIPTION","group":"","filename":"ajax"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (32, 'com_postinstall', 'component', 'com_postinstall', '', 1, 0, 1, 1, '{"name":"com_postinstall","type":"component","creationDate":"September 2013","author":"Joomla! Project","copyright":"(C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.2.0","description":"COM_POSTINSTALL_XML_DESCRIPTION","group":""}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (102, 'LIB_PHPUTF8', 'library', 'phputf8', '', 0, 1, 1, 1, '{"name":"LIB_PHPUTF8","type":"library","creationDate":"2006","author":"Harry Fuecks","copyright":"Copyright various authors","authorEmail":"hfuecks@gmail.com","authorUrl":"http:\\/\\/sourceforge.net\\/projects\\/phputf8","version":"0.5","description":"LIB_PHPUTF8_XML_DESCRIPTION","group":"","filename":"phputf8"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(103, 'LIB_JOOMLA', 'library', 'joomla', '', 0, 1, 1, 1, '{"name":"LIB_JOOMLA","type":"library","creationDate":"2008","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"https:\\/\\/www.joomla.org","version":"13.1","description":"LIB_JOOMLA_XML_DESCRIPTION","group":"","filename":"joomla"}', '{"mediaversion":"76e4e2b7e020ae6d8c02ff2cec88b047"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(103, 'LIB_JOOMLA', 'library', 'joomla', '', 0, 1, 1, 1, '{"name":"LIB_JOOMLA","type":"library","creationDate":"2008","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2016 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"https:\\/\\/www.joomla.org","version":"13.1","description":"LIB_JOOMLA_XML_DESCRIPTION","group":"","filename":"joomla"}', '{"mediaversion":"f506958a933d5ab7071ede107c86a415"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (104, 'LIB_IDNA', 'library', 'idna_convert', '', 0, 1, 1, 1, '{"name":"LIB_IDNA","type":"library","creationDate":"2004","author":"phlyLabs","copyright":"2004-2011 phlyLabs Berlin, http:\\/\\/phlylabs.de","authorEmail":"phlymail@phlylabs.de","authorUrl":"http:\\/\\/phlylabs.de","version":"0.8.0","description":"LIB_IDNA_XML_DESCRIPTION","group":"","filename":"idna_convert"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (105, 'FOF', 'library', 'fof', '', 0, 1, 1, 1, '{"name":"FOF","type":"library","creationDate":"2015-04-22 13:15:32","author":"Nicholas K. Dionysopoulos \\/ Akeeba Ltd","copyright":"(C)2011-2015 Nicholas K. Dionysopoulos","authorEmail":"nicholas@akeebabackup.com","authorUrl":"https:\\/\\/www.akeebabackup.com","version":"2.4.3","description":"LIB_FOF_XML_DESCRIPTION","group":"","filename":"fof"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (106, 'LIB_PHPASS', 'library', 'phpass', '', 0, 1, 1, 1, '{"name":"LIB_PHPASS","type":"library","creationDate":"2004-2006","author":"Solar Designer","copyright":"","authorEmail":"solar@openwall.com","authorUrl":"http:\\/\\/www.openwall.com\\/phpass\\/","version":"0.3","description":"LIB_PHPASS_XML_DESCRIPTION","group":"","filename":"phpass"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -689,6 +704,13 @@ INSERT INTO `fv5oz_extensions` (`extension_id`, `name`, `type`, `element`, `fold
 (814, 'com_orderlogbook', 'component', 'com_orderlogbook', '', 1, 1, 0, 0, '{"name":"com_orderlogbook","type":"component","creationDate":"2017-04-24","author":"AIT Laundry","copyright":"2017 AIT Laundry","authorEmail":"aitlaundry@gmail.com","authorUrl":"http:\\/\\/","version":"CVS: 1.0.0","description":"Provide Logbook for Order","group":"","filename":"orderlogbook"}', '{"save_history":"0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (817, 'com_location', 'component', 'com_location', '', 1, 1, 0, 0, '{"name":"com_location","type":"component","creationDate":"2017-04-28","author":"AIT Laundry","copyright":"2017 AIT Laundry","authorEmail":"aitlaundry@gmail.com","authorUrl":"http:\\/\\/","version":"CVS: 1.0.0","description":"Provide location management","group":"","filename":"location"}', '{"save_history":"0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (819, 'AITLaundry searchLocation', 'module', 'mod_searchlocation', '', 0, 1, 0, 0, '{"name":"AITLaundry searchLocation","type":"module","creationDate":"May 2017","author":"AIT","copyright":"Copyright (c) 2017 AITLaundry. All rights reserved.","authorEmail":"","authorUrl":"","version":"1.0.0","description":"\\n\\t\\n\\t\\n\\t\\n\\t","group":"","filename":"mod_searchlocation"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0);
+INSERT INTO `fv5oz_extensions` (`extension_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) VALUES
+(822, 'Editor - JoomlaCK', 'plugin', 'jckeditor', 'editors', 0, 1, 1, 0, '{"name":"Editor - JoomlaCK","type":"plugin","creationDate":"Jan 2015","author":"WebxSolution Ltd","copyright":"","authorEmail":"","authorUrl":"","version":"6.6.2","description":"PLG_JCK_XML_DESC","group":"","filename":"jckeditor"}', '{"toolbar":"Full","toolbar_ft":"Basic","uicolor":"#D6E6F4","skin":"office2007","content_css":"1","content_css_custom":"","styles_css":"1","styles_css_custom":"","imagePath":"images","flashPath":"images\\/flash","filePath":"files","entermode":"1","shiftentermode":"2","wwidth":"","hheight":"","showerrors":"1","lang_mode":"1","lang_code":"en","bgcolor":"#FFFFFF","ftcolor":"","ftsize":"12","ftfamily":"Arial","textalign":"0","entities":"1","formatsource":"1","returnScript":"1","useUserFolders":"0","userFolderType":"username","forcesimpleAmpersand":"0","startupFocus":"0","EnableImageDragndrop":"1","imageDragndropPath":"images","jcktypography":"1","jcktypographycontent":"\\ufeff\\/*\\r\\n * JCK Editor Typography Style-sheet\\r\\n * @author: Paul Franklin\\r\\n * @website: http:\\/\\/www.joomlackeditor.com\\r\\n * @version: 2.0\\r\\n * @copyright (C) WebxSolution Ltd 2011 - 2014. All rights reserved\\r\\n * @license: GPLv2\\r\\n * @terms: http:\\/\\/www.joomlackeditor.com\\/terms-of-use\\r\\n * @icons: WebxSolution Ltd has the non-exclusive, non-transferable, non-sublicensable right to use the Licensed Material an unlimited number of times in any and all media for the following commercial or personal purposes (together the \\"Permitted Uses\\") subject to the restrictions set forth in the Agreement. Any uses other than the Permitted Uses must be approved by DryIcons in writing. http:\\/\\/dryicons.com\\/terms\\/commercial\\/\\r\\n *\\/ \\r\\n\\r\\n \\/* ADD PARAGRAPH FORMAT STYLES FOR EDITOR\\r\\n-------------------------------------------------------------------------*\\/\\r\\n@font-face {}\\r\\nbody.cke_show_borders {}\\r\\nh1 {}\\r\\nh2 {}\\r\\nh3 {}\\r\\nh4 {}\\r\\nh5 {}\\r\\nh6 {}\\r\\npre {}\\r\\naddress {}\\r\\n\\r\\n \\/* Preformatted text\\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\nblockquote {\\r\\n    background: none repeat scroll 0 0 #CCCCCC;\\r\\n    border-left: 10px solid #8F8F8F;\\r\\n    color: #544C4A;\\r\\n    font: italic 12pt\\/1.2em Georgia;\\r\\n    margin: 10px !important;\\r\\n    padding: 10px !important;\\r\\n    text-shadow: 1px 1px 1px #ffffff;\\r\\n    width: 60%;\\r\\n    border-radius: 0 10px 0 10px;\\r\\n    -moz-border-radius: 0 10px 0 10px;\\r\\n    -webkit-border: 0 10px 0 10px;\\r\\n}\\r\\n\\r\\nblockquote p { display: inline; }\\r\\nblockquote:after { background: none repeat scroll 0 0 transparent !important; }\\r\\n\\r\\nblockquote:before {\\r\\n    content: url(\\"blockquotes.png\\") !important;\\r\\n\\tbackground: none repeat scroll 0 0 transparent !important;\\r\\n    margin-right: 15px;\\r\\n    vertical-align: super;\\r\\n\\tposition: relative !important;\\r\\n}\\r\\n\\r\\nspan.dropcap  {\\r\\n    color: #333333;\\r\\n    display: block;\\r\\n    float: left;\\r\\n    font: 60px\\/40px Georgia,Times,serif;\\r\\n    padding: 7px 8px 0 0;\\r\\n}\\r\\n\\r\\nspan.box-1heading-jck { font: 50px\\/50px Georgia,Times,serif;}\\r\\nspan.box-2heading-jck { font: 30px\\/40px Georgia,Times,serif;}\\r\\nspan.box-1heading-jck, span.box-2heading-jck { color: #333333; display: block; float: left;}\\r\\n\\r\\n\\/* Tooltips \\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\n.flashtip-jck, .ziptip-jck, .pdftip-jck, .videotip-jck, .infotip-jck, .warningtip-jck, .filmtip-jck, .pintip-jck , .lightbulbtip-jck , .recycletip-jck , .cameratip-jck, .commenttip-jck, .chattip-jck, .documenttip-jck, .accessibletip-jck, .startip-jck, .hearttip-jck, .previoustip-jck, .carttip-jck, .attachmenttip-jck, .calculatortip-jck, .cuttip-jck, .dollartip-jck, .poundtip-jck , .eurotip-jck, .mailtip-jck, .supporttip-jck, .nexttip-jck, .soundtip-jck { color: #444444 !important; }\\r\\n\\r\\na.flashtip-jck, a.ziptip-jck, a.pdftip-jck, a.videotip-jck, a.infotip-jck, a.warningtip-jck, a.filmtip-jck, a.pintip-jck , a.lightbulbtip-jck , a.recycletip-jck , a.cameratip-jck, a.commenttip-jck, a.chattip-jck, a.documenttip-jck, a.accessibletip-jck, a.startip-jck, a.hearttip-jck, a.previoustip-jck, a.carttip-jck, a.attachmenttip-jck, a.calculatortip-jck, a.cuttip-jck, a.dollartip-jck, a.poundtip-jck , a.eurotip-jck, a.mailtip-jck, a.supporttip-jck , a.nexttip-jck, a.soundtip-jck { color: #095197 !important; }\\r\\n\\r\\n.flashtip-jck, .ziptip-jck, .pdftip-jck, .videotip-jck, .infotip-jck, .warningtip-jck, .filmtip-jck, .pintip-jck , .lightbulbtip-jck , .recycletip-jck , .cameratip-jck, .commenttip-jck, .chattip-jck, .documenttip-jck, .accessibletip-jck, .startip-jck, .hearttip-jck, .previoustip-jck, .carttip-jck, .attachmenttip-jck, .calculatortip-jck, .cuttip-jck, .dollartip-jck, .poundtip-jck , .eurotip-jck, .mailtip-jck, .supporttip-jck, .nexttip-jck, .soundtip-jck, .download-DOC,\\r\\n a.flashtip-jck, a.ziptip-jck, a.pdftip-jck, a.videotip-jck, a.infotip-jck, a.warningtip-jck, a.filmtip-jck, a.pintip-jck , a.lightbulbtip-jck , a.recycletip-jck , a.cameratip-jck, a.commenttip-jck, a.chattip-jck, a.documenttip-jck, a.accessibletip-jck, a.startip-jck, a.hearttip-jck, a.previoustip-jck, a.carttip-jck, a.attachmenttip-jck, a.calculatortip-jck, a.cuttip-jck, a.dollartip-jck, a.poundtip-jck , a.eurotip-jck, a.mailtip-jck, a.supporttip-jck , a.nexttip-jck, a.soundtip-jck {\\r\\n    display: block;\\r\\n\\tmargin-bottom: 20px;\\r\\n\\tbackground-color: #FAFAFA !important;\\r\\n    background-position: left center !important;\\r\\n    background-repeat: no-repeat !important;\\r\\n\\tbackground-size: 28px auto !important;\\r\\n    border-bottom: 1px dotted #C8C8C8;\\r\\n    border-top: 1px dotted #C8C8C8;\\r\\n    display: block;\\r\\n    margin: 10px 0 !important;\\r\\n    padding: 7px 10px 7px 35px !important;\\r\\n\\t-webkit-transition: background-color 800ms ease-in-out;\\r\\n\\t-moz-transition: background-color 800ms ease-in-out;\\r\\n\\t-o-transition: background-color 800ms ease-in-out;\\r\\n\\ttransition: background-color 800ms ease-in-out;\\r\\n\\ttext-shadow: 1px 1px 1px #ffffff;\\r\\n\\tfont-size: 14px;\\r\\n}\\r\\n\\r\\na.flashtip-jck:hover, a.ziptip-jck:hover, a.pdftip-jck:hover, a.videotip-jck:hover, a.infotip-jck:hover, a.warningtip-jck:hover, a.filmtip-jck:hover, a.pintip-jck:hover , a.lightbulbtip-jck:hover , a.recycletip-jck:hover , a.cameratip-jck:hover, a.commenttip-jck:hover, a.chattip-jck:hover, a.documenttip-jck:hover, a.accessibletip-jck:hover, a.startip-jck:hover, a.hearttip-jck:hover, a.previoustip-jck:hover, a.carttip-jck:hover, a.attachmenttip-jck:hover, a.calculatortip-jck:hover, a.cuttip-jck:hover, a.dollartip-jck:hover, a.poundtip-jck:hover, a.eurotip-jck:hover, a.mailtip-jck:hover, a.supporttip-jck:hover, a.nexttip-jck:hover, a.soundtip-jck:hover, a.download-DOC:hover { color: #095197 !important; }\\r\\n\\r\\n.flashtip-jck:hover, .ziptip-jck:hover, .pdftip-jck:hover, .videotip-jck:hover, .infotip-jck:hover, .warningtip-jck:hover, .filmtip-jck:hover, .pintip-jck:hover , .lightbulbtip-jck:hover , .recycletip-jck:hover , .cameratip-jck:hover, .commenttip-jck:hover, .chattip-jck:hover, .documenttip-jck:hover, .accessibletip-jck:hover, .startip-jck:hover, .hearttip-jck:hover, .previoustip-jck:hover, .carttip-jck:hover, .attachmenttip-jck:hover, .calculatortip-jck:hover, .cuttip-jck:hover, .dollartip-jck:hover, .poundtip-jck:hover, .eurotip-jck:hover, .mailtip-jck:hover, .supporttip-jck:hover, .nexttip-jck:hover, .soundtip-jck:hover, .download-DOC:hover, a.flashtip-jck:hover, a.ziptip-jck:hover, a.pdftip-jck:hover, a.videotip-jck:hover, a.infotip-jck:hover, a.warningtip-jck:hover, a.filmtip-jck:hover, a.pintip-jck:hover , a.lightbulbtip-jck:hover, a.recycletip-jck:hover, a.cameratip-jck:hover, a.commenttip-jck:hover, a.chattip-jck:hover, a.documenttip-jck:hover, a.accessibletip-jck:hover, a.startip-jck:hover, a.hearttip-jck:hover, a.previoustip-jck:hover, a.carttip-jck:hover, a.attachmenttip-jck:hover, a.calculatortip-jck:hover, a.cuttip-jck:hover, a.dollartip-jck:hover, a.poundtip-jck:hover, a.eurotip-jck:hover, a.mailtip-jck:hover, a.supporttip-jck, a.nexttip-jck:hover, a.soundtip-jck:hover {\\r\\n    background-color: #F2F2F2 !important;\\r\\n\\t-webkit-transition: background-color 400ms ease-in-out;\\r\\n\\t-moz-transition: background-color 400ms ease-in-out;\\r\\n\\t-o-transition: background-color 400ms ease-in-out;\\r\\n\\ttransition: background-color 400ms ease-in-out;\\r\\n\\tbackground-repeat: no-repeat !important;\\r\\n}\\r\\n\\r\\n.flashtip-jck, .flashtip-jck:hover, a.flashtip-jck:hover { background-image: url(\\"flash.png\\")!important}\\r\\n.ziptip-jck, .ziptip-jck:hover, a.ziptip-jck:hover { background-image: url(\\"zip_download.png\\")!important}\\r\\n.pdftip-jck, .pdftip-jck:hover, a.pdftip-jck:hover { background-image: url(\\"pdf.png\\")!important}\\r\\n.videotip-jck , .videotip-jck:hover, a.videotip-jck:hover { background-image: url(\\"video_clip.png\\")!important}\\r\\n.infotip-jck, .infotip-jck:hover, a.infotip-jck:hover { background-image: url(\\"info.png\\")!important}\\r\\n.warningtip-jck, .warningtip-jck:hover, a.warningtip-jck:hover { background-image: url(\\"warning.png\\")!important}\\r\\n.filmtip-jck, .filmtip-jck:hover, a.filmtip-jck:hover { background-image: url(\\"film.png\\")!important}\\r\\n.pintip-jck, .pintip-jck:hover, a.pintip-jck:hover {background-image: url(\\"pin.png\\")!important}\\r\\n.lightbulbtip-jck, .lightbulbtip-jck:hover, a.lightbulbtip-jck:hover {background-image: url(\\"light_bulb.png\\")!important}\\r\\n.recycletip-jck, .recycletip-jck:hover, a.recycletip-jck:hover { background-image: url(\\"recycle.png\\")!important}\\r\\n.cameratip-jck, .cameratip-jck:hover, a.cameratip-jck:hover{ background-image: url(\\"camera.png\\")!important}\\r\\n.commenttip-jck, .commenttip-jck:hover, a.commenttip-jck:hover { background-image: url(\\"comment.png\\")!important}\\r\\n.chattip-jck, .chattip-jck:hover , a.chattip-jck:hover { background-image: url(\\"chat.png\\")!important}\\r\\n.documenttip-jck, .documenttip-jck:hover, a.documenttip-jck:hover { background-image: url(\\"document.png\\")!important}\\r\\n.accessibletip-jck, .accessibletip-jck:hover, a.accessibletip-jck:hover { background-image: url(\\"accessible.png\\")!important}\\r\\n.startip-jck, .startip-jck:hover , a.startip-jck:hover { background-image: url(\\"star.png\\")!important}\\r\\n.hearttip-jck, .hearttip-jck:hover, a.hearttip-jck:hover { background-image: url(\\"heart.png\\")!important}\\r\\n.previoustip-jck, .previoustip-jck:hover, a.previoustip-jck:hover { background-image: url(\\"previous.png\\")!important}\\r\\n.carttip-jck, .carttip-jck :hover, a.carttip-jck:hover { background-image: url(\\"cart.png\\")!important}\\r\\n.attachmenttip-jck, .attachmenttip-jck:hover, a.attachmenttip-jck:hover { background-image: url(\\"attachment.png\\")!important}\\r\\n.calculatortip-jck, .calculatortip-jck:hover , a.calculatortip-jck:hover { background-image: url(\\"calculator.png\\")!important}\\r\\n.cuttip-jck, .cuttip-jck:hover, a.cuttip-jck:hover { background-image: url(\\"cut.png\\")!important}\\r\\n.dollartip-jck , .dollartip-jck:hover, a.dollartip-jck:hover { background-image: url(\\"dollar_currency_sign.png\\")!important}\\r\\n.poundtip-jck, .poundtip-jck:hover, a.poundtip-jck:hover { background-image: url(\\"sterling_pound_currency_sign.png\\")!important}\\r\\n.eurotip-jck, .eurotip-jck:hover , a.eurotip-jck:hover { background-image: url(\\"euro_currency_sign.png\\")!important}\\r\\n.mailtip-jck, .mailtip-jck:hover , a.mailtip-jck:hover { background-image: url(\\"mail.png\\")!important}\\r\\n.supporttip-jck, .supporttip-jck:hover , a.supporttip-jck:hover { background-image: url(\\"support.png\\")!important}\\r\\n.nexttip-jck, .nexttip-jck:hover, a.nexttip-jck:hover { background-image: url(\\"next.png\\")!important}\\r\\n.soundtip-jck, .soundtip-jck:hover , a.soundtip-jck:hover { background-image: url(\\"sound.png\\")!important}\\r\\n\\r\\n\\r\\n\\r\\n \\/* Text Highlight\\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\nspan.blue_hlight-jck, span.gree_hlight-jck, span.red_hlight-jck, span.black_hlight-jck , span.yell_hlight-jck {\\r\\n    border-radius: 5px 5px 5px 5px;\\r\\n    color: #FFFFFF;\\r\\n    display: inline;\\r\\n    font-weight: bold;\\r\\n\\ttext-shadow: none;\\r\\n    padding: 2px 4px;\\r\\n\\tfont-size: 13px;\\r\\n}\\r\\n\\r\\nspan.blue_hlight-jck {  background: none repeat scroll 0 0 #3E6A86;}\\r\\nspan.gree_hlight-jck {  background: none repeat scroll 0 0 #b9cd96;}\\r\\nspan.red_hlight-jck {  background: none repeat scroll 0 0 #AA1428;}\\r\\nspan.black_hlight-jck {  background: none repeat scroll 0 0 #000000;}\\r\\nspan.yell_hlight-jck {  background: none repeat scroll 0 0 #F2F096; color: #544C4A;}\\r\\n \\r\\n\\/* Box Styles\\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\n.blubox-jck, .grebox-jck, .redbox-jck, .blabox-jck, .yelbox-jck   {\\r\\n\\tbackground: none repeat scroll 0 0 #FAFAFA;\\r\\n\\tborder-style: solid;\\r\\n    border-width: 1px 1px 1px 8px;\\r\\n\\tmargin: 10px 0 20px !important;\\r\\n    padding: 8px 8px 8px 20px !important;\\r\\n\\t-webkit-border-top-left-radius: 15px;\\r\\n    -webkit-border-bottom-left-radius: 15px;\\r\\n    -moz-border-radius-topleft: 15px;\\r\\n    -moz-border-radius-bottomleft: 15px;\\r\\n    border-top-left-radius: 15px;\\r\\n    border-bottom-left-radius: 15px;\\r\\n\\tcolor: #444444 !important;\\r\\n\\ttext-shadow: 1px 1px 1px #ffffff;\\r\\n}\\r\\n\\r\\n.blubox-jck  {  border-color: #DDDDDD #DDDDDD #DDDDDD #3E6A86;}\\r\\n.grebox-jck  {  border-color: #DDDDDD #DDDDDD #DDDDDD #b9cd96;}\\r\\n.redbox-jck {  border-color: #DDDDDD #DDDDDD #DDDDDD #AA1428;}\\r\\n.blabox-jck  {  border-color: #DDDDDD #DDDDDD #DDDDDD #000000;}\\r\\n.yelbox-jck  {  border-color: #DDDDDD #DDDDDD #DDDDDD #F2F096; color: #544C4A;}\\r\\n\\r\\n.blubox-jck > br,\\r\\n.grebox-jck  > br,\\r\\n.redbox-jck > br, \\r\\n.blabox-jck  > br, \\r\\n.yelbox-jck > br {\\r\\n    clear: both;\\r\\n}\\r\\n\\r\\n\\/* Icon Library\\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\n.info-jck, .warning-jck, .film-jck, .pin-jck , .lightbulb-jck , .recycle-jck , .camera-jck, .comment-jck, .chat-jck, .document-jck, .accessible-jck, .star-jck, .heart-jck, .previous-jck, .cart-jck, .attachment-jck, .calculator-jck, .cut-jck, .dollar-jck, .pound-jck , .euro-jck, .mail-jck, .support-jck, .next-jck, .sound-jck, .flash-jck, .zip-jck, .pdf-jck, .video-jck   {\\r\\n    display: block;\\r\\n    padding: 20px 0 20px 60px !important;\\r\\n\\tmargin-bottom: 20px !important;\\r\\n\\tbackground-color: transparent !important;\\r\\n    background-position: left center !important;\\r\\n    background-repeat: no-repeat !important;\\r\\n}\\r\\n\\r\\n.info-jck { background: url(\\"info.png\\")}\\r\\n.warning-jck { background: url(\\"warning.png\\")}\\r\\n.film-jck { background: url(\\"film.png\\")}\\r\\n.pin-jck {background: url(\\"pin.png\\")}\\r\\n.lightbulb-jck {background: url(\\"light_bulb.png\\")}\\r\\n.recycle-jck { background: url(\\"recycle.png\\")}\\r\\n.camera-jck { background: url(\\"camera.png\\")}\\r\\n.comment-jck { background: url(\\"comment.png\\")}\\r\\n.chat-jck  { background: url(\\"chat.png\\")}\\r\\n.document-jck { background: url(\\"document.png\\")}\\r\\n.accessible-jck { background: url(\\"accessible.png\\")}\\r\\n.star-jck { background: url(\\"star.png\\")}\\r\\n.heart-jck { background: url(\\"heart.png\\")}\\r\\n.previous-jck { background: url(\\"previous.png\\")}\\r\\n.cart-jck { background: url(\\"cart.png\\")}\\r\\n.attachment-jck { background: url(\\"attachment.png\\")}\\r\\n.calculator-jck { background: url(\\"calculator.png\\")}\\r\\n.cut-jck { background: url(\\"cut.png\\")}\\r\\n.dollar-jck { background: url(\\"dollar_currency_sign.png\\")}\\r\\n.pound-jck { background: url(\\"sterling_pound_currency_sign.png\\")}\\r\\n.euro-jck { background: url(\\"euro_currency_sign.png\\")}\\r\\n.mail-jck { background: url(\\"mail.png\\")}\\r\\n.support-jck { background: url(\\"support.png\\")}\\r\\n.next-jck  { background: url(\\"next.png\\")}\\r\\n.sound-jck  { background: url(\\"sound.png\\")}\\r\\n.flash-jck  { background: url(\\"flash.png\\")}\\r\\n.zip-jck  { background: url(\\"zip_download.png\\")}\\r\\n.pdf-jck  { background: url(\\"pdf.png\\")}\\r\\n.video-jck  { background: url(\\"video_clip.png\\")}\\r\\n\\r\\n\\/* Images Caption Styles\\r\\n-------------------------------------------------------------------------*\\/\\r\\nimg.caption { background-color:inherit; vertical-align: middle;}\\r\\n.img_caption.none { margin: 0 !important;} \\r\\n.img_caption { text-align: center; }\\r\\n\\r\\nimg.caption.photo, img.caption.photoblack, img.caption.photoblue, img.caption.photogreen, img.caption.photored, img.caption.photoyellow { \\r\\n    background-color: #FFFFFF;\\r\\n    padding: 10px 10px 40px;\\r\\n\\tmargin-right: 5px;\\r\\n\\tbox-shadow: 0 0 3px #000000;\\r\\n\\t-webkit-box-shadow: 0 0 3px #000000;\\r\\n    -moz-box-shadow: 0 0 3px #000000;\\r\\n}\\r\\n\\r\\nimg.caption.photo + p, img.caption.photoblack + p, img.caption.photoblue + p, img.caption.photogreen + p, img.caption.photored + p, img.caption.photoyellow + p {\\r\\n    position: relative; \\r\\n    left: 0px;\\r\\n    bottom: 30px;\\r\\n    overflow: hidden;\\r\\n    text-overflow: ellipsis;\\r\\n    white-space: nowrap;\\r\\n    width: 100%;\\r\\n\\tcolor: #333333;\\r\\n\\tmargin: 0;\\r\\n    font-size: 13px;\\r\\n    line-height: 18px;\\r\\n}\\r\\n\\r\\nimg.caption.photoblack + p , img.caption.photoblue + p, img.caption.photored + p { color: #FFFFFF; }\\r\\nimg.caption.photoblack { background-color: #000000;}\\r\\nimg.caption.photoblue {  background-color: #3E6A86;}\\r\\nimg.caption.photogreen  {  background-color: #b9cd96;}\\r\\nimg.caption.photored {  background-color: #AA1428;}\\r\\nimg.caption.photoyellow {  background-color: #F2F096;}\\r\\n\\r\\n\\/* Images Styles\\r\\n-------------------------------------------------------------------------*\\/\\r\\nimg.jck_img_align_left {\\r\\n    float: left; \\r\\n    margin: 3px 5px 0 0;\\r\\n    padding: 1px;\\r\\n}\\r\\n\\r\\nimg.jck_img_align_right {\\r\\n    float: right; \\r\\n    margin: 3px 0 0 5px;\\r\\n    padding: 1px;\\r\\n}\\r\\n\\r\\nimg.image_holder {\\r\\n    background: none repeat scroll 0 0 #FFFFFF;\\r\\n    border: 5px solid #EFEFEF;\\r\\n    margin: 3px 5px 0 0;\\r\\n    padding: 1px;\\r\\n}\\r\\n\\r\\nimg.fade_in {\\r\\n\\t-webkit-transition: all 500ms ease-in-out;\\r\\n\\t-moz-transition: all 500ms ease-in-out;\\r\\n\\t-o-transition: all 500ms ease-in-out;\\r\\n\\ttransition: all 500ms ease-in-out;\\r\\n\\t-webkit-box-shadow: 0 0 3px #000000;\\r\\n\\t-moz-box-shadow: 0 0 3px #000000;\\r\\n\\tbox-shadow: 0 0 3px #000000;\\r\\n\\tborder: 10px solid #FFFFFF;\\r\\n    opacity: 0.5;\\r\\n    overflow: hidden;\\r\\n    position: relative;\\r\\n\\tmargin: 3px;\\r\\n\\tcursor:url(cursor_zoom.png),auto;\\r\\n}\\r\\n\\r\\nimg.fade_in:hover {\\r\\n\\t-webkit-box-shadow: 0 0 10px #000000;\\r\\n\\t-moz-box-shadow: 0 0 10px #000000;\\r\\n\\tbox-shadow: 0 0 10px #000000;\\r\\n    opacity: 1;\\r\\n}\\r\\n\\r\\nimg.zoom  { \\r\\n\\t-webkit-transition: all 500ms ease-in-out;\\r\\n\\t-moz-transition: all 500ms ease-in-out;\\r\\n\\t-o-transition: all 500ms ease-in-out;\\r\\n\\ttransition: all 500ms ease-in-out;\\r\\n    background: none repeat scroll 0 0 #FFFFFF;\\r\\n\\t-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n\\t-moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n\\tbox-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n    color: #333333;\\r\\n    display: inline;\\r\\n    float: left;\\r\\n    font-size: 18px;\\r\\n    padding: 10px 10px 15px;\\r\\n    text-align: center;\\r\\n    text-decoration: none;\\r\\n    width: auto;\\r\\n\\tfont-family: serif;\\r\\n\\theight: 100px;\\r\\n\\twidth: auto;\\r\\n\\tmargin: 0 20px 27px 0px;\\r\\n\\tcursor:url(cursor_zoom.png),auto;\\r\\n}\\r\\n\\r\\nimg.zoom:hover {\\r\\n    -moz-transform: scale(1.75);\\r\\n\\t-webkit-transform: scale(1.75);\\r\\n\\t-o-transform: scale(1.75);\\r\\n\\t-webkit-transition: all 500ms ease-in-out;\\r\\n\\t-moz-transition: all 500ms ease-in-out;\\r\\n\\t-o-transition: all 500ms ease-in-out;\\r\\n\\ttransition: all 500ms ease-in-out;\\r\\n\\t-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);\\r\\n\\t-moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);\\r\\n\\tbox-shadow: 0 3px 6px rgba(0, 0, 0, 0.5); \\r\\n    position: relative;\\r\\n    z-index: 50;\\r\\n\\tmargin: 0 -60px 27px 80px;\\r\\n}\\r\\n\\r\\nimg.polaroids_zoom  {\\r\\n    -moz-transform: rotate(-2deg);\\r\\n\\t-webkit-transform: rotate(2deg); \\r\\n\\t-o-transform: rotate(2deg); \\r\\n\\t-webkit-transition: all 500ms ease-in-out;\\r\\n\\t-moz-transition: all 500ms ease-in-out;\\r\\n\\t-o-transition: all 500ms ease-in-out;\\r\\n\\ttransition: all 500ms ease-in-out;\\r\\n    background: none repeat scroll 0 0 #FFFFFF;\\r\\n\\t-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n\\t-moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n\\tbox-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n    color: #333333;\\r\\n    display: inline;\\r\\n    float: left;\\r\\n    font-size: 18px;\\r\\n    margin: 10px 20px 25px 14px;\\r\\n    padding: 10px 10px 15px;\\r\\n    text-align: center;\\r\\n    text-decoration: none;\\r\\n    width: auto;\\r\\n\\tfont-family: serif;\\r\\n\\theight: 100px;\\r\\n\\twidth: auto;\\r\\n\\tcursor:url(cursor_zoom.png),auto;\\r\\n}\\r\\n\\r\\nimg.polaroids_zoom:hover {\\r\\n    -moz-transform: scale(1.30);\\r\\n\\t-webkit-transform: scale(1.30);\\r\\n\\t-o-transform: scale(1.30);\\r\\n\\t-webkit-transition: all 500ms ease-in-out;\\r\\n\\t-moz-transition: all 500ms ease-in-out;\\r\\n\\t-o-transition: all 500ms ease-in-out;\\r\\n\\ttransition: all 500ms ease-in-out;\\r\\n\\t-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);\\r\\n\\t-moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);\\r\\n\\tbox-shadow: 0 3px 6px rgba(0, 0, 0, 0.5); \\r\\n    position: relative;\\r\\n    z-index: 50;\\r\\n}\\r\\n\\r\\nimg.screenshot_blue, img.screenshot_green , img.screenshot_red, img.screenshot_black, img.screenshot_gray, img.screenshot_yellow  {\\r\\n    margin: 5px 0;\\r\\n    padding: 10px;\\r\\n\\tbackground: #ffffff;\\r\\n\\tbackground: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);\\r\\n\\tbackground: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5));\\r\\n\\tbackground: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tfilter: progid:DXImageTransform.Microsoft.gradient( startColorstr=''#ffffff'', endColorstr=''#e5e5e5'',GradientType=0 );\\r\\n\\topacity: 1;\\r\\n\\tmax-width: 85%;\\r\\n}\\r\\n\\r\\nimg.screenshot_blue { border: 10px solid #3E6A86;}\\r\\nimg.screenshot_green  { border: 10px solid #b9cd96;}\\r\\nimg.screenshot_red  { border: 10px solid #AA1428;}\\r\\nimg.screenshot_black  { border: 10px solid #000000;}\\r\\nimg.screenshot_gray { border: 10px solid #F0F0F0;}\\r\\nimg.screenshot_yellow { border: 10px solid #EFDE2C;}\\r\\n\\r\\n \\/* Div Styles\\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\ndiv.scroll_box{\\r\\n    margin: 5px 0;\\r\\n    padding: 10px;\\r\\n\\tbackground: #ffffff;\\r\\n\\tbackground: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);\\r\\n\\tbackground: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5));\\r\\n\\tbackground: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tfilter: progid:DXImageTransform.Microsoft.gradient( startColorstr=''#ffffff'', endColorstr=''#e5e5e5'',GradientType=0 );\\r\\n\\topacity: 1;\\r\\n\\tborder-left: 15px solid ##EDEDED;\\r\\n    border-top: 15px solid #EDEDED;\\r\\n    height: 300px;\\r\\n    overflow: scroll;\\r\\n\\t-webkit-box-shadow: 0 0 1px 1px #E3E3E3 inset, 0 0 1px 2px #FFFFFF inset, 0 0 0 1px #E3E3E3;\\r\\n\\tbox-shadow: 0 0 1px 1px #E3E3E3 inset, 0 0 1px 2px #FFFFFF inset, 0 0 0 1px #E3E3E3; \\r\\n}\\r\\n\\r\\ndiv.img_rollover { background-color: transparent; \\/* max-width: 0;  = set the the width of your rollover images*\\/ }\\r\\ndiv.img_rollover img:first-child { display: block; }\\r\\ndiv.img_rollover img:last-child { display: none; }\\r\\ndiv.img_rollover:hover img:first-child { display: none; }\\r\\ndiv.img_rollover:hover img:last-child { display:block; cursor: pointer; }\\r\\n\\r\\n\\/* Tables Styles\\r\\n-------------------------------------------------------------------------*\\/\\r\\ntable.table_style_blue, table.table_style_green, table.table_style_red, table.table_style_black, table.table_style_yellow  {\\r\\n    border: 1px solid #DDDDDD;\\r\\n    border-collapse: collapse;\\r\\n    color: #404040;\\r\\n    width: 100%;\\r\\n}\\r\\n\\r\\ntable.table_style_blue tbody tr, table.table_style_green tbody tr, table.table_style_red tbody tr, table.table_style_black tbody tr, table.table_style_yellow tbody tr  {\\r\\n    background: none repeat scroll 0 0 #F2F2F2;\\r\\n\\tborder: 1px solid #DDDDDD;\\r\\n\\t-webkit-transition: all 800ms ease-in-out;\\r\\n\\t-moz-transition: all 800ms ease-in-out;\\r\\n\\t-o-transition: all 800ms ease-in-out;\\r\\n\\ttransition: all 800ms ease-in-out;\\r\\n}\\r\\n\\r\\ntable.table_style_blue tbody tr:hover , table.table_style_green tbody tr:hover, table.table_style_red tbody tr:hover, table.table_style_black tbody tr:hover, table.table_style_yellow tbody tr:hover  {\\r\\n    background: none repeat scroll 0 0 #E5E5E5;\\r\\n\\t-webkit-transition: all 300ms ease-in-out;\\r\\n\\t-moz-transition: all 300ms ease-in-out;\\r\\n\\t-o-transition: all 300ms ease-in-out;\\r\\n\\ttransition: all 300ms ease-in-out;\\r\\n}\\r\\n\\r\\ntable.table_style_blue tbody tr td, table.table_style_green tbody tr td, table.table_style_red tbody tr td, table.table_style_black tbody tr td, table.table_style_yellow tbody tr td {\\r\\n    line-height: 22px;\\r\\n\\tpadding: 5px;\\r\\n\\tborder: 1px solid #DDDDDD;\\r\\n}\\r\\n\\r\\ntable.table_style_blue caption, table.table_style_green caption, table.table_style_red caption, table.table_style_black caption, table.table_style_yellow caption  {\\r\\n    color: #FFFFFF;\\r\\n    font-weight: 700;\\r\\n    line-height: 22px;\\r\\n    text-align: center;\\r\\n    text-transform: uppercase;\\r\\n}\\r\\n\\r\\ntable.table_style_blue caption { background: none repeat scroll 0 0 #3E6A86;}\\r\\ntable.table_style_green caption { background: none repeat scroll 0 0 #b9cd96;}\\r\\ntable.table_style_red caption { background: none repeat scroll 0 0 #AA1428;}\\r\\ntable.table_style_black caption { background: none repeat scroll 0 0 #000000;}\\r\\ntable.table_style_yellow caption { background: none repeat scroll 0 0 #F2F096; color: #544C4A;}\\r\\n\\r\\n\\/* Templates\\r\\n-------------------------------------------------------------------------*\\/\\r\\n.row-fluid { width: 100%; }\\r\\n.row-fluid:after { clear: both; }\\r\\n.row-fluid [class*=\\"span\\"]:first-child {  margin-left: 0; }\\r\\n.row-fluid .controls-row [class*=\\"span\\"] + [class*=\\"span\\"] { margin-left: 2.12766%; }\\r\\n.row-fluid .span6 { width: 48.9362%; }\\r\\n.row-fluid:before, .row-fluid:after {\\r\\n    content: \\"\\";\\r\\n    display: table;\\r\\n    line-height: 0;\\r\\n}\\r\\n.row-fluid [class*=\\"span\\"] {\\r\\n    -moz-box-sizing: border-box;\\r\\n    display: block;\\r\\n    float: left;\\r\\n    margin-left: 2.12766%;\\r\\n    min-height: 30px;\\r\\n    width: 100%;\\r\\n}\\r\\n\\r\\n\\/* 1 big button template *\\/\\r\\na.button-big {\\r\\n\\t-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;\\r\\n\\t-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;\\r\\n\\tbox-shadow:inset 0px 1px 0px 0px #ffffff;\\r\\n\\tbackground:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );\\r\\n\\tbackground:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );\\r\\n\\tfilter:progid:DXImageTransform.Microsoft.gradient(startColorstr=''#ededed'', endColorstr=''#dfdfdf'');\\r\\n\\tbackground-color:#ededed;\\r\\n\\t-webkit-border-top-left-radius:6px;\\r\\n\\t-moz-border-radius-topleft:6px;\\r\\n\\tborder-top-left-radius:6px;\\r\\n\\t-webkit-border-top-right-radius:6px;\\r\\n\\t-moz-border-radius-topright:6px;\\r\\n\\tborder-top-right-radius:6px;\\r\\n\\t-webkit-border-bottom-right-radius:6px;\\r\\n\\t-moz-border-radius-bottomright:6px;\\r\\n\\tborder-bottom-right-radius:6px;\\r\\n\\t-webkit-border-bottom-left-radius:6px;\\r\\n\\t-moz-border-radius-bottomleft:6px;\\r\\n\\tborder-bottom-left-radius:6px;\\r\\n\\ttext-indent:0;\\r\\n\\tborder:1px solid #dcdcdc;\\r\\n\\tdisplay:inline-block;\\r\\n\\tcolor:#777777;\\r\\n\\tfont-family:sans-serif;\\r\\n\\tfont-size:18px;\\r\\n\\tfont-weight:bold;\\r\\n\\tfont-style:normal;\\r\\n\\tpadding: 10% 15%;\\r\\n\\ttext-decoration:none;\\r\\n\\ttext-align:center;\\r\\n\\ttext-shadow:1px 1px 0px #ffffff;\\r\\n\\ttext-transform: uppercase;\\r\\n\\tmargin: 10px 0;\\r\\n}\\r\\na.button-big:hover {\\r\\n\\tbackground:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );\\r\\n\\tbackground:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );\\r\\n\\tfilter:progid:DXImageTransform.Microsoft.gradient(startColorstr=''#dfdfdf'', endColorstr=''#ededed'');\\r\\n\\tbackground-color:#dfdfdf;\\r\\n}\\r\\na.button-big:active {\\r\\n\\tposition:relative;\\r\\n\\ttop:1px;\\r\\n}\\r\\n\\/* 2 big button with desc *\\/\\r\\n.row-fluid .span6 {  width: 48.9362%; }\\r\\n\\/* 3 big button with desc *\\/\\r\\n.row-fluid .span4 { width: 31.9149%; }\\r\\n\\r\\n\\/* User Profiles *\\/\\r\\ndiv.row-fluid img.polaroids_zoom {\\r\\n\\theight: auto !important;\\r\\n\\tmax-width: 120px;\\r\\n}\\r\\n\\/* Other\\r\\n-------------------------------------------------------------------------*\\/\\r\\n\\/*Responsive media embed*\\/\\r\\nbody div.media_embed {\\r\\n\\tposition: relative; \\r\\n\\tpadding-bottom: 56.25%; \\r\\n\\tpadding-top: 30px; \\r\\n\\theight: 0; \\r\\n\\toverflow: hidden; \\r\\n\\tmax-width: 100%; \\r\\n\\theight: auto; \\r\\n\\tmargin-top:15px;\\r\\n} \\r\\nbody div.media_embed iframe, body div.media_embed object, body div.media_embed embed {\\r\\n\\tposition: absolute; top: 0; \\r\\n\\tleft: 0; \\r\\n\\twidth: 100%; \\r\\n\\theight: 100%; \\r\\n}\\r\\n\\r\\n\\/*Fixes*\\/\\r\\nbody.cke_ltr div.cke_panel_block div.scroll_box { height: 25px !important;} \\/* Minimises the height in the style preview list *\\/\\r\\nbody.cke_ltr div.cke_panel_block { color: #000000; } \\/* Stops templates setting the style list text to white *\\/","autolaunchFilebrowser":"1","minify":"1","magicline_enabled":"1"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(823, 'System - JCK Modal', 'plugin', 'jckmodal', 'system', 0, 0, 1, 0, '{"name":"System - JCK Modal","type":"plugin","creationDate":"April 2011","author":"WebxSolution Ltd","copyright":"Copyright 2011 WebxSolution Ltd. All rights reserved.","authorEmail":"studio@webxsolution.com","authorUrl":"www.webxsolution.com","version":"1.1","description":"Forces Joomla to initialise the Modal JS classes required by JTree Link''s modal option.","group":"","filename":"jckmodal"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(824, 'com_jckman', 'component', 'com_jckman', '', 1, 1, 0, 0, '{"name":"com_jckman","type":"component","creationDate":"Jan 2015","author":"Andrew Williams","copyright":"2013 - 2015 WebxSolutions Ltd","authorEmail":"","authorUrl":"","version":"6.4.4","description":" \\n\\t<p>JoomlaCK Editor Manager v6.4<\\/p> \\n\\t","group":""}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(825, 'JCK Suite', 'package', 'pkg_jcksuite', '', 0, 1, 1, 0, '{"name":"JCK Suite","type":"package","creationDate":"Nov 2014","author":"Andrew Williams","copyright":"","authorEmail":"","authorUrl":"","version":"6.6.2","description":"PLG_JCK_SUITE_XML_DESC","group":"","filename":"pkg_jcksuite"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(826, 'System - JCK Typography', 'plugin', 'jcktypography', 'system', 0, 1, 1, 0, 'false', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(827, 'AIT Combos', 'module', 'mod_combos', '', 0, 1, 0, 0, '{"name":"AIT Combos","type":"module","creationDate":"May 2017","author":"TuanAnhTran","copyright":"Copyright (c) 2017 AIT. All rights reserved.","authorEmail":"","authorUrl":"","version":"1.0.0","description":"\\n\\t\\n\\t\\n\\t\\n\\t","group":"","filename":"mod_combos"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1245,6 +1267,266 @@ CREATE TABLE IF NOT EXISTS `fv5oz_finder_types` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `fv5oz_jcklanguages`
+--
+
+CREATE TABLE IF NOT EXISTS `fv5oz_jcklanguages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tag` varchar(5) DEFAULT NULL,
+  `filename` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fv5oz_jckplugins`
+--
+
+CREATE TABLE IF NOT EXISTS `fv5oz_jckplugins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL DEFAULT '',
+  `name` varchar(100) NOT NULL,
+  `type` varchar(100) NOT NULL DEFAULT 'command',
+  `row` tinyint(4) NOT NULL DEFAULT '0',
+  `icon` varchar(255) NOT NULL DEFAULT '',
+  `published` tinyint(3) NOT NULL DEFAULT '0',
+  `editable` tinyint(3) NOT NULL DEFAULT '0',
+  `checked_out` int(11) NOT NULL DEFAULT '0',
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `iscore` tinyint(3) NOT NULL DEFAULT '0',
+  `acl` text,
+  `params` text NOT NULL,
+  `parentid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `plugin` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=102 ;
+
+--
+-- Dumping data for table `fv5oz_jckplugins`
+--
+
+INSERT INTO `fv5oz_jckplugins` (`id`, `title`, `name`, `type`, `row`, `icon`, `published`, `editable`, `checked_out`, `checked_out_time`, `iscore`, `acl`, `params`, `parentid`) VALUES
+(1, 'Scayt', 'scayt', 'plugin', 1, '-192', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 82),
+(2, '', 'sourcearea', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(3, 'Source', 'source', 'command', 1, '0', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 2),
+(4, 'Preview', 'preview', 'plugin', 1, '-64', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(5, 'Cut', 'cut', 'command', 1, '-96', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 60),
+(6, 'Copy', 'copy', 'command', 1, '-112', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 60),
+(7, 'Paste', 'paste', 'command', 1, '-128', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 60),
+(8, 'PasteText', 'pastetext', 'plugin', 1, '-144', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(9, 'Find', 'find', 'plugin', 1, '-240', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(10, 'Replace', 'replace', 'command', 1, '-256', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 9),
+(11, 'SelectAll', 'selectall', 'command', 1, '-272', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 61),
+(12, 'RemoveFormat', 'removeformat', 'plugin', 1, '-288', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(13, 'Bold', 'bold', 'command', 2, '-304', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 58),
+(14, 'Italic', 'italic', 'command', 2, '-320', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 58),
+(15, 'Strike', 'strike', 'command', 2, '-352', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 58),
+(16, 'Subscript', 'subscript', 'command', 2, '-368', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 58),
+(17, 'Superscript', 'superscript', 'command', 2, '-384', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 58),
+(18, 'Underline', 'underline', 'command', 2, '-336', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 58),
+(19, 'Smiley', 'smiley', 'plugin', 2, '-640', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(20, 'Link', 'link', 'plugin', 2, '-528', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(21, 'Image', 'image', 'plugin', 2, '-576', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(22, 'Flash', 'flash', 'plugin', 2, '-592', 0, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(23, 'SpecialChar', 'specialchar', 'plugin', 2, '-656', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(24, 'PageBreak', 'pagebreak', 'plugin', 2, '-672', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(25, 'SpellChecker', 'checkspell', 'command', 1, '-192', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 82),
+(26, '', 'tableresize', 'plugin', 2, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 82),
+(27, '', 'tabletools', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 82),
+(28, 'TextColor', 'textcolor', 'command', 3, '-704', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 62),
+(29, 'BGColor', 'bgcolor', 'command', 3, '-720', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 62),
+(30, 'Form', 'form', 'command', 1, '-752', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 75),
+(31, 'Radio', 'radio', 'command', 1, '-784', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 75),
+(32, 'TextField', 'textfield', 'command', 1, '-800', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 75),
+(33, 'Textarea', 'textarea', 'command', 1, '-816', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 75),
+(34, 'ShowBlocks', 'showblocks', 'plugin', 3, '-1136', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(35, 'Select', 'select', 'command', 1, '-832', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 75),
+(36, 'ImageButton', 'imagebutton', 'command', 1, '-864', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 75),
+(37, 'HiddenField', 'hiddenfield', 'command', 1, '-880', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 75),
+(38, 'Checkbox', 'checkbox', 'command', 1, '-768', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 75),
+(39, 'Button', 'button', 'command', 1, '-848', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 75),
+(40, 'NumberedList', 'numberedlist', 'command', 2, '-400', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 90),
+(41, 'BulletedList', 'bulletedlist', 'command', 2, '-416', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 90),
+(42, 'Indent', 'indent', 'plugin', 2, '-448', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(43, 'Outdent', 'outdent', 'command', 2, '-432', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 42),
+(44, 'JustifyLeft', 'justifyleft', 'command', 2, '-464', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 55),
+(45, 'JustifyCenter', 'justifycenter', 'command', 2, '-480', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 55),
+(46, 'JustifyBlock', 'justifyblock', 'command', 2, '-512', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 55),
+(47, 'JustifyRight', 'justifyright', 'command', 2, '-496', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 55),
+(48, 'Blockquote', 'blockquote', 'plugin', 2, '-1152', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(49, 'About', 'about', 'plugin', 3, '-736', 0, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(50, 'Maximize', 'maximize', 'plugin', 3, '-1040', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(51, '', 'div', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(52, 'CreateDiv', 'creatediv', 'command', 2, '-1168', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 51),
+(53, '', 'editdiv', 'command', 0, '-1184', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 51),
+(54, '', 'removediv', 'command', 0, '-1200', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 51),
+(55, '', 'justify', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(56, '', 'a11yhelp', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(57, '', 'autogrow', 'plugin', 0, '', 0, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(58, '', 'basicstyles', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(59, 'Table', 'table', 'plugin', 2, '-608', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(60, '', 'clipboard', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(61, '', 'selection', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(62, '', 'colorbutton', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(63, 'Unlink', 'unlink', 'command', 2, '-544', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 20),
+(64, 'Anchor', 'anchor', 'command', 2, '-560', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 20),
+(65, '', 'contextmenu', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(66, '', 'editingblock', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(67, '', 'elementspath', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(68, '', 'enterkey', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(69, '', 'entities', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(70, '', 'toolbar', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(71, '', 'jfilebrowser', 'filebrowser', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(72, 'Styles', 'stylescombo', 'plugin', 3, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(73, 'Font', 'font', 'plugin', 3, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(74, 'Format', 'format', 'plugin', 3, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(75, '', 'forms', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(76, 'About', 'jabout', 'plugin', 3, '-736', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(77, 'Flash', 'jflash', 'plugin', 2, '-592', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(78, 'Save', 'jsave', 'plugin', 1, '-32', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(79, 'JTreeLink', 'jtreelink', 'plugin', 2, 'images/jtreelink.png', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(80, 'HorizontalRule', 'horizontalrule', 'plugin', 2, '-624', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(81, 'Print', 'print', 'plugin', 1, '-176', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(82, '', 'wsc', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(83, '', 'showborders', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(84, '', 'tab', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(85, 'Undo', 'undo', 'plugin', 1, '-208', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(86, 'Redo', 'redo', 'command', 1, '-224', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 86),
+(87, '', 'resize', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(88, 'Templates', 'templates', 'plugin', 1, '-80', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(89, '', 'wysiwygarea', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(90, '', 'list', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(92, 'FontSize', 'fontsize', 'command', 3, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 73),
+(93, 'PasteFromWord', 'pastefromword', 'plugin', 1, '-160', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(94, 'Mobileimage', 'mobileimage', 'plugin', 1, 'icon.png', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(95, '', 'html5support', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(96, 'Video', 'video', 'plugin', 3, 'images/icon.png', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 95),
+(97, 'Audio', 'audio', 'plugin', 3, 'images/icon.png', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', 95),
+(98, 'UIColor', 'uicolor', 'plugin', 3, 'uicolor.gif', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(99, '', 'imagedragndrop', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL),
+(100, '', 'ie9selectionoverride', 'plugin', 0, '', 1, 1, 0, '0000-00-00 00:00:00', 1, NULL, '', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fv5oz_jcktoolbarplugins`
+--
+
+CREATE TABLE IF NOT EXISTS `fv5oz_jcktoolbarplugins` (
+  `toolbarid` int(11) NOT NULL,
+  `pluginid` int(11) NOT NULL,
+  `row` int(11) NOT NULL DEFAULT '0',
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  `state` tinyint(3) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`toolbarid`,`pluginid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fv5oz_jcktoolbarplugins`
+--
+
+INSERT INTO `fv5oz_jcktoolbarplugins` (`toolbarid`, `pluginid`, `row`, `ordering`, `state`) VALUES
+(1, 1, 2, 10, 1),
+(1, 3, 1, 1, 1),
+(1, 4, 12, 2, 1),
+(1, 5, 2, 1, 1),
+(1, 6, 2, 2, 1),
+(1, 7, 2, 3, 1),
+(1, 8, 2, 4, 1),
+(1, 9, 3, 5, 1),
+(1, 10, 3, 6, 1),
+(1, 11, 2, 6, 1),
+(1, 12, 3, 3, 1),
+(1, 13, 4, 1, 1),
+(1, 14, 4, 2, 1),
+(1, 15, 4, 4, 1),
+(1, 16, 4, 6, 1),
+(1, 17, 4, 7, 1),
+(1, 18, 4, 3, 1),
+(1, 19, 9, 6, 1),
+(1, 20, 8, 2, 1),
+(1, 21, 9, 1, 1),
+(1, 23, 4, 9, 1),
+(1, 25, 2, 9, 1),
+(1, 28, 11, 3, 1),
+(1, 29, 11, 4, 1),
+(1, 30, 5, 1, 1),
+(1, 31, 5, 3, 1),
+(1, 32, 5, 4, 1),
+(1, 33, 5, 5, 1),
+(1, 34, 10, 4, 1),
+(1, 35, 5, 6, 1),
+(1, 36, 5, 8, 1),
+(1, 37, 5, 9, 1),
+(1, 38, 5, 2, 1),
+(1, 39, 5, 7, 1),
+(1, 40, 6, 1, 1),
+(1, 41, 6, 2, 1),
+(1, 42, 6, 5, 1),
+(1, 43, 6, 4, 1),
+(1, 44, 7, 1, 1),
+(1, 45, 7, 2, 1),
+(1, 46, 7, 4, 1),
+(1, 47, 7, 3, 1),
+(1, 48, 4, 8, 1),
+(1, 50, 12, 1, 1),
+(1, 52, 10, 3, 1),
+(1, 59, 9, 4, 1),
+(1, 63, 8, 3, 1),
+(1, 64, 8, 4, 1),
+(1, 72, 10, 1, 1),
+(1, 73, 11, 1, 1),
+(1, 74, 10, 2, 1),
+(1, 76, 12, 4, 1),
+(1, 77, 9, 2, 1),
+(1, 78, 1, 2, 1),
+(1, 79, 8, 1, 1),
+(1, 80, 9, 5, 1),
+(1, 81, 2, 8, 1),
+(1, 85, 3, 1, 1),
+(1, 86, 3, 2, 1),
+(1, 88, 9, 3, 1),
+(1, 92, 11, 2, 1),
+(1, 93, 2, 5, 1),
+(1, 96, 12, 5, 1),
+(1, 97, 12, 6, 1),
+(1, 98, 12, 7, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fv5oz_jcktoolbars`
+--
+
+CREATE TABLE IF NOT EXISTS `fv5oz_jcktoolbars` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL DEFAULT '',
+  `name` varchar(100) NOT NULL,
+  `published` tinyint(3) NOT NULL DEFAULT '0',
+  `checked_out` int(11) NOT NULL DEFAULT '0',
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `iscore` tinyint(3) NOT NULL DEFAULT '0',
+  `params` text NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `toolbar` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `fv5oz_jcktoolbars`
+--
+
+INSERT INTO `fv5oz_jcktoolbars` (`id`, `title`, `name`, `published`, `checked_out`, `checked_out_time`, `iscore`, `params`) VALUES
+(1, 'Full', 'full', 1, 0, '0000-00-00 00:00:00', 1, ''),
+(2, 'Publisher', 'publisher', 1, 0, '0000-00-00 00:00:00', 1, ''),
+(3, 'Basic', 'basic', 1, 0, '0000-00-00 00:00:00', 1, ''),
+(4, 'Blog', 'blog', 1, 0, '0000-00-00 00:00:00', 1, ''),
+(5, 'Image', 'image', 1, 0, '0000-00-00 00:00:00', 1, ''),
+(6, 'Mobile', 'mobile', 1, 0, '0000-00-00 00:00:00', 1, '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `fv5oz_languages`
 --
 
@@ -1370,14 +1652,14 @@ CREATE TABLE IF NOT EXISTS `fv5oz_menu` (
   KEY `idx_alias` (`alias`(100)),
   KEY `idx_path` (`path`(100)),
   KEY `idx_language` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=139 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=147 ;
 
 --
 -- Dumping data for table `fv5oz_menu`
 --
 
 INSERT INTO `fv5oz_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `link`, `type`, `published`, `parent_id`, `level`, `component_id`, `checked_out`, `checked_out_time`, `browserNav`, `access`, `img`, `template_style_id`, `params`, `lft`, `rgt`, `home`, `language`, `client_id`) VALUES
-(1, '', 'Menu_Item_Root', 'root', '', '', '', '', 1, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', 0, 73, 0, '*', 0),
+(1, '', 'Menu_Item_Root', 'root', '', '', '', '', 1, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', 0, 89, 0, '*', 0),
 (2, 'menu', 'com_banners', 'Banners', '', 'Banners', 'index.php?option=com_banners', 'component', 0, 1, 1, 4, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners', 0, '', 1, 10, 0, '*', 1),
 (3, 'menu', 'com_banners', 'Banners', '', 'Banners/Banners', 'index.php?option=com_banners', 'component', 0, 2, 2, 4, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners', 0, '', 2, 3, 0, '*', 1),
 (4, 'menu', 'com_banners_categories', 'Categories', '', 'Banners/Categories', 'index.php?option=com_categories&extension=com_banners', 'component', 0, 2, 2, 6, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners-cat', 0, '', 4, 5, 0, '*', 1),
@@ -1397,7 +1679,7 @@ INSERT INTO `fv5oz_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `l
 (19, 'menu', 'com_joomlaupdate', 'Joomla! Update', '', 'Joomla! Update', 'index.php?option=com_joomlaupdate', 'component', 1, 1, 1, 28, 0, '0000-00-00 00:00:00', 0, 0, 'class:joomlaupdate', 0, '', 33, 34, 0, '*', 1),
 (20, 'main', 'com_tags', 'Tags', '', 'Tags', 'index.php?option=com_tags', 'component', 0, 1, 1, 29, 0, '0000-00-00 00:00:00', 0, 1, 'class:tags', 0, '', 35, 36, 0, '', 1),
 (21, 'main', 'com_postinstall', 'Post-installation messages', '', 'Post-installation messages', 'index.php?option=com_postinstall', 'component', 0, 1, 1, 32, 0, '0000-00-00 00:00:00', 0, 1, 'class:postinstall', 0, '', 37, 38, 0, '*', 1),
-(101, 'mainmenu', 'Home', 'home', '', 'home', 'index.php?option=com_content&view=featured', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"featured_categories":[""],"layout_type":"blog","num_leading_articles":"1","num_intro_articles":"3","num_columns":"3","num_links":"0","multi_column_order":"1","orderby_pri":"","orderby_sec":"front","order_date":"","show_pagination":"2","show_pagination_results":"1","show_title":"","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_readmore":"","show_readmore_title":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_noauth":"","show_feed_link":"1","feed_summary":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":1,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 39, 40, 1, '*', 0),
+(101, 'mainmenu', 'Home', 'home', '', 'home', 'index.php?option=com_content&view=featured', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{"featured_categories":[""],"layout_type":"blog","num_leading_articles":"1","num_intro_articles":"3","num_columns":"3","num_links":"0","multi_column_order":"1","orderby_pri":"","orderby_sec":"front","order_date":"","show_pagination":"2","show_pagination_results":"1","show_title":"","link_titles":"","show_intro":"","info_block_position":"","info_block_show_title":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_readmore":"","show_readmore_title":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_tags":"","show_noauth":"","show_feed_link":"1","feed_summary":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"menu_show":1,"page_title":"","show_page_heading":"0","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 39, 40, 1, '*', 0),
 (110, 'main', 'COM_SERVICESS', 'com-servicess', '', 'com-servicess', 'index.php?option=com_servicess', 'component', 0, 1, 1, 807, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_servicess/images/s_com_servicess.png', 0, '{}', 41, 44, 0, '', 1),
 (111, 'main', 'COM_SERVICESS_TITLE_SERVICESS', 'com-servicess-title-servicess', '', 'com-servicess/com-servicess-title-servicess', 'index.php?option=com_servicess&view=servicess', 'component', 0, 110, 2, 807, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_servicess/images/s_servicess.png', 0, '{}', 42, 43, 0, '', 1),
 (114, 'main', 'COM_COMBOS', 'com-combos', '', 'com-combos', 'index.php?option=com_combos', 'component', 0, 1, 1, 809, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_combos/images/s_com_combos.png', 0, '{}', 45, 48, 0, '', 1),
@@ -1413,7 +1695,15 @@ INSERT INTO `fv5oz_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `l
 (126, 'main', 'COM_ORDERLOGBOOK_TITLE_ORDERLOGBOOKS', 'com-orderlogbook-title-orderlogbooks', '', 'com-orderlogbook/com-orderlogbook-title-orderlogbooks', 'index.php?option=com_orderlogbook&view=orderlogbooks', 'component', 0, 125, 2, 814, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_orderlogbook/images/s_orderlogbooks.png', 0, '{}', 64, 65, 0, '', 1),
 (135, 'main', 'COM_LOCATION', 'com-location', '', 'com-location', 'index.php?option=com_location', 'component', 0, 1, 1, 817, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_location/images/s_com_location.png', 0, '{}', 67, 70, 0, '', 1),
 (136, 'main', 'COM_LOCATION_TITLE_LOCATIONS', 'com-location-title-locations', '', 'com-location/com-location-title-locations', 'index.php?option=com_location&view=locations', 'component', 0, 135, 2, 817, 0, '0000-00-00 00:00:00', 0, 1, 'media/com_location/images/s_locations.png', 0, '{}', 68, 69, 0, '', 1),
-(137, 'mainmenu', 'Get Started', 'get-started', '', 'get-started', 'index.php?option=com_users&view=registration', 'component', 1, 1, 1, 25, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"menu_show":1,"page_title":"","show_page_heading":"1","page_heading":"Get Started","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 71, 72, 0, '*', 0);
+(137, 'mainmenu', 'Get Started', 'get-started', '', 'get-started', 'index.php?option=com_users&view=registration', 'component', 1, 1, 1, 25, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"menu_show":1,"page_title":"","show_page_heading":"1","page_heading":"Get Started","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 71, 72, 0, '*', 0),
+(139, 'main', 'COM_JCKMAN_MENU_NAME', 'com-jckman-menu-name', '', 'com-jckman-menu-name', 'index.php?option=com_jckman', 'component', 0, 1, 1, 824, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jckman/icons/jcklogo.png', 0, '{}', 73, 88, 0, '', 1),
+(140, 'main', 'COM_JCKMAN_SUBMENU_CPANEL_NAME', 'com-jckman-submenu-cpanel-name', '', 'com-jckman-menu-name/com-jckman-submenu-cpanel-name', 'index.php?option=com_jckman&view=cpanel', 'component', 0, 139, 2, 824, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jckman/icons/icon-16-cpanel.png', 0, '{}', 74, 75, 0, '', 1),
+(141, 'main', 'COM_JCKMAN_SUBMENU_PLUGIN_NAME', 'com-jckman-submenu-plugin-name', '', 'com-jckman-menu-name/com-jckman-submenu-plugin-name', 'index.php?option=com_jckman&view=list', 'component', 0, 139, 2, 824, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jckman/icons/icon-16-pluginmanager.png', 0, '{}', 76, 77, 0, '', 1),
+(142, 'main', 'COM_JCKMAN_SUBMENU_INSTALL_NAME', 'com-jckman-submenu-install-name', '', 'com-jckman-menu-name/com-jckman-submenu-install-name', 'index.php?option=com_jckman&view=install', 'component', 0, 139, 2, 824, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jckman/icons/icon-16-installer.png', 0, '{}', 78, 79, 0, '', 1),
+(143, 'main', 'COM_JCKMAN_SUBMENU_UNINSTALL_NAME', 'com-jckman-submenu-uninstall-name', '', 'com-jckman-menu-name/com-jckman-submenu-uninstall-name', 'index.php?option=com_jckman&view=extension', 'component', 0, 139, 2, 824, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jckman/icons/icon-16-uninstaller.png', 0, '{}', 80, 81, 0, '', 1),
+(144, 'main', 'COM_JCKMAN_SUBMENU_SYSTEMCHECK_NAME', 'com-jckman-submenu-systemcheck-name', '', 'com-jckman-menu-name/com-jckman-submenu-systemcheck-name', 'index.php?option=com_jckman&view=cpanel&taskbtn=system', 'component', 0, 139, 2, 824, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jckman/icons/icon-16-systemcheck.png', 0, '{}', 82, 83, 0, '', 1),
+(145, 'main', 'COM_JCKMAN_SUBMENU_SYNC_NAME', 'com-jckman-submenu-sync-name', '', 'com-jckman-menu-name/com-jckman-submenu-sync-name', 'index.php?option=com_jckman&view=cpanel&taskbtn=sync', 'component', 0, 139, 2, 824, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jckman/icons/icon-16-sync.png', 0, '{}', 84, 85, 0, '', 1),
+(146, 'main', 'COM_JCKMAN_SUBMENU_JCKEDITOR_NAME', 'com-jckman-submenu-jckeditor-name', '', 'com-jckman-menu-name/com-jckman-submenu-jckeditor-name', 'index.php?option=com_jckman&view=cpanel&taskbtn=editor', 'component', 0, 139, 2, 824, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jckman/icons/icon-16-editor.png', 0, '{}', 86, 87, 0, '', 1);
 
 -- --------------------------------------------------------
 
@@ -1464,12 +1754,6 @@ CREATE TABLE IF NOT EXISTS `fv5oz_messages` (
 --
 
 INSERT INTO `fv5oz_messages` (`message_id`, `user_id_from`, `user_id_to`, `folder_id`, `date_time`, `state`, `priority`, `subject`, `message`) VALUES
-(1, 0, 0, 0, '2017-05-04 02:00:03', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: dfd'),
-(2, 0, 0, 0, '2017-05-04 22:08:38', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: fdsa'),
-(3, 0, 0, 0, '2017-05-04 22:18:41', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: testetestsert'),
-(4, 0, 0, 0, '2017-05-04 22:22:36', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: testetestsert'),
-(5, 0, 0, 0, '2017-05-04 22:25:22', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: sss'),
-(6, 0, 0, 0, '2017-05-04 22:33:55', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: sef'),
 (7, 0, 0, 0, '2017-05-13 02:04:21', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: ddd');
 
 -- --------------------------------------------------------
@@ -1514,7 +1798,7 @@ CREATE TABLE IF NOT EXISTS `fv5oz_modules` (
   KEY `published` (`published`,`access`),
   KEY `newsfeeds` (`module`,`published`),
   KEY `idx_language` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=89 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=102 ;
 
 --
 -- Dumping data for table `fv5oz_modules`
@@ -1536,7 +1820,20 @@ INSERT INTO `fv5oz_modules` (`id`, `asset_id`, `title`, `note`, `content`, `orde
 (17, 51, 'Breadcrumbs', '', '', 1, 'position-2', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_breadcrumbs', 1, 1, '{"moduleclass_sfx":"","showHome":"1","homeText":"","showComponent":"1","separator":"","cache":"0","cache_time":"0","cachemode":"itemid"}', 0, '*'),
 (79, 52, 'Multilanguage status', '', '', 1, 'status', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'mod_multilangstatus', 3, 1, '{"layout":"_:default","moduleclass_sfx":"","cache":"0"}', 1, '*'),
 (86, 53, 'Joomla Version', '', '', 1, 'footer', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_version', 3, 1, '{"format":"short","product":"1","layout":"_:default","moduleclass_sfx":"","cache":"0"}', 1, '*'),
-(88, 72, 'AITLaundry search Location', '', '', 1, 'moduleLocationSearch', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_searchlocation', 1, 0, '{"layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*');
+(88, 72, 'AITLaundry search Location', '', '', 1, 'moduleLocationSearch', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_searchlocation', 1, 0, '{"layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
+(89, 74, 'JCK Manager', '', '<img alt="" src="components/com_jckman/icons/jck-manager-logo.png" />', 1, 'jck_icon', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_custom', 1, 1, '{"prepare_content":0}', 1, ''),
+(90, 75, 'Dashboard', '', '<img alt="" src="components/com_jckman/icons/jck-manager-logo.png" />', 2, 'jck_icon', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_jckquickicon', 1, 1, '', 1, ''),
+(91, 76, 'JCK Manager v6.4.4', '', '<table class="table table-striped" border="0" cellpadding="0" cellspacing="0" style="margin-bottom:0px;">\r\n			<tr>\r\n				<td>Version:</td>\r\n				<td>6.4.4</td>\r\n			</tr>\r\n			<tr>\r\n				<td>Author:</td>\r\n				<td><a href="http://www.joomlackeditor.com" target="_blank">www.joomlackeditor.com</a></td>\r\n			</tr>\r\n			<tr>\r\n				<td>Copyright:</td>\r\n				<td>&copy; WebxSolution Ltd, All rights reserved.</td>\r\n			</tr>\r\n			<tr>\r\n				<td>License:</td>\r\n				<td>GPLv2.0</td>\r\n			</tr>\r\n			<tr>\r\n				<td>More info:</td>\r\n				<td><a href="http://joomlackeditor.com/terms-of-use" target="_blank">http://joomlackeditor.com/terms-of-use</a></td>\r\n			</tr>\r\n		</table>', 3, 'jck_icon', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_custom', 1, 1, '', 1, ''),
+(92, 77, 'COM_JCKMAN_CPANEL_SLIDER_MANAGER_LABEL', '', 'COM_JCKMAN_CPANEL_SLIDER_MANAGER_HTML', 1, 'jck_cpanel', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, '', 1, 1, '{}', 1, ''),
+(93, 78, 'COM_JCKMAN_CPANEL_SLIDER_PLUGIN_LABEL', '', 'COM_JCKMAN_CPANEL_SLIDER_PLUGIN_HTML', 2, 'jck_cpanel', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, '', 1, 1, '{}', 1, ''),
+(94, 79, 'COM_JCKMAN_CPANEL_SLIDER_SYSTEM_CHECK_LABEL', '', 'COM_JCKMAN_CPANEL_SLIDER_SYSTEM_CHECK_HTML', 3, 'jck_cpanel', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, '', 1, 1, '{}', 1, ''),
+(95, 80, 'COM_JCKMAN_CPANEL_SLIDER_SYSTEM_LAYOUT_MANAGER', '', 'COM_JCKMAN_CPANEL_SLIDER_SYSTEM_LAYOUT_MANAGER_HTML', 4, 'jck_cpanel', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, '', 1, 1, '{}', 1, ''),
+(96, 81, 'COM_JCKMAN_CPANEL_SLIDER_BACKUP_LABEL', '', 'COM_JCKMAN_CPANEL_SLIDER_BACKUP_LABEL_HTML', 5, 'jck_cpanel', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, '', 1, 1, '{}', 1, ''),
+(97, 82, 'COM_JCKMAN_CPANEL_SLIDER_RESTORE_LABEL', '', 'COM_JCKMAN_CPANEL_SLIDER_RESTORE_HTML', 6, 'jck_cpanel', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, '', 1, 1, '{}', 1, ''),
+(98, 83, 'COM_JCKMAN_CPANEL_SLIDER_SYNC_LABEL', '', 'COM_JCKMAN_CPANEL_SLIDER_SYNC_HTML', 7, 'jck_cpanel', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, '', 1, 1, '{}', 1, ''),
+(99, 85, 'Feature Photo', '', '<h2 style="margin-top: 200px; color: orange;">\r\n	IMPRESSED!</h2>\r\n<p style="box-sizing: border-box; margin: 0px 0px 10px; color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">\r\n	BLA BLA BLA BLA BLA BLA BLA BLA</p>\r\n', 1, 'modMidlePosition', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_custom', 1, 0, '{"prepare_content":"0","backgroundimage":"","layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
+(100, 86, 'How it works', '', '<div class="container-fluid" id="how">\r\n	<h1>\r\n		How it works</h1>\r\n	<div class="row" id="how2">\r\n		<div class="col-sm-3 col-xs-12">\r\n			<img src="images/laundry-icon.png" />\r\n			<p>\r\n				CHOOSE YOUR COMBO</p>\r\n		</div>\r\n		<div class="col-sm-3 col-xs-12 leftBorder">\r\n			<img class="cke-resize" src="images/laundry-icon.png" />\r\n			<p>\r\n				SET YOUR PREFERENCES</p>\r\n		</div>\r\n		<div class="col-md-3 col-xs-12 leftBorder">\r\n			<img src="images/Delivery-Icon.png" />\r\n			<p>\r\n				WE WILL TAKE CARE OF IT</p>\r\n		</div>\r\n		<div class="col-md-3 col-xs-12 leftBorder">\r\n			<button class="btn" onclick="document.getElementById(''video'').style.display=''block''" style="padding:0; background-color:rgba(0,0,0,0);" type="button"><img id="play" src="images/play.png" /></button>\r\n			<p id="playvideo">\r\n				PLAY VIDEO</p>\r\n		</div>\r\n	</div>\r\n</div>\r\n', 1, 'modMidlePosition', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_custom', 1, 1, '{"prepare_content":"0","backgroundimage":"","layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
+(101, 87, 'Combos', '', '', 1, 'modMidlePosition', 106, '2017-05-15 10:59:05', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_combos', 1, 0, '{"layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*');
 
 -- --------------------------------------------------------
 
@@ -1572,7 +1869,10 @@ INSERT INTO `fv5oz_modules_menu` (`moduleid`, `menuid`) VALUES
 (17, 0),
 (79, 0),
 (86, 0),
-(88, 0);
+(88, 0),
+(99, 101),
+(100, 101),
+(101, 101);
 
 -- --------------------------------------------------------
 
@@ -1799,8 +2099,9 @@ INSERT INTO `fv5oz_schemas` (`extension_id`, `version_id`) VALUES
 CREATE TABLE IF NOT EXISTS `fv5oz_services` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `comboid` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `comboid` int(11) NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL,
@@ -1809,14 +2110,22 @@ CREATE TABLE IF NOT EXISTS `fv5oz_services` (
   `created_by` int(11) NOT NULL,
   `modified_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `fv5oz_services`
 --
 
-INSERT INTO `fv5oz_services` (`id`, `name`, `price`, `comboid`, `description`, `ordering`, `state`, `checked_out`, `checked_out_time`, `created_by`, `modified_by`) VALUES
-(1, 'Iron', '$50', '["1","2"]', '', 1, 1, 0, '0000-00-00 00:00:00', 106, 106);
+INSERT INTO `fv5oz_services` (`id`, `name`, `icon`, `price`, `comboid`, `description`, `ordering`, `state`, `checked_out`, `checked_out_time`, `created_by`, `modified_by`) VALUES
+(1, 'Washing - 10kg', 'images/laundry-icon.png', '50', 2, '<p>\r\n	<span style="color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">this is an example for my website</span></p>\r\n', 1, 1, 0, '0000-00-00 00:00:00', 106, 106),
+(2, 'Dry Cleaning - 5 Itens', 'images/dryclean.png', '25', 2, '<p>\r\n	<span style="color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">this is an example for my website</span></p>\r\n', 2, 1, 0, '0000-00-00 00:00:00', 106, 106),
+(3, 'Delivery - 1 p.w', 'images/delivery_combo.png', '30', 2, '<p>\r\n	<span style="color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">this is an example for my website</span></p>\r\n', 3, 1, 0, '0000-00-00 00:00:00', 106, 106),
+(4, 'Washing - 20kg', 'images/laundry-icon.png', '36', 3, '<p>\r\n	<span style="color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">this is an example for my website</span></p>\r\n', 4, 1, 0, '0000-00-00 00:00:00', 106, 106),
+(5, 'Dry Cleaning - 10 Itens', 'images/dryclean.png', '52', 3, '<p>\r\n	<span style="color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">this is an example for my website</span></p>\r\n', 5, 1, 0, '0000-00-00 00:00:00', 106, 106),
+(6, 'Delivery - 1 p.w', 'images/delivery_combo.png', '41', 3, '<p>\r\n	<span style="color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">this is an example for my website</span></p>\r\n', 6, 1, 0, '0000-00-00 00:00:00', 106, 106),
+(7, 'Washing - 15kg', 'images/laundry-icon.png', '23', 1, '<p>\r\n	<span style="color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">this is an example for my website</span></p>\r\n', 7, 1, 0, '0000-00-00 00:00:00', 106, 106),
+(8, 'Dry Cleaning - 10 Itens', 'images/dryclean.png', '45', 1, '<p>\r\n	<span style="color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">this is an example for my website</span></p>\r\n', 8, 1, 0, '0000-00-00 00:00:00', 106, 106),
+(9, 'Delivery - 1 p.w', 'images/delivery_combo.png', '30', 1, '<p>\r\n	<span style="color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">this is an example for my website</span></p>\r\n', 9, 1, 0, '0000-00-00 00:00:00', 106, 106);
 
 -- --------------------------------------------------------
 
@@ -1842,8 +2151,10 @@ CREATE TABLE IF NOT EXISTS `fv5oz_session` (
 --
 
 INSERT INTO `fv5oz_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-('864dn8drnrvnl2mu34hdn34p32', 0, 1, '1494641062', 'joomla|s:1312:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo0OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTozMDtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTQ2Mzc1ODk7czo0OiJsYXN0IjtpOjE0OTQ2NDEwNjE7czozOiJub3ciO2k6MTQ5NDY0MTA2Mjt9czo1OiJ0b2tlbiI7czozMjoiOUlQUU92dzY2a0xhRnQ0bnhqUXhUNlhWUWNmUzhLY2kiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6MTp7czo5OiJjb21fdXNlcnMiO086ODoic3RkQ2xhc3MiOjE6e3M6MTI6InJlZ2lzdHJhdGlvbiI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJkYXRhIjthOjEwOntzOjk6ImZpcnN0TmFtZSI7czo1OiJnZnNkcSI7czo4OiJsYXN0TmFtZSI7czozOiJkZmEiO3M6ODoidXNlcm5hbWUiO3M6MzoiZGRkIjtzOjk6InBhc3N3b3JkMSI7czo2OiIxMjM0NTYiO3M6OToicGFzc3dvcmQyIjtzOjY6IjEyMzQ1NiI7czo2OiJlbWFpbDEiO3M6MTI6ImRzZkBmZHNhLmNvbSI7czo2OiJlbWFpbDIiO3M6MTI6ImRzZkBmZHNhLmNvbSI7czoxMToibW9iaWxlUGhvbmUiO3M6OToiMjEzMTU2MTU2IjtzOjk6ImhvbWVQaG9uZSI7czoxMDoiNTEzMjEzMjEyMyI7czo3OiJhZGRyZXNzIjtzOjEyOiJkZ2RzZmdzZGZnZmQiO319fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjoxO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086NToiSlVzZXIiOjE6e3M6MjoiaWQiO2k6MDt9czoxMToiYXBwbGljYXRpb24iO086ODoic3RkQ2xhc3MiOjE6e3M6NToicXVldWUiO047fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 0, ''),
-('orpaq0hnm57aoenqdoqharns21', 1, 0, '1494640479', 'joomla|s:1392:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo0OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToyNTtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTQ2MzU0OTA7czo0OiJsYXN0IjtpOjE0OTQ2Mzk2NTI7czozOiJub3ciO2k6MTQ5NDY0MDQ3OTt9czo1OiJ0b2tlbiI7czozMjoiWU1RalNXcmlXVGRIbDRkb0JHUHBmR0FBMzNHUDMwMHQiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMToiY29tX21vZHVsZXMiO086ODoic3RkQ2xhc3MiOjI6e3M6NDoiZWRpdCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo2OiJtb2R1bGUiO086ODoic3RkQ2xhc3MiOjI6e3M6MjoiaWQiO2E6MDp7fXM6NDoiZGF0YSI7Tjt9fXM6MzoiYWRkIjtPOjg6InN0ZENsYXNzIjoxOntzOjY6Im1vZHVsZSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMjoiZXh0ZW5zaW9uX2lkIjtOO3M6NjoicGFyYW1zIjtOO319fXM6OToiY29tX21lbnVzIjtPOjg6InN0ZENsYXNzIjoxOntzOjU6Iml0ZW1zIjtPOjg6InN0ZENsYXNzIjozOntzOjg6Im1lbnV0eXBlIjtzOjg6Im1haW5tZW51IjtzOjQ6Imxpc3QiO2E6NDp7czo5OiJkaXJlY3Rpb24iO3M6MzoiYXNjIjtzOjU6ImxpbWl0IjtzOjI6IjIwIjtzOjg6Im9yZGVyaW5nIjtzOjU6ImEubGZ0IjtzOjU6InN0YXJ0IjtkOjA7fXM6MTA6ImxpbWl0c3RhcnQiO2k6MDt9fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjoxO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086NToiSlVzZXIiOjE6e3M6MjoiaWQiO3M6MzoiMTA2Ijt9czoxMToiYXBwbGljYXRpb24iO086ODoic3RkQ2xhc3MiOjE6e3M6NToicXVldWUiO047fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 106, 'admin');
+('8q58o883vmm8932mq8e6gc4bv2', 0, 1, '1494880178', 'joomla|s:712:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTo3O3M6NToidGltZXIiO086ODoic3RkQ2xhc3MiOjM6e3M6NToic3RhcnQiO2k6MTQ5NDg3NjU2NDtzOjQ6Imxhc3QiO2k6MTQ5NDg3NjU3ODtzOjM6Im5vdyI7aToxNDk0ODgwMTc4O31zOjU6InRva2VuIjtzOjMyOiJvTkMxbThnMmxSdmlEdUpMNXk2emxpSUxqRFMwWkR0diI7fXM6ODoicmVnaXN0cnkiO086MjQ6Ikpvb21sYVxSZWdpc3RyeVxSZWdpc3RyeSI6Mzp7czo3OiIAKgBkYXRhIjtPOjg6InN0ZENsYXNzIjowOnt9czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MTtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9czo0OiJ1c2VyIjtPOjU6IkpVc2VyIjoxOntzOjI6ImlkIjtpOjA7fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 0, ''),
+('ftm45d4tf2pcdp1ma97u0atqb5', 1, 0, '1494881691', 'joomla|s:6292:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo3OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTo2MTtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTQ4Nzc5Mjg7czo0OiJsYXN0IjtpOjE0OTQ4ODE2ODU7czozOiJub3ciO2k6MTQ5NDg4MTY5MDt9czo1OiJ0b2tlbiI7czozMjoiOEJwaDhYSGk2cERDbUZ3ZVVraXdiR2ltcUtNdjJKb0ciO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6Mzp7czoxMDoiY29tX2NvbWJvcyI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo2OiJjb21ib3MiO086ODoic3RkQ2xhc3MiOjE6e3M6ODoib3JkZXJjb2wiO3M6NjoiYS5uYW1lIjt9czo0OiJlZGl0IjtPOjg6InN0ZENsYXNzIjoxOntzOjU6ImNvbWJvIjtPOjg6InN0ZENsYXNzIjoyOntzOjI6ImlkIjthOjA6e31zOjQ6ImRhdGEiO047fX19czoxMzoiY29tX3NlcnZpY2VzcyI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo5OiJzZXJ2aWNlc3MiO086ODoic3RkQ2xhc3MiOjQ6e3M6ODoib3JkZXJjb2wiO3M6MTE6ImEuYGNvbWJvaWRgIjtzOjY6ImZpbHRlciI7Tzo4OiJzdGRDbGFzcyI6Mzp7czo2OiJzZWFyY2giO3M6MDoiIjtzOjU6InN0YXRlIjtzOjA6IiI7czo3OiJjb21ib2lkIjtzOjA6IiI7fXM6OToib3JkZXJkaXJuIjtzOjM6ImFzYyI7czoxMDoibGltaXRzdGFydCI7aTowO31zOjQ6ImVkaXQiO086ODoic3RkQ2xhc3MiOjE6e3M6ODoic2VydmljZXMiO086ODoic3RkQ2xhc3MiOjI6e3M6MjoiaWQiO2E6MDp7fXM6NDoiZGF0YSI7Tjt9fX1zOjY6Imdsb2JhbCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJsaXN0IjtPOjg6InN0ZENsYXNzIjoxOntzOjU6ImxpbWl0IjtpOjIwO319fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjE7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fXM6NDoidXNlciI7Tzo1OiJKVXNlciI6MTp7czoyOiJpZCI7czozOiIxMDYiO31zOjEwOiJqY2twbHVnaW5zIjthOjQzOntpOjA7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6NToiYmVlejUiO31pOjE7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6MTA6ImJlZXpsYXlvdXQiO31pOjI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6MTI6ImJlZXpwZXJzb25hbCI7fWk6MztPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6MTA6InN0eWxlc2hlZXQiO3M6NDoibmFtZSI7czoxMDoiaW5kZXguaHRtbCI7fWk6NDtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6MTA6InN0eWxlc2hlZXQiO3M6NDoibmFtZSI7czoxMzoiamNrdHlwb2dyYXBoeSI7fWk6NTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NzoidG9vbGJhciI7czo0OiJuYW1lIjtzOjEwOiJjb21wb25lbnRzIjt9aTo2O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo3OiJ0b29sYmFyIjtzOjQ6Im5hbWUiO3M6MTA6ImluZGV4Lmh0bWwiO31pOjc7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjc6InRvb2xiYXIiO3M6NDoibmFtZSI7czo2OiJtb2JpbGUiO31pOjg7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjQ6ImNvcmUiO3M6NDoibmFtZSI7czo2OiJlZGl0b3IiO31pOjk7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjQ6ImNvcmUiO3M6NDoibmFtZSI7czozOiJlbnYiO31pOjEwO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo0OiJjb3JlIjtzOjQ6Im5hbWUiO3M6MTA6ImluZGV4Lmh0bWwiO31pOjExO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo0OiJjb3JlIjtzOjQ6Im5hbWUiO3M6ODoiamVsZW1lbnQiO31pOjEyO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo0OiJjb3JlIjtzOjQ6Im5hbWUiO3M6NzoicGx1Z2lucyI7fWk6MTM7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjQ6ImNvcmUiO3M6NDoibmFtZSI7czo1OiJ0b29scyI7fWk6MTQ7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjk6IjM0N3VwZGF0ZSI7fWk6MTU7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjk6IjM0OHVwZGF0ZSI7fWk6MTY7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjk6IjYyMHVwZGF0ZSI7fWk6MTc7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjk6IjY1NHVwZGF0ZSI7fWk6MTg7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjk6IjY1OHVwZGF0ZSI7fWk6MTk7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjM6ImFjbCI7fWk6MjA7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjE5OiJhbGx2aWRlb3NwYXJhbWV0ZXJzIjt9aToyMTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6OToiYXV0b2ZvY3VzIjt9aToyMjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTU6ImJhY2tncm91bmRjb3ZlciI7fWk6MjM7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjY6ImNsaWVudCI7fWk6MjQ7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjIxOiJkZWZhdWx0YmVlenR5cG9ncmFwaHkiO31pOjI1O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxMToiZGVmYXVsdGZvbnQiO31pOjI2O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxMzoiZnNhcGFyYW1ldGVycyI7fWk6Mjc7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjEzOiJodGFjY2Vzc21ha2VyIjt9aToyODtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6ODoiaW1hZ2Vjc3MiO31pOjI5O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxNDoiaW1hZ2VkcmFnbmRyb3AiO31pOjMwO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxMDoiaW5kZXguaHRtbCI7fWk6MzE7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjE3OiJsYW5ndWFnZW92ZXJyaWRlcyI7fWk6MzI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjk6Im1hZ2ljbGluZSI7fWk6MzM7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjY6Im1vYmlsZSI7fWk6MzQ7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjY6Im9wdGlvbiI7fWk6MzU7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjg6Im92ZXJyaWRlIjt9aTozNjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTA6InBhcmFtZXRlcnMiO31pOjM3O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxNToicGx1Z2lub3ZlcnJpZGVzIjt9aTozODtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTM6InNpZ3BhcmFtZXRlcnMiO31pOjM5O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo3OiJ0b29sYmFyIjt9aTo0MDtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTA6InR5cG9ncmFwaHkiO31pOjQxO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo3OiJ1aWNvbG9yIjt9aTo0MjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MzoieG1sIjt9fXM6OToiamNrb3B0aW9uIjtzOjEzOiJjb21fc2VydmljZXNzIjtzOjExOiJhcHBsaWNhdGlvbiI7Tzo4OiJzdGRDbGFzcyI6MTp7czo1OiJxdWV1ZSI7Tjt9czo5OiJjb21fbWVkaWEiO086ODoic3RkQ2xhc3MiOjE6e3M6MTA6InJldHVybl91cmwiO3M6MTE4OiJpbmRleC5waHA/b3B0aW9uPWNvbV9tZWRpYSZ2aWV3PWltYWdlcyZ0bXBsPWNvbXBvbmVudCZmaWVsZGlkPWpmb3JtX2ljb24mZV9uYW1lPSZhc3NldD1jb21fc2VydmljZXNzJmF1dGhvcj1jcmVhdGVkX2J5Ijt9fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjowO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO30=";', 106, 'admin'),
+('qkdhvvn70j08gebj4h1stuvcl7', 0, 1, '1494882089', 'joomla|s:712:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToyO3M6NToidGltZXIiO086ODoic3RkQ2xhc3MiOjM6e3M6NToic3RhcnQiO2k6MTQ5NDg4MjA4NztzOjQ6Imxhc3QiO2k6MTQ5NDg4MjA4NztzOjM6Im5vdyI7aToxNDk0ODgyMDg5O31zOjU6InRva2VuIjtzOjMyOiJUV3lvdEFOS0lPMEx0SHR1bDJqTWxZcW1HcktKVlIzZiI7fXM6ODoicmVnaXN0cnkiO086MjQ6Ikpvb21sYVxSZWdpc3RyeVxSZWdpc3RyeSI6Mzp7czo3OiIAKgBkYXRhIjtPOjg6InN0ZENsYXNzIjowOnt9czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MTtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9czo0OiJ1c2VyIjtPOjU6IkpVc2VyIjoxOntzOjI6ImlkIjtpOjA7fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 0, ''),
+('vbbopgufcnofp88k5ae9mfq3p0', 1, 0, '1494882927', 'joomla|s:5816:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo2OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToyOTtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTQ4ODIwNzE7czo0OiJsYXN0IjtpOjE0OTQ4ODI5MjY7czozOiJub3ciO2k6MTQ5NDg4MjkyNzt9czo1OiJ0b2tlbiI7czozMjoiSFNNNDFrOFZHSkZkZmVBSmIxcGlnYmFudUYwRVNTU1IiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMzoiY29tX3NlcnZpY2VzcyI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo5OiJzZXJ2aWNlc3MiO086ODoic3RkQ2xhc3MiOjQ6e3M6ODoib3JkZXJjb2wiO3M6MTE6ImEuYGNvbWJvaWRgIjtzOjY6ImZpbHRlciI7Tzo4OiJzdGRDbGFzcyI6Mzp7czo2OiJzZWFyY2giO3M6MDoiIjtzOjU6InN0YXRlIjtzOjA6IiI7czo3OiJjb21ib2lkIjtzOjA6IiI7fXM6OToib3JkZXJkaXJuIjtzOjM6ImFzYyI7czoxMDoibGltaXRzdGFydCI7aTowO31zOjQ6ImVkaXQiO086ODoic3RkQ2xhc3MiOjE6e3M6ODoic2VydmljZXMiO086ODoic3RkQ2xhc3MiOjI6e3M6MjoiaWQiO2E6MTp7aTowO2k6Mzt9czo0OiJkYXRhIjtOO319fXM6NjoiZ2xvYmFsIjtPOjg6InN0ZENsYXNzIjoxOntzOjQ6Imxpc3QiO086ODoic3RkQ2xhc3MiOjE6e3M6NToibGltaXQiO2k6MjA7fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MTtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9czo0OiJ1c2VyIjtPOjU6IkpVc2VyIjoxOntzOjI6ImlkIjtzOjM6IjEwNiI7fXM6MTA6Impja3BsdWdpbnMiO2E6NDM6e2k6MDtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6MTA6InN0eWxlc2hlZXQiO3M6NDoibmFtZSI7czo1OiJiZWV6NSI7fWk6MTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6MTA6InN0eWxlc2hlZXQiO3M6NDoibmFtZSI7czoxMDoiYmVlemxheW91dCI7fWk6MjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6MTA6InN0eWxlc2hlZXQiO3M6NDoibmFtZSI7czoxMjoiYmVlenBlcnNvbmFsIjt9aTozO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czoxMDoic3R5bGVzaGVldCI7czo0OiJuYW1lIjtzOjEwOiJpbmRleC5odG1sIjt9aTo0O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czoxMDoic3R5bGVzaGVldCI7czo0OiJuYW1lIjtzOjEzOiJqY2t0eXBvZ3JhcGh5Ijt9aTo1O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo3OiJ0b29sYmFyIjtzOjQ6Im5hbWUiO3M6MTA6ImNvbXBvbmVudHMiO31pOjY7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjc6InRvb2xiYXIiO3M6NDoibmFtZSI7czoxMDoiaW5kZXguaHRtbCI7fWk6NztPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NzoidG9vbGJhciI7czo0OiJuYW1lIjtzOjY6Im1vYmlsZSI7fWk6ODtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NDoiY29yZSI7czo0OiJuYW1lIjtzOjY6ImVkaXRvciI7fWk6OTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NDoiY29yZSI7czo0OiJuYW1lIjtzOjM6ImVudiI7fWk6MTA7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjQ6ImNvcmUiO3M6NDoibmFtZSI7czoxMDoiaW5kZXguaHRtbCI7fWk6MTE7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjQ6ImNvcmUiO3M6NDoibmFtZSI7czo4OiJqZWxlbWVudCI7fWk6MTI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjQ6ImNvcmUiO3M6NDoibmFtZSI7czo3OiJwbHVnaW5zIjt9aToxMztPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NDoiY29yZSI7czo0OiJuYW1lIjtzOjU6InRvb2xzIjt9aToxNDtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6OToiMzQ3dXBkYXRlIjt9aToxNTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6OToiMzQ4dXBkYXRlIjt9aToxNjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6OToiNjIwdXBkYXRlIjt9aToxNztPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6OToiNjU0dXBkYXRlIjt9aToxODtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6OToiNjU4dXBkYXRlIjt9aToxOTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MzoiYWNsIjt9aToyMDtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTk6ImFsbHZpZGVvc3BhcmFtZXRlcnMiO31pOjIxO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo5OiJhdXRvZm9jdXMiO31pOjIyO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxNToiYmFja2dyb3VuZGNvdmVyIjt9aToyMztPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6NjoiY2xpZW50Ijt9aToyNDtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MjE6ImRlZmF1bHRiZWV6dHlwb2dyYXBoeSI7fWk6MjU7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjExOiJkZWZhdWx0Zm9udCI7fWk6MjY7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjEzOiJmc2FwYXJhbWV0ZXJzIjt9aToyNztPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTM6Imh0YWNjZXNzbWFrZXIiO31pOjI4O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo4OiJpbWFnZWNzcyI7fWk6Mjk7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjE0OiJpbWFnZWRyYWduZHJvcCI7fWk6MzA7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjEwOiJpbmRleC5odG1sIjt9aTozMTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTc6Imxhbmd1YWdlb3ZlcnJpZGVzIjt9aTozMjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6OToibWFnaWNsaW5lIjt9aTozMztPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6NjoibW9iaWxlIjt9aTozNDtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6Njoib3B0aW9uIjt9aTozNTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6ODoib3ZlcnJpZGUiO31pOjM2O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxMDoicGFyYW1ldGVycyI7fWk6Mzc7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjE1OiJwbHVnaW5vdmVycmlkZXMiO31pOjM4O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxMzoic2lncGFyYW1ldGVycyI7fWk6Mzk7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjc6InRvb2xiYXIiO31pOjQwO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxMDoidHlwb2dyYXBoeSI7fWk6NDE7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjc6InVpY29sb3IiO31pOjQyO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czozOiJ4bWwiO319czo5OiJqY2tvcHRpb24iO3M6MTM6ImNvbV9zZXJ2aWNlc3MiO3M6MTE6ImFwcGxpY2F0aW9uIjtPOjg6InN0ZENsYXNzIjoxOntzOjU6InF1ZXVlIjtOO319fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fQ==";', 106, 'admin');
 
 -- --------------------------------------------------------
 
@@ -2122,7 +2433,7 @@ CREATE TABLE IF NOT EXISTS `fv5oz_update_sites` (
   `last_check_timestamp` bigint(20) DEFAULT '0',
   `extra_query` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT '',
   PRIMARY KEY (`update_site_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Update Sites' AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Update Sites' AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `fv5oz_update_sites`
@@ -2132,7 +2443,9 @@ INSERT INTO `fv5oz_update_sites` (`update_site_id`, `name`, `type`, `location`, 
 (1, 'Joomla! Core', 'collection', 'https://update.joomla.org/core/list.xml', 1, 1493247765, ''),
 (2, 'Joomla! Extension Directory', 'collection', 'https://update.joomla.org/jed/list.xml', 1, 1493247765, ''),
 (3, 'Accredited Joomla! Translations', 'collection', 'https://update.joomla.org/language/translationlist_3.xml', 1, 1493247767, ''),
-(4, 'Joomla! Update Component Update Site', 'extension', 'https://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 1493247767, '');
+(4, 'Joomla! Update Component Update Site', 'extension', 'https://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 1493247767, ''),
+(5, 'JoomlaCK Editor Update Site', 'extension', 'http://www.joomlackeditor.com/upgrade/plg_jckeditor.xml', 1, 0, ''),
+(6, 'JoomlaCK Editor Update Site', 'extension', 'http://www.joomlackeditor.com/upgrade/com_jckman.xml', 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -2154,7 +2467,9 @@ INSERT INTO `fv5oz_update_sites_extensions` (`update_site_id`, `extension_id`) V
 (1, 700),
 (2, 700),
 (3, 802),
-(4, 28);
+(4, 28),
+(5, 822),
+(6, 824);
 
 -- --------------------------------------------------------
 
@@ -2230,7 +2545,7 @@ CREATE TABLE IF NOT EXISTS `fv5oz_users` (
 --
 
 INSERT INTO `fv5oz_users` (`id`, `firstName`, `name`, `lastName`, `homePhone`, `mobilePhone`, `address`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`) VALUES
-(106, 'Super User', 'admin', '', '', '', '', 'admin', 'aitlaundry@gmail.com', '$2y$10$a/6j6HvIKqcyfPvHlVJd3.jVFMXYHepZuM36p7Kap.kOj0au7ORHa', 0, 1, '2017-04-10 22:44:44', '2017-05-13 01:05:45', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(106, 'Super User', 'admin', '', '', '', '', 'admin', 'aitlaundry@gmail.com', '$2y$10$a/6j6HvIKqcyfPvHlVJd3.jVFMXYHepZuM36p7Kap.kOj0au7ORHa', 0, 1, '2017-04-10 22:44:44', '2017-05-15 21:01:20', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
 (107, 'gfdgfds', 'manager', 'fads', 'fdsa', 'fdsa', 'fafdasfdsafdsf', 'manager', '5527@ait.nsw.edu.au', '$2y$10$4Ov8ixQreBzMTijs2HAiZ.6qq5.mflVhDeUtRtAL7cQZ/0VaLehd6', 0, 0, '2017-04-12 02:01:41', '2017-05-04 01:23:56', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
 (113, '22', '111111111 3', '3', '123456', '123456', 'sdafads', 'sss', 'sd@fda.com', '$2y$10$zn1Q5Jk4E2tQyiEENmRjN.z8EfeP9RGbTssriD0c05XRErqUu1WyC', 0, 0, '2017-05-04 22:25:20', '0000-00-00 00:00:00', '20b5407d26c2cec2e48f28f80451379d', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
 (114, '22', '22 3', '3', '123456', '123456', 'sdafads', 'sef', '1sd@fda.com', '$2y$10$h9Minaup1IipzSqZkYZUoO4BE15BkSz8whMAtVBlP7XgzwFhTEch6', 0, 0, '2017-05-04 22:33:53', '0000-00-00 00:00:00', 'd27cdeb2a95d8cb6e8d542583fd50039', '{}', '0000-00-00 00:00:00', 0, '', '', 0),

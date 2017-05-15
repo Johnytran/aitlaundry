@@ -164,9 +164,6 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
             color: #333;
             white-space: nowrap;
         }
-        
-
-
     </style>
 <body class="site <?php echo $option
 	. ' view-' . $view
@@ -181,7 +178,7 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 	      <div class="container-fluid"> 
 	        <!-- Brand and toggle get grouped for better mobile display -->
 	        <div class="navbar-header">
-	            <a href="index.html"><img src="templates/<?php echo $this->template; ?>/images/logo_impress.jpg"/></a>
+	            <a href="index.php"><img src="templates/<?php echo $this->template; ?>/images/logo_impress.jpg"/></a>
 	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 	            <span class="sr-only">Toggle navigation</span>
 	            <span class="icon-bar"></span>
@@ -234,37 +231,8 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 	<main>
 	<jdoc:include type="message" />
 	<jdoc:include type="component" />
-	 <!----------------------- FEATURE MOTTO --------------------->
-		<div class="row">
-		<div id="banner" class="container-fluid col-xs-12">
-			<h2 id="motto">Let our services get you <span id="impressed">IMPRESSED</span>!</h2>
-	  <p>BLA BLA BLA BLA BLA BLA BLA BLA</p>
-		</div>
-		</div>
-	<!--------------------------- HOW IT WORKS --------------------->
-		<div id="how" class="container-fluid">
-	<h1>How it works</h1>
-			<div id="how2" class="row">
-			  <div class="col-sm-3 col-xs-12">
-			    <img src="templates/<?php echo $this->template; ?>/images/laundry-icon.png">
-			    <p>CHOOSE YOUR COMBO</p>
-			  </div>
-			  <div class="col-sm-3 col-xs-12 leftBorder">
-			    <img src="templates/<?php echo $this->template; ?>/images/location_icon.png">
-			    <p>SET YOUR PREFERENCES</p>
-			  </div>
-			  <div class="col-md-3 col-xs-12 leftBorder">
-			    <img src="templates/<?php echo $this->template; ?>/images/Delivery-Icon.png">
-			    <p>WE WILL TAKE CARE OF IT</p>
-			  </div>
-			  <div class="col-md-3 col-xs-12 leftBorder">
-			    <button type="button" class="btn" onclick="document.getElementById('video').style.display='block'" style="padding:0; background-color:rgba(0,0,0,0);">
-			        <img id="play" src="templates/<?php echo $this->template; ?>/images/play.png">
-			      </button>
-			    <p id="playvideo">PLAY VIDEO</p>
-			 </div>
-			</div> 
-			
+	<jdoc:include type="modules" name="modMidlePosition" style="none" />
+	
 			<!---------- video pop up------------>
 			<div id="video" class="modal">
 	  <div class="modal-content animate">
@@ -277,172 +245,7 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 	</div>
 
 		</div>
-	<!---------------- COMBOS ------------------->
-		<!---------------- COMBOS ------------------->
-		<div id="combos" class="container-fluid">
-			<h1>Combos</h1>
-			<div class="combosection">
-				<div class="container-fluid" style="padding:0px 30px 50px 30px;">
-					<h5>Little explaination of how the combo system works!</h5>
-				</div>
-				<div style="max-width:1100px; margin:0 auto 20px auto">
-					<!-------------------------------------- SINGLE COMBO ---------------------------------->
-					<div id="single" class="col-sm-3 combobox" style="">
-						<div class="container-fluid" style="padding:20px; background-color:white;">
-							<img src="templates/<?php echo $this->template; ?>/images/single.png" style="max-width:200px">
-						</div>
-						<div class="combodescription">
-							<p>DESCRIPTION</p>
-						</div>
-						<div class="title">
-							<h4>SINGLE</h4>
-						</div>
-
-						<div class="pricefrom">
-							<p style="background-color:black; color:white;">$<span style="font-size:30px;">35</span>/mo</p>
-						</div>
-						<div class="combosubbox dropdownbox">
-							<img style="max-width:40px" src="templates/<?php echo $this->template; ?>/images/wash.png"><br>
-							<br><p><strong>Washing</strong> - 10kg</p>
-							<div class="dropdownbox-content">
-								this is an example for my website 
-							</div>
-						</div>
-						<div class="combosubbox dropdownbox">
-							<img style="max-width:60px" src="templates/<?php echo $this->template; ?>/images/ironing.png">
-							<br><p><strong>Ironing</strong> - Not Included
-							</p>
-							<div class="dropdownbox-content">
-								this is an example for my website 
-							</div>
-						</div>
-						<div class="combosubbox dropdownbox">
-							<img style="max-width:40px" src="templates/<?php echo $this->template; ?>/images/dryclean.png"><br>
-							<br><p><strong>Dry Cleaning</strong> - 5 Itens
-							</p>
-							<div class="dropdownbox-content">
-								this is an example for my website 
-							</div>
-						</div>
-						<div class="combosubbox dropdownbox">
-							<img style="max-width:65px" src="templates/<?php echo $this->template; ?>/images/delivery_combo.png"><br>
-							<br><p><strong>Delivery</strong> - 1 p.w
-							</p>
-							<div class="dropdownbox-content">
-								this is an example for my website 
-							</div>
-						</div>
-						<div class="selectcombo">
-							<h4>SELECT</h4>
-						</div>
-					</div><!---SINGLE--->
-					<!------------------------------------------------------- Couple COMBO ---------------------------->
-					<div id="couple" class="col-sm-3 combobox" style="margin-left:12.3%">
-						<div class="container-fluid" style="padding:30px 20px; background-color:white;">
-							<img src="templates/<?php echo $this->template; ?>/images/couple.png" style="max-width:300px;">
-						</div>
-						<div class="combodescription">
-							<p>DESCRIPTION</p>
-						</div>
-						<div class="title">
-							<h4>COUPLE</h4>
-						</div>
-
-						<div class="pricefrom">
-							<p style="background-color:black; color:white;">$<span style="font-size:30px;">55</span>/mo</p>
-						</div>
-						<div class="combosubbox dropdownbox">
-							<img style="max-width:40px" src="templates/<?php echo $this->template; ?>/images/wash.png"><br>
-							<br><p><strong>Washing</strong> - 15kg</p>
-							<div class="dropdownbox-content">
-								this is an example for my website 
-							</div>
-						</div>
-						<div class="combosubbox dropdownbox">
-							<img style="max-width:60px" src="templates/<?php echo $this->template; ?>/images/ironing.png">
-							<br><p><strong>Ironing</strong> - Included
-							</p>
-							<div class="dropdownbox-content">
-								this is an example for my website 
-							</div>
-						</div>
-						<div class="combosubbox dropdownbox">
-							<img style="max-width:40px" src="templates/<?php echo $this->template; ?>/images/dryclean.png"><br>
-							<br><p><strong>Dry Cleaning</strong> - 10 Itens
-							</p>
-							<div class="dropdownbox-content">
-								this is an example for my website 
-							</div>
-						</div>
-						<div class="combosubbox dropdownbox">
-							<img style="max-width:65px" src="templates/<?php echo $this->template; ?>/images/delivery_combo.png"><br>
-							<br><p><strong>Delivery</strong> - 1 p.w
-							</p>
-							<div class="dropdownbox-content">
-								this is an example for my website 
-							</div>
-						</div>
-						<div class="selectcombo">
-							<h4>SELECT</h4>
-						</div>
-					</div><!---Couple--->
-					
-					<!--------------------------------------------------------------- family COMBO -------------------------------------->
-					<div id="family" class="col-sm-3 combobox" style="margin-left:12.3%">
-						<div class="container-fluid" style="padding:30px 20px; background-color:white;">
-							<img src="templates/<?php echo $this->template; ?>/images/family.png" style="max-width:300px">
-						</div>
-						<div class="combodescription">
-							<p>DESCRIPTION</p>
-						</div>
-						<div class="title">
-							<h4>FAMILY</h4>
-						</div>
-
-						<div class="pricefrom">
-							<p style="background-color:black; color:white;">$<span style="font-size:30px;">75</span>/mo</p>
-						</div>
-						<div class="combosubbox dropdownbox">
-							<img style="max-width:40px" src="templates/<?php echo $this->template; ?>/images/wash.png"><br>
-							<br><p><strong>Washing</strong> - 20kg</p>
-							<div class="dropdownbox-content">
-								this is an example for my website 
-							</div>
-						</div>
-						<div class="combosubbox dropdownbox">
-							<img style="max-width:60px" src="templates/<?php echo $this->template; ?>/images/ironing.png">
-							<br><p><strong>Ironing</strong> - Included
-							</p>
-							<div class="dropdownbox-content">
-								this is an example for my website 
-							</div>
-						</div>
-						<div class="combosubbox dropdownbox">
-							<img style="max-width:40px" src="templates/<?php echo $this->template; ?>/images/dryclean.png"><br>
-							<br><p><strong>Dry Cleaning</strong> - 20 Itens
-							</p>
-							<div class="dropdownbox-content">
-								this is an example for my website 
-							</div>
-						</div>
-						<div class="combosubbox dropdownbox">
-							<img style="max-width:65px" src="templates/<?php echo $this->template; ?>/images/delivery_combo.png"><br>
-							<br><p><strong>Delivery</strong> - 2 p.w
-							</p>
-							<div class="dropdownbox-content">
-								this is an example for my website 
-							</div>
-						</div>
-						<div class="selectcombo">
-							<h4>SELECT</h4>
-						</div>
-					</div><!---family--->
-				</div>
-			</div>
-		</div>
-		<style>
-		  
-		</style>
+	
 		<!----------------------------------------------- LOCATIONS ------------------------------------------->
 		<div id="locations" clas="row">
 			<h1>Locations</h1>

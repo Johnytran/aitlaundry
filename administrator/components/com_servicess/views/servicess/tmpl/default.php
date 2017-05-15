@@ -187,7 +187,7 @@ if (!empty($this->extra_sidebar))
 				<?php echo JHtml::_('grid.sort',  'COM_SERVICESS_SERVICESS_PRICE', 'a.`price`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_SERVICESS_SERVICESS_COMBOID', 'a.`comboid`', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'Combo', 'a.`comboid`', $listDirn, $listOrder); ?>
 				</th>
 
 					
@@ -261,7 +261,7 @@ if (!empty($this->extra_sidebar))
 					<?php echo $item->price; ?>
 				</td>				<td>
 
-					<?php echo $item->comboid; ?>
+					<?php echo $item->comboName; ?>
 				</td>
 
 					</tr>
