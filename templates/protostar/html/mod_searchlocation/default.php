@@ -24,7 +24,7 @@ defined('_JEXEC') or die;
         }
 
         input{
-            max-width: 590px;
+            max-width: 580px;
             color: black;
         }
         #buttonID{

@@ -16,6 +16,7 @@
 			label="First name"
 			size="30"
 			required="true"
+               class="form-control"
 		/>
 
 
