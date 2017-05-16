@@ -171,8 +171,7 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 	. ($task ? ' task-' . $task : ' no-task')
 	. ($itemid ? ' itemid-' . $itemid : '')
 	. ($params->get('fluidContainer') ? ' fluid' : '');
-	echo ($this->direction == 'rtl' ? ' rtl' : '');
-?>">
+	echo ($this->direction == 'rtl' ? ' rtl' : '');?>">
 	<header>       
 	    <nav class="navbar navbar-default" id="navbarStyle">  
 	      <div class="container-fluid"> 
@@ -254,39 +253,7 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
             <jdoc:include type="modules" name="moduleLocationSearch" style="none" />
 			<!-------------------------------- Suburbs List ------------------------->
 		<div class="container-fluid row" style="padding:30px 0 50px 0;">
-			 <div class="col-sm-4">
-			   <div class="space2">
-			     <p>Sydney City 2000</p>
-			   </div>
-			   <div class="space2">
-			     <p>Sydney City 2000</p>
-			   </div>
-			   <div class="space2">
-			     <p>Sydney City 2000</p>
-			   </div>
-			 </div>
-			 <div class="col-sm-4">
-			   <div class="space2">
-			     <p>Sydney City 2000</p>
-			   </div>
-			   <div class="space2">
-			     <p>Sydney City 2000</p>
-			   </div>
-			   <div class="space2">
-			     <p>Sydney City 2000</p>
-			   </div>
-			 </div>
-			 <div class="col-sm-4">
-			   <div class="space2">
-			     <p>Sydney City 2000</p>
-			   </div>
-			   <div class="space2">
-			     <p>Sydney City 2000</p>
-			   </div>
-			   <div class="space2">
-			     <p>Sydney City 2000</p>
-			   </div>
-			 </div>
+
 		</div>
 		</div>
 	</main>
