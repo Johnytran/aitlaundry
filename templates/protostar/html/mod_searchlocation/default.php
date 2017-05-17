@@ -71,13 +71,44 @@ defined('_JEXEC') or die;
 <script>
 	var allMarkers;
 	var bounds;
+  var dataLocations = [];
+  var map;
 	jQuery(function($) {
     // Asynchronously Load the map API 
-    var map;
+    
 	
     var script = document.createElement('script');
     script.src = "//maps.googleapis.com/maps/api/js?sensor=false&callback=initialize&key=AIzaSyAmgL1tXr-qF0GXLGXef0yBRdM37WV2aMg";
     document.body.appendChild(script);
+    jQuery(".search-location-box-button").bind('click', function() {
+      
+      var input = jQuery(".search-location-box");
+      var longitude='', latitude='';
+      var currentMarkerPosition = null;
+      if(dataLocations){
+        //console.log(dataLocations.length);
+        //console.log(dataLocations[0]);
+        for(var i=0; i<dataLocations.length; i++){
+          if(dataLocations[i]['surburb']== input.val() || dataLocations[i]['postcode']== input.val()){
+            //console.log(dataLocations[i]['longitude']);
+            longitude = dataLocations[i]['longitude'];
+            latitude = dataLocations[i]['latitude'];
+            currentMarkerPosition = new google.maps.LatLng(latitude, longitude);  
+            //console.log(position);
+            map.panTo(currentMarkerPosition);
+            map.setZoom(18);
+            new google.maps.event.trigger( allMarkers[i], 'click' );
+            //console.log(allMarkers[i].getPosition());
+            //console.log(allMarkers);
+
+          }
+     //     for(var j=0; j<allMarkers.length;j++){
+        //  console.log(allMarkers[j].getPosition().equals(currentMarkerPosition));
+        // }
+        }
+
+      }
+    });
 });
 
 function initialize() {
@@ -136,28 +167,36 @@ function initialize() {
     });
     
 }
+
 </script>
 
+<div id="locations" clas="row">
+      <h1>Locations</h1>
+      <p style="margin-bottom: 10px;">Now servicing in select neighbourhoods in Sydney.</p>
+          <form>
+            <input type="text" name="search" class="search-box search-location-box" placeholder="Enter your address or postcode to search availability"/>
+              <button id="buttonID" type="button" class="btn btn-default search-box search-location-box search-location-box-button" name="search">Search</button><br>
+          </form> 
+          <div id="map_wrapper">
+              <div id="map_canvas" class="mapping"></div>
+          </div>
+      <div class="container-fluid row" style="padding:30px 0 50px 0;">
+      </div>
+    </div>
 
-<form>
-	<input type="text" name="search" class="search-box search-location-box" placeholder="Enter your address or postcode to search availability"/>
-    <button id="buttonID" class="btn btn-default search-box search-location-box" name="search">Search</button><br>
-</form>	
-<div id="map_wrapper">
-    <div id="map_canvas" class="mapping"></div>
-</div>
+
 <script type="text/javascript">
       jQuery(document).ready(function() {
 
-      	jQuery('.search-location-box').keyup(function(){
-      		//console.log(this.value);
-      		if(!this.value){
-      			map.fitBounds(bounds);
-      		}
-      	});
+        
+        jQuery('.search-location-box').keyup(function(){
+          //console.log(this.value);
+          if(!this.value){
+            map.fitBounds(bounds);
+          }
+        });
 
         var searchBox = jQuery('.search-box');
-        var dataLocations = [];
         <?php foreach($rows as $key=>$value){
         	?>
         	dataLocations[<?php echo $key;?>] = [];

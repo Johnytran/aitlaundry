@@ -29,11 +29,10 @@
 		<position>banner</position>
 		<position>debug</position>
 		<position>moduleLoginPos</position>
-		<position>moduleLocationSearch</position>
 		<position>modMidlePosition</position>
-		<position>position-3</position>
-		<position>position-4</position>
-		<position>position-5</position>
+		<position>modFeaturePhoto</position>
+		<position>modHowItWork</position>
+		<position>modCombos</position>
 		<position>position-6</position>
 		<position>position-7</position>
 		<position>position-8</position>

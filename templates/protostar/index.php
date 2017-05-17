@@ -58,7 +58,15 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
     <style>
     
         /*LOGIN BUTTON*/
-        
+        ol.omniselect-results{
+			background: gray;
+		}
+		ol.omniselect-results li{
+			color: white;
+		}
+		ol.omniselect-results li.omniselect-active{
+			color: black;
+		}
         .btn-primary:focus,
         .btn-primary.focus {
             color: black; 
@@ -230,10 +238,12 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 	<main>
 	<jdoc:include type="message" />
 	<jdoc:include type="component" />
+	<jdoc:include type="modules" name="modFeaturePhoto" style="none" />
+	<jdoc:include type="modules" name="modHowItWork" style="none" />
+	<jdoc:include type="modules" name="modCombos" style="none" />
 	<jdoc:include type="modules" name="modMidlePosition" style="none" />
 	
-			<!---------- video pop up------------>
-			<div id="video" class="modal">
+	<div id="video" class="modal">
 	  <div class="modal-content animate">
 	    <span onclick="document.getElementById('video').style.display='none'" class="close" title="Close Modal">&times;</span>
 	    <h2 style="text-align:center;">HOW IT WORKS</h2>
@@ -242,21 +252,6 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 	    </video>
 	  </div>
 	</div>
-
-		</div>
-	
-		<!----------------------------------------------- LOCATIONS ------------------------------------------->
-		<div id="locations" clas="row">
-			<h1>Locations</h1>
-			<p style="margin-bottom: 10px;">Now servicing in select neighbourhoods in Sydney.</p>
-			<!-- SEARCHBOX -->
-            <jdoc:include type="modules" name="moduleLocationSearch" style="none" />
-			<!-------------------------------- Suburbs List ------------------------->
-		<div class="container-fluid row" style="padding:30px 0 50px 0;">
-
-		</div>
-		</div>
-	</main>
 	<!--------------------------------- FOOTER ------------------------------------>
 	<footer style="background-color:#4d4d4d; margin-top:2px;">
 	  <div class="container-fluid">
