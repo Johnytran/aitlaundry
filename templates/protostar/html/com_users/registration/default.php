@@ -16,7 +16,7 @@ JHtml::_('behavior.formvalidator');
         <h1>Get Started</h1>
     </div>
 <div class="gettingStarted">
-    <form class="form-horizontal row" id="member-registration" action="/aitlaundry/aitlaundry/index.php/get-started?task=registration.register" method="post" class="form-validate form-horizontal well" enctype="multipart/form-data">
+    <form class="form-horizontal row" id="member-registration" action="<?php echo JRoute::_('index.php?option=com_users&task=registration.register'); ?>" method="post" class="form-validate form-horizontal well" enctype="multipart/form-data">
                         
                     <div class="column span1-2">
                         <div class="form-group">
@@ -32,6 +32,7 @@ JHtml::_('behavior.formvalidator');
                                  <input type="text" name="jform[firstName]" id="jform_firstName" value="" class="form-control required invalid" size="30" required="required" aria-required="true" aria-invalid="true">                                
                             </div>
                         </div>
+                         <input type="hidden" name="jform[name]" value="test"/>                                
                         <div class="form-group">
                             <label for="lastName" class="col-sm-4 control-label">
                                 <label id="jform_lastName-lbl" for="jform_lastName" class="hasPopover required" title="" data-content="last name" data-original-title="Last name">	Last name<span class="star">&nbsp;*</span>

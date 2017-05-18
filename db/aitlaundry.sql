@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2017 at 02:59 AM
+-- Generation Time: May 18, 2017 at 03:40 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -1652,14 +1652,14 @@ CREATE TABLE IF NOT EXISTS `fv5oz_menu` (
   KEY `idx_alias` (`alias`(100)),
   KEY `idx_path` (`path`(100)),
   KEY `idx_language` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=147 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=148 ;
 
 --
 -- Dumping data for table `fv5oz_menu`
 --
 
 INSERT INTO `fv5oz_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `link`, `type`, `published`, `parent_id`, `level`, `component_id`, `checked_out`, `checked_out_time`, `browserNav`, `access`, `img`, `template_style_id`, `params`, `lft`, `rgt`, `home`, `language`, `client_id`) VALUES
-(1, '', 'Menu_Item_Root', 'root', '', '', '', '', 1, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', 0, 89, 0, '*', 0),
+(1, '', 'Menu_Item_Root', 'root', '', '', '', '', 1, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', 0, 91, 0, '*', 0),
 (2, 'menu', 'com_banners', 'Banners', '', 'Banners', 'index.php?option=com_banners', 'component', 0, 1, 1, 4, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners', 0, '', 1, 10, 0, '*', 1),
 (3, 'menu', 'com_banners', 'Banners', '', 'Banners/Banners', 'index.php?option=com_banners', 'component', 0, 2, 2, 4, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners', 0, '', 2, 3, 0, '*', 1),
 (4, 'menu', 'com_banners_categories', 'Categories', '', 'Banners/Categories', 'index.php?option=com_categories&extension=com_banners', 'component', 0, 2, 2, 6, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners-cat', 0, '', 4, 5, 0, '*', 1),
@@ -1703,7 +1703,8 @@ INSERT INTO `fv5oz_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `l
 (143, 'main', 'COM_JCKMAN_SUBMENU_UNINSTALL_NAME', 'com-jckman-submenu-uninstall-name', '', 'com-jckman-menu-name/com-jckman-submenu-uninstall-name', 'index.php?option=com_jckman&view=extension', 'component', 0, 139, 2, 824, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jckman/icons/icon-16-uninstaller.png', 0, '{}', 80, 81, 0, '', 1),
 (144, 'main', 'COM_JCKMAN_SUBMENU_SYSTEMCHECK_NAME', 'com-jckman-submenu-systemcheck-name', '', 'com-jckman-menu-name/com-jckman-submenu-systemcheck-name', 'index.php?option=com_jckman&view=cpanel&taskbtn=system', 'component', 0, 139, 2, 824, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jckman/icons/icon-16-systemcheck.png', 0, '{}', 82, 83, 0, '', 1),
 (145, 'main', 'COM_JCKMAN_SUBMENU_SYNC_NAME', 'com-jckman-submenu-sync-name', '', 'com-jckman-menu-name/com-jckman-submenu-sync-name', 'index.php?option=com_jckman&view=cpanel&taskbtn=sync', 'component', 0, 139, 2, 824, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jckman/icons/icon-16-sync.png', 0, '{}', 84, 85, 0, '', 1),
-(146, 'main', 'COM_JCKMAN_SUBMENU_JCKEDITOR_NAME', 'com-jckman-submenu-jckeditor-name', '', 'com-jckman-menu-name/com-jckman-submenu-jckeditor-name', 'index.php?option=com_jckman&view=cpanel&taskbtn=editor', 'component', 0, 139, 2, 824, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jckman/icons/icon-16-editor.png', 0, '{}', 86, 87, 0, '', 1);
+(146, 'main', 'COM_JCKMAN_SUBMENU_JCKEDITOR_NAME', 'com-jckman-submenu-jckeditor-name', '', 'com-jckman-menu-name/com-jckman-submenu-jckeditor-name', 'index.php?option=com_jckman&view=cpanel&taskbtn=editor', 'component', 0, 139, 2, 824, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jckman/icons/icon-16-editor.png', 0, '{}', 86, 87, 0, '', 1),
+(147, 'system-menu', 'My Account', 'my-account', '', 'my-account', 'index.php?option=com_users&view=profile&layout=edit', 'component', 1, 1, 1, 25, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"menu_show":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 89, 90, 0, '*', 0);
 
 -- --------------------------------------------------------
 
@@ -1747,14 +1748,15 @@ CREATE TABLE IF NOT EXISTS `fv5oz_messages` (
   `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`message_id`),
   KEY `useridto_state` (`user_id_to`,`state`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `fv5oz_messages`
 --
 
 INSERT INTO `fv5oz_messages` (`message_id`, `user_id_from`, `user_id_to`, `folder_id`, `date_time`, `state`, `priority`, `subject`, `message`) VALUES
-(7, 0, 0, 0, '2017-05-13 02:04:21', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: ddd');
+(7, 0, 0, 0, '2017-05-13 02:04:21', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: ddd'),
+(8, 0, 0, 0, '2017-05-17 01:14:56', 0, 0, 'Error sending email', 'An error was encountered when sending the user registration email. The error is: Could not instantiate mail function. The user who attempted to register is: dfs');
 
 -- --------------------------------------------------------
 
@@ -1816,7 +1818,7 @@ INSERT INTO `fv5oz_modules` (`id`, `asset_id`, `title`, `note`, `content`, `orde
 (13, 47, 'Admin Submenu', '', '', 1, 'submenu', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_submenu', 3, 1, '', 1, '*'),
 (14, 48, 'User Status', '', '', 2, 'status', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_status', 3, 1, '', 1, '*'),
 (15, 49, 'Title', '', '', 1, 'title', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_title', 3, 1, '', 1, '*'),
-(16, 50, 'Login Form', '', '', 1, 'moduleLoginPos', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_login', 1, 1, '{"pretext":"","posttext":"","login":"","logout":"","greeting":"1","name":"0","usesecure":"0","usetext":"0","layout":"_:default","moduleclass_sfx":"","cache":"0","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
+(16, 50, 'Login Form', '', '', 1, 'moduleLoginPos', 106, '2017-05-17 01:35:40', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_login', 1, 1, '{"pretext":"","posttext":"","login":"147","logout":"","greeting":"1","name":"0","usesecure":"0","usetext":"0","layout":"_:default","moduleclass_sfx":"","cache":"0","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
 (17, 51, 'Breadcrumbs', '', '', 1, 'position-2', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_breadcrumbs', 1, 1, '{"moduleclass_sfx":"","showHome":"1","homeText":"","showComponent":"1","separator":"","cache":"0","cache_time":"0","cachemode":"itemid"}', 0, '*'),
 (79, 52, 'Multilanguage status', '', '', 1, 'status', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'mod_multilangstatus', 3, 1, '{"layout":"_:default","moduleclass_sfx":"","cache":"0"}', 1, '*'),
 (86, 53, 'Joomla Version', '', '', 1, 'footer', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_version', 3, 1, '{"format":"short","product":"1","layout":"_:default","moduleclass_sfx":"","cache":"0"}', 1, '*'),
@@ -2151,7 +2153,7 @@ CREATE TABLE IF NOT EXISTS `fv5oz_session` (
 --
 
 INSERT INTO `fv5oz_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-('uqfh5c0hrfu65ra44l8hl3hb44', 0, 1, '1494982565', 'joomla|s:1584:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo0OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToxMDE7czo1OiJ0aW1lciI7Tzo4OiJzdGRDbGFzcyI6Mzp7czo1OiJzdGFydCI7aToxNDk0OTc0MzEyO3M6NDoibGFzdCI7aToxNDk0OTgyNTYzO3M6Mzoibm93IjtpOjE0OTQ5ODI1NjQ7fXM6NToidG9rZW4iO3M6MzI6ImRuczdRMnVKUFk3eG9HV0NvWUpzTzE1RWxrWGRoSUlpIjt9czo4OiJyZWdpc3RyeSI7TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjA6e31zOjE0OiIAKgBpbml0aWFsaXplZCI7YjoxO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086NToiSlVzZXIiOjE6e3M6MjoiaWQiO2k6MDt9czoxMDoiamNrcGx1Z2lucyI7YTo4OntpOjA7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjc6ImRlZmF1bHQiO3M6NDoibmFtZSI7czo5OiJkcmFnbmRyb3AiO31pOjE7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjc6ImRlZmF1bHQiO3M6NDoibmFtZSI7czoxMDoiaW5kZXguaHRtbCI7fWk6MjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NzoiZGVmYXVsdCI7czo0OiJuYW1lIjtzOjQ6InVzZXIiO31pOjM7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6NToiYmVlejUiO31pOjQ7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6MTA6ImJlZXpsYXlvdXQiO31pOjU7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6MTI6ImJlZXpwZXJzb25hbCI7fWk6NjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6MTA6InN0eWxlc2hlZXQiO3M6NDoibmFtZSI7czoxMDoiaW5kZXguaHRtbCI7fWk6NztPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6MTA6InN0eWxlc2hlZXQiO3M6NDoibmFtZSI7czoxMzoiamNrdHlwb2dyYXBoeSI7fX19fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fQ==";', 0, '');
+('0m1u4j270ppdi913rd1m3ibap1', 1, 0, '1495070701', 'joomla|s:720:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTo0O3M6NToidG9rZW4iO3M6MzI6IkpyYlE4Y0M4OWFjTHdkMm9SdHpESWYyUTdzVFhaeFNuIjtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTUwNzA2OTI7czo0OiJsYXN0IjtpOjE0OTUwNzA2OTc7czozOiJub3ciO2k6MTQ5NTA3MDY5ODt9fXM6ODoicmVnaXN0cnkiO086MjQ6Ikpvb21sYVxSZWdpc3RyeVxSZWdpc3RyeSI6Mzp7czo3OiIAKgBkYXRhIjtPOjg6InN0ZENsYXNzIjowOnt9czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MTtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9czo0OiJ1c2VyIjtPOjU6IkpVc2VyIjoxOntzOjI6ImlkIjtzOjM6IjEwNiI7fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 106, 'admin');
 
 -- --------------------------------------------------------
 
@@ -2535,18 +2537,19 @@ CREATE TABLE IF NOT EXISTS `fv5oz_users` (
   KEY `idx_block` (`block`),
   KEY `username` (`username`),
   KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=116 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=117 ;
 
 --
 -- Dumping data for table `fv5oz_users`
 --
 
 INSERT INTO `fv5oz_users` (`id`, `firstName`, `name`, `lastName`, `homePhone`, `mobilePhone`, `address`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`) VALUES
-(106, 'Super User', 'admin', '', '', '', '', 'admin', 'aitlaundry@gmail.com', '$2y$10$a/6j6HvIKqcyfPvHlVJd3.jVFMXYHepZuM36p7Kap.kOj0au7ORHa', 0, 1, '2017-04-10 22:44:44', '2017-05-16 22:57:20', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(106, 'Super User', 'admin', '', '', '', '', 'admin', 'aitlaundry@gmail.com', '$2y$10$a/6j6HvIKqcyfPvHlVJd3.jVFMXYHepZuM36p7Kap.kOj0au7ORHa', 0, 1, '2017-04-10 22:44:44', '2017-05-18 01:24:58', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
 (107, 'gfdgfds', 'manager', 'fads', 'fdsa', 'fdsa', 'fafdasfdsafdsf', 'manager', '5527@ait.nsw.edu.au', '$2y$10$4Ov8ixQreBzMTijs2HAiZ.6qq5.mflVhDeUtRtAL7cQZ/0VaLehd6', 0, 0, '2017-04-12 02:01:41', '2017-05-04 01:23:56', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
 (113, '22', '111111111 3', '3', '123456', '123456', 'sdafads', 'sss', 'sd@fda.com', '$2y$10$zn1Q5Jk4E2tQyiEENmRjN.z8EfeP9RGbTssriD0c05XRErqUu1WyC', 0, 0, '2017-05-04 22:25:20', '0000-00-00 00:00:00', '20b5407d26c2cec2e48f28f80451379d', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
 (114, '22', '22 3', '3', '123456', '123456', 'sdafads', 'sef', '1sd@fda.com', '$2y$10$h9Minaup1IipzSqZkYZUoO4BE15BkSz8whMAtVBlP7XgzwFhTEch6', 0, 0, '2017-05-04 22:33:53', '0000-00-00 00:00:00', 'd27cdeb2a95d8cb6e8d542583fd50039', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
-(115, 'gfsdq', 'gfsdq dfa', 'dfa', '5132132123', '213156156', 'dgdsfgsdfgfd', 'ddd', 'dsf@fdsa.com', '$2y$10$lgqZ093Ep9LxiEp/e53F7.bkH3xwQB/dB6DlZRBPE9gML36RM0KjC', 0, 0, '2017-05-13 02:04:18', '0000-00-00 00:00:00', '0ed78d1624ea56b811e76d3efb261e60', '{}', '0000-00-00 00:00:00', 0, '', '', 0);
+(115, 'gfsdq', 'gfsdq dfa', 'dfa', '5132132123', '213156156', 'dgdsfgsdfgfd', 'ddd', 'dsf@fdsa.com', '$2y$10$lgqZ093Ep9LxiEp/e53F7.bkH3xwQB/dB6DlZRBPE9gML36RM0KjC', 0, 0, '2017-05-13 02:04:18', '0000-00-00 00:00:00', '0ed78d1624ea56b811e76d3efb261e60', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
+(116, 'fdas', 'fads fdsa', 'dsa', '', '', 'dsfdsaf fdasfsda fdafdas f', 'dfs', '1fdas@fdas.das', '$2y$10$QPaPrmR3ivNaDnvsh.ScM.uMfj4JFHCIeXtzZW3zCo/d458qe3eDO', 0, 0, '2017-05-17 01:14:53', '0000-00-00 00:00:00', 'ddc43cace8b49760c4ab83ad1a2e165e', '{}', '0000-00-00 00:00:00', 0, '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -2631,7 +2634,8 @@ INSERT INTO `fv5oz_user_usergroup_map` (`user_id`, `group_id`) VALUES
 (107, 6),
 (113, 2),
 (114, 2),
-(115, 2);
+(115, 2),
+(116, 2);
 
 -- --------------------------------------------------------
 
