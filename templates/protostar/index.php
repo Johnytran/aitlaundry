@@ -172,6 +172,10 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
             color: #333;
             white-space: nowrap;
         }
+        
+        #modlgn-remember{
+            margin-left: 10px;
+        }
     </style>
 <body class="site <?php echo $option
 	. ' view-' . $view
