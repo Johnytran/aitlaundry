@@ -40,11 +40,15 @@ class CombosControllerCombos extends CombosController
 		if($combos_id){
 			$user = JFactory::getUser();
 			require_once(JPATH_COMPONENT .'/cart.class.php');
-			$cart = new Cart();
-			$cart->add($combos_id); 
-			$session = JFactory::getSession();
-			$session->set('cart', $cart);
-
+			$cart = new Cart($combos_id, 1);
+			$itemsSession = $cart->getCart();
+			//print_r(count($itemsSession));die;
+			if(count($itemsSession)<1){
+				$cart->addProduct(); 
+			}else{
+				return $this->setRedirect('index.php?option=com_users&view=profile&layout=edit&user_id='.$user->id.'&tab=2', 'Please complete checkout firstly before purchase other combos.');
+			}
+			
 			if($user->id)
 				return $this->setRedirect('index.php?option=com_users&view=profile&layout=edit&user_id='.$user->id.'&tab=2', 'The combos is added to cart');
 			else

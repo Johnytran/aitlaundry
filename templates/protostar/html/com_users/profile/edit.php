@@ -8,6 +8,10 @@
  */
 
 defined('_JEXEC') or die;
+$tab= JRequest::getVar('tab',1);
+$session = JFactory::getSession();
+$cart = $session->get('yourcart');
+
 ?>
 
 <div id="abouttitle" class="container-fluid">
@@ -15,13 +19,13 @@ defined('_JEXEC') or die;
             </div>
 			<div class="tab">
 				<div>
-					<button class="tablinks" onclick="openAccount(event, 'Personal')" id="defaultOpen">Personal Info</button>
+					<button class="tablinks" onclick="openAccount(event, 'Personal')" <?php echo ($tab==1)?'id="defaultOpen"':'';?>>Personal Info</button>
 				</div>
 				<div>				
-					<button class="tablinks" onclick="openAccount(event, 'Combo')">Combo And Services</button>
+					<button class="tablinks" onclick="openAccount(event, 'Combo')" <?php echo ($tab==2)?'id="defaultOpen"':'';?>>Combo And Services</button>
 				</div>	
 				<div>				
-					<button class="tablinks" onclick="openAccount(event, 'PaymentHistory')">Payment History</button>
+					<button class="tablinks" onclick="openAccount(event, 'PaymentHistory')" <?php echo ($tab==3)?'id="defaultOpen"':'';?>>Payment History</button>
 				</div>	
 			</div>
 			<div id="Personal" class="tabcontent">
@@ -91,6 +95,30 @@ defined('_JEXEC') or die;
 
 			<div id="Combo" class="tabcontent">
 				<h3>Combo's and services</h3>
+				<?php 
+				if(count($cart)){?>
+				<div class="row">
+				  <div class="col-sm-4">Num</div>
+				  <div class="col-sm-4">Combos</div>
+				  <div class="col-sm-4">Quantity</div>
+				  <div class="col-sm-4">Price</div>
+				</div>
+				<?php
+					
+					foreach($cart as $key=>$value){?>
+						<div class="row">
+						  <div class="col-sm-4"><?php echo $value["id"];?></div>
+						  <div class="col-sm-4"><?php echo $value["name"];?></div>
+						  <div class="col-sm-4">1</div>
+						  <div class="col-sm-4">$<?php echo $value["price"];?></div>
+						</div>	
+				<?php	
+					}
+				}else{?>
+					<p>There is no products in your cart currently, please start shoosing a combo.</p>
+				<?php 
+				}
+				?>
 			</div>
 			
 			<div id="PaymentHistory" class="tabcontent">

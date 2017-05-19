@@ -9,10 +9,10 @@
  */
 
 defined('_JEXEC') or die;
-
-$tab= JRequest::getVar('tab');
+require_once(JPATH_SITE .'/components/com_combos/cart.class.php');
+$tab= JRequest::getVar('tab',1);
 $session = JFactory::getSession();
-$cart = $session->get('cart');
+$cart = $session->get('yourcart');
 ?>
 
 <div id="abouttitle" class="container-fluid">
@@ -96,13 +96,30 @@ $cart = $session->get('cart');
 
 			<div id="Combo" class="tabcontent">
 				<h3>Combo's and services</h3>
-
+				<?php 
+				if(count($cart)){?>
 				<div class="row">
 				  <div class="col-sm-4">Num</div>
 				  <div class="col-sm-4">Combos</div>
 				  <div class="col-sm-4">Quantity</div>
 				  <div class="col-sm-4">Price</div>
 				</div>
+				<?php
+					
+					foreach($cart as $key=>$value){?>
+						<div class="row">
+						  <div class="col-sm-4"><?php echo $value["id"];?></div>
+						  <div class="col-sm-4"><?php echo $value["name"];?></div>
+						  <div class="col-sm-4">1</div>
+						  <div class="col-sm-4">$<?php echo $value["price"];?></div>
+						</div>	
+				<?php	
+					}
+				}else{?>
+					<p>There is no products in your cart currently, please start shoosing a combo.</p>
+				<?php 
+				}
+				?>
 			</div>
 			
 			<div id="PaymentHistory" class="tabcontent">

@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidator');
-$tab = JRequest::getVar('tab');
+$tab = JRequest::getVar('tab',1);
 ?>
     <style>
         .login input, label{
