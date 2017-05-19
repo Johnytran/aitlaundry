@@ -17,13 +17,12 @@ body h2{
 	line-height: 30px; 
 	color: white;
 }
-
-a {
+.comboContainer a {
     color: white;
     text-decoration: none;
 }
 
-a:focus, a:hover {
+.comboContainer a:focus, a:hover {
     color: white;
     text-decoration: underline;
 }
@@ -158,6 +157,21 @@ span#impressed {
 .leftBorder{
   border-left:2px solid white;
 }
+
+.videoWrapper {
+	
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 50px;
+	height: 0;
+}
+.videoWrapper iframe {
+	position: absolute;
+	
+	left: 70px;
+	width: 80%;
+	height: 80%;
+}
+
 /*************** COMBOS **********************/
 .comboContainer{
     height: auto;
@@ -789,6 +803,19 @@ div.space1{
     .comboContainer{
         flex-direction: column;
     
+    }
+    .videoWrapper {
+	
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+    }
+    .videoWrapper iframe {
+        position: absolute;
+
+        left: 0px;
+        width: 80%;
+        height: 80%;
     }
 }
 

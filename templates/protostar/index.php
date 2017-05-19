@@ -250,10 +250,9 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 	<div id="video" class="modal">
 	  <div class="modal-content animate">
 	    <span onclick="document.getElementById('video').style.display='none'" class="close" title="Close Modal">&times;</span>
-	    <h2 style="text-align:center;">HOW IT WORKS</h2>
-	    <video width="400" controls>
-	      <source src="" type="">
-	    </video>
+	    <div class="videoWrapper">
+             <iframe src="https://www.youtube.com/embed/-fDrXUvm0so?autoplay=1" frameborder="0" ></iframe>
+          </div>        
 	  </div>
 	</div>
 	<!--------------------------------- FOOTER ------------------------------------>
