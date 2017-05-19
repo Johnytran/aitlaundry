@@ -1,3 +1,4 @@
+
 <?php
 /**
  * @package     Joomla.Site
@@ -8,23 +9,157 @@
  */
 
 defined('_JEXEC') or die;
+
+$tab= JRequest::getVar('tab');
+$session = JFactory::getSession();
+$cart = $session->get('cart');
 ?>
-<div class="profile<?php echo $this->pageclass_sfx?>">
-<?php if ($this->params->get('show_page_heading')) : ?>
-<div class="page-header">
-	<h1>
-		<?php echo $this->escape($this->params->get('page_heading')); ?>
-	</h1>
-</div>
-<?php endif; ?>
-<?php if (JFactory::getUser()->id == $this->data->id) : ?>
-<ul class="btn-toolbar pull-right">
-	<li class="btn-group">
-		<a class="btn" href="<?php echo JRoute::_('index.php?option=com_users&task=profile.edit&user_id=' . (int) $this->data->id);?>">
-			<span class="icon-user"></span> <?php echo JText::_('COM_USERS_EDIT_PROFILE'); ?></a>
-	</li>
-</ul>
-<?php endif; ?>
 
+<div id="abouttitle" class="container-fluid">
+                <h1>My Account</h1>
+            </div>
+			<div class="tab">
+				<div>
+					<button class="tablinks" onclick="openAccount(event, 'Personal')" <?php echo ($tab==1)?'id="defaultOpen"':'';?>>Personal Info</button>
+				</div>
+				<div>				
+					<button class="tablinks" onclick="openAccount(event, 'Combo')" <?php echo ($tab==2)?'id="defaultOpen"':'';?>>Combo And Services</button>
+				</div>	
+				<div>				
+					<button class="tablinks" onclick="openAccount(event, 'PaymentHistory')" <?php echo ($tab==3)?'id="defaultOpen"':'';?>>Payment History</button>
+				</div>	
+			</div>
+			<div id="Personal" class="tabcontent">
+				<div id="personalTable">
+                    <form class="form-horizontal row" action="index.php?option=com_users&task=profile.update" method="post">
+                    <div class="column span1-2">
+                            <div class="form-group">
+                            <label for="firstName" class="col-sm-4 control-label">First Name:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" disabled="disabled" name="firstName" value="<?php echo $this->data->firstName;?>" id="firstName" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="col-sm-4 control-label">Last Name:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" disabled="disabled" name="lastName" value="<?php echo $this->data->lastName;?>" id="lastName" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailInput" class="col-sm-4 control-label">Email:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" disabled="disabled" name="email" value="<?php echo $this->data->email;?>" id="emailInput" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobilePhone" class="col-sm-4 control-label">Mobile Phone:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" disabled="disabled" value="<?php echo $this->data->mobilePhone;?>" name="mobilePhone" value="<?php echo $this->data->mobilePhone;?>" id="mobilePhone" placeholder="Mobile Phone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="homePhone" class="col-sm-4 control-label">Home Phone:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="homePhone" disabled="disabled" id="homePhone" value="<?php echo $this->data->homePhone;?>" placeholder="Home Phone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-sm-4 control-label">Password:</label>
+                            <div class="col-sm-8">
+                                <input type="password" name="password" disabled="disabled" class="form-control" id="inputPassword" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-sm-4 control-label">Confirm Password</label>
+                            <div class="col-sm-8">
+                                <input type="password" disabled="disabled" name="password2" class="form-control" id="inputPassword" placeholder="Password">
+                            </div>
+                        </div>
+                        </div>
+                        <div class="column span1-2">
+                            <div class="form-group">
+                            <label for="streetAddress" class="col-sm-4 control-label">Address:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" disabled="disabled" name="streetAddress" value="<?php echo $this->data->address;?>" value="<?php echo $this->data->address;?>" id="streetAddress" placeholder="Street Address">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <a class="btn btn-default btnStyle" href="<?php echo JRoute::_('index.php?option=com_users&task=profile.edit&user_id=' . (int) $this->data->id);?>">Edit</a>
+                            </div>
+                        </div>
+                        </div>
+                    </form>
+				</div>
+			</div>
 
-</div>
+			<div id="Combo" class="tabcontent">
+				<h3>Combo's and services</h3>
+
+				<div class="row">
+				  <div class="col-sm-4">Num</div>
+				  <div class="col-sm-4">Combos</div>
+				  <div class="col-sm-4">Quantity</div>
+				  <div class="col-sm-4">Price</div>
+				</div>
+			</div>
+			
+			<div id="PaymentHistory" class="tabcontent">
+				<h3>Payment History</h3>
+				<div class="paymentTableHolder">
+					<table id="paymentTable" style="width:100%";>
+						<tr>
+							<th>OrderID</th>
+							<th>Payment</th>
+							<th>Payment type</th>
+							<th>Combo Type</th>
+							<th>Pickup Date</th>
+							<th>Dropoff Date</th>
+							<th>Status</th>						
+						</tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+<script>
+	
+	function openAccount(evt, tabName) {
+	    var i, tabcontent, tablinks;
+	    tabcontent = document.getElementsByClassName("tabcontent");
+	    for (i = 0; i < tabcontent.length; i++) {
+	        tabcontent[i].style.display = "none";
+	    }
+	    tablinks = document.getElementsByClassName("tablinks");
+	    for (i = 0; i < tablinks.length; i++) {
+	        tablinks[i].className = tablinks[i].className.replace(" active", "");
+	    }
+	    document.getElementById(tabName).style.display = "block";
+	    evt.currentTarget.className += " active";
+	}
+	document.getElementById("defaultOpen").click();
+</script>

@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidator');
+$tab = JRequest::getVar('tab');
 ?>
 <div class="login<?php echo $this->pageclass_sfx; ?>">
 	<?php if ($this->params->get('show_page_heading')) : ?>
@@ -80,9 +81,9 @@ JHtml::_('behavior.formvalidator');
 			</div>
 
 			<?php if ($this->params->get('login_redirect_url')) : ?>
-				<input type="hidden" name="return" value="<?php echo base64_encode($this->params->get('login_redirect_url', $this->form->getValue('return'))); ?>" />
+				<input type="hidden" name="return" value="<?php echo base64_encode($this->params->get('login_redirect_url', $this->form->getValue('return')).'&tab='.$tab); ?>" />
 			<?php else : ?>
-				<input type="hidden" name="return" value="<?php echo base64_encode($this->params->get('login_redirect_menuitem', $this->form->getValue('return'))); ?>" />
+				<input type="hidden" name="return" value="<?php echo base64_encode($this->params->get('login_redirect_menuitem', $this->form->getValue('return')).'&tab='.$tab); ?>" />
 			<?php endif; ?>
 			<?php echo JHtml::_('form.token'); ?>
 		</fieldset>

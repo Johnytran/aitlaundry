@@ -34,4 +34,24 @@ class CombosControllerCombos extends CombosController
 
 		return $model;
 	}
+
+	public function addCart(){
+		$combos_id = JRequest::getVar('id');
+		if($combos_id){
+			$user = JFactory::getUser();
+			require_once(JPATH_COMPONENT .'/cart.class.php');
+			$cart = new Cart();
+			$cart->add($combos_id); 
+			$session = JFactory::getSession();
+			$session->set('cart', $cart);
+
+			if($user->id)
+				return $this->setRedirect('index.php?option=com_users&view=profile&layout=edit&user_id='.$user->id.'&tab=2', 'The combos is added to cart');
+			else
+				return $this->setRedirect('index.php?option=com_users&view=login&tab=2', 'Cart is added please login to process your cart.');
+		}else{
+			return $this->setRedirect('index.php', 'The chosen product has got error, please try more.');
+		}
+		
+	}
 }

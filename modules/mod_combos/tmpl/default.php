@@ -75,7 +75,7 @@ $result = $db->loadObjectList();
 							?>
 							
 							<div class="selectcombo">
-								<h4>SELECT</h4>
+								<h4><a href="index.php?option=com_combos&task=combos.addCart&id=<?php echo $value->id;?>">SELECT</a></h4>
 							</div>
 						</div>	
 

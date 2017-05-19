@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2017 at 03:40 AM
+-- Generation Time: May 20, 2017 at 01:50 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -1704,7 +1704,7 @@ INSERT INTO `fv5oz_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `l
 (144, 'main', 'COM_JCKMAN_SUBMENU_SYSTEMCHECK_NAME', 'com-jckman-submenu-systemcheck-name', '', 'com-jckman-menu-name/com-jckman-submenu-systemcheck-name', 'index.php?option=com_jckman&view=cpanel&taskbtn=system', 'component', 0, 139, 2, 824, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jckman/icons/icon-16-systemcheck.png', 0, '{}', 82, 83, 0, '', 1),
 (145, 'main', 'COM_JCKMAN_SUBMENU_SYNC_NAME', 'com-jckman-submenu-sync-name', '', 'com-jckman-menu-name/com-jckman-submenu-sync-name', 'index.php?option=com_jckman&view=cpanel&taskbtn=sync', 'component', 0, 139, 2, 824, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jckman/icons/icon-16-sync.png', 0, '{}', 84, 85, 0, '', 1),
 (146, 'main', 'COM_JCKMAN_SUBMENU_JCKEDITOR_NAME', 'com-jckman-submenu-jckeditor-name', '', 'com-jckman-menu-name/com-jckman-submenu-jckeditor-name', 'index.php?option=com_jckman&view=cpanel&taskbtn=editor', 'component', 0, 139, 2, 824, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_jckman/icons/icon-16-editor.png', 0, '{}', 86, 87, 0, '', 1),
-(147, 'system-menu', 'My Account', 'my-account', '', 'my-account', 'index.php?option=com_users&view=profile&layout=edit', 'component', 1, 1, 1, 25, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"menu_show":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 89, 90, 0, '*', 0);
+(147, 'system-menu', 'My Account', 'my-account', '', 'my-account', 'index.php?option=com_users&view=profile', 'component', 1, 1, 1, 25, 0, '0000-00-00 00:00:00', 0, 1, ' ', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"menu_show":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 89, 90, 0, '*', 0);
 
 -- --------------------------------------------------------
 
@@ -1818,7 +1818,7 @@ INSERT INTO `fv5oz_modules` (`id`, `asset_id`, `title`, `note`, `content`, `orde
 (13, 47, 'Admin Submenu', '', '', 1, 'submenu', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_submenu', 3, 1, '', 1, '*'),
 (14, 48, 'User Status', '', '', 2, 'status', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_status', 3, 1, '', 1, '*'),
 (15, 49, 'Title', '', '', 1, 'title', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_title', 3, 1, '', 1, '*'),
-(16, 50, 'Login Form', '', '', 1, 'moduleLoginPos', 106, '2017-05-17 01:35:40', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_login', 1, 1, '{"pretext":"","posttext":"","login":"147","logout":"","greeting":"1","name":"0","usesecure":"0","usetext":"0","layout":"_:default","moduleclass_sfx":"","cache":"0","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
+(16, 50, 'Login Form', '', '', 1, 'moduleLoginPos', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_login', 1, 1, '{"pretext":"","posttext":"","login":"147","logout":"","greeting":"1","name":"0","usesecure":"0","usetext":"0","layout":"_:default","moduleclass_sfx":"","cache":"0","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
 (17, 51, 'Breadcrumbs', '', '', 1, 'position-2', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_breadcrumbs', 1, 1, '{"moduleclass_sfx":"","showHome":"1","homeText":"","showComponent":"1","separator":"","cache":"0","cache_time":"0","cachemode":"itemid"}', 0, '*'),
 (79, 52, 'Multilanguage status', '', '', 1, 'status', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'mod_multilangstatus', 3, 1, '{"layout":"_:default","moduleclass_sfx":"","cache":"0"}', 1, '*'),
 (86, 53, 'Joomla Version', '', '', 1, 'footer', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_version', 3, 1, '{"format":"short","product":"1","layout":"_:default","moduleclass_sfx":"","cache":"0"}', 1, '*'),
@@ -2153,7 +2153,7 @@ CREATE TABLE IF NOT EXISTS `fv5oz_session` (
 --
 
 INSERT INTO `fv5oz_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-('0m1u4j270ppdi913rd1m3ibap1', 1, 0, '1495070701', 'joomla|s:720:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTo0O3M6NToidG9rZW4iO3M6MzI6IkpyYlE4Y0M4OWFjTHdkMm9SdHpESWYyUTdzVFhaeFNuIjtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTUwNzA2OTI7czo0OiJsYXN0IjtpOjE0OTUwNzA2OTc7czozOiJub3ciO2k6MTQ5NTA3MDY5ODt9fXM6ODoicmVnaXN0cnkiO086MjQ6Ikpvb21sYVxSZWdpc3RyeVxSZWdpc3RyeSI6Mzp7czo3OiIAKgBkYXRhIjtPOjg6InN0ZENsYXNzIjowOnt9czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MTtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9czo0OiJ1c2VyIjtPOjU6IkpVc2VyIjoxOntzOjI6ImlkIjtzOjM6IjEwNiI7fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 106, 'admin');
+('lp3plfim7jobaojk7aleeeidp0', 0, 1, '1495237764', 'joomla|s:712:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjozOntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToyO3M6NToidGltZXIiO086ODoic3RkQ2xhc3MiOjM6e3M6NToic3RhcnQiO2k6MTQ5NTIzNzc2MTtzOjQ6Imxhc3QiO2k6MTQ5NTIzNzc2MTtzOjM6Im5vdyI7aToxNDk1MjM3NzY0O31zOjU6InRva2VuIjtzOjMyOiJkcEoxRm5rQUNhd2F5RnJKYjNlMnR2djdLN1NvVHBzdSI7fXM6ODoicmVnaXN0cnkiO086MjQ6Ikpvb21sYVxSZWdpc3RyeVxSZWdpc3RyeSI6Mzp7czo3OiIAKgBkYXRhIjtPOjg6InN0ZENsYXNzIjowOnt9czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MTtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9czo0OiJ1c2VyIjtPOjU6IkpVc2VyIjoxOntzOjI6ImlkIjtpOjA7fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 0, '');
 
 -- --------------------------------------------------------
 
@@ -2544,7 +2544,7 @@ CREATE TABLE IF NOT EXISTS `fv5oz_users` (
 --
 
 INSERT INTO `fv5oz_users` (`id`, `firstName`, `name`, `lastName`, `homePhone`, `mobilePhone`, `address`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`) VALUES
-(106, 'Super User', 'admin', '', '', '', '', 'admin', 'aitlaundry@gmail.com', '$2y$10$a/6j6HvIKqcyfPvHlVJd3.jVFMXYHepZuM36p7Kap.kOj0au7ORHa', 0, 1, '2017-04-10 22:44:44', '2017-05-18 01:24:58', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(106, 'fdas', 'admin', 'eiiii', '', '324324', '', 'admin', 'fdas@fdas.das', '$2y$10$a/6j6HvIKqcyfPvHlVJd3.jVFMXYHepZuM36p7Kap.kOj0au7ORHa', 0, 1, '2017-04-10 22:44:44', '2017-05-19 20:25:09', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
 (107, 'gfdgfds', 'manager', 'fads', 'fdsa', 'fdsa', 'fafdasfdsafdsf', 'manager', '5527@ait.nsw.edu.au', '$2y$10$4Ov8ixQreBzMTijs2HAiZ.6qq5.mflVhDeUtRtAL7cQZ/0VaLehd6', 0, 0, '2017-04-12 02:01:41', '2017-05-04 01:23:56', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
 (113, '22', '111111111 3', '3', '123456', '123456', 'sdafads', 'sss', 'sd@fda.com', '$2y$10$zn1Q5Jk4E2tQyiEENmRjN.z8EfeP9RGbTssriD0c05XRErqUu1WyC', 0, 0, '2017-05-04 22:25:20', '0000-00-00 00:00:00', '20b5407d26c2cec2e48f28f80451379d', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
 (114, '22', '22 3', '3', '123456', '123456', 'sdafads', 'sef', '1sd@fda.com', '$2y$10$h9Minaup1IipzSqZkYZUoO4BE15BkSz8whMAtVBlP7XgzwFhTEch6', 0, 0, '2017-05-04 22:33:53', '0000-00-00 00:00:00', 'd27cdeb2a95d8cb6e8d542583fd50039', '{}', '0000-00-00 00:00:00', 0, '', '', 0),

@@ -32,6 +32,8 @@ class UsersControllerUser extends UsersController
 		$app    = JFactory::getApplication();
 		$input  = $app->input;
 		$method = $input->getMethod();
+		// $tab = JRequest::getVar('tab');
+		// die($tab);
 
 		// Populate the data array:
 		$data = array();
@@ -41,6 +43,7 @@ class UsersControllerUser extends UsersController
 		$data['password']  = $input->$method->get('password', '', 'RAW');
 		$data['secretkey'] = $input->$method->get('secretkey', '', 'RAW');
 
+		//die($data['return']);
 		// Check for a simple menu item id
 		if (is_numeric($data['return']))
 		{

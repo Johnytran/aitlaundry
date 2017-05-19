@@ -79,7 +79,36 @@ class UsersControllerProfile extends UsersController
 
 		return true;
 	}
+	public function update(){
 
+		// print_r($_POST);die;
+		$db = JFactory::getDBO();
+		$query = $db->getQuery(true);
+		$user = JFactory::getUser();
+		$fields = array(
+		    $db->quoteName('firstName') . ' = ' . $db->quote($_POST['firstName']),
+		    $db->quoteName('lastName') . ' = ' . $db->quote($_POST['lastName']),
+		    $db->quoteName('email') . ' = ' . $db->quote($_POST['email']),
+		    $db->quoteName('mobilePhone') . ' = ' . $db->quote($_POST['mobilePhone']),
+		    $db->quoteName('homePhone') . ' = ' . $db->quote($_POST['homePhone']),
+		);
+
+		$conditions = array(
+		    $db->quoteName('id') . ' = '.$user->id
+		);
+		$query->update($db->quoteName('#__users'))->set($fields)->where($conditions);
+ 
+		$db->setQuery($query);
+		 
+		$result = $db->execute();
+		$message = '';
+		if($result)
+			$message = "User Information has been updated";
+		else
+			$message = "Fail in updating data";
+
+		return $this->setRedirect('index.php?option=com_users&view=profile', $message);
+	}
 	/**
 	 * Method to save a user's profile data.
 	 *
