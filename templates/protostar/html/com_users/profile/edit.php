@@ -13,7 +13,16 @@ $session = JFactory::getSession();
 $cart = $session->get('yourcart');
 
 ?>
+<style>
+    .close{
+           position: relative;
+            top: -20px;
+            color: #000;
+            font-size: 80px;
+            font-weight: bold;
+    }
 
+</style>
 <div id="abouttitle" class="container-fluid">
                 <h1>My Account</h1>
             </div>
