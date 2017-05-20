@@ -9,10 +9,11 @@
  */
 
 defined('_JEXEC') or die;
-
-$tab= JRequest::getVar('tab');
+require_once(JPATH_SITE .'/components/com_combos/cart.class.php');
+$tab= JRequest::getVar('tab',1);
 $session = JFactory::getSession();
 $cart = $session->get('cart');
+print_r($cart);
 ?>
 
 <div id="abouttitle" class="container-fluid">
