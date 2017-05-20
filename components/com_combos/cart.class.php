@@ -29,14 +29,24 @@ class cart{
             $product = $this->product();
             $temp['id']=$product['id'];
             $temp['quantity']=1;
-            $temp['price']= $product['price'];
+            $temp['price']= $this->getPrice($product['id']);
             $temp['name']= $product['name'];
                         
             $this->yourcart[$this->rand_id()]=$temp;  
         }
         $this->session->set('yourcart',$this->yourcart);
     }
-     
+    public function getPrice($combo_id){
+    	$db =&JFactory::getDBO();
+        $query = 'SELECT sum(price) as total FROM #__services where comboid ='.$combo_id;
+        $db->setQuery($query);
+        $total= $db->loadResult();
+        if ($db->getErrorNum()) {
+             echo $db->stderr();
+             return 0;
+        }
+        return $total;
+    }
     public function updateproduct($id){
         //$id is product id
         $this->yourcart[$this->id]['quantity']=$this->quantity;

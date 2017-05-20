@@ -110,7 +110,7 @@ $cart = $session->get('yourcart');
 						  <div class="col-sm-4"><?php echo $value["id"];?></div>
 						  <div class="col-sm-4"><?php echo $value["name"];?></div>
 						  <div class="col-sm-4">1</div>
-						  <div class="col-sm-4"><?php echo $value["price"];?></div>
+						  <div class="col-sm-4">$<?php echo $value["price"];?></div>
 						</div>	
 				<?php	
 					}
