@@ -18,13 +18,13 @@ $db->setQuery($query);
 $result = $db->loadObjectList();
 ?>
 
-<div id="combos" class="container-fluid">
+<div id="combos" class="container-fluid" >
 	<h1>Combos</h1>
 	<div class="combosection">
-		<div class="container-fluid" style="padding:0px 30px 50px 30px;">
+		<div class="container-fluid" style="padding:20px; background-color:white;">
 			<h5>Little explaination of how the combo system works!</h5>
 		</div>
-		<div style="max-width:1100px; margin:0 auto 20px auto">
+		<div class="comboContainer">
 			<?php
 				if($result==null){
 					echo "<p>There has no had combos available recently</p>";

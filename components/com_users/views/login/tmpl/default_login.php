@@ -13,6 +13,37 @@ JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidator');
 $tab = JRequest::getVar('tab');
 ?>
+    <style>
+        .login input, label{
+            float: left;
+            margin-bottom: 10px;
+        }
+        
+
+        #remember{
+            font-size: 50px;
+            margin-left: 10px;
+        }
+        .nav-stacked{
+            padding: 0;
+        }
+        .extraOptions{
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .nav-stacked li{
+            max-width: 500px;
+            
+        }
+        .container{
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        #password-lbl{
+            margin-top: 10px;
+            
+        }
+    </style>
 <div class="login<?php echo $this->pageclass_sfx; ?>">
 	<?php if ($this->params->get('show_page_heading')) : ?>
 	<div class="page-header">
@@ -40,7 +71,7 @@ $tab = JRequest::getVar('tab');
 
 	<form action="<?php echo JRoute::_('index.php?option=com_users&task=user.login'); ?>" method="post" class="form-validate form-horizontal well">
 
-		<fieldset>
+		<div class="container">
 			<?php foreach ($this->form->getFieldset('credentials') as $field) : ?>
 				<?php if (!$field->hidden) : ?>
 					<div class="control-group">
@@ -74,7 +105,7 @@ $tab = JRequest::getVar('tab');
 
 			<div class="control-group">
 				<div class="controls">
-					<button type="submit" class="btn btn-primary">
+					<button type="submit">
 						<?php echo JText::_('JLOGIN'); ?>
 					</button>
 				</div>
@@ -86,26 +117,26 @@ $tab = JRequest::getVar('tab');
 				<input type="hidden" name="return" value="<?php echo base64_encode($this->params->get('login_redirect_menuitem', $this->form->getValue('return')).'&tab='.$tab); ?>" />
 			<?php endif; ?>
 			<?php echo JHtml::_('form.token'); ?>
-		</fieldset>
+		</div>
 	</form>
 </div>
-<div>
-	<ul class="nav nav-tabs nav-stacked">
-		<li>
-			<a href="<?php echo JRoute::_('index.php?option=com_users&view=reset'); ?>">
-			<?php echo JText::_('COM_USERS_LOGIN_RESET'); ?></a>
-		</li>
-		<li>
-			<a href="<?php echo JRoute::_('index.php?option=com_users&view=remind'); ?>">
-			<?php echo JText::_('COM_USERS_LOGIN_REMIND'); ?></a>
-		</li>
+<div class="extraOptions">
+	<ul class="container nav nav-tabs nav-stacked">
 		<?php
 		$usersConfig = JComponentHelper::getParams('com_users');
 		if ($usersConfig->get('allowUserRegistration')) : ?>
 		<li>
 			<a href="<?php echo JRoute::_('index.php?option=com_users&view=registration'); ?>">
-				<?php echo JText::_('COM_USERS_LOGIN_REGISTER'); ?></a>
+				<?php echo JText::_('Create an account'); ?></a>
 		</li>
 		<?php endif; ?>
+		<li>
+			<a href="<?php echo JRoute::_('index.php?option=com_users&view=remind'); ?>">
+			<?php echo JText::_('COM_USERS_LOGIN_REMIND'); ?></a>
+		</li>
+		<li>
+			<a href="<?php echo JRoute::_('index.php?option=com_users&view=reset'); ?>">
+			<?php echo JText::_('COM_USERS_LOGIN_RESET'); ?></a>
+		</li>
 	</ul>
 </div>
