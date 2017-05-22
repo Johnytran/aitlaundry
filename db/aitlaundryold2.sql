@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.1.14
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2017 at 03:09 AM
--- Server version: 5.7.14
--- PHP Version: 5.6.25
+-- Generation Time: May 23, 2017 at 12:52 AM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `aitlaundry`
@@ -26,16 +26,20 @@ SET time_zone = "+00:00";
 -- Table structure for table `fv5oz_assets`
 --
 
-CREATE TABLE `fv5oz_assets` (
-  `id` int(10) UNSIGNED NOT NULL COMMENT 'Primary Key',
+CREATE TABLE IF NOT EXISTS `fv5oz_assets` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
   `parent_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set parent.',
   `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
-  `level` int(10) UNSIGNED NOT NULL COMMENT 'The cached level in the nested tree.',
+  `level` int(10) unsigned NOT NULL COMMENT 'The cached level in the nested tree.',
   `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The unique name for the asset.\n',
   `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The descriptive title for the asset.',
-  `rules` varchar(5120) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded access control.'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `rules` varchar(5120) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded access control.',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_asset_name` (`name`),
+  KEY `idx_lft_rgt` (`lft`,`rgt`),
+  KEY `idx_parent_id` (`parent_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=90 ;
 
 --
 -- Dumping data for table `fv5oz_assets`
@@ -126,10 +130,12 @@ INSERT INTO `fv5oz_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 -- Table structure for table `fv5oz_associations`
 --
 
-CREATE TABLE `fv5oz_associations` (
+CREATE TABLE IF NOT EXISTS `fv5oz_associations` (
   `id` int(11) NOT NULL COMMENT 'A reference to the associated item.',
   `context` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The context of the associated item.',
-  `key` char(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The key for the association computed from an md5 on associated ids.'
+  `key` char(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The key for the association computed from an md5 on associated ids.',
+  PRIMARY KEY (`context`,`id`),
+  KEY `idx_key` (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -138,8 +144,8 @@ CREATE TABLE `fv5oz_associations` (
 -- Table structure for table `fv5oz_banners`
 --
 
-CREATE TABLE `fv5oz_banners` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_banners` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `cid` int(11) NOT NULL DEFAULT '0',
   `type` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -149,10 +155,10 @@ CREATE TABLE `fv5oz_banners` (
   `clicks` int(11) NOT NULL DEFAULT '0',
   `clickurl` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `state` tinyint(3) NOT NULL DEFAULT '0',
-  `catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `catid` int(10) unsigned NOT NULL DEFAULT '0',
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `custombannercode` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sticky` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `sticky` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `ordering` int(11) NOT NULL DEFAULT '0',
   `metakey` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -161,19 +167,25 @@ CREATE TABLE `fv5oz_banners` (
   `purchase_type` tinyint(4) NOT NULL DEFAULT '-1',
   `track_clicks` tinyint(4) NOT NULL DEFAULT '-1',
   `track_impressions` tinyint(4) NOT NULL DEFAULT '-1',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `reset` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_by` int(10) unsigned NOT NULL DEFAULT '0',
   `created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
+  `version` int(10) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `idx_state` (`state`),
+  KEY `idx_own_prefix` (`own_prefix`),
+  KEY `idx_metakey_prefix` (`metakey_prefix`(100)),
+  KEY `idx_banner_catid` (`catid`),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -181,22 +193,25 @@ CREATE TABLE `fv5oz_banners` (
 -- Table structure for table `fv5oz_banner_clients`
 --
 
-CREATE TABLE `fv5oz_banner_clients` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_banner_clients` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `contact` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `extrainfo` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `state` tinyint(3) NOT NULL DEFAULT '0',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `metakey` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `own_prefix` tinyint(4) NOT NULL DEFAULT '0',
   `metakey_prefix` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `purchase_type` tinyint(4) NOT NULL DEFAULT '-1',
   `track_clicks` tinyint(4) NOT NULL DEFAULT '-1',
-  `track_impressions` tinyint(4) NOT NULL DEFAULT '-1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `track_impressions` tinyint(4) NOT NULL DEFAULT '-1',
+  PRIMARY KEY (`id`),
+  KEY `idx_own_prefix` (`own_prefix`),
+  KEY `idx_metakey_prefix` (`metakey_prefix`(100))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -204,11 +219,15 @@ CREATE TABLE `fv5oz_banner_clients` (
 -- Table structure for table `fv5oz_banner_tracks`
 --
 
-CREATE TABLE `fv5oz_banner_tracks` (
+CREATE TABLE IF NOT EXISTS `fv5oz_banner_tracks` (
   `track_date` datetime NOT NULL,
-  `track_type` int(10) UNSIGNED NOT NULL,
-  `banner_id` int(10) UNSIGNED NOT NULL,
-  `count` int(10) UNSIGNED NOT NULL DEFAULT '0'
+  `track_type` int(10) unsigned NOT NULL,
+  `banner_id` int(10) unsigned NOT NULL,
+  `count` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`track_date`,`track_type`,`banner_id`),
+  KEY `idx_track_date` (`track_date`),
+  KEY `idx_track_type` (`track_type`),
+  KEY `idx_banner_id` (`banner_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -217,13 +236,13 @@ CREATE TABLE `fv5oz_banner_tracks` (
 -- Table structure for table `fv5oz_categories`
 --
 
-CREATE TABLE `fv5oz_categories` (
-  `id` int(11) NOT NULL,
-  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
-  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+CREATE TABLE IF NOT EXISTS `fv5oz_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
+  `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `lft` int(11) NOT NULL DEFAULT '0',
   `rgt` int(11) NOT NULL DEFAULT '0',
-  `level` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `level` int(10) unsigned NOT NULL DEFAULT '0',
   `path` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `extension` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -231,21 +250,29 @@ CREATE TABLE `fv5oz_categories` (
   `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `description` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `published` tinyint(1) NOT NULL DEFAULT '0',
-  `checked_out` int(11) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(11) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `access` int(10) unsigned NOT NULL DEFAULT '0',
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `metadesc` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The meta description for the page.',
   `metakey` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The meta keywords for the page.',
   `metadata` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded metadata properties.',
-  `created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `modified_user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `hits` int(10) unsigned NOT NULL DEFAULT '0',
   `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `version` int(10) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `cat_idx` (`extension`,`published`,`access`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_path` (`path`(100)),
+  KEY `idx_left_right` (`lft`,`rgt`),
+  KEY `idx_alias` (`alias`(100)),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `fv5oz_categories`
@@ -265,8 +292,8 @@ INSERT INTO `fv5oz_categories` (`id`, `asset_id`, `parent_id`, `lft`, `rgt`, `le
 -- Table structure for table `fv5oz_combos_combo`
 --
 
-CREATE TABLE `fv5oz_combos_combo` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_combos_combo` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `ordering` int(11) NOT NULL,
@@ -274,8 +301,9 @@ CREATE TABLE `fv5oz_combos_combo` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
-  `modified_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `modified_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `fv5oz_combos_combo`
@@ -292,8 +320,8 @@ INSERT INTO `fv5oz_combos_combo` (`id`, `name`, `description`, `ordering`, `stat
 -- Table structure for table `fv5oz_contact_details`
 --
 
-CREATE TABLE `fv5oz_contact_details` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_contact_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `con_position` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -307,15 +335,15 @@ CREATE TABLE `fv5oz_contact_details` (
   `misc` mediumtext COLLATE utf8mb4_unicode_ci,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_to` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `default_con` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `default_con` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `published` tinyint(1) NOT NULL DEFAULT '0',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `ordering` int(11) NOT NULL DEFAULT '0',
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
   `catid` int(11) NOT NULL DEFAULT '0',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `access` int(10) unsigned NOT NULL DEFAULT '0',
   `mobile` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `webpage` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `sortname1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -323,20 +351,29 @@ CREATE TABLE `fv5oz_contact_details` (
   `sortname3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_by` int(10) unsigned NOT NULL DEFAULT '0',
   `created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
   `metakey` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `metadesc` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `metadata` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `featured` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Set if contact is featured.',
+  `featured` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Set if contact is featured.',
   `xreference` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'A reference to enable linkages to external data sets.',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `version` int(10) unsigned NOT NULL DEFAULT '1',
+  `hits` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_state` (`published`),
+  KEY `idx_catid` (`catid`),
+  KEY `idx_createdby` (`created_by`),
+  KEY `idx_featured_catid` (`featured`,`catid`),
+  KEY `idx_language` (`language`),
+  KEY `idx_xreference` (`xreference`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -344,45 +381,54 @@ CREATE TABLE `fv5oz_contact_details` (
 -- Table structure for table `fv5oz_content`
 --
 
-CREATE TABLE `fv5oz_content` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
+CREATE TABLE IF NOT EXISTS `fv5oz_content` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `introtext` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `fulltext` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `state` tinyint(3) NOT NULL DEFAULT '0',
-  `catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `catid` int(10) unsigned NOT NULL DEFAULT '0',
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_by` int(10) unsigned NOT NULL DEFAULT '0',
   `created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `images` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `urls` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `attribs` varchar(5120) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `version` int(10) unsigned NOT NULL DEFAULT '1',
   `ordering` int(11) NOT NULL DEFAULT '0',
   `metakey` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `metadesc` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `access` int(10) unsigned NOT NULL DEFAULT '0',
+  `hits` int(10) unsigned NOT NULL DEFAULT '0',
   `metadata` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `featured` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Set if article is featured.',
+  `featured` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Set if article is featured.',
   `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The language code for the article.',
-  `xreference` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'A reference to enable linkages to external data sets.'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `xreference` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'A reference to enable linkages to external data sets.',
+  PRIMARY KEY (`id`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_state` (`state`),
+  KEY `idx_catid` (`catid`),
+  KEY `idx_createdby` (`created_by`),
+  KEY `idx_featured_catid` (`featured`,`catid`),
+  KEY `idx_language` (`language`),
+  KEY `idx_xreference` (`xreference`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `fv5oz_content`
 --
 
 INSERT INTO `fv5oz_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`) VALUES
-(1, 89, 'TERMS & CONDITIONS', 'terms-conditions', '<div class="container-fluid" id="termstitle">\r\n	<h1>\r\n		Terms and Conditions</h1>\r\n</div>\r\n<div class="container-fluid" id="termscontent">\r\n<!-------- PURPOSE ------>	<div id="terms">\r\n		<h4>\r\n			Terms and Conditions</h4>\r\n		<p class="text-justify">\r\n			Impress Laundry, is pleased to provide professional pick-up and delivery laundry services to our customers and offers quality and convenience at an affordable price. Our services are subject to the terms and conditions below. Your use of Impress Laundry, indicates your agreement to be bound by the terms and conditions contained herein. Please read the following provisions carefully and let us know if you have any questions. We look forward to doing business with you! This agreement is strictly between Laundry Care LLC, its customers and services provided by parties subcontracted by Impress Laundry, and does not in any way constitute or imply any relationship with any other parties.</p>\r\n		<h4>\r\n			Pick-up/Delivery</h4>\r\n		<p class="text-justify">\r\n			Schedule. All services will be provided by Impress Laundry. Pick-up/Delivery will take place on a pre-determined day and frequency, except on certain holidays, as determined by you.Impress Laundry or you may change the pre-determined pick-up/delivery times, permanently or temporary, with advance notice by either you or Impress Laundry. Impress Laundry requires at least 1 day notice prior to any change. If you&rsquo;d like to leave your items at a secure spot, it will be at your own risk. This is also true for delivery. Items left for pick up are not under our care until we have retrieved said items. Items left for delivery at the pre-determined location will not be under our care once they have been left at the agreed upon location.</p>\r\n		<h4>\r\n			Procedure and Terms</h4>\r\n		<p class="text-justify">\r\n			Impress Laundry will provide each customer with a Laundry Care nylon/polyurethane Laundry Bag for a fee. Impress Laundry reserves the right not to pick-up items that are not in these bags or 13 gallon sized trash bags. Weekly customers will purchase Impress Laundry bag(s) at the beginning of their service plan for a fee stated on the Impress Laundry website. A bag fee will be charged to the customer for replacement bags. Gift Card Recipients: Impress Laundry nylon/polyurethane Laundry Bags are not provided to Gift Card recipients. Items can be placed in 13 gallon sized trash bags or the equivalent thereof. Should you chose to request one of our Laundry Care bags, the fee for said bag will be deducted from your remaining Gift Card balance. If you chose to continue service after the full value of your Gift Card has been redeemed, you will be provided a Laundry Care bag and the fee will be applied to your invoice. Impress Laundry and its Providers/Partners are not responsible for, and shall not pay for, any loss, damage or theft of items left unattended by the customer for pick-up or delivery. Impress Laundry will not leave items in the possession of any other person that is not the owner of those items unless the owner has given consent. The customer is responsible for ensuring that his/her Laundry Bag is delivered safely to the LImpress Laundry.</p>\r\n		<h4>\r\n			Missed/Unattended Pick-up or Delivery</h4>\r\n		<p class="text-justify">\r\n			If the customer misses a scheduled pick-up or delivery, the customer must coordinate with Impress Laundry to reschedule the pick-up or delivery during the next available day and time. Customer may be subject to a missed pick up fee or missed drop off fee for failing to notify their Provider/Partner 24 Hours prior to the scheduled pick up/delivery. Gift Card Recipients: Fees assessed due to missed/unattended pick-up or delivery will be deducted from the remaining balance of your Gift Card.</p>\r\n		<h4>\r\n			Refunds</h4>\r\n		<p class="text-justify">\r\n			Except as described in this paragraph, all sales are final and all payments are non-refundable. A customer who has signed up for a prepaid package plan or gift card will have the right to cancel his or her contract within fourteen (14) days of signing up for the Impress Laundry service and receive a full refund if no promotional value was received. After such fourteen day period, Impress Laundry shall have no obligation to refund any amounts paid by the customer. If a promotional value was received the sale is final and the payment is non-refundable.</p>\r\n		<h4>\r\n			Garment Care</h4>\r\n		<p class="text-justify">\r\n			The customer agrees not to include any of the following items inside their Laundry Bag (i) non-washable items, (ii) items that are labeled for dry cleaning only, (iii) items that have been exposed to bed bugs or (iv) any other items not meant for laundering. Customer acknowledges that items that have been air-dried (per customer request or Laundry Care&rsquo;s determination for best garment care) may be damp upon delivery. The customer is responsible for any and all damage caused by any items left in the customer&rsquo;s clothing or Laundry Bag that causes damage to the clothing of any customer, the cleaning machines, or any other property of the Impress Laundry. Impress Laundry desires to provide high quality laundering services and will use all reasonable precautions to avoid damage to clothes. Impress Laundry, however, are not liable for any damage due to normal laundering of items, cleaning of items without care instructions, for dry clean items placed inside Laundry Bags, for special-processing items (delicate-wash, air-dry, stain-treatment) not placed in a separate bag, damage resulting from items left in the clothing, bleeding of colors, shrinking or any other alteration resulting from normal washing procedures. Impress Laundry will follow any reasonable instructions provided by the customer, including water or drying temperatures. Impress Laundry do not read cleaning instruction labels and is not responsible for special care items, such as dry clean only items, which are included in the Laundry Bag. Although Impress Laundry use their best efforts to remove stains, stain removal is not guaranteed. Impress Laundry may refuse to clean any garment at their sole discretion. Impress Laundry will re-clean items that, in its sole discretion, were not properly cleaned and have not been worn since they were cleaned, at no additional cost. Laundry Care LLC and its subcontractors are not responsible for loss of or damage to any personal or non-cleanable items left in the clothing or laundry bags such as money, jewelry, or any other item. The customer agrees not to leave such items in their clothing or in their laundry bags. Zippers behave unpredictably while cleaning. Although zippers generally are not an issue, the customer is notified that there is a possibility of zipper issues while following normal wash procedures, and Impress Laundry does not accept any liability for such issues.</p>\r\n		<h4>\r\n			Confidentiality and Disclaimer</h4>\r\n		<p class="text-justify">\r\n			Impress Laundry takes privacy and personal information seriously. Impress Laundry uses customer information to provide services, to process payment, facilitate billing, and for any other purpose reasonably necessary to provide services under this Agreement. Additionally, personal information may be disclosed when required by law necessary to enforce this Agreement or necessary to protect the rights, interests, property of safety of Impress Laundry. From time-to-time, we also may send merchant service announcements, newsletters, and periodic notices about specials and new products.</p>\r\n	</div>\r\n</div>\r\n', '', 1, 2, '2017-05-22 22:49:55', 106, '', '2017-05-22 03:00:34', 106, 0, '0000-00-00 00:00:00', '2017-05-22 03:00:34', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","info_block_show_title":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 5, 0, '', '', 1, 9, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', '');
+(1, 89, 'TERMS & CONDITIONS', 'terms-conditions', '<p>\r\n	fdjbfsjadbfsa</p>\r\n', '', 1, 2, '2017-05-22 22:49:55', 106, '', '2017-05-22 22:49:55', 0, 0, '0000-00-00 00:00:00', '2017-05-22 22:49:55', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","info_block_show_title":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 1, 0, '', '', 1, 1, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', '');
 
 -- --------------------------------------------------------
 
@@ -390,13 +436,17 @@ INSERT INTO `fv5oz_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `f
 -- Table structure for table `fv5oz_contentitem_tag_map`
 --
 
-CREATE TABLE `fv5oz_contentitem_tag_map` (
+CREATE TABLE IF NOT EXISTS `fv5oz_contentitem_tag_map` (
   `type_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `core_content_id` int(10) UNSIGNED NOT NULL COMMENT 'PK from the core content table',
+  `core_content_id` int(10) unsigned NOT NULL COMMENT 'PK from the core content table',
   `content_item_id` int(11) NOT NULL COMMENT 'PK from the content type table',
-  `tag_id` int(10) UNSIGNED NOT NULL COMMENT 'PK from the tag table',
+  `tag_id` int(10) unsigned NOT NULL COMMENT 'PK from the tag table',
   `tag_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Date of most recent save for this tag-item',
-  `type_id` mediumint(8) NOT NULL COMMENT 'PK from the content_type table'
+  `type_id` mediumint(8) NOT NULL COMMENT 'PK from the content_type table',
+  UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`),
+  KEY `idx_tag_type` (`tag_id`,`type_id`),
+  KEY `idx_date_id` (`tag_date`,`tag_id`),
+  KEY `idx_core_content_id` (`core_content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Maps items from content tables to tags';
 
 -- --------------------------------------------------------
@@ -405,9 +455,10 @@ CREATE TABLE `fv5oz_contentitem_tag_map` (
 -- Table structure for table `fv5oz_content_frontpage`
 --
 
-CREATE TABLE `fv5oz_content_frontpage` (
+CREATE TABLE IF NOT EXISTS `fv5oz_content_frontpage` (
   `content_id` int(11) NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0'
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -416,11 +467,12 @@ CREATE TABLE `fv5oz_content_frontpage` (
 -- Table structure for table `fv5oz_content_rating`
 --
 
-CREATE TABLE `fv5oz_content_rating` (
+CREATE TABLE IF NOT EXISTS `fv5oz_content_rating` (
   `content_id` int(11) NOT NULL DEFAULT '0',
-  `rating_sum` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `rating_count` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `lastip` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
+  `rating_sum` int(10) unsigned NOT NULL DEFAULT '0',
+  `rating_count` int(10) unsigned NOT NULL DEFAULT '0',
+  `lastip` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -429,16 +481,18 @@ CREATE TABLE `fv5oz_content_rating` (
 -- Table structure for table `fv5oz_content_types`
 --
 
-CREATE TABLE `fv5oz_content_types` (
-  `type_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_content_types` (
+  `type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `type_alias` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `table` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `rules` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `field_mappings` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `router` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `content_history_options` varchar(5120) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'JSON string for com_contenthistory options'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `content_history_options` varchar(5120) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'JSON string for com_contenthistory options',
+  PRIMARY KEY (`type_id`),
+  KEY `idx_alias` (`type_alias`(100))
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `fv5oz_content_types`
@@ -472,9 +526,9 @@ INSERT INTO `fv5oz_content_types` (`type_id`, `type_title`, `type_alias`, `table
 -- Table structure for table `fv5oz_core_log_searches`
 --
 
-CREATE TABLE `fv5oz_core_log_searches` (
+CREATE TABLE IF NOT EXISTS `fv5oz_core_log_searches` (
   `search_term` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0'
+  `hits` int(10) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -483,25 +537,29 @@ CREATE TABLE `fv5oz_core_log_searches` (
 -- Table structure for table `fv5oz_extensions`
 --
 
-CREATE TABLE `fv5oz_extensions` (
-  `extension_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_extensions` (
+  `extension_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `element` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `folder` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `client_id` tinyint(3) NOT NULL,
   `enabled` tinyint(3) NOT NULL DEFAULT '1',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `access` int(10) unsigned NOT NULL DEFAULT '1',
   `protected` tinyint(3) NOT NULL DEFAULT '0',
   `manifest_cache` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `custom_data` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `system_data` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `ordering` int(11) DEFAULT '0',
-  `state` int(11) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `state` int(11) DEFAULT '0',
+  PRIMARY KEY (`extension_id`),
+  KEY `element_clientid` (`element`,`client_id`),
+  KEY `element_folder_clientid` (`element`,`folder`,`client_id`),
+  KEY `extension` (`type`,`element`,`folder`,`client_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=828 ;
 
 --
 -- Dumping data for table `fv5oz_extensions`
@@ -656,8 +714,8 @@ INSERT INTO `fv5oz_extensions` (`extension_id`, `name`, `type`, `element`, `fold
 (817, 'com_location', 'component', 'com_location', '', 1, 1, 0, 0, '{"name":"com_location","type":"component","creationDate":"2017-04-28","author":"AIT Laundry","copyright":"2017 AIT Laundry","authorEmail":"aitlaundry@gmail.com","authorUrl":"http:\\/\\/","version":"CVS: 1.0.0","description":"Provide location management","group":"","filename":"location"}', '{"save_history":"0"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (819, 'AITLaundry searchLocation', 'module', 'mod_searchlocation', '', 0, 1, 0, 0, '{"name":"AITLaundry searchLocation","type":"module","creationDate":"May 2017","author":"AIT","copyright":"Copyright (c) 2017 AITLaundry. All rights reserved.","authorEmail":"","authorUrl":"","version":"1.0.0","description":"\\n\\t\\n\\t\\n\\t\\n\\t","group":"","filename":"mod_searchlocation"}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 INSERT INTO `fv5oz_extensions` (`extension_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) VALUES
-(822, 'Editor - JoomlaCK', 'plugin', 'jckeditor', 'editors', 0, 1, 1, 0, '{"name":"Editor - JoomlaCK","type":"plugin","creationDate":"Jan 2015","author":"WebxSolution Ltd","copyright":"","authorEmail":"","authorUrl":"","version":"6.6.2","description":"PLG_JCK_XML_DESC","group":"","filename":"jckeditor"}', '{"toolbar":"Full","toolbar_ft":"Basic","uicolor":"#D6E6F4","skin":"office2007","content_css":"1","content_css_custom":"","styles_css":"1","styles_css_custom":"","imagePath":"images","flashPath":"images\\/flash","filePath":"files","entermode":"1","shiftentermode":"2","wwidth":"","hheight":"","showerrors":"1","lang_mode":"1","lang_code":"en","bgcolor":"#FFFFFF","ftcolor":"","ftsize":"12","ftfamily":"Arial","textalign":"0","entities":"1","formatsource":"1","returnScript":"1","useUserFolders":"0","userFolderType":"username","forcesimpleAmpersand":"0","startupFocus":"0","EnableImageDragndrop":"1","imageDragndropPath":"images","jcktypography":"1","jcktypographycontent":"\\ufeff\\/*\\r\\n * JCK Editor Typography Style-sheet\\r\\n * @author: Paul Franklin\\r\\n * @website: http:\\/\\/www.joomlackeditor.com\\r\\n * @version: 2.0\\r\\n * @copyright (C) WebxSolution Ltd 2011 - 2014. All rights reserved\\r\\n * @license: GPLv2\\r\\n * @terms: http:\\/\\/www.joomlackeditor.com\\/terms-of-use\\r\\n * @icons: WebxSolution Ltd has the non-exclusive, non-transferable, non-sublicensable right to use the Licensed Material an unlimited number of times in any and all media for the following commercial or personal purposes (together the \\"Permitted Uses\\") subject to the restrictions set forth in the Agreement. Any uses other than the Permitted Uses must be approved by DryIcons in writing. http:\\/\\/dryicons.com\\/terms\\/commercial\\/\\r\\n *\\/ \\r\\n\\r\\n \\/* ADD PARAGRAPH FORMAT STYLES FOR EDITOR\\r\\n-------------------------------------------------------------------------*\\/\\r\\n@font-face {}\\r\\nbody.cke_show_borders {}\\r\\nh1 {}\\r\\nh2 {}\\r\\nh3 {}\\r\\nh4 {}\\r\\nh5 {}\\r\\nh6 {}\\r\\npre {}\\r\\naddress {}\\r\\n\\r\\n \\/* Preformatted text\\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\nblockquote {\\r\\n    background: none repeat scroll 0 0 #CCCCCC;\\r\\n    border-left: 10px solid #8F8F8F;\\r\\n    color: #544C4A;\\r\\n    font: italic 12pt\\/1.2em Georgia;\\r\\n    margin: 10px !important;\\r\\n    padding: 10px !important;\\r\\n    text-shadow: 1px 1px 1px #ffffff;\\r\\n    width: 60%;\\r\\n    border-radius: 0 10px 0 10px;\\r\\n    -moz-border-radius: 0 10px 0 10px;\\r\\n    -webkit-border: 0 10px 0 10px;\\r\\n}\\r\\n\\r\\nblockquote p { display: inline; }\\r\\nblockquote:after { background: none repeat scroll 0 0 transparent !important; }\\r\\n\\r\\nblockquote:before {\\r\\n    content: url(\\"blockquotes.png\\") !important;\\r\\n\\tbackground: none repeat scroll 0 0 transparent !important;\\r\\n    margin-right: 15px;\\r\\n    vertical-align: super;\\r\\n\\tposition: relative !important;\\r\\n}\\r\\n\\r\\nspan.dropcap  {\\r\\n    color: #333333;\\r\\n    display: block;\\r\\n    float: left;\\r\\n    font: 60px\\/40px Georgia,Times,serif;\\r\\n    padding: 7px 8px 0 0;\\r\\n}\\r\\n\\r\\nspan.box-1heading-jck { font: 50px\\/50px Georgia,Times,serif;}\\r\\nspan.box-2heading-jck { font: 30px\\/40px Georgia,Times,serif;}\\r\\nspan.box-1heading-jck, span.box-2heading-jck { color: #333333; display: block; float: left;}\\r\\n\\r\\n\\/* Tooltips \\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\n.flashtip-jck, .ziptip-jck, .pdftip-jck, .videotip-jck, .infotip-jck, .warningtip-jck, .filmtip-jck, .pintip-jck , .lightbulbtip-jck , .recycletip-jck , .cameratip-jck, .commenttip-jck, .chattip-jck, .documenttip-jck, .accessibletip-jck, .startip-jck, .hearttip-jck, .previoustip-jck, .carttip-jck, .attachmenttip-jck, .calculatortip-jck, .cuttip-jck, .dollartip-jck, .poundtip-jck , .eurotip-jck, .mailtip-jck, .supporttip-jck, .nexttip-jck, .soundtip-jck { color: #444444 !important; }\\r\\n\\r\\na.flashtip-jck, a.ziptip-jck, a.pdftip-jck, a.videotip-jck, a.infotip-jck, a.warningtip-jck, a.filmtip-jck, a.pintip-jck , a.lightbulbtip-jck , a.recycletip-jck , a.cameratip-jck, a.commenttip-jck, a.chattip-jck, a.documenttip-jck, a.accessibletip-jck, a.startip-jck, a.hearttip-jck, a.previoustip-jck, a.carttip-jck, a.attachmenttip-jck, a.calculatortip-jck, a.cuttip-jck, a.dollartip-jck, a.poundtip-jck , a.eurotip-jck, a.mailtip-jck, a.supporttip-jck , a.nexttip-jck, a.soundtip-jck { color: #095197 !important; }\\r\\n\\r\\n.flashtip-jck, .ziptip-jck, .pdftip-jck, .videotip-jck, .infotip-jck, .warningtip-jck, .filmtip-jck, .pintip-jck , .lightbulbtip-jck , .recycletip-jck , .cameratip-jck, .commenttip-jck, .chattip-jck, .documenttip-jck, .accessibletip-jck, .startip-jck, .hearttip-jck, .previoustip-jck, .carttip-jck, .attachmenttip-jck, .calculatortip-jck, .cuttip-jck, .dollartip-jck, .poundtip-jck , .eurotip-jck, .mailtip-jck, .supporttip-jck, .nexttip-jck, .soundtip-jck, .download-DOC,\\r\\n a.flashtip-jck, a.ziptip-jck, a.pdftip-jck, a.videotip-jck, a.infotip-jck, a.warningtip-jck, a.filmtip-jck, a.pintip-jck , a.lightbulbtip-jck , a.recycletip-jck , a.cameratip-jck, a.commenttip-jck, a.chattip-jck, a.documenttip-jck, a.accessibletip-jck, a.startip-jck, a.hearttip-jck, a.previoustip-jck, a.carttip-jck, a.attachmenttip-jck, a.calculatortip-jck, a.cuttip-jck, a.dollartip-jck, a.poundtip-jck , a.eurotip-jck, a.mailtip-jck, a.supporttip-jck , a.nexttip-jck, a.soundtip-jck {\\r\\n    display: block;\\r\\n\\tmargin-bottom: 20px;\\r\\n\\tbackground-color: #FAFAFA !important;\\r\\n    background-position: left center !important;\\r\\n    background-repeat: no-repeat !important;\\r\\n\\tbackground-size: 28px auto !important;\\r\\n    border-bottom: 1px dotted #C8C8C8;\\r\\n    border-top: 1px dotted #C8C8C8;\\r\\n    display: block;\\r\\n    margin: 10px 0 !important;\\r\\n    padding: 7px 10px 7px 35px !important;\\r\\n\\t-webkit-transition: background-color 800ms ease-in-out;\\r\\n\\t-moz-transition: background-color 800ms ease-in-out;\\r\\n\\t-o-transition: background-color 800ms ease-in-out;\\r\\n\\ttransition: background-color 800ms ease-in-out;\\r\\n\\ttext-shadow: 1px 1px 1px #ffffff;\\r\\n\\tfont-size: 14px;\\r\\n}\\r\\n\\r\\na.flashtip-jck:hover, a.ziptip-jck:hover, a.pdftip-jck:hover, a.videotip-jck:hover, a.infotip-jck:hover, a.warningtip-jck:hover, a.filmtip-jck:hover, a.pintip-jck:hover , a.lightbulbtip-jck:hover , a.recycletip-jck:hover , a.cameratip-jck:hover, a.commenttip-jck:hover, a.chattip-jck:hover, a.documenttip-jck:hover, a.accessibletip-jck:hover, a.startip-jck:hover, a.hearttip-jck:hover, a.previoustip-jck:hover, a.carttip-jck:hover, a.attachmenttip-jck:hover, a.calculatortip-jck:hover, a.cuttip-jck:hover, a.dollartip-jck:hover, a.poundtip-jck:hover, a.eurotip-jck:hover, a.mailtip-jck:hover, a.supporttip-jck:hover, a.nexttip-jck:hover, a.soundtip-jck:hover, a.download-DOC:hover { color: #095197 !important; }\\r\\n\\r\\n.flashtip-jck:hover, .ziptip-jck:hover, .pdftip-jck:hover, .videotip-jck:hover, .infotip-jck:hover, .warningtip-jck:hover, .filmtip-jck:hover, .pintip-jck:hover , .lightbulbtip-jck:hover , .recycletip-jck:hover , .cameratip-jck:hover, .commenttip-jck:hover, .chattip-jck:hover, .documenttip-jck:hover, .accessibletip-jck:hover, .startip-jck:hover, .hearttip-jck:hover, .previoustip-jck:hover, .carttip-jck:hover, .attachmenttip-jck:hover, .calculatortip-jck:hover, .cuttip-jck:hover, .dollartip-jck:hover, .poundtip-jck:hover, .eurotip-jck:hover, .mailtip-jck:hover, .supporttip-jck:hover, .nexttip-jck:hover, .soundtip-jck:hover, .download-DOC:hover, a.flashtip-jck:hover, a.ziptip-jck:hover, a.pdftip-jck:hover, a.videotip-jck:hover, a.infotip-jck:hover, a.warningtip-jck:hover, a.filmtip-jck:hover, a.pintip-jck:hover , a.lightbulbtip-jck:hover, a.recycletip-jck:hover, a.cameratip-jck:hover, a.commenttip-jck:hover, a.chattip-jck:hover, a.documenttip-jck:hover, a.accessibletip-jck:hover, a.startip-jck:hover, a.hearttip-jck:hover, a.previoustip-jck:hover, a.carttip-jck:hover, a.attachmenttip-jck:hover, a.calculatortip-jck:hover, a.cuttip-jck:hover, a.dollartip-jck:hover, a.poundtip-jck:hover, a.eurotip-jck:hover, a.mailtip-jck:hover, a.supporttip-jck, a.nexttip-jck:hover, a.soundtip-jck:hover {\\r\\n    background-color: #F2F2F2 !important;\\r\\n\\t-webkit-transition: background-color 400ms ease-in-out;\\r\\n\\t-moz-transition: background-color 400ms ease-in-out;\\r\\n\\t-o-transition: background-color 400ms ease-in-out;\\r\\n\\ttransition: background-color 400ms ease-in-out;\\r\\n\\tbackground-repeat: no-repeat !important;\\r\\n}\\r\\n\\r\\n.flashtip-jck, .flashtip-jck:hover, a.flashtip-jck:hover { background-image: url(\\"flash.png\\")!important}\\r\\n.ziptip-jck, .ziptip-jck:hover, a.ziptip-jck:hover { background-image: url(\\"zip_download.png\\")!important}\\r\\n.pdftip-jck, .pdftip-jck:hover, a.pdftip-jck:hover { background-image: url(\\"pdf.png\\")!important}\\r\\n.videotip-jck , .videotip-jck:hover, a.videotip-jck:hover { background-image: url(\\"video_clip.png\\")!important}\\r\\n.infotip-jck, .infotip-jck:hover, a.infotip-jck:hover { background-image: url(\\"info.png\\")!important}\\r\\n.warningtip-jck, .warningtip-jck:hover, a.warningtip-jck:hover { background-image: url(\\"warning.png\\")!important}\\r\\n.filmtip-jck, .filmtip-jck:hover, a.filmtip-jck:hover { background-image: url(\\"film.png\\")!important}\\r\\n.pintip-jck, .pintip-jck:hover, a.pintip-jck:hover {background-image: url(\\"pin.png\\")!important}\\r\\n.lightbulbtip-jck, .lightbulbtip-jck:hover, a.lightbulbtip-jck:hover {background-image: url(\\"light_bulb.png\\")!important}\\r\\n.recycletip-jck, .recycletip-jck:hover, a.recycletip-jck:hover { background-image: url(\\"recycle.png\\")!important}\\r\\n.cameratip-jck, .cameratip-jck:hover, a.cameratip-jck:hover{ background-image: url(\\"camera.png\\")!important}\\r\\n.commenttip-jck, .commenttip-jck:hover, a.commenttip-jck:hover { background-image: url(\\"comment.png\\")!important}\\r\\n.chattip-jck, .chattip-jck:hover , a.chattip-jck:hover { background-image: url(\\"chat.png\\")!important}\\r\\n.documenttip-jck, .documenttip-jck:hover, a.documenttip-jck:hover { background-image: url(\\"document.png\\")!important}\\r\\n.accessibletip-jck, .accessibletip-jck:hover, a.accessibletip-jck:hover { background-image: url(\\"accessible.png\\")!important}\\r\\n.startip-jck, .startip-jck:hover , a.startip-jck:hover { background-image: url(\\"star.png\\")!important}\\r\\n.hearttip-jck, .hearttip-jck:hover, a.hearttip-jck:hover { background-image: url(\\"heart.png\\")!important}\\r\\n.previoustip-jck, .previoustip-jck:hover, a.previoustip-jck:hover { background-image: url(\\"previous.png\\")!important}\\r\\n.carttip-jck, .carttip-jck :hover, a.carttip-jck:hover { background-image: url(\\"cart.png\\")!important}\\r\\n.attachmenttip-jck, .attachmenttip-jck:hover, a.attachmenttip-jck:hover { background-image: url(\\"attachment.png\\")!important}\\r\\n.calculatortip-jck, .calculatortip-jck:hover , a.calculatortip-jck:hover { background-image: url(\\"calculator.png\\")!important}\\r\\n.cuttip-jck, .cuttip-jck:hover, a.cuttip-jck:hover { background-image: url(\\"cut.png\\")!important}\\r\\n.dollartip-jck , .dollartip-jck:hover, a.dollartip-jck:hover { background-image: url(\\"dollar_currency_sign.png\\")!important}\\r\\n.poundtip-jck, .poundtip-jck:hover, a.poundtip-jck:hover { background-image: url(\\"sterling_pound_currency_sign.png\\")!important}\\r\\n.eurotip-jck, .eurotip-jck:hover , a.eurotip-jck:hover { background-image: url(\\"euro_currency_sign.png\\")!important}\\r\\n.mailtip-jck, .mailtip-jck:hover , a.mailtip-jck:hover { background-image: url(\\"mail.png\\")!important}\\r\\n.supporttip-jck, .supporttip-jck:hover , a.supporttip-jck:hover { background-image: url(\\"support.png\\")!important}\\r\\n.nexttip-jck, .nexttip-jck:hover, a.nexttip-jck:hover { background-image: url(\\"next.png\\")!important}\\r\\n.soundtip-jck, .soundtip-jck:hover , a.soundtip-jck:hover { background-image: url(\\"sound.png\\")!important}\\r\\n\\r\\n\\r\\n\\r\\n \\/* Text Highlight\\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\nspan.blue_hlight-jck, span.gree_hlight-jck, span.red_hlight-jck, span.black_hlight-jck , span.yell_hlight-jck {\\r\\n    border-radius: 5px 5px 5px 5px;\\r\\n    color: #FFFFFF;\\r\\n    display: inline;\\r\\n    font-weight: bold;\\r\\n\\ttext-shadow: none;\\r\\n    padding: 2px 4px;\\r\\n\\tfont-size: 13px;\\r\\n}\\r\\n\\r\\nspan.blue_hlight-jck {  background: none repeat scroll 0 0 #3E6A86;}\\r\\nspan.gree_hlight-jck {  background: none repeat scroll 0 0 #b9cd96;}\\r\\nspan.red_hlight-jck {  background: none repeat scroll 0 0 #AA1428;}\\r\\nspan.black_hlight-jck {  background: none repeat scroll 0 0 #000000;}\\r\\nspan.yell_hlight-jck {  background: none repeat scroll 0 0 #F2F096; color: #544C4A;}\\r\\n \\r\\n\\/* Box Styles\\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\n.blubox-jck, .grebox-jck, .redbox-jck, .blabox-jck, .yelbox-jck   {\\r\\n\\tbackground: none repeat scroll 0 0 #FAFAFA;\\r\\n\\tborder-style: solid;\\r\\n    border-width: 1px 1px 1px 8px;\\r\\n\\tmargin: 10px 0 20px !important;\\r\\n    padding: 8px 8px 8px 20px !important;\\r\\n\\t-webkit-border-top-left-radius: 15px;\\r\\n    -webkit-border-bottom-left-radius: 15px;\\r\\n    -moz-border-radius-topleft: 15px;\\r\\n    -moz-border-radius-bottomleft: 15px;\\r\\n    border-top-left-radius: 15px;\\r\\n    border-bottom-left-radius: 15px;\\r\\n\\tcolor: #444444 !important;\\r\\n\\ttext-shadow: 1px 1px 1px #ffffff;\\r\\n}\\r\\n\\r\\n.blubox-jck  {  border-color: #DDDDDD #DDDDDD #DDDDDD #3E6A86;}\\r\\n.grebox-jck  {  border-color: #DDDDDD #DDDDDD #DDDDDD #b9cd96;}\\r\\n.redbox-jck {  border-color: #DDDDDD #DDDDDD #DDDDDD #AA1428;}\\r\\n.blabox-jck  {  border-color: #DDDDDD #DDDDDD #DDDDDD #000000;}\\r\\n.yelbox-jck  {  border-color: #DDDDDD #DDDDDD #DDDDDD #F2F096; color: #544C4A;}\\r\\n\\r\\n.blubox-jck > br,\\r\\n.grebox-jck  > br,\\r\\n.redbox-jck > br, \\r\\n.blabox-jck  > br, \\r\\n.yelbox-jck > br {\\r\\n    clear: both;\\r\\n}\\r\\n\\r\\n\\/* Icon Library\\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\n.info-jck, .warning-jck, .film-jck, .pin-jck , .lightbulb-jck , .recycle-jck , .camera-jck, .comment-jck, .chat-jck, .document-jck, .accessible-jck, .star-jck, .heart-jck, .previous-jck, .cart-jck, .attachment-jck, .calculator-jck, .cut-jck, .dollar-jck, .pound-jck , .euro-jck, .mail-jck, .support-jck, .next-jck, .sound-jck, .flash-jck, .zip-jck, .pdf-jck, .video-jck   {\\r\\n    display: block;\\r\\n    padding: 20px 0 20px 60px !important;\\r\\n\\tmargin-bottom: 20px !important;\\r\\n\\tbackground-color: transparent !important;\\r\\n    background-position: left center !important;\\r\\n    background-repeat: no-repeat !important;\\r\\n}\\r\\n\\r\\n.info-jck { background: url(\\"info.png\\")}\\r\\n.warning-jck { background: url(\\"warning.png\\")}\\r\\n.film-jck { background: url(\\"film.png\\")}\\r\\n.pin-jck {background: url(\\"pin.png\\")}\\r\\n.lightbulb-jck {background: url(\\"light_bulb.png\\")}\\r\\n.recycle-jck { background: url(\\"recycle.png\\")}\\r\\n.camera-jck { background: url(\\"camera.png\\")}\\r\\n.comment-jck { background: url(\\"comment.png\\")}\\r\\n.chat-jck  { background: url(\\"chat.png\\")}\\r\\n.document-jck { background: url(\\"document.png\\")}\\r\\n.accessible-jck { background: url(\\"accessible.png\\")}\\r\\n.star-jck { background: url(\\"star.png\\")}\\r\\n.heart-jck { background: url(\\"heart.png\\")}\\r\\n.previous-jck { background: url(\\"previous.png\\")}\\r\\n.cart-jck { background: url(\\"cart.png\\")}\\r\\n.attachment-jck { background: url(\\"attachment.png\\")}\\r\\n.calculator-jck { background: url(\\"calculator.png\\")}\\r\\n.cut-jck { background: url(\\"cut.png\\")}\\r\\n.dollar-jck { background: url(\\"dollar_currency_sign.png\\")}\\r\\n.pound-jck { background: url(\\"sterling_pound_currency_sign.png\\")}\\r\\n.euro-jck { background: url(\\"euro_currency_sign.png\\")}\\r\\n.mail-jck { background: url(\\"mail.png\\")}\\r\\n.support-jck { background: url(\\"support.png\\")}\\r\\n.next-jck  { background: url(\\"next.png\\")}\\r\\n.sound-jck  { background: url(\\"sound.png\\")}\\r\\n.flash-jck  { background: url(\\"flash.png\\")}\\r\\n.zip-jck  { background: url(\\"zip_download.png\\")}\\r\\n.pdf-jck  { background: url(\\"pdf.png\\")}\\r\\n.video-jck  { background: url(\\"video_clip.png\\")}\\r\\n\\r\\n\\/* Images Caption Styles\\r\\n-------------------------------------------------------------------------*\\/\\r\\nimg.caption { background-color:inherit; vertical-align: middle;}\\r\\n.img_caption.none { margin: 0 !important;} \\r\\n.img_caption { text-align: center; }\\r\\n\\r\\nimg.caption.photo, img.caption.photoblack, img.caption.photoblue, img.caption.photogreen, img.caption.photored, img.caption.photoyellow { \\r\\n    background-color: #FFFFFF;\\r\\n    padding: 10px 10px 40px;\\r\\n\\tmargin-right: 5px;\\r\\n\\tbox-shadow: 0 0 3px #000000;\\r\\n\\t-webkit-box-shadow: 0 0 3px #000000;\\r\\n    -moz-box-shadow: 0 0 3px #000000;\\r\\n}\\r\\n\\r\\nimg.caption.photo + p, img.caption.photoblack + p, img.caption.photoblue + p, img.caption.photogreen + p, img.caption.photored + p, img.caption.photoyellow + p {\\r\\n    position: relative; \\r\\n    left: 0px;\\r\\n    bottom: 30px;\\r\\n    overflow: hidden;\\r\\n    text-overflow: ellipsis;\\r\\n    white-space: nowrap;\\r\\n    width: 100%;\\r\\n\\tcolor: #333333;\\r\\n\\tmargin: 0;\\r\\n    font-size: 13px;\\r\\n    line-height: 18px;\\r\\n}\\r\\n\\r\\nimg.caption.photoblack + p , img.caption.photoblue + p, img.caption.photored + p { color: #FFFFFF; }\\r\\nimg.caption.photoblack { background-color: #000000;}\\r\\nimg.caption.photoblue {  background-color: #3E6A86;}\\r\\nimg.caption.photogreen  {  background-color: #b9cd96;}\\r\\nimg.caption.photored {  background-color: #AA1428;}\\r\\nimg.caption.photoyellow {  background-color: #F2F096;}\\r\\n\\r\\n\\/* Images Styles\\r\\n-------------------------------------------------------------------------*\\/\\r\\nimg.jck_img_align_left {\\r\\n    float: left; \\r\\n    margin: 3px 5px 0 0;\\r\\n    padding: 1px;\\r\\n}\\r\\n\\r\\nimg.jck_img_align_right {\\r\\n    float: right; \\r\\n    margin: 3px 0 0 5px;\\r\\n    padding: 1px;\\r\\n}\\r\\n\\r\\nimg.image_holder {\\r\\n    background: none repeat scroll 0 0 #FFFFFF;\\r\\n    border: 5px solid #EFEFEF;\\r\\n    margin: 3px 5px 0 0;\\r\\n    padding: 1px;\\r\\n}\\r\\n\\r\\nimg.fade_in {\\r\\n\\t-webkit-transition: all 500ms ease-in-out;\\r\\n\\t-moz-transition: all 500ms ease-in-out;\\r\\n\\t-o-transition: all 500ms ease-in-out;\\r\\n\\ttransition: all 500ms ease-in-out;\\r\\n\\t-webkit-box-shadow: 0 0 3px #000000;\\r\\n\\t-moz-box-shadow: 0 0 3px #000000;\\r\\n\\tbox-shadow: 0 0 3px #000000;\\r\\n\\tborder: 10px solid #FFFFFF;\\r\\n    opacity: 0.5;\\r\\n    overflow: hidden;\\r\\n    position: relative;\\r\\n\\tmargin: 3px;\\r\\n\\tcursor:url(cursor_zoom.png),auto;\\r\\n}\\r\\n\\r\\nimg.fade_in:hover {\\r\\n\\t-webkit-box-shadow: 0 0 10px #000000;\\r\\n\\t-moz-box-shadow: 0 0 10px #000000;\\r\\n\\tbox-shadow: 0 0 10px #000000;\\r\\n    opacity: 1;\\r\\n}\\r\\n\\r\\nimg.zoom  { \\r\\n\\t-webkit-transition: all 500ms ease-in-out;\\r\\n\\t-moz-transition: all 500ms ease-in-out;\\r\\n\\t-o-transition: all 500ms ease-in-out;\\r\\n\\ttransition: all 500ms ease-in-out;\\r\\n    background: none repeat scroll 0 0 #FFFFFF;\\r\\n\\t-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n\\t-moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n\\tbox-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n    color: #333333;\\r\\n    display: inline;\\r\\n    float: left;\\r\\n    font-size: 18px;\\r\\n    padding: 10px 10px 15px;\\r\\n    text-align: center;\\r\\n    text-decoration: none;\\r\\n    width: auto;\\r\\n\\tfont-family: serif;\\r\\n\\theight: 100px;\\r\\n\\twidth: auto;\\r\\n\\tmargin: 0 20px 27px 0px;\\r\\n\\tcursor:url(cursor_zoom.png),auto;\\r\\n}\\r\\n\\r\\nimg.zoom:hover {\\r\\n    -moz-transform: scale(1.75);\\r\\n\\t-webkit-transform: scale(1.75);\\r\\n\\t-o-transform: scale(1.75);\\r\\n\\t-webkit-transition: all 500ms ease-in-out;\\r\\n\\t-moz-transition: all 500ms ease-in-out;\\r\\n\\t-o-transition: all 500ms ease-in-out;\\r\\n\\ttransition: all 500ms ease-in-out;\\r\\n\\t-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);\\r\\n\\t-moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);\\r\\n\\tbox-shadow: 0 3px 6px rgba(0, 0, 0, 0.5); \\r\\n    position: relative;\\r\\n    z-index: 50;\\r\\n\\tmargin: 0 -60px 27px 80px;\\r\\n}\\r\\n\\r\\nimg.polaroids_zoom  {\\r\\n    -moz-transform: rotate(-2deg);\\r\\n\\t-webkit-transform: rotate(2deg); \\r\\n\\t-o-transform: rotate(2deg); \\r\\n\\t-webkit-transition: all 500ms ease-in-out;\\r\\n\\t-moz-transition: all 500ms ease-in-out;\\r\\n\\t-o-transition: all 500ms ease-in-out;\\r\\n\\ttransition: all 500ms ease-in-out;\\r\\n    background: none repeat scroll 0 0 #FFFFFF;\\r\\n\\t-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n\\t-moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n\\tbox-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n    color: #333333;\\r\\n    display: inline;\\r\\n    float: left;\\r\\n    font-size: 18px;\\r\\n    margin: 10px 20px 25px 14px;\\r\\n    padding: 10px 10px 15px;\\r\\n    text-align: center;\\r\\n    text-decoration: none;\\r\\n    width: auto;\\r\\n\\tfont-family: serif;\\r\\n\\theight: 100px;\\r\\n\\twidth: auto;\\r\\n\\tcursor:url(cursor_zoom.png),auto;\\r\\n}\\r\\n\\r\\nimg.polaroids_zoom:hover {\\r\\n    -moz-transform: scale(1.30);\\r\\n\\t-webkit-transform: scale(1.30);\\r\\n\\t-o-transform: scale(1.30);\\r\\n\\t-webkit-transition: all 500ms ease-in-out;\\r\\n\\t-moz-transition: all 500ms ease-in-out;\\r\\n\\t-o-transition: all 500ms ease-in-out;\\r\\n\\ttransition: all 500ms ease-in-out;\\r\\n\\t-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);\\r\\n\\t-moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);\\r\\n\\tbox-shadow: 0 3px 6px rgba(0, 0, 0, 0.5); \\r\\n    position: relative;\\r\\n    z-index: 50;\\r\\n}\\r\\n\\r\\nimg.screenshot_blue, img.screenshot_green , img.screenshot_red, img.screenshot_black, img.screenshot_gray, img.screenshot_yellow  {\\r\\n    margin: 5px 0;\\r\\n    padding: 10px;\\r\\n\\tbackground: #ffffff;\\r\\n\\tbackground: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);\\r\\n\\tbackground: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5));\\r\\n\\tbackground: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tfilter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#ffffff\', endColorstr=\'#e5e5e5\',GradientType=0 );\\r\\n\\topacity: 1;\\r\\n\\tmax-width: 85%;\\r\\n}\\r\\n\\r\\nimg.screenshot_blue { border: 10px solid #3E6A86;}\\r\\nimg.screenshot_green  { border: 10px solid #b9cd96;}\\r\\nimg.screenshot_red  { border: 10px solid #AA1428;}\\r\\nimg.screenshot_black  { border: 10px solid #000000;}\\r\\nimg.screenshot_gray { border: 10px solid #F0F0F0;}\\r\\nimg.screenshot_yellow { border: 10px solid #EFDE2C;}\\r\\n\\r\\n \\/* Div Styles\\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\ndiv.scroll_box{\\r\\n    margin: 5px 0;\\r\\n    padding: 10px;\\r\\n\\tbackground: #ffffff;\\r\\n\\tbackground: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);\\r\\n\\tbackground: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5));\\r\\n\\tbackground: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tfilter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#ffffff\', endColorstr=\'#e5e5e5\',GradientType=0 );\\r\\n\\topacity: 1;\\r\\n\\tborder-left: 15px solid ##EDEDED;\\r\\n    border-top: 15px solid #EDEDED;\\r\\n    height: 300px;\\r\\n    overflow: scroll;\\r\\n\\t-webkit-box-shadow: 0 0 1px 1px #E3E3E3 inset, 0 0 1px 2px #FFFFFF inset, 0 0 0 1px #E3E3E3;\\r\\n\\tbox-shadow: 0 0 1px 1px #E3E3E3 inset, 0 0 1px 2px #FFFFFF inset, 0 0 0 1px #E3E3E3; \\r\\n}\\r\\n\\r\\ndiv.img_rollover { background-color: transparent; \\/* max-width: 0;  = set the the width of your rollover images*\\/ }\\r\\ndiv.img_rollover img:first-child { display: block; }\\r\\ndiv.img_rollover img:last-child { display: none; }\\r\\ndiv.img_rollover:hover img:first-child { display: none; }\\r\\ndiv.img_rollover:hover img:last-child { display:block; cursor: pointer; }\\r\\n\\r\\n\\/* Tables Styles\\r\\n-------------------------------------------------------------------------*\\/\\r\\ntable.table_style_blue, table.table_style_green, table.table_style_red, table.table_style_black, table.table_style_yellow  {\\r\\n    border: 1px solid #DDDDDD;\\r\\n    border-collapse: collapse;\\r\\n    color: #404040;\\r\\n    width: 100%;\\r\\n}\\r\\n\\r\\ntable.table_style_blue tbody tr, table.table_style_green tbody tr, table.table_style_red tbody tr, table.table_style_black tbody tr, table.table_style_yellow tbody tr  {\\r\\n    background: none repeat scroll 0 0 #F2F2F2;\\r\\n\\tborder: 1px solid #DDDDDD;\\r\\n\\t-webkit-transition: all 800ms ease-in-out;\\r\\n\\t-moz-transition: all 800ms ease-in-out;\\r\\n\\t-o-transition: all 800ms ease-in-out;\\r\\n\\ttransition: all 800ms ease-in-out;\\r\\n}\\r\\n\\r\\ntable.table_style_blue tbody tr:hover , table.table_style_green tbody tr:hover, table.table_style_red tbody tr:hover, table.table_style_black tbody tr:hover, table.table_style_yellow tbody tr:hover  {\\r\\n    background: none repeat scroll 0 0 #E5E5E5;\\r\\n\\t-webkit-transition: all 300ms ease-in-out;\\r\\n\\t-moz-transition: all 300ms ease-in-out;\\r\\n\\t-o-transition: all 300ms ease-in-out;\\r\\n\\ttransition: all 300ms ease-in-out;\\r\\n}\\r\\n\\r\\ntable.table_style_blue tbody tr td, table.table_style_green tbody tr td, table.table_style_red tbody tr td, table.table_style_black tbody tr td, table.table_style_yellow tbody tr td {\\r\\n    line-height: 22px;\\r\\n\\tpadding: 5px;\\r\\n\\tborder: 1px solid #DDDDDD;\\r\\n}\\r\\n\\r\\ntable.table_style_blue caption, table.table_style_green caption, table.table_style_red caption, table.table_style_black caption, table.table_style_yellow caption  {\\r\\n    color: #FFFFFF;\\r\\n    font-weight: 700;\\r\\n    line-height: 22px;\\r\\n    text-align: center;\\r\\n    text-transform: uppercase;\\r\\n}\\r\\n\\r\\ntable.table_style_blue caption { background: none repeat scroll 0 0 #3E6A86;}\\r\\ntable.table_style_green caption { background: none repeat scroll 0 0 #b9cd96;}\\r\\ntable.table_style_red caption { background: none repeat scroll 0 0 #AA1428;}\\r\\ntable.table_style_black caption { background: none repeat scroll 0 0 #000000;}\\r\\ntable.table_style_yellow caption { background: none repeat scroll 0 0 #F2F096; color: #544C4A;}\\r\\n\\r\\n\\/* Templates\\r\\n-------------------------------------------------------------------------*\\/\\r\\n.row-fluid { width: 100%; }\\r\\n.row-fluid:after { clear: both; }\\r\\n.row-fluid [class*=\\"span\\"]:first-child {  margin-left: 0; }\\r\\n.row-fluid .controls-row [class*=\\"span\\"] + [class*=\\"span\\"] { margin-left: 2.12766%; }\\r\\n.row-fluid .span6 { width: 48.9362%; }\\r\\n.row-fluid:before, .row-fluid:after {\\r\\n    content: \\"\\";\\r\\n    display: table;\\r\\n    line-height: 0;\\r\\n}\\r\\n.row-fluid [class*=\\"span\\"] {\\r\\n    -moz-box-sizing: border-box;\\r\\n    display: block;\\r\\n    float: left;\\r\\n    margin-left: 2.12766%;\\r\\n    min-height: 30px;\\r\\n    width: 100%;\\r\\n}\\r\\n\\r\\n\\/* 1 big button template *\\/\\r\\na.button-big {\\r\\n\\t-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;\\r\\n\\t-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;\\r\\n\\tbox-shadow:inset 0px 1px 0px 0px #ffffff;\\r\\n\\tbackground:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );\\r\\n\\tbackground:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );\\r\\n\\tfilter:progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#ededed\', endColorstr=\'#dfdfdf\');\\r\\n\\tbackground-color:#ededed;\\r\\n\\t-webkit-border-top-left-radius:6px;\\r\\n\\t-moz-border-radius-topleft:6px;\\r\\n\\tborder-top-left-radius:6px;\\r\\n\\t-webkit-border-top-right-radius:6px;\\r\\n\\t-moz-border-radius-topright:6px;\\r\\n\\tborder-top-right-radius:6px;\\r\\n\\t-webkit-border-bottom-right-radius:6px;\\r\\n\\t-moz-border-radius-bottomright:6px;\\r\\n\\tborder-bottom-right-radius:6px;\\r\\n\\t-webkit-border-bottom-left-radius:6px;\\r\\n\\t-moz-border-radius-bottomleft:6px;\\r\\n\\tborder-bottom-left-radius:6px;\\r\\n\\ttext-indent:0;\\r\\n\\tborder:1px solid #dcdcdc;\\r\\n\\tdisplay:inline-block;\\r\\n\\tcolor:#777777;\\r\\n\\tfont-family:sans-serif;\\r\\n\\tfont-size:18px;\\r\\n\\tfont-weight:bold;\\r\\n\\tfont-style:normal;\\r\\n\\tpadding: 10% 15%;\\r\\n\\ttext-decoration:none;\\r\\n\\ttext-align:center;\\r\\n\\ttext-shadow:1px 1px 0px #ffffff;\\r\\n\\ttext-transform: uppercase;\\r\\n\\tmargin: 10px 0;\\r\\n}\\r\\na.button-big:hover {\\r\\n\\tbackground:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );\\r\\n\\tbackground:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );\\r\\n\\tfilter:progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#dfdfdf\', endColorstr=\'#ededed\');\\r\\n\\tbackground-color:#dfdfdf;\\r\\n}\\r\\na.button-big:active {\\r\\n\\tposition:relative;\\r\\n\\ttop:1px;\\r\\n}\\r\\n\\/* 2 big button with desc *\\/\\r\\n.row-fluid .span6 {  width: 48.9362%; }\\r\\n\\/* 3 big button with desc *\\/\\r\\n.row-fluid .span4 { width: 31.9149%; }\\r\\n\\r\\n\\/* User Profiles *\\/\\r\\ndiv.row-fluid img.polaroids_zoom {\\r\\n\\theight: auto !important;\\r\\n\\tmax-width: 120px;\\r\\n}\\r\\n\\/* Other\\r\\n-------------------------------------------------------------------------*\\/\\r\\n\\/*Responsive media embed*\\/\\r\\nbody div.media_embed {\\r\\n\\tposition: relative; \\r\\n\\tpadding-bottom: 56.25%; \\r\\n\\tpadding-top: 30px; \\r\\n\\theight: 0; \\r\\n\\toverflow: hidden; \\r\\n\\tmax-width: 100%; \\r\\n\\theight: auto; \\r\\n\\tmargin-top:15px;\\r\\n} \\r\\nbody div.media_embed iframe, body div.media_embed object, body div.media_embed embed {\\r\\n\\tposition: absolute; top: 0; \\r\\n\\tleft: 0; \\r\\n\\twidth: 100%; \\r\\n\\theight: 100%; \\r\\n}\\r\\n\\r\\n\\/*Fixes*\\/\\r\\nbody.cke_ltr div.cke_panel_block div.scroll_box { height: 25px !important;} \\/* Minimises the height in the style preview list *\\/\\r\\nbody.cke_ltr div.cke_panel_block { color: #000000; } \\/* Stops templates setting the style list text to white *\\/","autolaunchFilebrowser":"1","minify":"1","magicline_enabled":"1"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(823, 'System - JCK Modal', 'plugin', 'jckmodal', 'system', 0, 0, 1, 0, '{"name":"System - JCK Modal","type":"plugin","creationDate":"April 2011","author":"WebxSolution Ltd","copyright":"Copyright 2011 WebxSolution Ltd. All rights reserved.","authorEmail":"studio@webxsolution.com","authorUrl":"www.webxsolution.com","version":"1.1","description":"Forces Joomla to initialise the Modal JS classes required by JTree Link\'s modal option.","group":"","filename":"jckmodal"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(822, 'Editor - JoomlaCK', 'plugin', 'jckeditor', 'editors', 0, 1, 1, 0, '{"name":"Editor - JoomlaCK","type":"plugin","creationDate":"Jan 2015","author":"WebxSolution Ltd","copyright":"","authorEmail":"","authorUrl":"","version":"6.6.2","description":"PLG_JCK_XML_DESC","group":"","filename":"jckeditor"}', '{"toolbar":"Full","toolbar_ft":"Basic","uicolor":"#D6E6F4","skin":"office2007","content_css":"1","content_css_custom":"","styles_css":"1","styles_css_custom":"","imagePath":"images","flashPath":"images\\/flash","filePath":"files","entermode":"1","shiftentermode":"2","wwidth":"","hheight":"","showerrors":"1","lang_mode":"1","lang_code":"en","bgcolor":"#FFFFFF","ftcolor":"","ftsize":"12","ftfamily":"Arial","textalign":"0","entities":"1","formatsource":"1","returnScript":"1","useUserFolders":"0","userFolderType":"username","forcesimpleAmpersand":"0","startupFocus":"0","EnableImageDragndrop":"1","imageDragndropPath":"images","jcktypography":"1","jcktypographycontent":"\\ufeff\\/*\\r\\n * JCK Editor Typography Style-sheet\\r\\n * @author: Paul Franklin\\r\\n * @website: http:\\/\\/www.joomlackeditor.com\\r\\n * @version: 2.0\\r\\n * @copyright (C) WebxSolution Ltd 2011 - 2014. All rights reserved\\r\\n * @license: GPLv2\\r\\n * @terms: http:\\/\\/www.joomlackeditor.com\\/terms-of-use\\r\\n * @icons: WebxSolution Ltd has the non-exclusive, non-transferable, non-sublicensable right to use the Licensed Material an unlimited number of times in any and all media for the following commercial or personal purposes (together the \\"Permitted Uses\\") subject to the restrictions set forth in the Agreement. Any uses other than the Permitted Uses must be approved by DryIcons in writing. http:\\/\\/dryicons.com\\/terms\\/commercial\\/\\r\\n *\\/ \\r\\n\\r\\n \\/* ADD PARAGRAPH FORMAT STYLES FOR EDITOR\\r\\n-------------------------------------------------------------------------*\\/\\r\\n@font-face {}\\r\\nbody.cke_show_borders {}\\r\\nh1 {}\\r\\nh2 {}\\r\\nh3 {}\\r\\nh4 {}\\r\\nh5 {}\\r\\nh6 {}\\r\\npre {}\\r\\naddress {}\\r\\n\\r\\n \\/* Preformatted text\\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\nblockquote {\\r\\n    background: none repeat scroll 0 0 #CCCCCC;\\r\\n    border-left: 10px solid #8F8F8F;\\r\\n    color: #544C4A;\\r\\n    font: italic 12pt\\/1.2em Georgia;\\r\\n    margin: 10px !important;\\r\\n    padding: 10px !important;\\r\\n    text-shadow: 1px 1px 1px #ffffff;\\r\\n    width: 60%;\\r\\n    border-radius: 0 10px 0 10px;\\r\\n    -moz-border-radius: 0 10px 0 10px;\\r\\n    -webkit-border: 0 10px 0 10px;\\r\\n}\\r\\n\\r\\nblockquote p { display: inline; }\\r\\nblockquote:after { background: none repeat scroll 0 0 transparent !important; }\\r\\n\\r\\nblockquote:before {\\r\\n    content: url(\\"blockquotes.png\\") !important;\\r\\n\\tbackground: none repeat scroll 0 0 transparent !important;\\r\\n    margin-right: 15px;\\r\\n    vertical-align: super;\\r\\n\\tposition: relative !important;\\r\\n}\\r\\n\\r\\nspan.dropcap  {\\r\\n    color: #333333;\\r\\n    display: block;\\r\\n    float: left;\\r\\n    font: 60px\\/40px Georgia,Times,serif;\\r\\n    padding: 7px 8px 0 0;\\r\\n}\\r\\n\\r\\nspan.box-1heading-jck { font: 50px\\/50px Georgia,Times,serif;}\\r\\nspan.box-2heading-jck { font: 30px\\/40px Georgia,Times,serif;}\\r\\nspan.box-1heading-jck, span.box-2heading-jck { color: #333333; display: block; float: left;}\\r\\n\\r\\n\\/* Tooltips \\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\n.flashtip-jck, .ziptip-jck, .pdftip-jck, .videotip-jck, .infotip-jck, .warningtip-jck, .filmtip-jck, .pintip-jck , .lightbulbtip-jck , .recycletip-jck , .cameratip-jck, .commenttip-jck, .chattip-jck, .documenttip-jck, .accessibletip-jck, .startip-jck, .hearttip-jck, .previoustip-jck, .carttip-jck, .attachmenttip-jck, .calculatortip-jck, .cuttip-jck, .dollartip-jck, .poundtip-jck , .eurotip-jck, .mailtip-jck, .supporttip-jck, .nexttip-jck, .soundtip-jck { color: #444444 !important; }\\r\\n\\r\\na.flashtip-jck, a.ziptip-jck, a.pdftip-jck, a.videotip-jck, a.infotip-jck, a.warningtip-jck, a.filmtip-jck, a.pintip-jck , a.lightbulbtip-jck , a.recycletip-jck , a.cameratip-jck, a.commenttip-jck, a.chattip-jck, a.documenttip-jck, a.accessibletip-jck, a.startip-jck, a.hearttip-jck, a.previoustip-jck, a.carttip-jck, a.attachmenttip-jck, a.calculatortip-jck, a.cuttip-jck, a.dollartip-jck, a.poundtip-jck , a.eurotip-jck, a.mailtip-jck, a.supporttip-jck , a.nexttip-jck, a.soundtip-jck { color: #095197 !important; }\\r\\n\\r\\n.flashtip-jck, .ziptip-jck, .pdftip-jck, .videotip-jck, .infotip-jck, .warningtip-jck, .filmtip-jck, .pintip-jck , .lightbulbtip-jck , .recycletip-jck , .cameratip-jck, .commenttip-jck, .chattip-jck, .documenttip-jck, .accessibletip-jck, .startip-jck, .hearttip-jck, .previoustip-jck, .carttip-jck, .attachmenttip-jck, .calculatortip-jck, .cuttip-jck, .dollartip-jck, .poundtip-jck , .eurotip-jck, .mailtip-jck, .supporttip-jck, .nexttip-jck, .soundtip-jck, .download-DOC,\\r\\n a.flashtip-jck, a.ziptip-jck, a.pdftip-jck, a.videotip-jck, a.infotip-jck, a.warningtip-jck, a.filmtip-jck, a.pintip-jck , a.lightbulbtip-jck , a.recycletip-jck , a.cameratip-jck, a.commenttip-jck, a.chattip-jck, a.documenttip-jck, a.accessibletip-jck, a.startip-jck, a.hearttip-jck, a.previoustip-jck, a.carttip-jck, a.attachmenttip-jck, a.calculatortip-jck, a.cuttip-jck, a.dollartip-jck, a.poundtip-jck , a.eurotip-jck, a.mailtip-jck, a.supporttip-jck , a.nexttip-jck, a.soundtip-jck {\\r\\n    display: block;\\r\\n\\tmargin-bottom: 20px;\\r\\n\\tbackground-color: #FAFAFA !important;\\r\\n    background-position: left center !important;\\r\\n    background-repeat: no-repeat !important;\\r\\n\\tbackground-size: 28px auto !important;\\r\\n    border-bottom: 1px dotted #C8C8C8;\\r\\n    border-top: 1px dotted #C8C8C8;\\r\\n    display: block;\\r\\n    margin: 10px 0 !important;\\r\\n    padding: 7px 10px 7px 35px !important;\\r\\n\\t-webkit-transition: background-color 800ms ease-in-out;\\r\\n\\t-moz-transition: background-color 800ms ease-in-out;\\r\\n\\t-o-transition: background-color 800ms ease-in-out;\\r\\n\\ttransition: background-color 800ms ease-in-out;\\r\\n\\ttext-shadow: 1px 1px 1px #ffffff;\\r\\n\\tfont-size: 14px;\\r\\n}\\r\\n\\r\\na.flashtip-jck:hover, a.ziptip-jck:hover, a.pdftip-jck:hover, a.videotip-jck:hover, a.infotip-jck:hover, a.warningtip-jck:hover, a.filmtip-jck:hover, a.pintip-jck:hover , a.lightbulbtip-jck:hover , a.recycletip-jck:hover , a.cameratip-jck:hover, a.commenttip-jck:hover, a.chattip-jck:hover, a.documenttip-jck:hover, a.accessibletip-jck:hover, a.startip-jck:hover, a.hearttip-jck:hover, a.previoustip-jck:hover, a.carttip-jck:hover, a.attachmenttip-jck:hover, a.calculatortip-jck:hover, a.cuttip-jck:hover, a.dollartip-jck:hover, a.poundtip-jck:hover, a.eurotip-jck:hover, a.mailtip-jck:hover, a.supporttip-jck:hover, a.nexttip-jck:hover, a.soundtip-jck:hover, a.download-DOC:hover { color: #095197 !important; }\\r\\n\\r\\n.flashtip-jck:hover, .ziptip-jck:hover, .pdftip-jck:hover, .videotip-jck:hover, .infotip-jck:hover, .warningtip-jck:hover, .filmtip-jck:hover, .pintip-jck:hover , .lightbulbtip-jck:hover , .recycletip-jck:hover , .cameratip-jck:hover, .commenttip-jck:hover, .chattip-jck:hover, .documenttip-jck:hover, .accessibletip-jck:hover, .startip-jck:hover, .hearttip-jck:hover, .previoustip-jck:hover, .carttip-jck:hover, .attachmenttip-jck:hover, .calculatortip-jck:hover, .cuttip-jck:hover, .dollartip-jck:hover, .poundtip-jck:hover, .eurotip-jck:hover, .mailtip-jck:hover, .supporttip-jck:hover, .nexttip-jck:hover, .soundtip-jck:hover, .download-DOC:hover, a.flashtip-jck:hover, a.ziptip-jck:hover, a.pdftip-jck:hover, a.videotip-jck:hover, a.infotip-jck:hover, a.warningtip-jck:hover, a.filmtip-jck:hover, a.pintip-jck:hover , a.lightbulbtip-jck:hover, a.recycletip-jck:hover, a.cameratip-jck:hover, a.commenttip-jck:hover, a.chattip-jck:hover, a.documenttip-jck:hover, a.accessibletip-jck:hover, a.startip-jck:hover, a.hearttip-jck:hover, a.previoustip-jck:hover, a.carttip-jck:hover, a.attachmenttip-jck:hover, a.calculatortip-jck:hover, a.cuttip-jck:hover, a.dollartip-jck:hover, a.poundtip-jck:hover, a.eurotip-jck:hover, a.mailtip-jck:hover, a.supporttip-jck, a.nexttip-jck:hover, a.soundtip-jck:hover {\\r\\n    background-color: #F2F2F2 !important;\\r\\n\\t-webkit-transition: background-color 400ms ease-in-out;\\r\\n\\t-moz-transition: background-color 400ms ease-in-out;\\r\\n\\t-o-transition: background-color 400ms ease-in-out;\\r\\n\\ttransition: background-color 400ms ease-in-out;\\r\\n\\tbackground-repeat: no-repeat !important;\\r\\n}\\r\\n\\r\\n.flashtip-jck, .flashtip-jck:hover, a.flashtip-jck:hover { background-image: url(\\"flash.png\\")!important}\\r\\n.ziptip-jck, .ziptip-jck:hover, a.ziptip-jck:hover { background-image: url(\\"zip_download.png\\")!important}\\r\\n.pdftip-jck, .pdftip-jck:hover, a.pdftip-jck:hover { background-image: url(\\"pdf.png\\")!important}\\r\\n.videotip-jck , .videotip-jck:hover, a.videotip-jck:hover { background-image: url(\\"video_clip.png\\")!important}\\r\\n.infotip-jck, .infotip-jck:hover, a.infotip-jck:hover { background-image: url(\\"info.png\\")!important}\\r\\n.warningtip-jck, .warningtip-jck:hover, a.warningtip-jck:hover { background-image: url(\\"warning.png\\")!important}\\r\\n.filmtip-jck, .filmtip-jck:hover, a.filmtip-jck:hover { background-image: url(\\"film.png\\")!important}\\r\\n.pintip-jck, .pintip-jck:hover, a.pintip-jck:hover {background-image: url(\\"pin.png\\")!important}\\r\\n.lightbulbtip-jck, .lightbulbtip-jck:hover, a.lightbulbtip-jck:hover {background-image: url(\\"light_bulb.png\\")!important}\\r\\n.recycletip-jck, .recycletip-jck:hover, a.recycletip-jck:hover { background-image: url(\\"recycle.png\\")!important}\\r\\n.cameratip-jck, .cameratip-jck:hover, a.cameratip-jck:hover{ background-image: url(\\"camera.png\\")!important}\\r\\n.commenttip-jck, .commenttip-jck:hover, a.commenttip-jck:hover { background-image: url(\\"comment.png\\")!important}\\r\\n.chattip-jck, .chattip-jck:hover , a.chattip-jck:hover { background-image: url(\\"chat.png\\")!important}\\r\\n.documenttip-jck, .documenttip-jck:hover, a.documenttip-jck:hover { background-image: url(\\"document.png\\")!important}\\r\\n.accessibletip-jck, .accessibletip-jck:hover, a.accessibletip-jck:hover { background-image: url(\\"accessible.png\\")!important}\\r\\n.startip-jck, .startip-jck:hover , a.startip-jck:hover { background-image: url(\\"star.png\\")!important}\\r\\n.hearttip-jck, .hearttip-jck:hover, a.hearttip-jck:hover { background-image: url(\\"heart.png\\")!important}\\r\\n.previoustip-jck, .previoustip-jck:hover, a.previoustip-jck:hover { background-image: url(\\"previous.png\\")!important}\\r\\n.carttip-jck, .carttip-jck :hover, a.carttip-jck:hover { background-image: url(\\"cart.png\\")!important}\\r\\n.attachmenttip-jck, .attachmenttip-jck:hover, a.attachmenttip-jck:hover { background-image: url(\\"attachment.png\\")!important}\\r\\n.calculatortip-jck, .calculatortip-jck:hover , a.calculatortip-jck:hover { background-image: url(\\"calculator.png\\")!important}\\r\\n.cuttip-jck, .cuttip-jck:hover, a.cuttip-jck:hover { background-image: url(\\"cut.png\\")!important}\\r\\n.dollartip-jck , .dollartip-jck:hover, a.dollartip-jck:hover { background-image: url(\\"dollar_currency_sign.png\\")!important}\\r\\n.poundtip-jck, .poundtip-jck:hover, a.poundtip-jck:hover { background-image: url(\\"sterling_pound_currency_sign.png\\")!important}\\r\\n.eurotip-jck, .eurotip-jck:hover , a.eurotip-jck:hover { background-image: url(\\"euro_currency_sign.png\\")!important}\\r\\n.mailtip-jck, .mailtip-jck:hover , a.mailtip-jck:hover { background-image: url(\\"mail.png\\")!important}\\r\\n.supporttip-jck, .supporttip-jck:hover , a.supporttip-jck:hover { background-image: url(\\"support.png\\")!important}\\r\\n.nexttip-jck, .nexttip-jck:hover, a.nexttip-jck:hover { background-image: url(\\"next.png\\")!important}\\r\\n.soundtip-jck, .soundtip-jck:hover , a.soundtip-jck:hover { background-image: url(\\"sound.png\\")!important}\\r\\n\\r\\n\\r\\n\\r\\n \\/* Text Highlight\\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\nspan.blue_hlight-jck, span.gree_hlight-jck, span.red_hlight-jck, span.black_hlight-jck , span.yell_hlight-jck {\\r\\n    border-radius: 5px 5px 5px 5px;\\r\\n    color: #FFFFFF;\\r\\n    display: inline;\\r\\n    font-weight: bold;\\r\\n\\ttext-shadow: none;\\r\\n    padding: 2px 4px;\\r\\n\\tfont-size: 13px;\\r\\n}\\r\\n\\r\\nspan.blue_hlight-jck {  background: none repeat scroll 0 0 #3E6A86;}\\r\\nspan.gree_hlight-jck {  background: none repeat scroll 0 0 #b9cd96;}\\r\\nspan.red_hlight-jck {  background: none repeat scroll 0 0 #AA1428;}\\r\\nspan.black_hlight-jck {  background: none repeat scroll 0 0 #000000;}\\r\\nspan.yell_hlight-jck {  background: none repeat scroll 0 0 #F2F096; color: #544C4A;}\\r\\n \\r\\n\\/* Box Styles\\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\n.blubox-jck, .grebox-jck, .redbox-jck, .blabox-jck, .yelbox-jck   {\\r\\n\\tbackground: none repeat scroll 0 0 #FAFAFA;\\r\\n\\tborder-style: solid;\\r\\n    border-width: 1px 1px 1px 8px;\\r\\n\\tmargin: 10px 0 20px !important;\\r\\n    padding: 8px 8px 8px 20px !important;\\r\\n\\t-webkit-border-top-left-radius: 15px;\\r\\n    -webkit-border-bottom-left-radius: 15px;\\r\\n    -moz-border-radius-topleft: 15px;\\r\\n    -moz-border-radius-bottomleft: 15px;\\r\\n    border-top-left-radius: 15px;\\r\\n    border-bottom-left-radius: 15px;\\r\\n\\tcolor: #444444 !important;\\r\\n\\ttext-shadow: 1px 1px 1px #ffffff;\\r\\n}\\r\\n\\r\\n.blubox-jck  {  border-color: #DDDDDD #DDDDDD #DDDDDD #3E6A86;}\\r\\n.grebox-jck  {  border-color: #DDDDDD #DDDDDD #DDDDDD #b9cd96;}\\r\\n.redbox-jck {  border-color: #DDDDDD #DDDDDD #DDDDDD #AA1428;}\\r\\n.blabox-jck  {  border-color: #DDDDDD #DDDDDD #DDDDDD #000000;}\\r\\n.yelbox-jck  {  border-color: #DDDDDD #DDDDDD #DDDDDD #F2F096; color: #544C4A;}\\r\\n\\r\\n.blubox-jck > br,\\r\\n.grebox-jck  > br,\\r\\n.redbox-jck > br, \\r\\n.blabox-jck  > br, \\r\\n.yelbox-jck > br {\\r\\n    clear: both;\\r\\n}\\r\\n\\r\\n\\/* Icon Library\\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\n.info-jck, .warning-jck, .film-jck, .pin-jck , .lightbulb-jck , .recycle-jck , .camera-jck, .comment-jck, .chat-jck, .document-jck, .accessible-jck, .star-jck, .heart-jck, .previous-jck, .cart-jck, .attachment-jck, .calculator-jck, .cut-jck, .dollar-jck, .pound-jck , .euro-jck, .mail-jck, .support-jck, .next-jck, .sound-jck, .flash-jck, .zip-jck, .pdf-jck, .video-jck   {\\r\\n    display: block;\\r\\n    padding: 20px 0 20px 60px !important;\\r\\n\\tmargin-bottom: 20px !important;\\r\\n\\tbackground-color: transparent !important;\\r\\n    background-position: left center !important;\\r\\n    background-repeat: no-repeat !important;\\r\\n}\\r\\n\\r\\n.info-jck { background: url(\\"info.png\\")}\\r\\n.warning-jck { background: url(\\"warning.png\\")}\\r\\n.film-jck { background: url(\\"film.png\\")}\\r\\n.pin-jck {background: url(\\"pin.png\\")}\\r\\n.lightbulb-jck {background: url(\\"light_bulb.png\\")}\\r\\n.recycle-jck { background: url(\\"recycle.png\\")}\\r\\n.camera-jck { background: url(\\"camera.png\\")}\\r\\n.comment-jck { background: url(\\"comment.png\\")}\\r\\n.chat-jck  { background: url(\\"chat.png\\")}\\r\\n.document-jck { background: url(\\"document.png\\")}\\r\\n.accessible-jck { background: url(\\"accessible.png\\")}\\r\\n.star-jck { background: url(\\"star.png\\")}\\r\\n.heart-jck { background: url(\\"heart.png\\")}\\r\\n.previous-jck { background: url(\\"previous.png\\")}\\r\\n.cart-jck { background: url(\\"cart.png\\")}\\r\\n.attachment-jck { background: url(\\"attachment.png\\")}\\r\\n.calculator-jck { background: url(\\"calculator.png\\")}\\r\\n.cut-jck { background: url(\\"cut.png\\")}\\r\\n.dollar-jck { background: url(\\"dollar_currency_sign.png\\")}\\r\\n.pound-jck { background: url(\\"sterling_pound_currency_sign.png\\")}\\r\\n.euro-jck { background: url(\\"euro_currency_sign.png\\")}\\r\\n.mail-jck { background: url(\\"mail.png\\")}\\r\\n.support-jck { background: url(\\"support.png\\")}\\r\\n.next-jck  { background: url(\\"next.png\\")}\\r\\n.sound-jck  { background: url(\\"sound.png\\")}\\r\\n.flash-jck  { background: url(\\"flash.png\\")}\\r\\n.zip-jck  { background: url(\\"zip_download.png\\")}\\r\\n.pdf-jck  { background: url(\\"pdf.png\\")}\\r\\n.video-jck  { background: url(\\"video_clip.png\\")}\\r\\n\\r\\n\\/* Images Caption Styles\\r\\n-------------------------------------------------------------------------*\\/\\r\\nimg.caption { background-color:inherit; vertical-align: middle;}\\r\\n.img_caption.none { margin: 0 !important;} \\r\\n.img_caption { text-align: center; }\\r\\n\\r\\nimg.caption.photo, img.caption.photoblack, img.caption.photoblue, img.caption.photogreen, img.caption.photored, img.caption.photoyellow { \\r\\n    background-color: #FFFFFF;\\r\\n    padding: 10px 10px 40px;\\r\\n\\tmargin-right: 5px;\\r\\n\\tbox-shadow: 0 0 3px #000000;\\r\\n\\t-webkit-box-shadow: 0 0 3px #000000;\\r\\n    -moz-box-shadow: 0 0 3px #000000;\\r\\n}\\r\\n\\r\\nimg.caption.photo + p, img.caption.photoblack + p, img.caption.photoblue + p, img.caption.photogreen + p, img.caption.photored + p, img.caption.photoyellow + p {\\r\\n    position: relative; \\r\\n    left: 0px;\\r\\n    bottom: 30px;\\r\\n    overflow: hidden;\\r\\n    text-overflow: ellipsis;\\r\\n    white-space: nowrap;\\r\\n    width: 100%;\\r\\n\\tcolor: #333333;\\r\\n\\tmargin: 0;\\r\\n    font-size: 13px;\\r\\n    line-height: 18px;\\r\\n}\\r\\n\\r\\nimg.caption.photoblack + p , img.caption.photoblue + p, img.caption.photored + p { color: #FFFFFF; }\\r\\nimg.caption.photoblack { background-color: #000000;}\\r\\nimg.caption.photoblue {  background-color: #3E6A86;}\\r\\nimg.caption.photogreen  {  background-color: #b9cd96;}\\r\\nimg.caption.photored {  background-color: #AA1428;}\\r\\nimg.caption.photoyellow {  background-color: #F2F096;}\\r\\n\\r\\n\\/* Images Styles\\r\\n-------------------------------------------------------------------------*\\/\\r\\nimg.jck_img_align_left {\\r\\n    float: left; \\r\\n    margin: 3px 5px 0 0;\\r\\n    padding: 1px;\\r\\n}\\r\\n\\r\\nimg.jck_img_align_right {\\r\\n    float: right; \\r\\n    margin: 3px 0 0 5px;\\r\\n    padding: 1px;\\r\\n}\\r\\n\\r\\nimg.image_holder {\\r\\n    background: none repeat scroll 0 0 #FFFFFF;\\r\\n    border: 5px solid #EFEFEF;\\r\\n    margin: 3px 5px 0 0;\\r\\n    padding: 1px;\\r\\n}\\r\\n\\r\\nimg.fade_in {\\r\\n\\t-webkit-transition: all 500ms ease-in-out;\\r\\n\\t-moz-transition: all 500ms ease-in-out;\\r\\n\\t-o-transition: all 500ms ease-in-out;\\r\\n\\ttransition: all 500ms ease-in-out;\\r\\n\\t-webkit-box-shadow: 0 0 3px #000000;\\r\\n\\t-moz-box-shadow: 0 0 3px #000000;\\r\\n\\tbox-shadow: 0 0 3px #000000;\\r\\n\\tborder: 10px solid #FFFFFF;\\r\\n    opacity: 0.5;\\r\\n    overflow: hidden;\\r\\n    position: relative;\\r\\n\\tmargin: 3px;\\r\\n\\tcursor:url(cursor_zoom.png),auto;\\r\\n}\\r\\n\\r\\nimg.fade_in:hover {\\r\\n\\t-webkit-box-shadow: 0 0 10px #000000;\\r\\n\\t-moz-box-shadow: 0 0 10px #000000;\\r\\n\\tbox-shadow: 0 0 10px #000000;\\r\\n    opacity: 1;\\r\\n}\\r\\n\\r\\nimg.zoom  { \\r\\n\\t-webkit-transition: all 500ms ease-in-out;\\r\\n\\t-moz-transition: all 500ms ease-in-out;\\r\\n\\t-o-transition: all 500ms ease-in-out;\\r\\n\\ttransition: all 500ms ease-in-out;\\r\\n    background: none repeat scroll 0 0 #FFFFFF;\\r\\n\\t-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n\\t-moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n\\tbox-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n    color: #333333;\\r\\n    display: inline;\\r\\n    float: left;\\r\\n    font-size: 18px;\\r\\n    padding: 10px 10px 15px;\\r\\n    text-align: center;\\r\\n    text-decoration: none;\\r\\n    width: auto;\\r\\n\\tfont-family: serif;\\r\\n\\theight: 100px;\\r\\n\\twidth: auto;\\r\\n\\tmargin: 0 20px 27px 0px;\\r\\n\\tcursor:url(cursor_zoom.png),auto;\\r\\n}\\r\\n\\r\\nimg.zoom:hover {\\r\\n    -moz-transform: scale(1.75);\\r\\n\\t-webkit-transform: scale(1.75);\\r\\n\\t-o-transform: scale(1.75);\\r\\n\\t-webkit-transition: all 500ms ease-in-out;\\r\\n\\t-moz-transition: all 500ms ease-in-out;\\r\\n\\t-o-transition: all 500ms ease-in-out;\\r\\n\\ttransition: all 500ms ease-in-out;\\r\\n\\t-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);\\r\\n\\t-moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);\\r\\n\\tbox-shadow: 0 3px 6px rgba(0, 0, 0, 0.5); \\r\\n    position: relative;\\r\\n    z-index: 50;\\r\\n\\tmargin: 0 -60px 27px 80px;\\r\\n}\\r\\n\\r\\nimg.polaroids_zoom  {\\r\\n    -moz-transform: rotate(-2deg);\\r\\n\\t-webkit-transform: rotate(2deg); \\r\\n\\t-o-transform: rotate(2deg); \\r\\n\\t-webkit-transition: all 500ms ease-in-out;\\r\\n\\t-moz-transition: all 500ms ease-in-out;\\r\\n\\t-o-transition: all 500ms ease-in-out;\\r\\n\\ttransition: all 500ms ease-in-out;\\r\\n    background: none repeat scroll 0 0 #FFFFFF;\\r\\n\\t-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n\\t-moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n\\tbox-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);\\r\\n    color: #333333;\\r\\n    display: inline;\\r\\n    float: left;\\r\\n    font-size: 18px;\\r\\n    margin: 10px 20px 25px 14px;\\r\\n    padding: 10px 10px 15px;\\r\\n    text-align: center;\\r\\n    text-decoration: none;\\r\\n    width: auto;\\r\\n\\tfont-family: serif;\\r\\n\\theight: 100px;\\r\\n\\twidth: auto;\\r\\n\\tcursor:url(cursor_zoom.png),auto;\\r\\n}\\r\\n\\r\\nimg.polaroids_zoom:hover {\\r\\n    -moz-transform: scale(1.30);\\r\\n\\t-webkit-transform: scale(1.30);\\r\\n\\t-o-transform: scale(1.30);\\r\\n\\t-webkit-transition: all 500ms ease-in-out;\\r\\n\\t-moz-transition: all 500ms ease-in-out;\\r\\n\\t-o-transition: all 500ms ease-in-out;\\r\\n\\ttransition: all 500ms ease-in-out;\\r\\n\\t-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);\\r\\n\\t-moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);\\r\\n\\tbox-shadow: 0 3px 6px rgba(0, 0, 0, 0.5); \\r\\n    position: relative;\\r\\n    z-index: 50;\\r\\n}\\r\\n\\r\\nimg.screenshot_blue, img.screenshot_green , img.screenshot_red, img.screenshot_black, img.screenshot_gray, img.screenshot_yellow  {\\r\\n    margin: 5px 0;\\r\\n    padding: 10px;\\r\\n\\tbackground: #ffffff;\\r\\n\\tbackground: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);\\r\\n\\tbackground: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5));\\r\\n\\tbackground: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tfilter: progid:DXImageTransform.Microsoft.gradient( startColorstr=''#ffffff'', endColorstr=''#e5e5e5'',GradientType=0 );\\r\\n\\topacity: 1;\\r\\n\\tmax-width: 85%;\\r\\n}\\r\\n\\r\\nimg.screenshot_blue { border: 10px solid #3E6A86;}\\r\\nimg.screenshot_green  { border: 10px solid #b9cd96;}\\r\\nimg.screenshot_red  { border: 10px solid #AA1428;}\\r\\nimg.screenshot_black  { border: 10px solid #000000;}\\r\\nimg.screenshot_gray { border: 10px solid #F0F0F0;}\\r\\nimg.screenshot_yellow { border: 10px solid #EFDE2C;}\\r\\n\\r\\n \\/* Div Styles\\r\\n----------------------------------------------------------------------------------------------------*\\/\\r\\ndiv.scroll_box{\\r\\n    margin: 5px 0;\\r\\n    padding: 10px;\\r\\n\\tbackground: #ffffff;\\r\\n\\tbackground: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);\\r\\n\\tbackground: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5));\\r\\n\\tbackground: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tbackground: linear-gradient(top, #ffffff 0%,#e5e5e5 100%);\\r\\n\\tfilter: progid:DXImageTransform.Microsoft.gradient( startColorstr=''#ffffff'', endColorstr=''#e5e5e5'',GradientType=0 );\\r\\n\\topacity: 1;\\r\\n\\tborder-left: 15px solid ##EDEDED;\\r\\n    border-top: 15px solid #EDEDED;\\r\\n    height: 300px;\\r\\n    overflow: scroll;\\r\\n\\t-webkit-box-shadow: 0 0 1px 1px #E3E3E3 inset, 0 0 1px 2px #FFFFFF inset, 0 0 0 1px #E3E3E3;\\r\\n\\tbox-shadow: 0 0 1px 1px #E3E3E3 inset, 0 0 1px 2px #FFFFFF inset, 0 0 0 1px #E3E3E3; \\r\\n}\\r\\n\\r\\ndiv.img_rollover { background-color: transparent; \\/* max-width: 0;  = set the the width of your rollover images*\\/ }\\r\\ndiv.img_rollover img:first-child { display: block; }\\r\\ndiv.img_rollover img:last-child { display: none; }\\r\\ndiv.img_rollover:hover img:first-child { display: none; }\\r\\ndiv.img_rollover:hover img:last-child { display:block; cursor: pointer; }\\r\\n\\r\\n\\/* Tables Styles\\r\\n-------------------------------------------------------------------------*\\/\\r\\ntable.table_style_blue, table.table_style_green, table.table_style_red, table.table_style_black, table.table_style_yellow  {\\r\\n    border: 1px solid #DDDDDD;\\r\\n    border-collapse: collapse;\\r\\n    color: #404040;\\r\\n    width: 100%;\\r\\n}\\r\\n\\r\\ntable.table_style_blue tbody tr, table.table_style_green tbody tr, table.table_style_red tbody tr, table.table_style_black tbody tr, table.table_style_yellow tbody tr  {\\r\\n    background: none repeat scroll 0 0 #F2F2F2;\\r\\n\\tborder: 1px solid #DDDDDD;\\r\\n\\t-webkit-transition: all 800ms ease-in-out;\\r\\n\\t-moz-transition: all 800ms ease-in-out;\\r\\n\\t-o-transition: all 800ms ease-in-out;\\r\\n\\ttransition: all 800ms ease-in-out;\\r\\n}\\r\\n\\r\\ntable.table_style_blue tbody tr:hover , table.table_style_green tbody tr:hover, table.table_style_red tbody tr:hover, table.table_style_black tbody tr:hover, table.table_style_yellow tbody tr:hover  {\\r\\n    background: none repeat scroll 0 0 #E5E5E5;\\r\\n\\t-webkit-transition: all 300ms ease-in-out;\\r\\n\\t-moz-transition: all 300ms ease-in-out;\\r\\n\\t-o-transition: all 300ms ease-in-out;\\r\\n\\ttransition: all 300ms ease-in-out;\\r\\n}\\r\\n\\r\\ntable.table_style_blue tbody tr td, table.table_style_green tbody tr td, table.table_style_red tbody tr td, table.table_style_black tbody tr td, table.table_style_yellow tbody tr td {\\r\\n    line-height: 22px;\\r\\n\\tpadding: 5px;\\r\\n\\tborder: 1px solid #DDDDDD;\\r\\n}\\r\\n\\r\\ntable.table_style_blue caption, table.table_style_green caption, table.table_style_red caption, table.table_style_black caption, table.table_style_yellow caption  {\\r\\n    color: #FFFFFF;\\r\\n    font-weight: 700;\\r\\n    line-height: 22px;\\r\\n    text-align: center;\\r\\n    text-transform: uppercase;\\r\\n}\\r\\n\\r\\ntable.table_style_blue caption { background: none repeat scroll 0 0 #3E6A86;}\\r\\ntable.table_style_green caption { background: none repeat scroll 0 0 #b9cd96;}\\r\\ntable.table_style_red caption { background: none repeat scroll 0 0 #AA1428;}\\r\\ntable.table_style_black caption { background: none repeat scroll 0 0 #000000;}\\r\\ntable.table_style_yellow caption { background: none repeat scroll 0 0 #F2F096; color: #544C4A;}\\r\\n\\r\\n\\/* Templates\\r\\n-------------------------------------------------------------------------*\\/\\r\\n.row-fluid { width: 100%; }\\r\\n.row-fluid:after { clear: both; }\\r\\n.row-fluid [class*=\\"span\\"]:first-child {  margin-left: 0; }\\r\\n.row-fluid .controls-row [class*=\\"span\\"] + [class*=\\"span\\"] { margin-left: 2.12766%; }\\r\\n.row-fluid .span6 { width: 48.9362%; }\\r\\n.row-fluid:before, .row-fluid:after {\\r\\n    content: \\"\\";\\r\\n    display: table;\\r\\n    line-height: 0;\\r\\n}\\r\\n.row-fluid [class*=\\"span\\"] {\\r\\n    -moz-box-sizing: border-box;\\r\\n    display: block;\\r\\n    float: left;\\r\\n    margin-left: 2.12766%;\\r\\n    min-height: 30px;\\r\\n    width: 100%;\\r\\n}\\r\\n\\r\\n\\/* 1 big button template *\\/\\r\\na.button-big {\\r\\n\\t-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;\\r\\n\\t-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;\\r\\n\\tbox-shadow:inset 0px 1px 0px 0px #ffffff;\\r\\n\\tbackground:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );\\r\\n\\tbackground:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );\\r\\n\\tfilter:progid:DXImageTransform.Microsoft.gradient(startColorstr=''#ededed'', endColorstr=''#dfdfdf'');\\r\\n\\tbackground-color:#ededed;\\r\\n\\t-webkit-border-top-left-radius:6px;\\r\\n\\t-moz-border-radius-topleft:6px;\\r\\n\\tborder-top-left-radius:6px;\\r\\n\\t-webkit-border-top-right-radius:6px;\\r\\n\\t-moz-border-radius-topright:6px;\\r\\n\\tborder-top-right-radius:6px;\\r\\n\\t-webkit-border-bottom-right-radius:6px;\\r\\n\\t-moz-border-radius-bottomright:6px;\\r\\n\\tborder-bottom-right-radius:6px;\\r\\n\\t-webkit-border-bottom-left-radius:6px;\\r\\n\\t-moz-border-radius-bottomleft:6px;\\r\\n\\tborder-bottom-left-radius:6px;\\r\\n\\ttext-indent:0;\\r\\n\\tborder:1px solid #dcdcdc;\\r\\n\\tdisplay:inline-block;\\r\\n\\tcolor:#777777;\\r\\n\\tfont-family:sans-serif;\\r\\n\\tfont-size:18px;\\r\\n\\tfont-weight:bold;\\r\\n\\tfont-style:normal;\\r\\n\\tpadding: 10% 15%;\\r\\n\\ttext-decoration:none;\\r\\n\\ttext-align:center;\\r\\n\\ttext-shadow:1px 1px 0px #ffffff;\\r\\n\\ttext-transform: uppercase;\\r\\n\\tmargin: 10px 0;\\r\\n}\\r\\na.button-big:hover {\\r\\n\\tbackground:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );\\r\\n\\tbackground:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );\\r\\n\\tfilter:progid:DXImageTransform.Microsoft.gradient(startColorstr=''#dfdfdf'', endColorstr=''#ededed'');\\r\\n\\tbackground-color:#dfdfdf;\\r\\n}\\r\\na.button-big:active {\\r\\n\\tposition:relative;\\r\\n\\ttop:1px;\\r\\n}\\r\\n\\/* 2 big button with desc *\\/\\r\\n.row-fluid .span6 {  width: 48.9362%; }\\r\\n\\/* 3 big button with desc *\\/\\r\\n.row-fluid .span4 { width: 31.9149%; }\\r\\n\\r\\n\\/* User Profiles *\\/\\r\\ndiv.row-fluid img.polaroids_zoom {\\r\\n\\theight: auto !important;\\r\\n\\tmax-width: 120px;\\r\\n}\\r\\n\\/* Other\\r\\n-------------------------------------------------------------------------*\\/\\r\\n\\/*Responsive media embed*\\/\\r\\nbody div.media_embed {\\r\\n\\tposition: relative; \\r\\n\\tpadding-bottom: 56.25%; \\r\\n\\tpadding-top: 30px; \\r\\n\\theight: 0; \\r\\n\\toverflow: hidden; \\r\\n\\tmax-width: 100%; \\r\\n\\theight: auto; \\r\\n\\tmargin-top:15px;\\r\\n} \\r\\nbody div.media_embed iframe, body div.media_embed object, body div.media_embed embed {\\r\\n\\tposition: absolute; top: 0; \\r\\n\\tleft: 0; \\r\\n\\twidth: 100%; \\r\\n\\theight: 100%; \\r\\n}\\r\\n\\r\\n\\/*Fixes*\\/\\r\\nbody.cke_ltr div.cke_panel_block div.scroll_box { height: 25px !important;} \\/* Minimises the height in the style preview list *\\/\\r\\nbody.cke_ltr div.cke_panel_block { color: #000000; } \\/* Stops templates setting the style list text to white *\\/","autolaunchFilebrowser":"1","minify":"1","magicline_enabled":"1"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(823, 'System - JCK Modal', 'plugin', 'jckmodal', 'system', 0, 0, 1, 0, '{"name":"System - JCK Modal","type":"plugin","creationDate":"April 2011","author":"WebxSolution Ltd","copyright":"Copyright 2011 WebxSolution Ltd. All rights reserved.","authorEmail":"studio@webxsolution.com","authorUrl":"www.webxsolution.com","version":"1.1","description":"Forces Joomla to initialise the Modal JS classes required by JTree Link''s modal option.","group":"","filename":"jckmodal"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (824, 'com_jckman', 'component', 'com_jckman', '', 1, 1, 0, 0, '{"name":"com_jckman","type":"component","creationDate":"Jan 2015","author":"Andrew Williams","copyright":"2013 - 2015 WebxSolutions Ltd","authorEmail":"","authorUrl":"","version":"6.4.4","description":" \\n\\t<p>JoomlaCK Editor Manager v6.4<\\/p> \\n\\t","group":""}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (825, 'JCK Suite', 'package', 'pkg_jcksuite', '', 0, 1, 1, 0, '{"name":"JCK Suite","type":"package","creationDate":"Nov 2014","author":"Andrew Williams","copyright":"","authorEmail":"","authorUrl":"","version":"6.6.2","description":"PLG_JCK_SUITE_XML_DESC","group":"","filename":"pkg_jcksuite"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (826, 'System - JCK Typography', 'plugin', 'jcktypography', 'system', 0, 1, 1, 0, 'false', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -669,22 +727,23 @@ INSERT INTO `fv5oz_extensions` (`extension_id`, `name`, `type`, `element`, `fold
 -- Table structure for table `fv5oz_finder_filters`
 --
 
-CREATE TABLE `fv5oz_finder_filters` (
-  `filter_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_filters` (
+  `filter_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_by` int(10) UNSIGNED NOT NULL,
+  `created_by` int(10) unsigned NOT NULL,
   `created_by_alias` varchar(255) NOT NULL,
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `map_count` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `map_count` int(10) unsigned NOT NULL DEFAULT '0',
   `data` text NOT NULL,
-  `params` mediumtext
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `params` mediumtext,
+  PRIMARY KEY (`filter_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -692,8 +751,8 @@ CREATE TABLE `fv5oz_finder_filters` (
 -- Table structure for table `fv5oz_finder_links`
 --
 
-CREATE TABLE `fv5oz_finder_links` (
-  `link_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links` (
+  `link_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL,
   `route` varchar(255) NOT NULL,
   `title` varchar(400) DEFAULT NULL,
@@ -708,11 +767,18 @@ CREATE TABLE `fv5oz_finder_links` (
   `publish_end_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `start_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `end_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `list_price` double UNSIGNED NOT NULL DEFAULT '0',
-  `sale_price` double UNSIGNED NOT NULL DEFAULT '0',
+  `list_price` double unsigned NOT NULL DEFAULT '0',
+  `sale_price` double unsigned NOT NULL DEFAULT '0',
   `type_id` int(11) NOT NULL,
-  `object` mediumblob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `object` mediumblob NOT NULL,
+  PRIMARY KEY (`link_id`),
+  KEY `idx_type` (`type_id`),
+  KEY `idx_title` (`title`(100)),
+  KEY `idx_md5` (`md5sum`),
+  KEY `idx_url` (`url`(75)),
+  KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`),
+  KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -720,10 +786,13 @@ CREATE TABLE `fv5oz_finder_links` (
 -- Table structure for table `fv5oz_finder_links_terms0`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms0` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms0` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -732,10 +801,13 @@ CREATE TABLE `fv5oz_finder_links_terms0` (
 -- Table structure for table `fv5oz_finder_links_terms1`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms1` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms1` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -744,10 +816,13 @@ CREATE TABLE `fv5oz_finder_links_terms1` (
 -- Table structure for table `fv5oz_finder_links_terms2`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms2` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms2` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -756,10 +831,13 @@ CREATE TABLE `fv5oz_finder_links_terms2` (
 -- Table structure for table `fv5oz_finder_links_terms3`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms3` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms3` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -768,10 +846,13 @@ CREATE TABLE `fv5oz_finder_links_terms3` (
 -- Table structure for table `fv5oz_finder_links_terms4`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms4` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms4` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -780,10 +861,13 @@ CREATE TABLE `fv5oz_finder_links_terms4` (
 -- Table structure for table `fv5oz_finder_links_terms5`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms5` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms5` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -792,10 +876,13 @@ CREATE TABLE `fv5oz_finder_links_terms5` (
 -- Table structure for table `fv5oz_finder_links_terms6`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms6` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms6` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -804,10 +891,13 @@ CREATE TABLE `fv5oz_finder_links_terms6` (
 -- Table structure for table `fv5oz_finder_links_terms7`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms7` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms7` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -816,10 +906,13 @@ CREATE TABLE `fv5oz_finder_links_terms7` (
 -- Table structure for table `fv5oz_finder_links_terms8`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms8` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms8` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -828,10 +921,13 @@ CREATE TABLE `fv5oz_finder_links_terms8` (
 -- Table structure for table `fv5oz_finder_links_terms9`
 --
 
-CREATE TABLE `fv5oz_finder_links_terms9` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_terms9` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -840,10 +936,13 @@ CREATE TABLE `fv5oz_finder_links_terms9` (
 -- Table structure for table `fv5oz_finder_links_termsa`
 --
 
-CREATE TABLE `fv5oz_finder_links_termsa` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_termsa` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -852,10 +951,13 @@ CREATE TABLE `fv5oz_finder_links_termsa` (
 -- Table structure for table `fv5oz_finder_links_termsb`
 --
 
-CREATE TABLE `fv5oz_finder_links_termsb` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_termsb` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -864,10 +966,13 @@ CREATE TABLE `fv5oz_finder_links_termsb` (
 -- Table structure for table `fv5oz_finder_links_termsc`
 --
 
-CREATE TABLE `fv5oz_finder_links_termsc` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_termsc` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -876,10 +981,13 @@ CREATE TABLE `fv5oz_finder_links_termsc` (
 -- Table structure for table `fv5oz_finder_links_termsd`
 --
 
-CREATE TABLE `fv5oz_finder_links_termsd` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_termsd` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -888,10 +996,13 @@ CREATE TABLE `fv5oz_finder_links_termsd` (
 -- Table structure for table `fv5oz_finder_links_termse`
 --
 
-CREATE TABLE `fv5oz_finder_links_termse` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_termse` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -900,10 +1011,13 @@ CREATE TABLE `fv5oz_finder_links_termse` (
 -- Table structure for table `fv5oz_finder_links_termsf`
 --
 
-CREATE TABLE `fv5oz_finder_links_termsf` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `term_id` int(10) UNSIGNED NOT NULL,
-  `weight` float UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_links_termsf` (
+  `link_id` int(10) unsigned NOT NULL,
+  `term_id` int(10) unsigned NOT NULL,
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -912,14 +1026,20 @@ CREATE TABLE `fv5oz_finder_links_termsf` (
 -- Table structure for table `fv5oz_finder_taxonomy`
 --
 
-CREATE TABLE `fv5oz_finder_taxonomy` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_taxonomy` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
-  `state` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
-  `access` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `ordering` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `state` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `access` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `ordering` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `parent_id` (`parent_id`),
+  KEY `state` (`state`),
+  KEY `ordering` (`ordering`),
+  KEY `access` (`access`),
+  KEY `idx_parent_published` (`parent_id`,`state`,`access`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `fv5oz_finder_taxonomy`
@@ -934,9 +1054,12 @@ INSERT INTO `fv5oz_finder_taxonomy` (`id`, `parent_id`, `title`, `state`, `acces
 -- Table structure for table `fv5oz_finder_taxonomy_map`
 --
 
-CREATE TABLE `fv5oz_finder_taxonomy_map` (
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `node_id` int(10) UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_taxonomy_map` (
+  `link_id` int(10) unsigned NOT NULL,
+  `node_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`node_id`),
+  KEY `link_id` (`link_id`),
+  KEY `node_id` (`node_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -945,17 +1068,22 @@ CREATE TABLE `fv5oz_finder_taxonomy_map` (
 -- Table structure for table `fv5oz_finder_terms`
 --
 
-CREATE TABLE `fv5oz_finder_terms` (
-  `term_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_terms` (
+  `term_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
-  `common` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `phrase` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `weight` float UNSIGNED NOT NULL DEFAULT '0',
+  `common` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `phrase` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `weight` float unsigned NOT NULL DEFAULT '0',
   `soundex` varchar(75) NOT NULL,
   `links` int(10) NOT NULL DEFAULT '0',
-  `language` char(3) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `language` char(3) NOT NULL DEFAULT '',
+  PRIMARY KEY (`term_id`),
+  UNIQUE KEY `idx_term` (`term`),
+  KEY `idx_term_phrase` (`term`,`phrase`),
+  KEY `idx_stem_phrase` (`stem`,`phrase`),
+  KEY `idx_soundex_phrase` (`soundex`,`phrase`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -963,9 +1091,11 @@ CREATE TABLE `fv5oz_finder_terms` (
 -- Table structure for table `fv5oz_finder_terms_common`
 --
 
-CREATE TABLE `fv5oz_finder_terms_common` (
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_terms_common` (
   `term` varchar(75) NOT NULL,
-  `language` varchar(3) NOT NULL
+  `language` varchar(3) NOT NULL,
+  KEY `idx_word_lang` (`term`,`language`),
+  KEY `idx_lang` (`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -984,7 +1114,7 @@ INSERT INTO `fv5oz_finder_terms_common` (`term`, `language`) VALUES
 ('ani', 'en'),
 ('any', 'en'),
 ('are', 'en'),
-('aren\'t', 'en'),
+('aren''t', 'en'),
 ('as', 'en'),
 ('at', 'en'),
 ('be', 'en'),
@@ -999,7 +1129,7 @@ INSERT INTO `fv5oz_finder_terms_common` (`term`, `language`) VALUES
 ('in', 'en'),
 ('into', 'en'),
 ('is', 'en'),
-('isn\'t', 'en'),
+('isn''t', 'en'),
 ('it', 'en'),
 ('its', 'en'),
 ('me', 'en'),
@@ -1095,14 +1225,16 @@ INSERT INTO `fv5oz_finder_terms_common` (`term`, `language`) VALUES
 -- Table structure for table `fv5oz_finder_tokens`
 --
 
-CREATE TABLE `fv5oz_finder_tokens` (
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_tokens` (
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
-  `common` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `phrase` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `weight` float UNSIGNED NOT NULL DEFAULT '1',
-  `context` tinyint(1) UNSIGNED NOT NULL DEFAULT '2',
-  `language` char(3) NOT NULL DEFAULT ''
+  `common` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `phrase` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `weight` float unsigned NOT NULL DEFAULT '1',
+  `context` tinyint(1) unsigned NOT NULL DEFAULT '2',
+  `language` char(3) NOT NULL DEFAULT '',
+  KEY `idx_word` (`term`),
+  KEY `idx_context` (`context`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -1111,18 +1243,20 @@ CREATE TABLE `fv5oz_finder_tokens` (
 -- Table structure for table `fv5oz_finder_tokens_aggregate`
 --
 
-CREATE TABLE `fv5oz_finder_tokens_aggregate` (
-  `term_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_tokens_aggregate` (
+  `term_id` int(10) unsigned NOT NULL,
   `map_suffix` char(1) NOT NULL,
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
-  `common` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `phrase` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  `term_weight` float UNSIGNED NOT NULL,
-  `context` tinyint(1) UNSIGNED NOT NULL DEFAULT '2',
-  `context_weight` float UNSIGNED NOT NULL,
-  `total_weight` float UNSIGNED NOT NULL,
-  `language` char(3) NOT NULL DEFAULT ''
+  `common` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `phrase` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `term_weight` float unsigned NOT NULL,
+  `context` tinyint(1) unsigned NOT NULL DEFAULT '2',
+  `context_weight` float unsigned NOT NULL,
+  `total_weight` float unsigned NOT NULL,
+  `language` char(3) NOT NULL DEFAULT '',
+  KEY `token` (`term`),
+  KEY `keyword_id` (`term_id`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -1131,11 +1265,13 @@ CREATE TABLE `fv5oz_finder_tokens_aggregate` (
 -- Table structure for table `fv5oz_finder_types`
 --
 
-CREATE TABLE `fv5oz_finder_types` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_finder_types` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
-  `mime` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `mime` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title` (`title`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1143,11 +1279,12 @@ CREATE TABLE `fv5oz_finder_types` (
 -- Table structure for table `fv5oz_jcklanguages`
 --
 
-CREATE TABLE `fv5oz_jcklanguages` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_jcklanguages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `tag` varchar(5) DEFAULT NULL,
-  `filename` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `filename` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1155,8 +1292,8 @@ CREATE TABLE `fv5oz_jcklanguages` (
 -- Table structure for table `fv5oz_jckplugins`
 --
 
-CREATE TABLE `fv5oz_jckplugins` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_jckplugins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL DEFAULT '',
   `name` varchar(100) NOT NULL,
   `type` varchar(100) NOT NULL DEFAULT 'command',
@@ -1169,8 +1306,10 @@ CREATE TABLE `fv5oz_jckplugins` (
   `iscore` tinyint(3) NOT NULL DEFAULT '0',
   `acl` text,
   `params` text NOT NULL,
-  `parentid` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `parentid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `plugin` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=102 ;
 
 --
 -- Dumping data for table `fv5oz_jckplugins`
@@ -1283,12 +1422,13 @@ INSERT INTO `fv5oz_jckplugins` (`id`, `title`, `name`, `type`, `row`, `icon`, `p
 -- Table structure for table `fv5oz_jcktoolbarplugins`
 --
 
-CREATE TABLE `fv5oz_jcktoolbarplugins` (
+CREATE TABLE IF NOT EXISTS `fv5oz_jcktoolbarplugins` (
   `toolbarid` int(11) NOT NULL,
   `pluginid` int(11) NOT NULL,
   `row` int(11) NOT NULL DEFAULT '0',
   `ordering` int(11) NOT NULL DEFAULT '0',
-  `state` tinyint(3) NOT NULL DEFAULT '0'
+  `state` tinyint(3) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`toolbarid`,`pluginid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1368,16 +1508,18 @@ INSERT INTO `fv5oz_jcktoolbarplugins` (`toolbarid`, `pluginid`, `row`, `ordering
 -- Table structure for table `fv5oz_jcktoolbars`
 --
 
-CREATE TABLE `fv5oz_jcktoolbars` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_jcktoolbars` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL DEFAULT '',
   `name` varchar(100) NOT NULL,
   `published` tinyint(3) NOT NULL DEFAULT '0',
   `checked_out` int(11) NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `iscore` tinyint(3) NOT NULL DEFAULT '0',
-  `params` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `params` text NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `toolbar` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `fv5oz_jcktoolbars`
@@ -1397,8 +1539,8 @@ INSERT INTO `fv5oz_jcktoolbars` (`id`, `title`, `name`, `published`, `checked_ou
 -- Table structure for table `fv5oz_languages`
 --
 
-CREATE TABLE `fv5oz_languages` (
-  `lang_id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_languages` (
+  `lang_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `asset_id` int(11) NOT NULL,
   `lang_code` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1410,9 +1552,15 @@ CREATE TABLE `fv5oz_languages` (
   `metadesc` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `sitename` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `published` int(11) NOT NULL DEFAULT '0',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `access` int(10) unsigned NOT NULL DEFAULT '0',
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`lang_id`),
+  UNIQUE KEY `idx_sef` (`sef`),
+  UNIQUE KEY `idx_image` (`image`),
+  UNIQUE KEY `idx_langcode` (`lang_code`),
+  KEY `idx_access` (`access`),
+  KEY `idx_ordering` (`ordering`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `fv5oz_languages`
@@ -1427,8 +1575,8 @@ INSERT INTO `fv5oz_languages` (`lang_id`, `asset_id`, `lang_code`, `title`, `tit
 -- Table structure for table `fv5oz_location`
 --
 
-CREATE TABLE `fv5oz_location` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_location` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `postcode` int(11) NOT NULL,
   `suburbname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `latitude` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1439,8 +1587,9 @@ CREATE TABLE `fv5oz_location` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
-  `modified_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `modified_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `fv5oz_location`
@@ -1459,8 +1608,8 @@ INSERT INTO `fv5oz_location` (`id`, `postcode`, `suburbname`, `latitude`, `longi
 -- Table structure for table `fv5oz_logbook`
 --
 
-CREATE TABLE `fv5oz_logbook` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_logbook` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `logid` int(11) NOT NULL,
   `note` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint(1) NOT NULL,
@@ -1469,8 +1618,9 @@ CREATE TABLE `fv5oz_logbook` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
-  `modified_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `modified_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1478,8 +1628,8 @@ CREATE TABLE `fv5oz_logbook` (
 -- Table structure for table `fv5oz_menu`
 --
 
-CREATE TABLE `fv5oz_menu` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `menutype` varchar(24) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The type of menu this item belongs to. FK to #__menu_types.menutype',
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The display title of the menu item.',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'The SEF alias of the menu item.',
@@ -1488,22 +1638,30 @@ CREATE TABLE `fv5oz_menu` (
   `link` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The actually link the menu item refers to.',
   `type` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The type of link: Component, URL, Alias, Separator',
   `published` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'The published state of the menu link.',
-  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '1' COMMENT 'The parent menu item in the menu tree.',
-  `level` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'The relative level in the tree.',
-  `component_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to #__extensions.id',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to #__users.id',
+  `parent_id` int(10) unsigned NOT NULL DEFAULT '1' COMMENT 'The parent menu item in the menu tree.',
+  `level` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'The relative level in the tree.',
+  `component_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to #__extensions.id',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to #__users.id',
   `checked_out_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'The time the menu item was checked out.',
   `browserNav` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'The click behaviour of the link.',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'The access level required to view the menu item.',
+  `access` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'The access level required to view the menu item.',
   `img` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The image of the menu item.',
-  `template_style_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `template_style_id` int(10) unsigned NOT NULL DEFAULT '0',
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded data for the menu item.',
   `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
-  `home` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Indicates if this menu item is the home or default page.',
+  `home` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Indicates if this menu item is the home or default page.',
   `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `client_id` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `client_id` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`(100),`language`),
+  KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`),
+  KEY `idx_menutype` (`menutype`),
+  KEY `idx_left_right` (`lft`,`rgt`),
+  KEY `idx_alias` (`alias`(100)),
+  KEY `idx_path` (`path`(100)),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=148 ;
 
 --
 -- Dumping data for table `fv5oz_menu`
@@ -1563,13 +1721,15 @@ INSERT INTO `fv5oz_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `l
 -- Table structure for table `fv5oz_menu_types`
 --
 
-CREATE TABLE `fv5oz_menu_types` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_menu_types` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `asset_id` int(11) NOT NULL,
   `menutype` varchar(24) COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` varchar(48) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_menutype` (`menutype`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `fv5oz_menu_types`
@@ -1585,17 +1745,19 @@ INSERT INTO `fv5oz_menu_types` (`id`, `asset_id`, `menutype`, `title`, `descript
 -- Table structure for table `fv5oz_messages`
 --
 
-CREATE TABLE `fv5oz_messages` (
-  `message_id` int(10) UNSIGNED NOT NULL,
-  `user_id_from` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `user_id_to` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `folder_id` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+CREATE TABLE IF NOT EXISTS `fv5oz_messages` (
+  `message_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id_from` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_id_to` int(10) unsigned NOT NULL DEFAULT '0',
+  `folder_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `date_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `state` tinyint(1) NOT NULL DEFAULT '0',
-  `priority` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `priority` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `message` text COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`message_id`),
+  KEY `useridto_state` (`user_id_to`,`state`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `fv5oz_messages`
@@ -1611,10 +1773,11 @@ INSERT INTO `fv5oz_messages` (`message_id`, `user_id_from`, `user_id_to`, `folde
 -- Table structure for table `fv5oz_messages_cfg`
 --
 
-CREATE TABLE `fv5oz_messages_cfg` (
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+CREATE TABLE IF NOT EXISTS `fv5oz_messages_cfg` (
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `cfg_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `cfg_value` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
+  `cfg_value` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1623,26 +1786,30 @@ CREATE TABLE `fv5oz_messages_cfg` (
 -- Table structure for table `fv5oz_modules`
 --
 
-CREATE TABLE `fv5oz_modules` (
-  `id` int(11) NOT NULL,
-  `asset_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
+CREATE TABLE IF NOT EXISTS `fv5oz_modules` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
   `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `ordering` int(11) NOT NULL DEFAULT '0',
   `position` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `published` tinyint(1) NOT NULL DEFAULT '0',
   `module` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `showtitle` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `access` int(10) unsigned NOT NULL DEFAULT '0',
+  `showtitle` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `client_id` tinyint(4) NOT NULL DEFAULT '0',
-  `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `published` (`published`,`access`),
+  KEY `newsfeeds` (`module`,`published`),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=103 ;
 
 --
 -- Dumping data for table `fv5oz_modules`
@@ -1676,9 +1843,9 @@ INSERT INTO `fv5oz_modules` (`id`, `asset_id`, `title`, `note`, `content`, `orde
 (97, 82, 'COM_JCKMAN_CPANEL_SLIDER_RESTORE_LABEL', '', 'COM_JCKMAN_CPANEL_SLIDER_RESTORE_HTML', 6, 'jck_cpanel', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, '', 1, 1, '{}', 1, ''),
 (98, 83, 'COM_JCKMAN_CPANEL_SLIDER_SYNC_LABEL', '', 'COM_JCKMAN_CPANEL_SLIDER_SYNC_HTML', 7, 'jck_cpanel', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, '', 1, 1, '{}', 1, ''),
 (99, 85, 'Feature Photo', '', '<h2 style="margin-top: 200px; color: orange;">\r\n	IMPRESSED!</h2>\r\n<p style="box-sizing: border-box; margin: 0px 0px 10px; color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">\r\n	BLA BLA BLA BLA BLA BLA BLA BLA</p>\r\n', 1, 'modFeaturePhoto', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_custom', 1, 0, '{"prepare_content":"0","backgroundimage":"","layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
-(100, 86, 'How it works', '', '<div class="container-fluid" id="how">\r\n	<h1>\r\n		How it works</h1>\r\n	<div class="row" id="how2">\r\n		<div class="col-sm-3 col-xs-12">\r\n			<img src="images/laundry-icon.png" />\r\n			<p>\r\n				CHOOSE YOUR COMBO</p>\r\n		</div>\r\n		<div class="col-sm-3 col-xs-12 leftBorder">\r\n			<img class="cke-resize" src="images/laundry-icon.png" />\r\n			<p>\r\n				SET YOUR PREFERENCES</p>\r\n		</div>\r\n		<div class="col-md-3 col-xs-12 leftBorder">\r\n			<img src="images/Delivery-Icon.png" />\r\n			<p>\r\n				WE WILL TAKE CARE OF IT</p>\r\n		</div>\r\n		<div class="col-md-3 col-xs-12 leftBorder">\r\n			<button class="btn" onclick="document.getElementById(\'video\').style.display=\'block\'" style="padding:0; background-color:rgba(0,0,0,0);" type="button"><img id="play" src="images/play.png" /></button>\r\n			<p id="playvideo">\r\n				PLAY VIDEO</p>\r\n		</div>\r\n	</div>\r\n</div>\r\n', 1, 'modHowItWork', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_custom', 1, 1, '{"prepare_content":"0","backgroundimage":"","layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
+(100, 86, 'How it works', '', '<div class="container-fluid" id="how">\r\n	<h1>\r\n		How it works</h1>\r\n	<div class="row" id="how2">\r\n		<div class="col-sm-3 col-xs-12">\r\n			<img src="images/laundry-icon.png" />\r\n			<p>\r\n				CHOOSE YOUR COMBO</p>\r\n		</div>\r\n		<div class="col-sm-3 col-xs-12 leftBorder">\r\n			<img class="cke-resize" src="images/laundry-icon.png" />\r\n			<p>\r\n				SET YOUR PREFERENCES</p>\r\n		</div>\r\n		<div class="col-md-3 col-xs-12 leftBorder">\r\n			<img src="images/Delivery-Icon.png" />\r\n			<p>\r\n				WE WILL TAKE CARE OF IT</p>\r\n		</div>\r\n		<div class="col-md-3 col-xs-12 leftBorder">\r\n			<button class="btn" onclick="document.getElementById(''video'').style.display=''block''" style="padding:0; background-color:rgba(0,0,0,0);" type="button"><img id="play" src="images/play.png" /></button>\r\n			<p id="playvideo">\r\n				PLAY VIDEO</p>\r\n		</div>\r\n	</div>\r\n</div>\r\n', 1, 'modHowItWork', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_custom', 1, 1, '{"prepare_content":"0","backgroundimage":"","layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
 (101, 87, 'Combos', '', '', 1, 'modCombos', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_combos', 1, 0, '{"layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
-(102, 88, 'Footer', '', '<footer style="background-color: #4d4d4d; margin-top: 2px;">\r\n<div class="container-fluid">\r\n<div class="space1">\r\n<div class="col-sm-4 space2">\r\n<div><a href="index.php?option=com_content&amp;view=article&amp;id=1&amp;catid=2&amp;Itemid=101">TERMS &amp; CONDITIONS</a></div>\r\n<div class="row space2"><a href="privacy.html">PRIVACY POLICY</a></div>\r\n</div>\r\n<div class="col-sm-4 space2">\r\n<div><a href="about.html">ABOUT US</a></div>\r\n<div class="row space2"><a href="contact.html">CONTACT US</a></div>\r\n</div>\r\n<div class="col-sm-4 space2">\r\n<div><a href="about.html">TESTIMONIALS</a></div>\r\n<div class="row space2"><a href="about.html">FAQ</a></div>\r\n</div>\r\n</div>\r\n<div class="row">\r\n<div class="col-xs-12" style="margin-top: 20px;">© AIT LAUNDRY - 2017</div>\r\n</div>\r\n</div>\r\n</footer>', 1, 'footer', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_custom', 1, 0, '{"prepare_content":"0","backgroundimage":"","layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*');
+(102, 88, 'Footer', '', '<footer style="background-color:#4d4d4d; margin-top:2px;">\r\n<div class="container-fluid">\r\n	<div class="space1">\r\n		<div class="col-sm-4 space2">\r\n			<div>\r\n				<a href="termsandconditions.html">TERMS &amp; CONDITIONS</a><a href="index.php?option=com_content&amp;view=article&amp;id=1&amp;catid=2&amp;Itemid=101">TERMS &amp; CONDITIONS</a><a href="privacy.html">PRIVACY POLICY</a></div>\r\n			<div class="row space2">\r\n			</div>\r\n		</div>\r\n		<div class="col-sm-4 space2">\r\n			<div>\r\n				<a href="about.html">ABOUT US</a></div>\r\n			<div class="row space2">\r\n				<a href="contact.html">CONTACT US</a></div>\r\n		</div>\r\n		<div class="col-sm-4 space2">\r\n			<div>\r\n				<a href="about.html">TESTIMONIALS</a></div>\r\n			<div class="row space2">\r\n				<a href="about.html">FAQ</a></div>\r\n		</div>\r\n	</div>\r\n	<div class="row">\r\n		<div class="col-xs-12" style="margin-top:20px;">\r\n			&copy; AIT LAUNDRY - 2017</div>\r\n	</div>\r\n</div>\r\n</footer>', 1, 'footer', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_custom', 1, 0, '{"prepare_content":"0","backgroundimage":"","layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*');
 
 -- --------------------------------------------------------
 
@@ -1686,9 +1853,10 @@ INSERT INTO `fv5oz_modules` (`id`, `asset_id`, `title`, `note`, `content`, `orde
 -- Table structure for table `fv5oz_modules_menu`
 --
 
-CREATE TABLE `fv5oz_modules_menu` (
+CREATE TABLE IF NOT EXISTS `fv5oz_modules_menu` (
   `moduleid` int(11) NOT NULL DEFAULT '0',
-  `menuid` int(11) NOT NULL DEFAULT '0'
+  `menuid` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`moduleid`,`menuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1725,27 +1893,27 @@ INSERT INTO `fv5oz_modules_menu` (`moduleid`, `menuid`) VALUES
 -- Table structure for table `fv5oz_newsfeeds`
 --
 
-CREATE TABLE `fv5oz_newsfeeds` (
+CREATE TABLE IF NOT EXISTS `fv5oz_newsfeeds` (
   `catid` int(11) NOT NULL DEFAULT '0',
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `link` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `published` tinyint(1) NOT NULL DEFAULT '0',
-  `numarticles` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `cache_time` int(10) UNSIGNED NOT NULL DEFAULT '3600',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `numarticles` int(10) unsigned NOT NULL DEFAULT '1',
+  `cache_time` int(10) unsigned NOT NULL DEFAULT '3600',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `ordering` int(11) NOT NULL DEFAULT '0',
   `rtl` tinyint(4) NOT NULL DEFAULT '0',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `access` int(10) unsigned NOT NULL DEFAULT '0',
   `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_by` int(10) unsigned NOT NULL DEFAULT '0',
   `created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
   `metakey` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `metadesc` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `metadata` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1753,10 +1921,18 @@ CREATE TABLE `fv5oz_newsfeeds` (
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `images` text COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `version` int(10) unsigned NOT NULL DEFAULT '1',
+  `hits` int(10) unsigned NOT NULL DEFAULT '0',
+  `images` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_state` (`published`),
+  KEY `idx_catid` (`catid`),
+  KEY `idx_createdby` (`created_by`),
+  KEY `idx_language` (`language`),
+  KEY `idx_xreference` (`xreference`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1764,8 +1940,8 @@ CREATE TABLE `fv5oz_newsfeeds` (
 -- Table structure for table `fv5oz_order`
 --
 
-CREATE TABLE `fv5oz_order` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_order` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ordernote` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `comboid` int(11) NOT NULL,
   `paymentid` int(11) NOT NULL,
@@ -1780,8 +1956,9 @@ CREATE TABLE `fv5oz_order` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
-  `modified_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `modified_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `fv5oz_order`
@@ -1797,8 +1974,8 @@ INSERT INTO `fv5oz_order` (`id`, `ordernote`, `comboid`, `paymentid`, `datetimec
 -- Table structure for table `fv5oz_orderlogbook`
 --
 
-CREATE TABLE `fv5oz_orderlogbook` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_orderlogbook` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `orderid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `ordering` int(11) NOT NULL,
@@ -1806,8 +1983,9 @@ CREATE TABLE `fv5oz_orderlogbook` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
-  `modified_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `modified_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1815,12 +1993,13 @@ CREATE TABLE `fv5oz_orderlogbook` (
 -- Table structure for table `fv5oz_overrider`
 --
 
-CREATE TABLE `fv5oz_overrider` (
-  `id` int(10) NOT NULL COMMENT 'Primary Key',
+CREATE TABLE IF NOT EXISTS `fv5oz_overrider` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
   `constant` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `string` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `file` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `file` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1828,8 +2007,8 @@ CREATE TABLE `fv5oz_overrider` (
 -- Table structure for table `fv5oz_payment`
 --
 
-CREATE TABLE `fv5oz_payment` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_payment` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `ordering` int(11) NOT NULL,
@@ -1837,8 +2016,9 @@ CREATE TABLE `fv5oz_payment` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
-  `modified_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `modified_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `fv5oz_payment`
@@ -1854,8 +2034,8 @@ INSERT INTO `fv5oz_payment` (`id`, `type`, `description`, `ordering`, `state`, `
 -- Table structure for table `fv5oz_postinstall_messages`
 --
 
-CREATE TABLE `fv5oz_postinstall_messages` (
-  `postinstall_message_id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_postinstall_messages` (
+  `postinstall_message_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `extension_id` bigint(20) NOT NULL DEFAULT '700' COMMENT 'FK to #__extensions',
   `title_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Lang key for the title',
   `description_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Lang key for description',
@@ -1868,8 +2048,9 @@ CREATE TABLE `fv5oz_postinstall_messages` (
   `condition_file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'RAD URI to file holding display condition method',
   `condition_method` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Display condition method, must return boolean',
   `version_introduced` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '3.2.0' COMMENT 'Version when this message was introduced',
-  `enabled` tinyint(3) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `enabled` tinyint(3) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`postinstall_message_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `fv5oz_postinstall_messages`
@@ -1887,18 +2068,21 @@ INSERT INTO `fv5oz_postinstall_messages` (`postinstall_message_id`, `extension_i
 -- Table structure for table `fv5oz_redirect_links`
 --
 
-CREATE TABLE `fv5oz_redirect_links` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_redirect_links` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `old_url` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL,
   `new_url` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `referer` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL,
   `comment` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `hits` int(10) unsigned NOT NULL DEFAULT '0',
   `published` tinyint(4) NOT NULL,
   `created_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `header` smallint(3) NOT NULL DEFAULT '301'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `header` smallint(3) NOT NULL DEFAULT '301',
+  PRIMARY KEY (`id`),
+  KEY `idx_old_url` (`old_url`(100)),
+  KEY `idx_link_modifed` (`modified_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1906,9 +2090,10 @@ CREATE TABLE `fv5oz_redirect_links` (
 -- Table structure for table `fv5oz_schemas`
 --
 
-CREATE TABLE `fv5oz_schemas` (
+CREATE TABLE IF NOT EXISTS `fv5oz_schemas` (
   `extension_id` int(11) NOT NULL,
-  `version_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
+  `version_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`extension_id`,`version_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1924,8 +2109,8 @@ INSERT INTO `fv5oz_schemas` (`extension_id`, `version_id`) VALUES
 -- Table structure for table `fv5oz_services`
 --
 
-CREATE TABLE `fv5oz_services` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_services` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `icon` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1936,8 +2121,9 @@ CREATE TABLE `fv5oz_services` (
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
-  `modified_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `modified_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `fv5oz_services`
@@ -1963,14 +2149,17 @@ INSERT INTO `fv5oz_services` (`id`, `name`, `icon`, `price`, `comboid`, `descrip
 -- Table structure for table `fv5oz_session`
 --
 
-CREATE TABLE `fv5oz_session` (
+CREATE TABLE IF NOT EXISTS `fv5oz_session` (
   `session_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `client_id` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
-  `guest` tinyint(4) UNSIGNED DEFAULT '1',
+  `client_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `guest` tinyint(4) unsigned DEFAULT '1',
   `time` varchar(14) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `data` mediumtext COLLATE utf8mb4_unicode_ci,
   `userid` int(11) DEFAULT '0',
-  `username` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT ''
+  `username` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  PRIMARY KEY (`session_id`),
+  KEY `userid` (`userid`),
+  KEY `time` (`time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1979,8 +2168,6 @@ CREATE TABLE `fv5oz_session` (
 
 INSERT INTO `fv5oz_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
 ('6av9kf6fr5u84jud8te7c24al7', 0, 0, '1495493456', 'joomla|s:2460:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo3OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTo2ODtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTU0ODgzNDI7czo0OiJsYXN0IjtpOjE0OTU0OTM0NDc7czozOiJub3ciO2k6MTQ5NTQ5MzQ1NTt9czo1OiJ0b2tlbiI7czozMjoiaVh5WEhyMTlDZEp4UlExdGVqd0VlcU84NVRJUXdXd2IiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6MTp7czo1OiJ1c2VycyI7Tzo4OiJzdGRDbGFzcyI6MTp7czo1OiJsb2dpbiI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJmb3JtIjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6ImRhdGEiO2E6MTp7czo2OiJyZXR1cm4iO3M6Mzk6ImluZGV4LnBocD9vcHRpb249Y29tX3VzZXJzJnZpZXc9cHJvZmlsZSI7fXM6NjoicmV0dXJuIjtzOjQ1OiJpbmRleC5waHA/b3B0aW9uPWNvbV91c2VycyZ2aWV3PXByb2ZpbGUmdGFiPTEiO319fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjoxO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086NToiSlVzZXIiOjE6e3M6MjoiaWQiO3M6MzoiMTA2Ijt9czo4OiJ5b3VyY2FydCI7YToxOntzOjY6IjM4MGY4ZiI7YTo0OntzOjI6ImlkIjtzOjE6IjEiO3M6ODoicXVhbnRpdHkiO2k6MTtzOjU6InByaWNlIjtzOjM6IjEyMCI7czo0OiJuYW1lIjtzOjY6IkNPVVBMRSI7fX1zOjExOiJhcHBsaWNhdGlvbiI7Tzo4OiJzdGRDbGFzcyI6MTp7czo1OiJxdWV1ZSI7Tjt9czoxMDoiamNrcGx1Z2lucyI7YTo4OntpOjA7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjc6ImRlZmF1bHQiO3M6NDoibmFtZSI7czo5OiJkcmFnbmRyb3AiO31pOjE7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjc6ImRlZmF1bHQiO3M6NDoibmFtZSI7czoxMDoiaW5kZXguaHRtbCI7fWk6MjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NzoiZGVmYXVsdCI7czo0OiJuYW1lIjtzOjQ6InVzZXIiO31pOjM7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6NToiYmVlejUiO31pOjQ7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6MTA6ImJlZXpsYXlvdXQiO31pOjU7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6MTI6ImJlZXpwZXJzb25hbCI7fWk6NjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6MTA6InN0eWxlc2hlZXQiO3M6NDoibmFtZSI7czoxMDoiaW5kZXguaHRtbCI7fWk6NztPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6MTA6InN0eWxlc2hlZXQiO3M6NDoibmFtZSI7czoxMzoiamNrdHlwb2dyYXBoeSI7fX1zOjEwOiJjb21fbWFpbHRvIjtPOjg6InN0ZENsYXNzIjoxOntzOjU6ImxpbmtzIjthOjE6e3M6NDA6ImU1NTc0YzViNDE4MDYwM2E3ZmE2ZTdlZjc5YjRkODYyYWViMTJlZWMiO086ODoic3RkQ2xhc3MiOjI6e3M6NDoibGluayI7czo3NjoiaHR0cDovL2xvY2FsaG9zdC9BSVQvYWl0bGF1bmRyeS9pbmRleC5waHAvMi11bmNhdGVnb3Jpc2VkLzEtdGVybXMtY29uZGl0aW9ucyI7czo2OiJleHBpcnkiO2k6MTQ5NTQ5MzQ1Njt9fX19fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fQ==";', 106, 'admin'),
-('ekgpujg8v3ai0unumlmcc9c8o5', 1, 0, '1495422541', 'joomla|s:10804:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo2OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTo0NDtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTU0MjE4NTU7czo0OiJsYXN0IjtpOjE0OTU0MjI1NDA7czozOiJub3ciO2k6MTQ5NTQyMjU0MTt9czo1OiJ0b2tlbiI7czozMjoiQ2szd2QyUzEyNVI4dm1CN3dvUmJRNUtjbnVXVk52OFgiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6Mzp7czoxMToiY29tX2NvbnRlbnQiO086ODoic3RkQ2xhc3MiOjE6e3M6NDoiZWRpdCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo3OiJhcnRpY2xlIjtPOjg6InN0ZENsYXNzIjoyOntzOjI6ImlkIjthOjA6e31zOjQ6ImRhdGEiO047fX19czoxMToiY29tX21vZHVsZXMiO086ODoic3RkQ2xhc3MiOjI6e3M6NDoiZWRpdCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo2OiJtb2R1bGUiO086ODoic3RkQ2xhc3MiOjI6e3M6MjoiaWQiO2E6MDp7fXM6NDoiZGF0YSI7Tjt9fXM6MzoiYWRkIjtPOjg6InN0ZENsYXNzIjoxOntzOjY6Im1vZHVsZSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMjoiZXh0ZW5zaW9uX2lkIjtOO3M6NjoicGFyYW1zIjtOO319fXM6MTA6ImNvbV9jb25maWciO086ODoic3RkQ2xhc3MiOjE6e3M6NjoiY29uZmlnIjtPOjg6InN0ZENsYXNzIjoxOntzOjY6Imdsb2JhbCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJkYXRhIjthOjkxOntzOjc6Im9mZmxpbmUiO3M6MToiMCI7czoxNToib2ZmbGluZV9tZXNzYWdlIjtzOjY5OiJUaGlzIHNpdGUgaXMgZG93biBmb3IgbWFpbnRlbmFuY2UuPGJyIC8+UGxlYXNlIGNoZWNrIGJhY2sgYWdhaW4gc29vbi4iO3M6MjM6ImRpc3BsYXlfb2ZmbGluZV9tZXNzYWdlIjtzOjE6IjEiO3M6MTM6Im9mZmxpbmVfaW1hZ2UiO3M6MDoiIjtzOjg6InNpdGVuYW1lIjtzOjEwOiJBSVRMYXVuZHJ5IjtzOjY6ImVkaXRvciI7czo3OiJ0aW55bWNlIjtzOjc6ImNhcHRjaGEiO3M6MToiMCI7czoxMDoibGlzdF9saW1pdCI7czoyOiIyMCI7czo2OiJhY2Nlc3MiO3M6MToiMSI7czo1OiJkZWJ1ZyI7czoxOiIwIjtzOjEwOiJkZWJ1Z19sYW5nIjtzOjE6IjAiO3M6NjoiZGJ0eXBlIjtzOjY6Im15c3FsaSI7czo0OiJob3N0IjtzOjk6ImxvY2FsaG9zdCI7czo0OiJ1c2VyIjtzOjQ6InJvb3QiO3M6ODoicGFzc3dvcmQiO3M6MDoiIjtzOjI6ImRiIjtzOjEwOiJBSVRMYXVuZHJ5IjtzOjg6ImRicHJlZml4IjtzOjY6ImZ2NW96XyI7czo5OiJsaXZlX3NpdGUiO3M6MDoiIjtzOjY6InNlY3JldCI7czoxNjoickdJMThJS0VDS1dlMnpJVyI7czo0OiJnemlwIjtzOjE6IjAiO3M6MTU6ImVycm9yX3JlcG9ydGluZyI7czo3OiJkZWZhdWx0IjtzOjc6ImhlbHB1cmwiO3M6ODA6Imh0dHBzOi8vaGVscC5qb29tbGEub3JnL3Byb3h5P2tleXJlZj1IZWxwe21ham9yfXttaW5vcn06e2tleXJlZn0mbGFuZz17bGFuZ2NvZGV9IjtzOjg6ImZ0cF9ob3N0IjtzOjA6IiI7czo4OiJmdHBfcG9ydCI7czowOiIiO3M6ODoiZnRwX3VzZXIiO3M6MDoiIjtzOjg6ImZ0cF9wYXNzIjtzOjA6IiI7czo4OiJmdHBfcm9vdCI7czowOiIiO3M6MTA6ImZ0cF9lbmFibGUiO3M6MToiMCI7czo2OiJvZmZzZXQiO3M6MzoiVVRDIjtzOjEwOiJtYWlsb25saW5lIjtzOjE6IjEiO3M6NjoibWFpbGVyIjtzOjQ6Im1haWwiO3M6ODoibWFpbGZyb20iO3M6MjA6ImFpdGxhdW5kcnlAZ21haWwuY29tIjtzOjg6ImZyb21uYW1lIjtzOjEwOiJBSVRMYXVuZHJ5IjtzOjg6InNlbmRtYWlsIjtzOjE4OiIvdXNyL3NiaW4vc2VuZG1haWwiO3M6ODoic210cGF1dGgiO3M6MToiMCI7czo4OiJzbXRwdXNlciI7czowOiIiO3M6ODoic210cHBhc3MiO3M6MDoiIjtzOjg6InNtdHBob3N0IjtzOjk6ImxvY2FsaG9zdCI7czoxMDoic210cHNlY3VyZSI7czo0OiJub25lIjtzOjg6InNtdHBwb3J0IjtzOjI6IjI1IjtzOjc6ImNhY2hpbmciO3M6MToiMCI7czoxMzoiY2FjaGVfaGFuZGxlciI7czo0OiJmaWxlIjtzOjk6ImNhY2hldGltZSI7czoyOiIxNSI7czoyMDoiY2FjaGVfcGxhdGZvcm1wcmVmaXgiO3M6MToiMCI7czo4OiJNZXRhRGVzYyI7czowOiIiO3M6ODoiTWV0YUtleXMiO3M6MDoiIjtzOjk6Ik1ldGFUaXRsZSI7czoxOiIxIjtzOjEwOiJNZXRhQXV0aG9yIjtzOjE6IjEiO3M6MTE6Ik1ldGFWZXJzaW9uIjtzOjE6IjAiO3M6Njoicm9ib3RzIjtzOjA6IiI7czozOiJzZWYiO3M6MToiMSI7czoxMToic2VmX3Jld3JpdGUiO3M6MToiMCI7czoxMDoic2VmX3N1ZmZpeCI7czoxOiIwIjtzOjEyOiJ1bmljb2Rlc2x1Z3MiO3M6MToiMCI7czoxMDoiZmVlZF9saW1pdCI7czoyOiIxMCI7czoxMDoiZmVlZF9lbWFpbCI7czo0OiJub25lIjtzOjg6ImxvZ19wYXRoIjtzOjQxOiJDOlx3YW1wXHd3d1xBSVRMYXVuZHJ5XGFkbWluaXN0cmF0b3IvbG9ncyI7czo4OiJ0bXBfcGF0aCI7czoyNjoiQzpcd2FtcFx3d3dcQUlUTGF1bmRyeS90bXAiO3M6ODoibGlmZXRpbWUiO3M6MjoiOTAiO3M6MTU6InNlc3Npb25faGFuZGxlciI7czo4OiJkYXRhYmFzZSI7czoxNjoibWVtY2FjaGVfcGVyc2lzdCI7czoxOiIxIjtzOjE3OiJtZW1jYWNoZV9jb21wcmVzcyI7czoxOiIwIjtzOjIwOiJtZW1jYWNoZV9zZXJ2ZXJfaG9zdCI7czo5OiJsb2NhbGhvc3QiO3M6MjA6Im1lbWNhY2hlX3NlcnZlcl9wb3J0IjtzOjU6IjExMjExIjtzOjE3OiJtZW1jYWNoZWRfcGVyc2lzdCI7czoxOiIxIjtzOjE4OiJtZW1jYWNoZWRfY29tcHJlc3MiO3M6MToiMCI7czoyMToibWVtY2FjaGVkX3NlcnZlcl9ob3N0IjtzOjk6ImxvY2FsaG9zdCI7czoyMToibWVtY2FjaGVkX3NlcnZlcl9wb3J0IjtzOjU6IjExMjExIjtzOjEzOiJyZWRpc19wZXJzaXN0IjtzOjE6IjEiO3M6MTc6InJlZGlzX3NlcnZlcl9ob3N0IjtzOjk6ImxvY2FsaG9zdCI7czoxNzoicmVkaXNfc2VydmVyX3BvcnQiO3M6NDoiNjM3OSI7czoxNzoicmVkaXNfc2VydmVyX2F1dGgiO3M6MDoiIjtzOjE1OiJyZWRpc19zZXJ2ZXJfZGIiO3M6MToiMCI7czoxMjoicHJveHlfZW5hYmxlIjtzOjE6IjAiO3M6MTA6InByb3h5X2hvc3QiO3M6MDoiIjtzOjEwOiJwcm94eV9wb3J0IjtzOjA6IiI7czoxMDoicHJveHlfdXNlciI7czowOiIiO3M6MTA6InByb3h5X3Bhc3MiO3M6MDoiIjtzOjExOiJtYXNzbWFpbG9mZiI7czoxOiIwIjtzOjEwOiJNZXRhUmlnaHRzIjtzOjA6IiI7czoxOToic2l0ZW5hbWVfcGFnZXRpdGxlcyI7czoxOiIwIjtzOjk6ImZvcmNlX3NzbCI7czoxOiIwIjtzOjI4OiJzZXNzaW9uX21lbWNhY2hlX3NlcnZlcl9ob3N0IjtzOjk6ImxvY2FsaG9zdCI7czoyODoic2Vzc2lvbl9tZW1jYWNoZV9zZXJ2ZXJfcG9ydCI7czo1OiIxMTIxMSI7czoyOToic2Vzc2lvbl9tZW1jYWNoZWRfc2VydmVyX2hvc3QiO3M6OToibG9jYWxob3N0IjtzOjI5OiJzZXNzaW9uX21lbWNhY2hlZF9zZXJ2ZXJfcG9ydCI7czo1OiIxMTIxMSI7czoxMjoiZnJvbnRlZGl0aW5nIjtzOjE6IjEiO3M6MTM6ImNvb2tpZV9kb21haW4iO3M6MDoiIjtzOjExOiJjb29raWVfcGF0aCI7czowOiIiO3M6ODoiYXNzZXRfaWQiO2k6MTtzOjc6ImZpbHRlcnMiO2E6OTp7aToxO2E6Mzp7czoxMToiZmlsdGVyX3R5cGUiO3M6MjoiTkgiO3M6MTE6ImZpbHRlcl90YWdzIjtzOjA6IiI7czoxNzoiZmlsdGVyX2F0dHJpYnV0ZXMiO3M6MDoiIjt9aTo5O2E6Mzp7czoxMToiZmlsdGVyX3R5cGUiO3M6MjoiQkwiO3M6MTE6ImZpbHRlcl90YWdzIjtzOjA6IiI7czoxNzoiZmlsdGVyX2F0dHJpYnV0ZXMiO3M6MDoiIjt9aTo2O2E6Mzp7czoxMToiZmlsdGVyX3R5cGUiO3M6MjoiQkwiO3M6MTE6ImZpbHRlcl90YWdzIjtzOjA6IiI7czoxNzoiZmlsdGVyX2F0dHJpYnV0ZXMiO3M6MDoiIjt9aTo3O2E6Mzp7czoxMToiZmlsdGVyX3R5cGUiO3M6NDoiTk9ORSI7czoxMToiZmlsdGVyX3RhZ3MiO3M6MDoiIjtzOjE3OiJmaWx0ZXJfYXR0cmlidXRlcyI7czowOiIiO31pOjI7YTozOntzOjExOiJmaWx0ZXJfdHlwZSI7czoyOiJOSCI7czoxMToiZmlsdGVyX3RhZ3MiO3M6MDoiIjtzOjE3OiJmaWx0ZXJfYXR0cmlidXRlcyI7czowOiIiO31pOjM7YTozOntzOjExOiJmaWx0ZXJfdHlwZSI7czoyOiJCTCI7czoxMToiZmlsdGVyX3RhZ3MiO3M6MDoiIjtzOjE3OiJmaWx0ZXJfYXR0cmlidXRlcyI7czowOiIiO31pOjQ7YTozOntzOjExOiJmaWx0ZXJfdHlwZSI7czoyOiJCTCI7czoxMToiZmlsdGVyX3RhZ3MiO3M6MDoiIjtzOjE3OiJmaWx0ZXJfYXR0cmlidXRlcyI7czowOiIiO31pOjU7YTozOntzOjExOiJmaWx0ZXJfdHlwZSI7czoyOiJCTCI7czoxMToiZmlsdGVyX3RhZ3MiO3M6MDoiIjtzOjE3OiJmaWx0ZXJfYXR0cmlidXRlcyI7czowOiIiO31pOjg7YTozOntzOjExOiJmaWx0ZXJfdHlwZSI7czo0OiJOT05FIjtzOjExOiJmaWx0ZXJfdGFncyI7czowOiIiO3M6MTc6ImZpbHRlcl9hdHRyaWJ1dGVzIjtzOjA6IiI7fX19fX19fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjE7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fXM6NDoidXNlciI7Tzo1OiJKVXNlciI6MTp7czoyOiJpZCI7czozOiIxMDYiO31zOjEwOiJqY2twbHVnaW5zIjthOjQzOntpOjA7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6NToiYmVlejUiO31pOjE7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6MTA6ImJlZXpsYXlvdXQiO31pOjI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6MTI6ImJlZXpwZXJzb25hbCI7fWk6MztPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6MTA6InN0eWxlc2hlZXQiO3M6NDoibmFtZSI7czoxMDoiaW5kZXguaHRtbCI7fWk6NDtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6MTA6InN0eWxlc2hlZXQiO3M6NDoibmFtZSI7czoxMzoiamNrdHlwb2dyYXBoeSI7fWk6NTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NzoidG9vbGJhciI7czo0OiJuYW1lIjtzOjEwOiJjb21wb25lbnRzIjt9aTo2O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo3OiJ0b29sYmFyIjtzOjQ6Im5hbWUiO3M6MTA6ImluZGV4Lmh0bWwiO31pOjc7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjc6InRvb2xiYXIiO3M6NDoibmFtZSI7czo2OiJtb2JpbGUiO31pOjg7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjQ6ImNvcmUiO3M6NDoibmFtZSI7czo2OiJlZGl0b3IiO31pOjk7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjQ6ImNvcmUiO3M6NDoibmFtZSI7czozOiJlbnYiO31pOjEwO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo0OiJjb3JlIjtzOjQ6Im5hbWUiO3M6MTA6ImluZGV4Lmh0bWwiO31pOjExO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo0OiJjb3JlIjtzOjQ6Im5hbWUiO3M6ODoiamVsZW1lbnQiO31pOjEyO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo0OiJjb3JlIjtzOjQ6Im5hbWUiO3M6NzoicGx1Z2lucyI7fWk6MTM7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjQ6ImNvcmUiO3M6NDoibmFtZSI7czo1OiJ0b29scyI7fWk6MTQ7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjk6IjM0N3VwZGF0ZSI7fWk6MTU7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjk6IjM0OHVwZGF0ZSI7fWk6MTY7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjk6IjYyMHVwZGF0ZSI7fWk6MTc7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjk6IjY1NHVwZGF0ZSI7fWk6MTg7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjk6IjY1OHVwZGF0ZSI7fWk6MTk7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjM6ImFjbCI7fWk6MjA7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjE5OiJhbGx2aWRlb3NwYXJhbWV0ZXJzIjt9aToyMTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6OToiYXV0b2ZvY3VzIjt9aToyMjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTU6ImJhY2tncm91bmRjb3ZlciI7fWk6MjM7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjY6ImNsaWVudCI7fWk6MjQ7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjIxOiJkZWZhdWx0YmVlenR5cG9ncmFwaHkiO31pOjI1O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxMToiZGVmYXVsdGZvbnQiO31pOjI2O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxMzoiZnNhcGFyYW1ldGVycyI7fWk6Mjc7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjEzOiJodGFjY2Vzc21ha2VyIjt9aToyODtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6ODoiaW1hZ2Vjc3MiO31pOjI5O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxNDoiaW1hZ2VkcmFnbmRyb3AiO31pOjMwO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxMDoiaW5kZXguaHRtbCI7fWk6MzE7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjE3OiJsYW5ndWFnZW92ZXJyaWRlcyI7fWk6MzI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjk6Im1hZ2ljbGluZSI7fWk6MzM7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjY6Im1vYmlsZSI7fWk6MzQ7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjY6Im9wdGlvbiI7fWk6MzU7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjg6Im92ZXJyaWRlIjt9aTozNjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTA6InBhcmFtZXRlcnMiO31pOjM3O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxNToicGx1Z2lub3ZlcnJpZGVzIjt9aTozODtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTM6InNpZ3BhcmFtZXRlcnMiO31pOjM5O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo3OiJ0b29sYmFyIjt9aTo0MDtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTA6InR5cG9ncmFwaHkiO31pOjQxO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo3OiJ1aWNvbG9yIjt9aTo0MjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MzoieG1sIjt9fXM6OToiamNrb3B0aW9uIjtzOjExOiJjb21fbW9kdWxlcyI7czoxMToiYXBwbGljYXRpb24iO086ODoic3RkQ2xhc3MiOjE6e3M6NToicXVldWUiO047fX19czoxNDoiACoAaW5pdGlhbGl6ZWQiO2I6MDtzOjk6InNlcGFyYXRvciI7czoxOiIuIjt9";', 106, 'admin'),
-('k3u6cq6u3vqic2bu7ndtab1lh4', 0, 1, '1495422508', 'joomla|s:1916:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo1OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToxMTtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTU0MjE4Mjk7czo0OiJsYXN0IjtpOjE0OTU0MjI1MDU7czozOiJub3ciO2k6MTQ5NTQyMjUwODt9czo1OiJ0b2tlbiI7czozMjoiRHNGMUp6elBnRjB4UUJzRnpBdTlrYWpOUGhsYXVtOTQiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6MDp7fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjE7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fXM6NDoidXNlciI7Tzo1OiJKVXNlciI6MTp7czoyOiJpZCI7aTowO31zOjEwOiJqY2twbHVnaW5zIjthOjg6e2k6MDtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NzoiZGVmYXVsdCI7czo0OiJuYW1lIjtzOjk6ImRyYWduZHJvcCI7fWk6MTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NzoiZGVmYXVsdCI7czo0OiJuYW1lIjtzOjEwOiJpbmRleC5odG1sIjt9aToyO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo3OiJkZWZhdWx0IjtzOjQ6Im5hbWUiO3M6NDoidXNlciI7fWk6MztPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6MTA6InN0eWxlc2hlZXQiO3M6NDoibmFtZSI7czo1OiJiZWV6NSI7fWk6NDtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6MTA6InN0eWxlc2hlZXQiO3M6NDoibmFtZSI7czoxMDoiYmVlemxheW91dCI7fWk6NTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6MTA6InN0eWxlc2hlZXQiO3M6NDoibmFtZSI7czoxMjoiYmVlenBlcnNvbmFsIjt9aTo2O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czoxMDoic3R5bGVzaGVldCI7czo0OiJuYW1lIjtzOjEwOiJpbmRleC5odG1sIjt9aTo3O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czoxMDoic3R5bGVzaGVldCI7czo0OiJuYW1lIjtzOjEzOiJqY2t0eXBvZ3JhcGh5Ijt9fXM6MTA6ImNvbV9tYWlsdG8iO086ODoic3RkQ2xhc3MiOjE6e3M6NToibGlua3MiO2E6MTp7czo0MDoiMzQ5YzFlODJmNGVkYTc1M2FlMGIxNjc5NjJjMTFhYTk3Y2ZkNjBlNyI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJsaW5rIjtzOjgzOiJodHRwOi8vbG9jYWxob3N0L2FpdGxhdW5kcnkvYWl0bGF1bmRyeS9pbmRleC5waHAvMi11bmNhdGVnb3Jpc2VkLzEtdGVybXMtY29uZGl0aW9ucyI7czo2OiJleHBpcnkiO2k6MTQ5NTQyMjUwODt9fX19fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fQ==";', 0, ''),
 ('n424q6pgk2eaovhqi4atfvi9k3', 1, 0, '1495493534', 'joomla|s:5696:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo2OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTozMztzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTU0OTMyODY7czo0OiJsYXN0IjtpOjE0OTU0OTM1MzM7czozOiJub3ciO2k6MTQ5NTQ5MzUzMzt9czo1OiJ0b2tlbiI7czozMjoieEZMZkl4Qms4RjNPb2JLdjJPSFh2clE2Rm9seWtWMksiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMToiY29tX21vZHVsZXMiO086ODoic3RkQ2xhc3MiOjI6e3M6NDoiZWRpdCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo2OiJtb2R1bGUiO086ODoic3RkQ2xhc3MiOjI6e3M6NDoiZGF0YSI7TjtzOjI6ImlkIjthOjA6e319fXM6MzoiYWRkIjtPOjg6InN0ZENsYXNzIjoxOntzOjY6Im1vZHVsZSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMjoiZXh0ZW5zaW9uX2lkIjtOO3M6NjoicGFyYW1zIjtOO319fXM6MTE6ImNvbV9jb250ZW50IjtPOjg6InN0ZENsYXNzIjoxOntzOjQ6ImVkaXQiO086ODoic3RkQ2xhc3MiOjE6e3M6NzoiYXJ0aWNsZSI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJkYXRhIjtOO319fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjoxO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086NToiSlVzZXIiOjE6e3M6MjoiaWQiO3M6MzoiMTA2Ijt9czoxMDoiamNrcGx1Z2lucyI7YTo0Mzp7aTowO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czoxMDoic3R5bGVzaGVldCI7czo0OiJuYW1lIjtzOjU6ImJlZXo1Ijt9aToxO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czoxMDoic3R5bGVzaGVldCI7czo0OiJuYW1lIjtzOjEwOiJiZWV6bGF5b3V0Ijt9aToyO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czoxMDoic3R5bGVzaGVldCI7czo0OiJuYW1lIjtzOjEyOiJiZWV6cGVyc29uYWwiO31pOjM7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6MTA6ImluZGV4Lmh0bWwiO31pOjQ7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6MTM6Impja3R5cG9ncmFwaHkiO31pOjU7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjc6InRvb2xiYXIiO3M6NDoibmFtZSI7czoxMDoiY29tcG9uZW50cyI7fWk6NjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NzoidG9vbGJhciI7czo0OiJuYW1lIjtzOjEwOiJpbmRleC5odG1sIjt9aTo3O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo3OiJ0b29sYmFyIjtzOjQ6Im5hbWUiO3M6NjoibW9iaWxlIjt9aTo4O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo0OiJjb3JlIjtzOjQ6Im5hbWUiO3M6NjoiZWRpdG9yIjt9aTo5O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo0OiJjb3JlIjtzOjQ6Im5hbWUiO3M6MzoiZW52Ijt9aToxMDtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NDoiY29yZSI7czo0OiJuYW1lIjtzOjEwOiJpbmRleC5odG1sIjt9aToxMTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NDoiY29yZSI7czo0OiJuYW1lIjtzOjg6ImplbGVtZW50Ijt9aToxMjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NDoiY29yZSI7czo0OiJuYW1lIjtzOjc6InBsdWdpbnMiO31pOjEzO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo0OiJjb3JlIjtzOjQ6Im5hbWUiO3M6NToidG9vbHMiO31pOjE0O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo5OiIzNDd1cGRhdGUiO31pOjE1O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo5OiIzNDh1cGRhdGUiO31pOjE2O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo5OiI2MjB1cGRhdGUiO31pOjE3O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo5OiI2NTR1cGRhdGUiO31pOjE4O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo5OiI2NTh1cGRhdGUiO31pOjE5O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czozOiJhY2wiO31pOjIwO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxOToiYWxsdmlkZW9zcGFyYW1ldGVycyI7fWk6MjE7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjk6ImF1dG9mb2N1cyI7fWk6MjI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjE1OiJiYWNrZ3JvdW5kY292ZXIiO31pOjIzO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo2OiJjbGllbnQiO31pOjI0O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoyMToiZGVmYXVsdGJlZXp0eXBvZ3JhcGh5Ijt9aToyNTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTE6ImRlZmF1bHRmb250Ijt9aToyNjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTM6ImZzYXBhcmFtZXRlcnMiO31pOjI3O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxMzoiaHRhY2Nlc3NtYWtlciI7fWk6Mjg7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjg6ImltYWdlY3NzIjt9aToyOTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTQ6ImltYWdlZHJhZ25kcm9wIjt9aTozMDtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTA6ImluZGV4Lmh0bWwiO31pOjMxO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxNzoibGFuZ3VhZ2VvdmVycmlkZXMiO31pOjMyO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo5OiJtYWdpY2xpbmUiO31pOjMzO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo2OiJtb2JpbGUiO31pOjM0O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo2OiJvcHRpb24iO31pOjM1O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo4OiJvdmVycmlkZSI7fWk6MzY7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjEwOiJwYXJhbWV0ZXJzIjt9aTozNztPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTU6InBsdWdpbm92ZXJyaWRlcyI7fWk6Mzg7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjEzOiJzaWdwYXJhbWV0ZXJzIjt9aTozOTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6NzoidG9vbGJhciI7fWk6NDA7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjEwOiJ0eXBvZ3JhcGh5Ijt9aTo0MTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6NzoidWljb2xvciI7fWk6NDI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjM6InhtbCI7fX1zOjk6Impja29wdGlvbiI7czoxMToiY29tX21vZHVsZXMiO3M6MTE6ImFwcGxpY2F0aW9uIjtPOjg6InN0ZENsYXNzIjoxOntzOjU6InF1ZXVlIjtOO319fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fQ==";', 106, 'admin');
 
 -- --------------------------------------------------------
@@ -1989,38 +2176,46 @@ INSERT INTO `fv5oz_session` (`session_id`, `client_id`, `guest`, `time`, `data`,
 -- Table structure for table `fv5oz_tags`
 --
 
-CREATE TABLE `fv5oz_tags` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+CREATE TABLE IF NOT EXISTS `fv5oz_tags` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `lft` int(11) NOT NULL DEFAULT '0',
   `rgt` int(11) NOT NULL DEFAULT '0',
-  `level` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `level` int(10) unsigned NOT NULL DEFAULT '0',
   `path` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `description` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `published` tinyint(1) NOT NULL DEFAULT '0',
-  `checked_out` int(11) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(11) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `access` int(10) unsigned NOT NULL DEFAULT '0',
   `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `metadesc` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The meta description for the page.',
   `metakey` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The meta keywords for the page.',
   `metadata` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded metadata properties.',
-  `created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `modified_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `modified_user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `images` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `urls` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `hits` int(10) unsigned NOT NULL DEFAULT '0',
   `language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `version` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `version` int(10) unsigned NOT NULL DEFAULT '1',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `tag_idx` (`published`,`access`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_path` (`path`(100)),
+  KEY `idx_left_right` (`lft`,`rgt`),
+  KEY `idx_alias` (`alias`(100)),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `fv5oz_tags`
@@ -2035,14 +2230,17 @@ INSERT INTO `fv5oz_tags` (`id`, `parent_id`, `lft`, `rgt`, `level`, `path`, `tit
 -- Table structure for table `fv5oz_template_styles`
 --
 
-CREATE TABLE `fv5oz_template_styles` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_template_styles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `template` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `client_id` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `client_id` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `home` char(7) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `params` text COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `params` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_template` (`template`),
+  KEY `idx_home` (`home`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `fv5oz_template_styles`
@@ -2060,11 +2258,15 @@ INSERT INTO `fv5oz_template_styles` (`id`, `template`, `client_id`, `home`, `tit
 -- Table structure for table `fv5oz_ucm_base`
 --
 
-CREATE TABLE `fv5oz_ucm_base` (
-  `ucm_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_ucm_base` (
+  `ucm_id` int(10) unsigned NOT NULL,
   `ucm_item_id` int(10) NOT NULL,
   `ucm_type_id` int(11) NOT NULL,
-  `ucm_language_id` int(11) NOT NULL
+  `ucm_language_id` int(11) NOT NULL,
+  PRIMARY KEY (`ucm_id`),
+  KEY `idx_ucm_item_id` (`ucm_item_id`),
+  KEY `idx_ucm_type_id` (`ucm_type_id`),
+  KEY `idx_ucm_language_id` (`ucm_language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2073,40 +2275,53 @@ CREATE TABLE `fv5oz_ucm_base` (
 -- Table structure for table `fv5oz_ucm_content`
 --
 
-CREATE TABLE `fv5oz_ucm_content` (
-  `core_content_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_ucm_content` (
+  `core_content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `core_type_alias` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'FK to the content types table',
   `core_title` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
   `core_alias` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `core_body` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `core_state` tinyint(1) NOT NULL DEFAULT '0',
   `core_checked_out_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `core_checked_out_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `core_access` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `core_checked_out_user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `core_access` int(10) unsigned NOT NULL DEFAULT '0',
   `core_params` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `core_featured` tinyint(4) UNSIGNED NOT NULL DEFAULT '0',
+  `core_featured` tinyint(4) unsigned NOT NULL DEFAULT '0',
   `core_metadata` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded metadata properties.',
-  `core_created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `core_created_user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `core_created_by_alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `core_created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `core_modified_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Most recent user that modified',
+  `core_modified_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Most recent user that modified',
   `core_modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `core_language` char(7) COLLATE utf8mb4_unicode_ci NOT NULL,
   `core_publish_up` datetime NOT NULL,
   `core_publish_down` datetime NOT NULL,
-  `core_content_item_id` int(10) UNSIGNED DEFAULT NULL COMMENT 'ID from the individual type table',
-  `asset_id` int(10) UNSIGNED DEFAULT NULL COMMENT 'FK to the #__assets table.',
+  `core_content_item_id` int(10) unsigned DEFAULT NULL COMMENT 'ID from the individual type table',
+  `asset_id` int(10) unsigned DEFAULT NULL COMMENT 'FK to the #__assets table.',
   `core_images` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `core_urls` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `core_hits` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `core_version` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `core_hits` int(10) unsigned NOT NULL DEFAULT '0',
+  `core_version` int(10) unsigned NOT NULL DEFAULT '1',
   `core_ordering` int(11) NOT NULL DEFAULT '0',
   `core_metakey` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `core_metadesc` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `core_catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `core_catid` int(10) unsigned NOT NULL DEFAULT '0',
   `core_xreference` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'A reference to enable linkages to external data sets.',
-  `core_type_id` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Contains core content data in name spaced fields';
+  `core_type_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`core_content_id`),
+  KEY `tag_idx` (`core_state`,`core_access`),
+  KEY `idx_access` (`core_access`),
+  KEY `idx_alias` (`core_alias`(100)),
+  KEY `idx_language` (`core_language`),
+  KEY `idx_title` (`core_title`(100)),
+  KEY `idx_modified_time` (`core_modified_time`),
+  KEY `idx_created_time` (`core_created_time`),
+  KEY `idx_content_type` (`core_type_alias`(100)),
+  KEY `idx_core_modified_user_id` (`core_modified_user_id`),
+  KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`),
+  KEY `idx_core_created_user_id` (`core_created_user_id`),
+  KEY `idx_core_type_id` (`core_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Contains core content data in name spaced fields' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2114,27 +2329,28 @@ CREATE TABLE `fv5oz_ucm_content` (
 -- Table structure for table `fv5oz_ucm_history`
 --
 
-CREATE TABLE `fv5oz_ucm_history` (
-  `version_id` int(10) UNSIGNED NOT NULL,
-  `ucm_item_id` int(10) UNSIGNED NOT NULL,
-  `ucm_type_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_ucm_history` (
+  `version_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ucm_item_id` int(10) unsigned NOT NULL,
+  `ucm_type_id` int(10) unsigned NOT NULL,
   `version_note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Optional version name',
   `save_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `editor_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `character_count` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Number of characters in this version.',
+  `editor_user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `character_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Number of characters in this version.',
   `sha1_hash` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'SHA1 hash of the version_data column.',
   `version_data` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'json-encoded string of version data',
-  `keep_forever` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=auto delete; 1=keep'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `keep_forever` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=auto delete; 1=keep',
+  PRIMARY KEY (`version_id`),
+  KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`),
+  KEY `idx_save_date` (`save_date`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `fv5oz_ucm_history`
 --
 
 INSERT INTO `fv5oz_ucm_history` (`version_id`, `ucm_item_id`, `ucm_type_id`, `version_note`, `save_date`, `editor_user_id`, `character_count`, `sha1_hash`, `version_data`, `keep_forever`) VALUES
-(1, 1, 1, '', '2017-05-22 22:49:55', 106, 1736, 'dc6c251b418b58f41eebd66b56d976c29c2b3704', '{"id":1,"asset_id":89,"title":"TERMS & CONDITIONS","alias":"terms-conditions","introtext":"<p>\\r\\n\\tfdjbfsjadbfsa<\\/p>\\r\\n","fulltext":"","state":1,"catid":"2","created":"2017-05-22 22:49:55","created_by":"106","created_by_alias":"","modified":"2017-05-22 22:49:55","modified_by":null,"checked_out":null,"checked_out_time":null,"publish_up":"2017-05-22 22:49:55","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"info_block_show_title\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":1,"ordering":null,"metakey":"","metadesc":"","access":"1","hits":null,"metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
-(2, 1, 1, '', '2017-05-22 02:57:56', 106, 9678, 'a6f1503191209681a3bf7d53d52ab04565386e72', '{"id":1,"asset_id":"89","title":"TERMS & CONDITIONS","alias":"terms-conditions","introtext":" <div id=\\"termstitle\\" class=\\"container-fluid\\">\\r\\n                <h1>Terms and Conditions<\\/h1>\\r\\n            <\\/div>\\r\\n            <div id=\\"termscontent\\" class=\\"container-fluid\\">\\r\\n                <!-------- PURPOSE ------>\\r\\n                <div id=\\"terms\\">\\r\\n                    <h4>Terms and Conditions<\\/h4>\\r\\n                    <p class=\\"text-justify\\">Impress Laundry, is pleased to provide professional pick-up and delivery laundry services to our customers and offers quality and convenience at an affordable price. Our services are subject to the terms and conditions below. Your use of Impress Laundry, indicates your agreement to be bound by the terms and conditions contained herein. Please read the following provisions carefully and let us know if you have any questions. We look forward to doing business with you! This agreement is strictly between Laundry Care LLC, its customers and services provided by parties subcontracted by Impress Laundry, and does not in any way constitute or imply any relationship with any other parties.<\\/p>\\r\\n                    <h4>Pick-up\\/Delivery<\\/h4>\\r\\n                    <p class=\\"text-justify\\">Schedule. All services will be provided by Impress Laundry. Pick-up\\/Delivery will take place on a pre-determined day and frequency, except on certain holidays, as determined by you.Impress Laundry or you may change the pre-determined pick-up\\/delivery times, permanently or temporary, with advance notice by either you or Impress Laundry. Impress Laundry requires at least 1 day notice prior to any change. If you\\u2019d like to leave your items at a secure spot, it will be at your own risk. This is also true for delivery. Items left for pick up are not under our care until we have retrieved said items. Items left for delivery at the pre-determined location will not be under our care once they have been left at the agreed upon location.<\\/p>\\r\\n                    <h4>Procedure and Terms<\\/h4>\\r\\n                    <p class=\\"text-justify\\">Impress Laundry will provide each customer with a Laundry Care nylon\\/polyurethane Laundry Bag for a fee. Impress Laundry reserves the right not to pick-up items that are not in these bags or 13 gallon sized trash bags. Weekly customers will purchase Impress Laundry bag(s) at the beginning of their service plan for a fee stated on the Impress Laundry website. A bag fee will be charged to the customer for replacement bags. Gift Card Recipients: Impress Laundry nylon\\/polyurethane Laundry Bags are not provided to Gift Card recipients. Items can be placed in 13 gallon sized trash bags or the equivalent thereof. Should you chose to request one of our Laundry Care bags, the fee for said bag will be deducted from your remaining Gift Card balance. If you chose to continue service after the full value of your Gift Card has been redeemed, you will be provided a Laundry Care bag and the fee will be applied to your invoice. Impress Laundry and its Providers\\/Partners are not responsible for, and shall not pay for, any loss, damage or theft of items left unattended by the customer for pick-up or delivery. Impress Laundry will not leave items in the possession of any other person that is not the owner of those items unless the owner has given consent. The customer is responsible for ensuring that his\\/her Laundry Bag is delivered safely to the LImpress Laundry.<\\/p>\\r\\n                    <h4>Missed\\/Unattended Pick-up or Delivery<\\/h4>\\r\\n                    <p class=\\"text-justify\\">If the customer misses a scheduled pick-up or delivery, the customer must coordinate with Impress Laundry to reschedule the pick-up or delivery during the next available day and time. Customer may be subject to a missed pick up fee or missed drop off fee for failing to notify their Provider\\/Partner 24 Hours prior to the scheduled pick up\\/delivery. Gift Card Recipients: Fees assessed due to missed\\/unattended pick-up or delivery will be deducted from the remaining balance of your Gift Card.<\\/p>\\r\\n                    <h4>Refunds<\\/h4>\\r\\n                    <p class=\\"text-justify\\">Except as described in this paragraph, all sales are final and all payments are non-refundable. A customer who has signed up for a prepaid package plan or gift card will have the right to cancel his or her contract within fourteen (14) days of signing up for the Impress Laundry service and receive a full refund if no promotional value was received. After such fourteen day period, Impress Laundry shall have no obligation to refund any amounts paid by the customer. If a promotional value was received the sale is final and the payment is non-refundable.<\\/p>\\r\\n                    <h4>Garment Care<\\/h4>\\r\\n                    <p class=\\"text-justify\\">The customer agrees not to include any of the following items inside their Laundry Bag (i) non-washable items, (ii) items that are labeled for dry cleaning only, (iii) items that have been exposed to bed bugs or (iv) any other items not meant for laundering. Customer acknowledges that items that have been air-dried (per customer request or Laundry Care\\u2019s determination for best garment care) may be damp upon delivery. The customer is responsible for any and all damage caused by any items left in the customer\\u2019s clothing or Laundry Bag that causes damage to the clothing of any customer, the cleaning machines, or any other property of the Impress Laundry. Impress Laundry desires to provide high quality laundering services and will use all reasonable precautions to avoid damage to clothes. Impress Laundry, however, are not liable for any damage due to normal laundering of items, cleaning of items without care instructions, for dry clean items placed inside Laundry Bags, for special-processing items (delicate-wash, air-dry, stain-treatment) not placed in a separate bag, damage resulting from items left in the clothing, bleeding of colors, shrinking or any other alteration resulting from normal washing procedures. Impress Laundry will follow any reasonable instructions provided by the customer, including water or drying temperatures. Impress Laundry do not read cleaning instruction labels and is not responsible for special care items, such as dry clean only items, which are included in the Laundry Bag. Although Impress Laundry use their best efforts to remove stains, stain removal is not guaranteed. Impress Laundry may refuse to clean any garment at their sole discretion. Impress Laundry will re-clean items that, in its sole discretion, were not properly cleaned and have not been worn since they were cleaned, at no additional cost. Laundry Care LLC and its subcontractors are not responsible for loss of or damage to any personal or non-cleanable items left in the clothing or laundry bags such as money, jewelry, or any other item. The customer agrees not to leave such items in their clothing or in their laundry bags. Zippers behave unpredictably while cleaning. Although zippers generally are not an issue, the customer is notified that there is a possibility of zipper issues while following normal wash procedures, and Impress Laundry does not accept any liability for such issues.<\\/p>\\r\\n                    <h4>Confidentiality and Disclaimer<\\/h4>\\r\\n                    <p class=\\"text-justify\\">Impress Laundry takes privacy and personal information seriously. Impress Laundry uses customer information to provide services, to process payment, facilitate billing, and for any other purpose reasonably necessary to provide services under this Agreement. Additionally, personal information may be disclosed when required by law necessary to enforce this Agreement or necessary to protect the rights, interests, property of safety of Impress Laundry. From time-to-time, we also may send merchant service announcements, newsletters, and periodic notices about specials and new products.<\\/p>\\r\\n                <\\/div>\\r\\n            <\\/div>","fulltext":"","state":1,"catid":"2","created":"2017-05-22 22:49:55","created_by":"106","created_by_alias":"","modified":"2017-05-22 02:57:56","modified_by":"106","checked_out":"106","checked_out_time":"2017-05-22 02:57:41","publish_up":"2017-05-22 22:49:55","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"info_block_show_title\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":2,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"1","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
-(3, 1, 1, '', '2017-05-22 02:58:07', 106, 9510, 'afb8c329ccf8fc1c3a902955a33534bf69444f35', '{"id":1,"asset_id":"89","title":"TERMS & CONDITIONS","alias":"terms-conditions","introtext":"<div class=\\"container-fluid\\" id=\\"termstitle\\">\\r\\n\\t<h1>\\r\\n\\t\\tTerms and Conditions<\\/h1>\\r\\n<\\/div>\\r\\n<div class=\\"container-fluid\\" id=\\"termscontent\\">\\r\\n<!-------- PURPOSE ------>\\t<div id=\\"terms\\">\\r\\n\\t\\t<h4>\\r\\n\\t\\t\\tTerms and Conditions<\\/h4>\\r\\n\\t\\t<p class=\\"text-justify\\">\\r\\n\\t\\t\\tImpress Laundry, is pleased to provide professional pick-up and delivery laundry services to our customers and offers quality and convenience at an affordable price. Our services are subject to the terms and conditions below. Your use of Impress Laundry, indicates your agreement to be bound by the terms and conditions contained herein. Please read the following provisions carefully and let us know if you have any questions. We look forward to doing business with you! This agreement is strictly between Laundry Care LLC, its customers and services provided by parties subcontracted by Impress Laundry, and does not in any way constitute or imply any relationship with any other parties.<\\/p>\\r\\n\\t\\t<h4>\\r\\n\\t\\t\\tPick-up\\/Delivery<\\/h4>\\r\\n\\t\\t<p class=\\"text-justify\\">\\r\\n\\t\\t\\tSchedule. All services will be provided by Impress Laundry. Pick-up\\/Delivery will take place on a pre-determined day and frequency, except on certain holidays, as determined by you.Impress Laundry or you may change the pre-determined pick-up\\/delivery times, permanently or temporary, with advance notice by either you or Impress Laundry. Impress Laundry requires at least 1 day notice prior to any change. If you&rsquo;d like to leave your items at a secure spot, it will be at your own risk. This is also true for delivery. Items left for pick up are not under our care until we have retrieved said items. Items left for delivery at the pre-determined location will not be under our care once they have been left at the agreed upon location.<\\/p>\\r\\n\\t\\t<h4>\\r\\n\\t\\t\\tProcedure and Terms<\\/h4>\\r\\n\\t\\t<p class=\\"text-justify\\">\\r\\n\\t\\t\\tImpress Laundry will provide each customer with a Laundry Care nylon\\/polyurethane Laundry Bag for a fee. Impress Laundry reserves the right not to pick-up items that are not in these bags or 13 gallon sized trash bags. Weekly customers will purchase Impress Laundry bag(s) at the beginning of their service plan for a fee stated on the Impress Laundry website. A bag fee will be charged to the customer for replacement bags. Gift Card Recipients: Impress Laundry nylon\\/polyurethane Laundry Bags are not provided to Gift Card recipients. Items can be placed in 13 gallon sized trash bags or the equivalent thereof. Should you chose to request one of our Laundry Care bags, the fee for said bag will be deducted from your remaining Gift Card balance. If you chose to continue service after the full value of your Gift Card has been redeemed, you will be provided a Laundry Care bag and the fee will be applied to your invoice. Impress Laundry and its Providers\\/Partners are not responsible for, and shall not pay for, any loss, damage or theft of items left unattended by the customer for pick-up or delivery. Impress Laundry will not leave items in the possession of any other person that is not the owner of those items unless the owner has given consent. The customer is responsible for ensuring that his\\/her Laundry Bag is delivered safely to the LImpress Laundry.<\\/p>\\r\\n\\t\\t<h4>\\r\\n\\t\\t\\tMissed\\/Unattended Pick-up or Delivery<\\/h4>\\r\\n\\t\\t<p class=\\"text-justify\\">\\r\\n\\t\\t\\tIf the customer misses a scheduled pick-up or delivery, the customer must coordinate with Impress Laundry to reschedule the pick-up or delivery during the next available day and time. Customer may be subject to a missed pick up fee or missed drop off fee for failing to notify their Provider\\/Partner 24 Hours prior to the scheduled pick up\\/delivery. Gift Card Recipients: Fees assessed due to missed\\/unattended pick-up or delivery will be deducted from the remaining balance of your Gift Card.<\\/p>\\r\\n\\t\\t<h4>\\r\\n\\t\\t\\tRefunds<\\/h4>\\r\\n\\t\\t<p class=\\"text-justify\\">\\r\\n\\t\\t\\tExcept as described in this paragraph, all sales are final and all payments are non-refundable. A customer who has signed up for a prepaid package plan or gift card will have the right to cancel his or her contract within fourteen (14) days of signing up for the Impress Laundry service and receive a full refund if no promotional value was received. After such fourteen day period, Impress Laundry shall have no obligation to refund any amounts paid by the customer. If a promotional value was received the sale is final and the payment is non-refundable.<\\/p>\\r\\n\\t\\t<h4>\\r\\n\\t\\t\\tGarment Care<\\/h4>\\r\\n\\t\\t<p class=\\"text-justify\\">\\r\\n\\t\\t\\tThe customer agrees not to include any of the following items inside their Laundry Bag (i) non-washable items, (ii) items that are labeled for dry cleaning only, (iii) items that have been exposed to bed bugs or (iv) any other items not meant for laundering. Customer acknowledges that items that have been air-dried (per customer request or Laundry Care&rsquo;s determination for best garment care) may be damp upon delivery. The customer is responsible for any and all damage caused by any items left in the customer&rsquo;s clothing or Laundry Bag that causes damage to the clothing of any customer, the cleaning machines, or any other property of the Impress Laundry. Impress Laundry desires to provide high quality laundering services and will use all reasonable precautions to avoid damage to clothes. Impress Laundry, however, are not liable for any damage due to normal laundering of items, cleaning of items without care instructions, for dry clean items placed inside Laundry Bags, for special-processing items (delicate-wash, air-dry, stain-treatment) not placed in a separate bag, damage resulting from items left in the clothing, bleeding of colors, shrinking or any other alteration resulting from normal washing procedures. Impress Laundry will follow any reasonable instructions provided by the customer, including water or drying temperatures. Impress Laundry do not read cleaning instruction labels and is not responsible for special care items, such as dry clean only items, which are included in the Laundry Bag. Although Impress Laundry use their best efforts to remove stains, stain removal is not guaranteed. Impress Laundry may refuse to clean any garment at their sole discretion. Impress Laundry will re-clean items that, in its sole discretion, were not properly cleaned and have not been worn since they were cleaned, at no additional cost. Laundry Care LLC and its subcontractors are not responsible for loss of or damage to any personal or non-cleanable items left in the clothing or laundry bags such as money, jewelry, or any other item. The customer agrees not to leave such items in their clothing or in their laundry bags. Zippers behave unpredictably while cleaning. Although zippers generally are not an issue, the customer is notified that there is a possibility of zipper issues while following normal wash procedures, and Impress Laundry does not accept any liability for such issues.<\\/p>\\r\\n\\t\\t<h4>\\r\\n\\t\\t\\tConfidentiality and Disclaimer<\\/h4>\\r\\n\\t\\t<p class=\\"text-justify\\">\\r\\n\\t\\t\\tImpress Laundry takes privacy and personal information seriously. Impress Laundry uses customer information to provide services, to process payment, facilitate billing, and for any other purpose reasonably necessary to provide services under this Agreement. Additionally, personal information may be disclosed when required by law necessary to enforce this Agreement or necessary to protect the rights, interests, property of safety of Impress Laundry. From time-to-time, we also may send merchant service announcements, newsletters, and periodic notices about specials and new products.<\\/p>\\r\\n\\t<\\/div>\\r\\n<\\/div>\\r\\n","fulltext":"","state":1,"catid":"2","created":"2017-05-22 22:49:55","created_by":"106","created_by_alias":"","modified":"2017-05-22 02:58:07","modified_by":"106","checked_out":"106","checked_out_time":"2017-05-22 02:57:56","publish_up":"2017-05-22 22:49:55","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"info_block_show_title\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":3,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"1","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0);
+(1, 1, 1, '', '2017-05-22 22:49:55', 106, 1736, 'dc6c251b418b58f41eebd66b56d976c29c2b3704', '{"id":1,"asset_id":89,"title":"TERMS & CONDITIONS","alias":"terms-conditions","introtext":"<p>\\r\\n\\tfdjbfsjadbfsa<\\/p>\\r\\n","fulltext":"","state":1,"catid":"2","created":"2017-05-22 22:49:55","created_by":"106","created_by_alias":"","modified":"2017-05-22 22:49:55","modified_by":null,"checked_out":null,"checked_out_time":null,"publish_up":"2017-05-22 22:49:55","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"info_block_show_title\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":1,"ordering":null,"metakey":"","metadesc":"","access":"1","hits":null,"metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0);
 
 -- --------------------------------------------------------
 
@@ -2142,8 +2358,8 @@ INSERT INTO `fv5oz_ucm_history` (`version_id`, `ucm_item_id`, `ucm_type_id`, `ve
 -- Table structure for table `fv5oz_updates`
 --
 
-CREATE TABLE `fv5oz_updates` (
-  `update_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_updates` (
+  `update_id` int(11) NOT NULL AUTO_INCREMENT,
   `update_site_id` int(11) DEFAULT '0',
   `extension_id` int(11) DEFAULT '0',
   `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT '',
@@ -2156,8 +2372,9 @@ CREATE TABLE `fv5oz_updates` (
   `data` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `detailsurl` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `infourl` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extra_query` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Available Updates';
+  `extra_query` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  PRIMARY KEY (`update_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Available Updates' AUTO_INCREMENT=58 ;
 
 --
 -- Dumping data for table `fv5oz_updates`
@@ -2228,15 +2445,16 @@ INSERT INTO `fv5oz_updates` (`update_id`, `update_site_id`, `extension_id`, `nam
 -- Table structure for table `fv5oz_update_sites`
 --
 
-CREATE TABLE `fv5oz_update_sites` (
-  `update_site_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_update_sites` (
+  `update_site_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `type` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `location` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `enabled` int(11) DEFAULT '0',
   `last_check_timestamp` bigint(20) DEFAULT '0',
-  `extra_query` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Update Sites';
+  `extra_query` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  PRIMARY KEY (`update_site_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Update Sites' AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `fv5oz_update_sites`
@@ -2256,9 +2474,10 @@ INSERT INTO `fv5oz_update_sites` (`update_site_id`, `name`, `type`, `location`, 
 -- Table structure for table `fv5oz_update_sites_extensions`
 --
 
-CREATE TABLE `fv5oz_update_sites_extensions` (
+CREATE TABLE IF NOT EXISTS `fv5oz_update_sites_extensions` (
   `update_site_id` int(11) NOT NULL DEFAULT '0',
-  `extension_id` int(11) NOT NULL DEFAULT '0'
+  `extension_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`update_site_id`,`extension_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Links extensions to update sites';
 
 --
@@ -2279,13 +2498,18 @@ INSERT INTO `fv5oz_update_sites_extensions` (`update_site_id`, `extension_id`) V
 -- Table structure for table `fv5oz_usergroups`
 --
 
-CREATE TABLE `fv5oz_usergroups` (
-  `id` int(10) UNSIGNED NOT NULL COMMENT 'Primary Key',
-  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Adjacency List Reference Id',
+CREATE TABLE IF NOT EXISTS `fv5oz_usergroups` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+  `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Adjacency List Reference Id',
   `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
-  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`),
+  KEY `idx_usergroup_title_lookup` (`title`),
+  KEY `idx_usergroup_adjacency_lookup` (`parent_id`),
+  KEY `idx_usergroup_nested_set_lookup` (`lft`,`rgt`) USING BTREE
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `fv5oz_usergroups`
@@ -2308,8 +2532,8 @@ INSERT INTO `fv5oz_usergroups` (`id`, `parent_id`, `lft`, `rgt`, `title`) VALUES
 -- Table structure for table `fv5oz_users`
 --
 
-CREATE TABLE `fv5oz_users` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `name` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `lastName` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2329,15 +2553,20 @@ CREATE TABLE `fv5oz_users` (
   `resetCount` int(11) NOT NULL DEFAULT '0' COMMENT 'Count of password resets since lastResetTime',
   `otpKey` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Two factor authentication encrypted keys',
   `otep` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'One time emergency passwords',
-  `requireReset` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Require user to reset password on next login'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `requireReset` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Require user to reset password on next login',
+  PRIMARY KEY (`id`),
+  KEY `idx_name` (`firstName`(100)),
+  KEY `idx_block` (`block`),
+  KEY `username` (`username`),
+  KEY `email` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=117 ;
 
 --
 -- Dumping data for table `fv5oz_users`
 --
 
 INSERT INTO `fv5oz_users` (`id`, `firstName`, `name`, `lastName`, `homePhone`, `mobilePhone`, `address`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`) VALUES
-(106, 'fdas', 'admin', 's', '', '324324', '', 'admin', 'fdas@fdas.das', '$2y$10$a/6j6HvIKqcyfPvHlVJd3.jVFMXYHepZuM36p7Kap.kOj0au7ORHa', 0, 1, '2017-04-10 22:44:44', '2017-05-22 02:57:38', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(106, 'fdas', 'admin', 's', '', '324324', '', 'admin', 'fdas@fdas.das', '$2y$10$a/6j6HvIKqcyfPvHlVJd3.jVFMXYHepZuM36p7Kap.kOj0au7ORHa', 0, 1, '2017-04-10 22:44:44', '2017-05-22 22:48:08', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
 (107, 'gfdgfds', 'manager', 'fads', 'fdsa', 'fdsa', 'fafdasfdsafdsf', 'manager', '5527@ait.nsw.edu.au', '$2y$10$4Ov8ixQreBzMTijs2HAiZ.6qq5.mflVhDeUtRtAL7cQZ/0VaLehd6', 0, 0, '2017-04-12 02:01:41', '2017-05-04 01:23:56', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
 (113, '22', '111111111 3', '3', '123456', '123456', 'sdafads', 'sss', 'sd@fda.com', '$2y$10$zn1Q5Jk4E2tQyiEENmRjN.z8EfeP9RGbTssriD0c05XRErqUu1WyC', 0, 0, '2017-05-04 22:25:20', '0000-00-00 00:00:00', '20b5407d26c2cec2e48f28f80451379d', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
 (114, '22', '22 3', '3', '123456', '123456', 'sdafads', 'sef', '1sd@fda.com', '$2y$10$h9Minaup1IipzSqZkYZUoO4BE15BkSz8whMAtVBlP7XgzwFhTEch6', 0, 0, '2017-05-04 22:33:53', '0000-00-00 00:00:00', 'd27cdeb2a95d8cb6e8d542583fd50039', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
@@ -2350,15 +2579,20 @@ INSERT INTO `fv5oz_users` (`id`, `firstName`, `name`, `lastName`, `homePhone`, `
 -- Table structure for table `fv5oz_user_keys`
 --
 
-CREATE TABLE `fv5oz_user_keys` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv5oz_user_keys` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `series` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `invalid` tinyint(4) NOT NULL,
   `time` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `uastring` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `uastring` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `series` (`series`),
+  UNIQUE KEY `series_2` (`series`),
+  UNIQUE KEY `series_3` (`series`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -2366,23 +2600,26 @@ CREATE TABLE `fv5oz_user_keys` (
 -- Table structure for table `fv5oz_user_notes`
 --
 
-CREATE TABLE `fv5oz_user_notes` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `catid` int(10) UNSIGNED NOT NULL DEFAULT '0',
+CREATE TABLE IF NOT EXISTS `fv5oz_user_notes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `catid` int(10) unsigned NOT NULL DEFAULT '0',
   `subject` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `state` tinyint(3) NOT NULL DEFAULT '0',
-  `checked_out` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `created_user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `created_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_user_id` int(10) UNSIGNED NOT NULL,
+  `modified_user_id` int(10) unsigned NOT NULL,
   `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `review_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_category_id` (`catid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2390,11 +2627,12 @@ CREATE TABLE `fv5oz_user_notes` (
 -- Table structure for table `fv5oz_user_profiles`
 --
 
-CREATE TABLE `fv5oz_user_profiles` (
+CREATE TABLE IF NOT EXISTS `fv5oz_user_profiles` (
   `user_id` int(11) NOT NULL,
   `profile_key` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `profile_value` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ordering` int(11) NOT NULL DEFAULT '0'
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Simple user profile storage table';
 
 -- --------------------------------------------------------
@@ -2403,9 +2641,10 @@ CREATE TABLE `fv5oz_user_profiles` (
 -- Table structure for table `fv5oz_user_usergroup_map`
 --
 
-CREATE TABLE `fv5oz_user_usergroup_map` (
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__users.id',
-  `group_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__usergroups.id'
+CREATE TABLE IF NOT EXISTS `fv5oz_user_usergroup_map` (
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__users.id',
+  `group_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__usergroups.id',
+  PRIMARY KEY (`user_id`,`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2426,7 +2665,7 @@ INSERT INTO `fv5oz_user_usergroup_map` (`user_id`, `group_id`) VALUES
 -- Table structure for table `fv5oz_utf8_conversion`
 --
 
-CREATE TABLE `fv5oz_utf8_conversion` (
+CREATE TABLE IF NOT EXISTS `fv5oz_utf8_conversion` (
   `converted` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -2443,12 +2682,14 @@ INSERT INTO `fv5oz_utf8_conversion` (`converted`) VALUES
 -- Table structure for table `fv5oz_viewlevels`
 --
 
-CREATE TABLE `fv5oz_viewlevels` (
-  `id` int(10) UNSIGNED NOT NULL COMMENT 'Primary Key',
+CREATE TABLE IF NOT EXISTS `fv5oz_viewlevels` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
   `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `ordering` int(11) NOT NULL DEFAULT '0',
-  `rules` varchar(5120) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded access control.'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `rules` varchar(5120) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON encoded access control.',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_assetgroup_title_lookup` (`title`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `fv5oz_viewlevels`
@@ -2467,15 +2708,16 @@ INSERT INTO `fv5oz_viewlevels` (`id`, `title`, `ordering`, `rules`) VALUES
 -- Table structure for table `fv50z_card`
 --
 
-CREATE TABLE `fv50z_card` (
-  `cardID` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv50z_card` (
+  `cardID` int(11) NOT NULL AUTO_INCREMENT,
   `cardNumber` bigint(30) NOT NULL,
   `cardHolder` varchar(200) NOT NULL,
   `expiryDate` date NOT NULL,
   `secretNumber` int(11) NOT NULL,
   `type` varchar(150) NOT NULL,
-  `bank` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `bank` varchar(250) NOT NULL,
+  PRIMARY KEY (`cardID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2483,12 +2725,13 @@ CREATE TABLE `fv50z_card` (
 -- Table structure for table `fv50z_combos`
 --
 
-CREATE TABLE `fv50z_combos` (
-  `comboID` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv50z_combos` (
+  `comboID` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(200) NOT NULL,
   `description` text NOT NULL,
-  `published` tinyint(4) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `published` tinyint(4) NOT NULL,
+  PRIMARY KEY (`comboID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -2496,9 +2739,10 @@ CREATE TABLE `fv50z_combos` (
 -- Table structure for table `fv50z_comboservice`
 --
 
-CREATE TABLE `fv50z_comboservice` (
+CREATE TABLE IF NOT EXISTS `fv50z_comboservice` (
   `serviceID` int(11) NOT NULL,
-  `comboID` int(11) NOT NULL
+  `comboID` int(11) NOT NULL,
+  PRIMARY KEY (`serviceID`,`comboID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2507,12 +2751,13 @@ CREATE TABLE `fv50z_comboservice` (
 -- Table structure for table `fv50z_logbook`
 --
 
-CREATE TABLE `fv50z_logbook` (
-  `logID` int(20) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv50z_logbook` (
+  `logID` int(20) NOT NULL AUTO_INCREMENT,
   `dateTimeModify` datetime NOT NULL,
   `status` tinyint(4) NOT NULL,
-  `note` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `note` text NOT NULL,
+  PRIMARY KEY (`logID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2520,10 +2765,11 @@ CREATE TABLE `fv50z_logbook` (
 -- Table structure for table `fv50z_orderlogbook`
 --
 
-CREATE TABLE `fv50z_orderlogbook` (
+CREATE TABLE IF NOT EXISTS `fv50z_orderlogbook` (
   `logID` int(11) NOT NULL,
   `orderID` int(11) NOT NULL,
-  `userID` int(11) NOT NULL
+  `userID` int(11) NOT NULL,
+  PRIMARY KEY (`logID`,`orderID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2532,922 +2778,14 @@ CREATE TABLE `fv50z_orderlogbook` (
 -- Table structure for table `fv50z_payment`
 --
 
-CREATE TABLE `fv50z_payment` (
-  `paymentID` int(20) NOT NULL,
+CREATE TABLE IF NOT EXISTS `fv50z_payment` (
+  `paymentID` int(20) NOT NULL AUTO_INCREMENT,
   `type` varchar(200) NOT NULL,
   `description` text NOT NULL,
-  `userID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `userID` int(11) NOT NULL,
+  PRIMARY KEY (`paymentID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `fv5oz_assets`
---
-ALTER TABLE `fv5oz_assets`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_asset_name` (`name`),
-  ADD KEY `idx_lft_rgt` (`lft`,`rgt`),
-  ADD KEY `idx_parent_id` (`parent_id`);
-
---
--- Indexes for table `fv5oz_associations`
---
-ALTER TABLE `fv5oz_associations`
-  ADD PRIMARY KEY (`context`,`id`),
-  ADD KEY `idx_key` (`key`);
-
---
--- Indexes for table `fv5oz_banners`
---
-ALTER TABLE `fv5oz_banners`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_state` (`state`),
-  ADD KEY `idx_own_prefix` (`own_prefix`),
-  ADD KEY `idx_metakey_prefix` (`metakey_prefix`(100)),
-  ADD KEY `idx_banner_catid` (`catid`),
-  ADD KEY `idx_language` (`language`);
-
---
--- Indexes for table `fv5oz_banner_clients`
---
-ALTER TABLE `fv5oz_banner_clients`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_own_prefix` (`own_prefix`),
-  ADD KEY `idx_metakey_prefix` (`metakey_prefix`(100));
-
---
--- Indexes for table `fv5oz_banner_tracks`
---
-ALTER TABLE `fv5oz_banner_tracks`
-  ADD PRIMARY KEY (`track_date`,`track_type`,`banner_id`),
-  ADD KEY `idx_track_date` (`track_date`),
-  ADD KEY `idx_track_type` (`track_type`),
-  ADD KEY `idx_banner_id` (`banner_id`);
-
---
--- Indexes for table `fv5oz_categories`
---
-ALTER TABLE `fv5oz_categories`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `cat_idx` (`extension`,`published`,`access`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_path` (`path`(100)),
-  ADD KEY `idx_left_right` (`lft`,`rgt`),
-  ADD KEY `idx_alias` (`alias`(100)),
-  ADD KEY `idx_language` (`language`);
-
---
--- Indexes for table `fv5oz_combos_combo`
---
-ALTER TABLE `fv5oz_combos_combo`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_contact_details`
---
-ALTER TABLE `fv5oz_contact_details`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_state` (`published`),
-  ADD KEY `idx_catid` (`catid`),
-  ADD KEY `idx_createdby` (`created_by`),
-  ADD KEY `idx_featured_catid` (`featured`,`catid`),
-  ADD KEY `idx_language` (`language`),
-  ADD KEY `idx_xreference` (`xreference`);
-
---
--- Indexes for table `fv5oz_content`
---
-ALTER TABLE `fv5oz_content`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_state` (`state`),
-  ADD KEY `idx_catid` (`catid`),
-  ADD KEY `idx_createdby` (`created_by`),
-  ADD KEY `idx_featured_catid` (`featured`,`catid`),
-  ADD KEY `idx_language` (`language`),
-  ADD KEY `idx_xreference` (`xreference`);
-
---
--- Indexes for table `fv5oz_contentitem_tag_map`
---
-ALTER TABLE `fv5oz_contentitem_tag_map`
-  ADD UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`),
-  ADD KEY `idx_tag_type` (`tag_id`,`type_id`),
-  ADD KEY `idx_date_id` (`tag_date`,`tag_id`),
-  ADD KEY `idx_core_content_id` (`core_content_id`);
-
---
--- Indexes for table `fv5oz_content_frontpage`
---
-ALTER TABLE `fv5oz_content_frontpage`
-  ADD PRIMARY KEY (`content_id`);
-
---
--- Indexes for table `fv5oz_content_rating`
---
-ALTER TABLE `fv5oz_content_rating`
-  ADD PRIMARY KEY (`content_id`);
-
---
--- Indexes for table `fv5oz_content_types`
---
-ALTER TABLE `fv5oz_content_types`
-  ADD PRIMARY KEY (`type_id`),
-  ADD KEY `idx_alias` (`type_alias`(100));
-
---
--- Indexes for table `fv5oz_extensions`
---
-ALTER TABLE `fv5oz_extensions`
-  ADD PRIMARY KEY (`extension_id`),
-  ADD KEY `element_clientid` (`element`,`client_id`),
-  ADD KEY `element_folder_clientid` (`element`,`folder`,`client_id`),
-  ADD KEY `extension` (`type`,`element`,`folder`,`client_id`);
-
---
--- Indexes for table `fv5oz_finder_filters`
---
-ALTER TABLE `fv5oz_finder_filters`
-  ADD PRIMARY KEY (`filter_id`);
-
---
--- Indexes for table `fv5oz_finder_links`
---
-ALTER TABLE `fv5oz_finder_links`
-  ADD PRIMARY KEY (`link_id`),
-  ADD KEY `idx_type` (`type_id`),
-  ADD KEY `idx_title` (`title`(100)),
-  ADD KEY `idx_md5` (`md5sum`),
-  ADD KEY `idx_url` (`url`(75)),
-  ADD KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`),
-  ADD KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`);
-
---
--- Indexes for table `fv5oz_finder_links_terms0`
---
-ALTER TABLE `fv5oz_finder_links_terms0`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms1`
---
-ALTER TABLE `fv5oz_finder_links_terms1`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms2`
---
-ALTER TABLE `fv5oz_finder_links_terms2`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms3`
---
-ALTER TABLE `fv5oz_finder_links_terms3`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms4`
---
-ALTER TABLE `fv5oz_finder_links_terms4`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms5`
---
-ALTER TABLE `fv5oz_finder_links_terms5`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms6`
---
-ALTER TABLE `fv5oz_finder_links_terms6`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms7`
---
-ALTER TABLE `fv5oz_finder_links_terms7`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms8`
---
-ALTER TABLE `fv5oz_finder_links_terms8`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_terms9`
---
-ALTER TABLE `fv5oz_finder_links_terms9`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_termsa`
---
-ALTER TABLE `fv5oz_finder_links_termsa`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_termsb`
---
-ALTER TABLE `fv5oz_finder_links_termsb`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_termsc`
---
-ALTER TABLE `fv5oz_finder_links_termsc`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_termsd`
---
-ALTER TABLE `fv5oz_finder_links_termsd`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_termse`
---
-ALTER TABLE `fv5oz_finder_links_termse`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_links_termsf`
---
-ALTER TABLE `fv5oz_finder_links_termsf`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Indexes for table `fv5oz_finder_taxonomy`
---
-ALTER TABLE `fv5oz_finder_taxonomy`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `parent_id` (`parent_id`),
-  ADD KEY `state` (`state`),
-  ADD KEY `ordering` (`ordering`),
-  ADD KEY `access` (`access`),
-  ADD KEY `idx_parent_published` (`parent_id`,`state`,`access`);
-
---
--- Indexes for table `fv5oz_finder_taxonomy_map`
---
-ALTER TABLE `fv5oz_finder_taxonomy_map`
-  ADD PRIMARY KEY (`link_id`,`node_id`),
-  ADD KEY `link_id` (`link_id`),
-  ADD KEY `node_id` (`node_id`);
-
---
--- Indexes for table `fv5oz_finder_terms`
---
-ALTER TABLE `fv5oz_finder_terms`
-  ADD PRIMARY KEY (`term_id`),
-  ADD UNIQUE KEY `idx_term` (`term`),
-  ADD KEY `idx_term_phrase` (`term`,`phrase`),
-  ADD KEY `idx_stem_phrase` (`stem`,`phrase`),
-  ADD KEY `idx_soundex_phrase` (`soundex`,`phrase`);
-
---
--- Indexes for table `fv5oz_finder_terms_common`
---
-ALTER TABLE `fv5oz_finder_terms_common`
-  ADD KEY `idx_word_lang` (`term`,`language`),
-  ADD KEY `idx_lang` (`language`);
-
---
--- Indexes for table `fv5oz_finder_tokens`
---
-ALTER TABLE `fv5oz_finder_tokens`
-  ADD KEY `idx_word` (`term`),
-  ADD KEY `idx_context` (`context`);
-
---
--- Indexes for table `fv5oz_finder_tokens_aggregate`
---
-ALTER TABLE `fv5oz_finder_tokens_aggregate`
-  ADD KEY `token` (`term`),
-  ADD KEY `keyword_id` (`term_id`);
-
---
--- Indexes for table `fv5oz_finder_types`
---
-ALTER TABLE `fv5oz_finder_types`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `title` (`title`);
-
---
--- Indexes for table `fv5oz_jcklanguages`
---
-ALTER TABLE `fv5oz_jcklanguages`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_jckplugins`
---
-ALTER TABLE `fv5oz_jckplugins`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `plugin` (`name`);
-
---
--- Indexes for table `fv5oz_jcktoolbarplugins`
---
-ALTER TABLE `fv5oz_jcktoolbarplugins`
-  ADD PRIMARY KEY (`toolbarid`,`pluginid`);
-
---
--- Indexes for table `fv5oz_jcktoolbars`
---
-ALTER TABLE `fv5oz_jcktoolbars`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `toolbar` (`name`);
-
---
--- Indexes for table `fv5oz_languages`
---
-ALTER TABLE `fv5oz_languages`
-  ADD PRIMARY KEY (`lang_id`),
-  ADD UNIQUE KEY `idx_sef` (`sef`),
-  ADD UNIQUE KEY `idx_image` (`image`),
-  ADD UNIQUE KEY `idx_langcode` (`lang_code`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_ordering` (`ordering`);
-
---
--- Indexes for table `fv5oz_location`
---
-ALTER TABLE `fv5oz_location`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_logbook`
---
-ALTER TABLE `fv5oz_logbook`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_menu`
---
-ALTER TABLE `fv5oz_menu`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`(100),`language`),
-  ADD KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`),
-  ADD KEY `idx_menutype` (`menutype`),
-  ADD KEY `idx_left_right` (`lft`,`rgt`),
-  ADD KEY `idx_alias` (`alias`(100)),
-  ADD KEY `idx_path` (`path`(100)),
-  ADD KEY `idx_language` (`language`);
-
---
--- Indexes for table `fv5oz_menu_types`
---
-ALTER TABLE `fv5oz_menu_types`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_menutype` (`menutype`);
-
---
--- Indexes for table `fv5oz_messages`
---
-ALTER TABLE `fv5oz_messages`
-  ADD PRIMARY KEY (`message_id`),
-  ADD KEY `useridto_state` (`user_id_to`,`state`);
-
---
--- Indexes for table `fv5oz_messages_cfg`
---
-ALTER TABLE `fv5oz_messages_cfg`
-  ADD UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`);
-
---
--- Indexes for table `fv5oz_modules`
---
-ALTER TABLE `fv5oz_modules`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `published` (`published`,`access`),
-  ADD KEY `newsfeeds` (`module`,`published`),
-  ADD KEY `idx_language` (`language`);
-
---
--- Indexes for table `fv5oz_modules_menu`
---
-ALTER TABLE `fv5oz_modules_menu`
-  ADD PRIMARY KEY (`moduleid`,`menuid`);
-
---
--- Indexes for table `fv5oz_newsfeeds`
---
-ALTER TABLE `fv5oz_newsfeeds`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_state` (`published`),
-  ADD KEY `idx_catid` (`catid`),
-  ADD KEY `idx_createdby` (`created_by`),
-  ADD KEY `idx_language` (`language`),
-  ADD KEY `idx_xreference` (`xreference`);
-
---
--- Indexes for table `fv5oz_order`
---
-ALTER TABLE `fv5oz_order`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_orderlogbook`
---
-ALTER TABLE `fv5oz_orderlogbook`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_overrider`
---
-ALTER TABLE `fv5oz_overrider`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_payment`
---
-ALTER TABLE `fv5oz_payment`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_postinstall_messages`
---
-ALTER TABLE `fv5oz_postinstall_messages`
-  ADD PRIMARY KEY (`postinstall_message_id`);
-
---
--- Indexes for table `fv5oz_redirect_links`
---
-ALTER TABLE `fv5oz_redirect_links`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_old_url` (`old_url`(100)),
-  ADD KEY `idx_link_modifed` (`modified_date`);
-
---
--- Indexes for table `fv5oz_schemas`
---
-ALTER TABLE `fv5oz_schemas`
-  ADD PRIMARY KEY (`extension_id`,`version_id`);
-
---
--- Indexes for table `fv5oz_services`
---
-ALTER TABLE `fv5oz_services`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fv5oz_session`
---
-ALTER TABLE `fv5oz_session`
-  ADD PRIMARY KEY (`session_id`),
-  ADD KEY `userid` (`userid`),
-  ADD KEY `time` (`time`);
-
---
--- Indexes for table `fv5oz_tags`
---
-ALTER TABLE `fv5oz_tags`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `tag_idx` (`published`,`access`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_path` (`path`(100)),
-  ADD KEY `idx_left_right` (`lft`,`rgt`),
-  ADD KEY `idx_alias` (`alias`(100)),
-  ADD KEY `idx_language` (`language`);
-
---
--- Indexes for table `fv5oz_template_styles`
---
-ALTER TABLE `fv5oz_template_styles`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_template` (`template`),
-  ADD KEY `idx_home` (`home`);
-
---
--- Indexes for table `fv5oz_ucm_base`
---
-ALTER TABLE `fv5oz_ucm_base`
-  ADD PRIMARY KEY (`ucm_id`),
-  ADD KEY `idx_ucm_item_id` (`ucm_item_id`),
-  ADD KEY `idx_ucm_type_id` (`ucm_type_id`),
-  ADD KEY `idx_ucm_language_id` (`ucm_language_id`);
-
---
--- Indexes for table `fv5oz_ucm_content`
---
-ALTER TABLE `fv5oz_ucm_content`
-  ADD PRIMARY KEY (`core_content_id`),
-  ADD KEY `tag_idx` (`core_state`,`core_access`),
-  ADD KEY `idx_access` (`core_access`),
-  ADD KEY `idx_alias` (`core_alias`(100)),
-  ADD KEY `idx_language` (`core_language`),
-  ADD KEY `idx_title` (`core_title`(100)),
-  ADD KEY `idx_modified_time` (`core_modified_time`),
-  ADD KEY `idx_created_time` (`core_created_time`),
-  ADD KEY `idx_content_type` (`core_type_alias`(100)),
-  ADD KEY `idx_core_modified_user_id` (`core_modified_user_id`),
-  ADD KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`),
-  ADD KEY `idx_core_created_user_id` (`core_created_user_id`),
-  ADD KEY `idx_core_type_id` (`core_type_id`);
-
---
--- Indexes for table `fv5oz_ucm_history`
---
-ALTER TABLE `fv5oz_ucm_history`
-  ADD PRIMARY KEY (`version_id`),
-  ADD KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`),
-  ADD KEY `idx_save_date` (`save_date`);
-
---
--- Indexes for table `fv5oz_updates`
---
-ALTER TABLE `fv5oz_updates`
-  ADD PRIMARY KEY (`update_id`);
-
---
--- Indexes for table `fv5oz_update_sites`
---
-ALTER TABLE `fv5oz_update_sites`
-  ADD PRIMARY KEY (`update_site_id`);
-
---
--- Indexes for table `fv5oz_update_sites_extensions`
---
-ALTER TABLE `fv5oz_update_sites_extensions`
-  ADD PRIMARY KEY (`update_site_id`,`extension_id`);
-
---
--- Indexes for table `fv5oz_usergroups`
---
-ALTER TABLE `fv5oz_usergroups`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`),
-  ADD KEY `idx_usergroup_title_lookup` (`title`),
-  ADD KEY `idx_usergroup_adjacency_lookup` (`parent_id`),
-  ADD KEY `idx_usergroup_nested_set_lookup` (`lft`,`rgt`) USING BTREE;
-
---
--- Indexes for table `fv5oz_users`
---
-ALTER TABLE `fv5oz_users`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_name` (`firstName`(100)),
-  ADD KEY `idx_block` (`block`),
-  ADD KEY `username` (`username`),
-  ADD KEY `email` (`email`);
-
---
--- Indexes for table `fv5oz_user_keys`
---
-ALTER TABLE `fv5oz_user_keys`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `series` (`series`),
-  ADD UNIQUE KEY `series_2` (`series`),
-  ADD UNIQUE KEY `series_3` (`series`),
-  ADD KEY `user_id` (`user_id`);
-
---
--- Indexes for table `fv5oz_user_notes`
---
-ALTER TABLE `fv5oz_user_notes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_user_id` (`user_id`),
-  ADD KEY `idx_category_id` (`catid`);
-
---
--- Indexes for table `fv5oz_user_profiles`
---
-ALTER TABLE `fv5oz_user_profiles`
-  ADD UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`);
-
---
--- Indexes for table `fv5oz_user_usergroup_map`
---
-ALTER TABLE `fv5oz_user_usergroup_map`
-  ADD PRIMARY KEY (`user_id`,`group_id`);
-
---
--- Indexes for table `fv5oz_viewlevels`
---
-ALTER TABLE `fv5oz_viewlevels`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_assetgroup_title_lookup` (`title`);
-
---
--- Indexes for table `fv50z_card`
---
-ALTER TABLE `fv50z_card`
-  ADD PRIMARY KEY (`cardID`);
-
---
--- Indexes for table `fv50z_combos`
---
-ALTER TABLE `fv50z_combos`
-  ADD PRIMARY KEY (`comboID`);
-
---
--- Indexes for table `fv50z_comboservice`
---
-ALTER TABLE `fv50z_comboservice`
-  ADD PRIMARY KEY (`serviceID`,`comboID`);
-
---
--- Indexes for table `fv50z_logbook`
---
-ALTER TABLE `fv50z_logbook`
-  ADD PRIMARY KEY (`logID`);
-
---
--- Indexes for table `fv50z_orderlogbook`
---
-ALTER TABLE `fv50z_orderlogbook`
-  ADD PRIMARY KEY (`logID`,`orderID`);
-
---
--- Indexes for table `fv50z_payment`
---
-ALTER TABLE `fv50z_payment`
-  ADD PRIMARY KEY (`paymentID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `fv5oz_assets`
---
-ALTER TABLE `fv5oz_assets`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key', AUTO_INCREMENT=90;
---
--- AUTO_INCREMENT for table `fv5oz_banners`
---
-ALTER TABLE `fv5oz_banners`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_banner_clients`
---
-ALTER TABLE `fv5oz_banner_clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_categories`
---
-ALTER TABLE `fv5oz_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `fv5oz_combos_combo`
---
-ALTER TABLE `fv5oz_combos_combo`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `fv5oz_contact_details`
---
-ALTER TABLE `fv5oz_contact_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_content`
---
-ALTER TABLE `fv5oz_content`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `fv5oz_content_types`
---
-ALTER TABLE `fv5oz_content_types`
-  MODIFY `type_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
---
--- AUTO_INCREMENT for table `fv5oz_extensions`
---
-ALTER TABLE `fv5oz_extensions`
-  MODIFY `extension_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=828;
---
--- AUTO_INCREMENT for table `fv5oz_finder_filters`
---
-ALTER TABLE `fv5oz_finder_filters`
-  MODIFY `filter_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_finder_links`
---
-ALTER TABLE `fv5oz_finder_links`
-  MODIFY `link_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_finder_taxonomy`
---
-ALTER TABLE `fv5oz_finder_taxonomy`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `fv5oz_finder_terms`
---
-ALTER TABLE `fv5oz_finder_terms`
-  MODIFY `term_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_finder_types`
---
-ALTER TABLE `fv5oz_finder_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_jcklanguages`
---
-ALTER TABLE `fv5oz_jcklanguages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_jckplugins`
---
-ALTER TABLE `fv5oz_jckplugins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
---
--- AUTO_INCREMENT for table `fv5oz_jcktoolbars`
---
-ALTER TABLE `fv5oz_jcktoolbars`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `fv5oz_languages`
---
-ALTER TABLE `fv5oz_languages`
-  MODIFY `lang_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `fv5oz_location`
---
-ALTER TABLE `fv5oz_location`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `fv5oz_logbook`
---
-ALTER TABLE `fv5oz_logbook`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_menu`
---
-ALTER TABLE `fv5oz_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
---
--- AUTO_INCREMENT for table `fv5oz_menu_types`
---
-ALTER TABLE `fv5oz_menu_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `fv5oz_messages`
---
-ALTER TABLE `fv5oz_messages`
-  MODIFY `message_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `fv5oz_modules`
---
-ALTER TABLE `fv5oz_modules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
---
--- AUTO_INCREMENT for table `fv5oz_newsfeeds`
---
-ALTER TABLE `fv5oz_newsfeeds`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_order`
---
-ALTER TABLE `fv5oz_order`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `fv5oz_orderlogbook`
---
-ALTER TABLE `fv5oz_orderlogbook`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_overrider`
---
-ALTER TABLE `fv5oz_overrider`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key';
---
--- AUTO_INCREMENT for table `fv5oz_payment`
---
-ALTER TABLE `fv5oz_payment`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `fv5oz_postinstall_messages`
---
-ALTER TABLE `fv5oz_postinstall_messages`
-  MODIFY `postinstall_message_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `fv5oz_redirect_links`
---
-ALTER TABLE `fv5oz_redirect_links`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_services`
---
-ALTER TABLE `fv5oz_services`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT for table `fv5oz_tags`
---
-ALTER TABLE `fv5oz_tags`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `fv5oz_template_styles`
---
-ALTER TABLE `fv5oz_template_styles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `fv5oz_ucm_content`
---
-ALTER TABLE `fv5oz_ucm_content`
-  MODIFY `core_content_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_ucm_history`
---
-ALTER TABLE `fv5oz_ucm_history`
-  MODIFY `version_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `fv5oz_updates`
---
-ALTER TABLE `fv5oz_updates`
-  MODIFY `update_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
---
--- AUTO_INCREMENT for table `fv5oz_update_sites`
---
-ALTER TABLE `fv5oz_update_sites`
-  MODIFY `update_site_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `fv5oz_usergroups`
---
-ALTER TABLE `fv5oz_usergroups`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key', AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT for table `fv5oz_users`
---
-ALTER TABLE `fv5oz_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
---
--- AUTO_INCREMENT for table `fv5oz_user_keys`
---
-ALTER TABLE `fv5oz_user_keys`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `fv5oz_user_notes`
---
-ALTER TABLE `fv5oz_user_notes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv5oz_viewlevels`
---
-ALTER TABLE `fv5oz_viewlevels`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key', AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `fv50z_card`
---
-ALTER TABLE `fv50z_card`
-  MODIFY `cardID` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv50z_combos`
---
-ALTER TABLE `fv50z_combos`
-  MODIFY `comboID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `fv50z_logbook`
---
-ALTER TABLE `fv50z_logbook`
-  MODIFY `logID` int(20) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fv50z_payment`
---
-ALTER TABLE `fv50z_payment`
-  MODIFY `paymentID` int(20) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
