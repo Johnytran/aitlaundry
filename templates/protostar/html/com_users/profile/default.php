@@ -118,7 +118,7 @@ $cart = $session->get('yourcart');
 				<?php	
 					}
 				}else{?>
-					<p>There is no products in your cart currently, please start shoosing a combo.</p>
+					<p>There is no product in your cart currently, please start choosing a <a class = "aLink" href="index.php#combos">Combo</a></p>
 				<?php 
 				}
 				?>
