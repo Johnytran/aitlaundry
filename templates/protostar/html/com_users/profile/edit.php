@@ -121,12 +121,12 @@ $cart = $session->get('yourcart');
 						  <div class="col-sm-4"><?php echo $value["name"];?></div>
 						  <div class="col-sm-4">1</div>
 						  <div class="col-sm-4">$<?php echo $value["price"];?></div>
-						  <div class="col-sm-4"><a href="index.php?option=com_combos&task=combos.deleteProduct&id=<?php echo $value['id']?>">Delete</a></div>
+						  <div class="col-sm-4"><a class = "aLink" href="index.php?option=com_combos&task=combos.deleteProduct&id=<?php echo $value['id']?>">Delete</a></div>
 						</div>	
 					<?php	
 					}
 					?>
-					<p><a href="index.php?option=com_order&view=order&layout=edit">Next step</a></p>
+					<p><a class = "btnStyle btn-default btn" href="index.php?option=com_order&view=order&layout=edit">Order Details</a></p>
 				<?php 
 				}else{?>
 					<p>There is no product in your cart currently, please start choosing a <a class = "aLink" href="index.php#combos">Combo</a></p>
