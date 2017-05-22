@@ -29,12 +29,9 @@ $user  = JFactory::getUser();
     }
     .cbomessage p{
         font-size: 20px;
-        text-align: justify;
+        text-align: center;
     }
-    .btn{
-        
-    }
-</style>
+    </style>
 <script>
 
 	jQuery(document).ready(function(){
@@ -51,8 +48,8 @@ $user  = JFactory::getUser();
 			 
 			request.done(function( msg ) {
 				//console.log(msg);
-				var wCbo = 500;
-				var hCbo = 400;
+				var wCbo = 380;
+				var hCbo = 440;
 			  switch( msg ){
 			  	case '1':
 			  		jQuery.colorbox({width: wCbo, height: hCbo, html:"<div class='cbomessage'><p>The combos is added to cart</p><p><a href='index.php?option=com_users&view=profile&layout=edit&tab=2&user_id=<?php echo $user->id;?>' class='btnStyle btn-default btn'>View cart</a></p></div>"});
@@ -83,7 +80,9 @@ $user  = JFactory::getUser();
 	<h1>Combos</h1>
 	<div class="combosection">
 		<div class="container-fluid" style="padding:20px; background-color:white;">
-			<h5>Little explaination of how the combo system works!</h5>
+			<h5>The combo system helps you to understand our Laundry services available.</h5> 
+                <h5>Each combo has its own configuration as shown below.</h5>
+                <h5>Don’t worry! If you change your mind, you will be able to swap it later on.</h5>
 		</div>
 		<div class="comboContainer">
 			<?php

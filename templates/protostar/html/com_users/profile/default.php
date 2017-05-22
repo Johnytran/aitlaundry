@@ -15,6 +15,27 @@ $session = JFactory::getSession();
 $cart = $session->get('yourcart');
 $user = JFactory::getUser();
 ?>
+<style>
+    .close{
+           position: relative;
+            top: -20px;
+            color: #000;
+            font-size: 80px;
+            font-weight: bold;
+    }
+    #cboxContent{
+        border: 2px solid #faa634;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .cbomessage{
+        padding: 50px;
+        padding-bottom: 10px;
+    }
+    .cbomessage p{
+        font-size: 20px;
+        text-align: center;
+    }
+</style>
 <script>
 	jQuery(document).ready(function(){
 		jQuery('a.deleteProduct').click(function(){
@@ -22,7 +43,7 @@ $user = JFactory::getUser();
 			var comboID = jQuery(this).attr('value');
 			
 			 
-			jQuery.colorbox({width: 400, height: 300, html:"<div class='cbomessage'><p>Do you want to delete?.</p><p><span class='first'><a class='btn' href='index.php?option=com_combos&task=combos.deleteProduct'>Delete</a><span class='last'><a href='index.php?option=com_users&view=profile&layout=edit&user_id=<?php echo $user->id;?>&tab=2'>Discard</a></span></p></div>"});
+			jQuery.colorbox({width: 380, height: 440, html:"<div class='cbomessage'><p>Are you sure that you want to delete your combo?</p><p><span class='first'><a class='btnStyle btn-default btn' href='index.php?option=com_combos&task=combos.deleteProduct'>Delete</a><span class='last'><a class='btnStyleCancel btn-default btn' href='index.php?option=com_users&view=profile&layout=edit&user_id=<?php echo $user->id;?>&tab=2'>Cancel</a></span></p></div>"});
 
 		});
 	});
@@ -115,7 +136,6 @@ $user = JFactory::getUser();
 					  <div class="col-sm-4">Combos</div>
 					  <div class="col-sm-4">Quantity</div>
 					  <div class="col-sm-4">Price</div>
-					  <div class="col-sm-4">Task</div>
 					</div>
 					<?php
 					//print_r($cart);
@@ -125,12 +145,18 @@ $user = JFactory::getUser();
 						  <div class="col-sm-4"><?php echo $value["name"];?></div>
 						  <div class="col-sm-4">1</div>
 						  <div class="col-sm-4">$<?php echo $value["price"];?></div>
-						  <div class="col-sm-4"><a class = "aLink deleteProduct" value="<?php echo $value['id']?>" href="javascript:void(0);">Delete</a></div>
+						  
 						</div>	
 					<?php	
 					}
 					?>
-					<p><a class = "btnStyle btn-default btn" href="index.php?option=com_order&view=order&layout=edit">Order Details</a></p>
+               
+					<p> 
+                        <a class = "deleteProduct btnStyleCancel btn-default btn" value="<?php echo $value['id']?>" href="javascript:void(0);">Delete Combo
+                        </a>
+                        <a class = "btnStyle btn-default btn" href="index.php?option=com_order&view=order&layout=edit">Order Details
+                        </a>
+                    </p>
 				<?php 
 				}else{?>
 					<p>There is no product in your cart currently, please start choosing a <a class = "aLink" href="index.php#combos">Combo</a></p>

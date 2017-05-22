@@ -17,6 +17,12 @@ body h2{
 	line-height: 30px; 
 	color: white;
 }
+.combosection h5{
+   font-size: 24px; 
+    letter-spacing: 2px;
+    margin-top: 5px;
+}
+    
 .comboContainer a {
     color: white;
     text-decoration: none;
@@ -41,6 +47,11 @@ header{
 }
 
 
+label{
+    font-weight: normal;
+    font-size: 16px;
+}
+
 
 /*NAVIGATION*/
 
@@ -60,6 +71,7 @@ header{
     color: white;
     border-bottom: 2px solid #faa634;
     margin-right: 5px;
+    font-size: 16px;
 }
 
 #navbarStyle img{
@@ -122,15 +134,27 @@ main {
     margin-top: 60px;
 
 }
-#banner{
-    padding:50px;
-    width 100%;
-    height:400px;
-    text-align:center;
+
+{
+    height: 70%;
+    background-image: url("../images/feature.jpg");
 }
+#banner{
+    width 100%;
+    text-align:center;
+    
+}
+
+#banner p{
+    padding: 20px;
+    letter-spacing: 2px;
+    font-size: 20px!important;
+}
+
 h3#moto{
   color:#cccccc;
 }
+
 span#impressed {
  color:#faa634;
 }
@@ -227,6 +251,7 @@ span#impressed {
     box-shadow:1px 1px 3px black;
     padding:0;
     border-radius:5px;
+    margin-bottom: 20px;
 }
 #combos .combobox:hover {
     box-shadow:1px 1px 15px #333;
@@ -271,6 +296,15 @@ span#impressed {
 
 #combos .dropdownbox:hover .dropdownbox-content {
     display: block;
+}
+
+#Combo .row{
+    display: flex;
+    flex-direction: row;
+}
+
+#Combo .deleteProduct{
+   
 }
 /*************** LOCATIONS **********************/
 }
@@ -575,7 +609,7 @@ div.paymentTableHolder{
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(255,255,255,0.9);
     
 }
 
@@ -625,19 +659,20 @@ div.paymentTableHolder{
     }
 
 .btnStyle{
+    margin-top: 10px;
     background-color: #faa634;
     color: black;
     font-size: 20px;
     padding: 10px;
     border: 2px solid black;
-    min-width: 350px;
+    width: 234px;
     height: 53px!important;
 }
 
 .btnStyleCancel{
     margin-top: 10px;
     background-color: white;
-    width: 350px;
+    width: 234px!important;
     color: black;
     font-size: 20px;
     padding: 10px;
@@ -831,6 +866,14 @@ div.space1{
         width: 80%;
         height: 80%;
     }
+    .btnStyle{
+        max-width: 230px!important;
+    }
+
+    .btnStyleCancel{
+        width: 230px;
+    }
+
 }
 
 
