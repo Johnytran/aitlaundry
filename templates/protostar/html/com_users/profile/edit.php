@@ -106,14 +106,14 @@ $cart = $session->get('yourcart');
 				<h3>Combo's and services</h3>
 				<?php 
 				if(count($cart)){?>
-				<div class="row">
-				  <div class="col-sm-4">Num</div>
-				  <div class="col-sm-4">Combos</div>
-				  <div class="col-sm-4">Quantity</div>
-				  <div class="col-sm-4">Price</div>
-				  <div class="col-sm-4">Task</div>
-				</div>
-				<?php
+					<div class="row">
+					  <div class="col-sm-4">Num</div>
+					  <div class="col-sm-4">Combos</div>
+					  <div class="col-sm-4">Quantity</div>
+					  <div class="col-sm-4">Price</div>
+					  <div class="col-sm-4">Task</div>
+					</div>
+					<?php
 					//print_r($cart);
 					foreach($cart as $key=>$value){?>
 						<div class="row">
@@ -123,14 +123,14 @@ $cart = $session->get('yourcart');
 						  <div class="col-sm-4">$<?php echo $value["price"];?></div>
 						  <div class="col-sm-4"><a href="index.php?option=com_combos&task=combos.deleteProduct&id=<?php echo $value['id']?>">Delete</a></div>
 						</div>	
-				<?php	
+					<?php	
 					}
+					?>
+					<p><a href="index.php?option=com_order&view=order&layout=edit">Next step</a></p>
+				<?php 
 				}else{?>
 					<p>There is no product in your cart currently, please start choosing a <a class = "aLink" href="index.php#combos">Combo</a></p>
-					}?>
-				<p><a href="index.php?option=com_order&view=order&layout=edit">Next step</a></p>
-				<?php }
-				?>
+				<?php }?>
 
 			
 			</div>
