@@ -103,6 +103,7 @@ $cart = $session->get('yourcart');
 				  <div class="col-sm-4">Combos</div>
 				  <div class="col-sm-4">Quantity</div>
 				  <div class="col-sm-4">Price</div>
+				  <div class="col-sm-4">Task</div>
 				</div>
 				<?php
 					
@@ -112,6 +113,7 @@ $cart = $session->get('yourcart');
 						  <div class="col-sm-4"><?php echo $value["name"];?></div>
 						  <div class="col-sm-4">1</div>
 						  <div class="col-sm-4">$<?php echo $value["price"];?></div>
+						  <div class="col-sm-4"><a href="index.php?option=com_combos&task=combos.deleteProduct&id=<?php echo $value['id']?>">Delete</a></div>
 						</div>	
 				<?php	
 					}

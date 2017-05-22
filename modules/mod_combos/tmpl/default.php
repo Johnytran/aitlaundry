@@ -33,13 +33,13 @@ $user  = JFactory::getUser();
 			});
 			 
 			request.done(function( msg ) {
-				console.log(msg);
+				//console.log(msg);
 				var wCbo = 500;
 				var hCbo = 400;
 			  switch( msg ){
 			  	case '1':
-			  		jQuery.colorbox({width: wCbo, height: hCbo, html:"<div class='cbomessage'><p>The combos is added to cart</p></div>"});
-			  		window.location.href="index.php?option=com_users&view=profile&layout=edit&tab=2&user_id="+<?php echo $user->id;?>;
+			  		jQuery.colorbox({width: wCbo, height: hCbo, html:"<div class='cbomessage'><p>The combos is added to cart</p><p><a href='index.php?option=com_users&view=profile&layout=edit&tab=2&user_id=<?php echo $user->id;?>' class='btn'>View cart</a></p></div>"});
+			  		
 			  		break;
 			  	case '2':
 			  		jQuery.colorbox({width: wCbo, height: hCbo, html:"<div class='cbomessage'><p>Please complete checkout firstly before purchase other combos.<br> Do you want to swap the combo?</p><p><span class='left'><a class='btn' href='index.php?option=com_combos&task=combos.changeProduct&id="+comboID+"'>Yes</a></span><span class='right'><a class='btn' href=''>Cancel</a></span></p></div>"});
