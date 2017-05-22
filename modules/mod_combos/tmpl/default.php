@@ -18,6 +18,23 @@ $db->setQuery($query);
 $result = $db->loadObjectList();
 $user  = JFactory::getUser();
 ?>
+<style>
+    #cboxContent{
+        border: 2px solid #faa634;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .cbomessage{
+        padding: 50px;
+        padding-bottom: 10px;
+    }
+    .cbomessage p{
+        font-size: 20px;
+        text-align: justify;
+    }
+    .btn{
+        
+    }
+</style>
 <script>
 
 	jQuery(document).ready(function(){
@@ -38,15 +55,14 @@ $user  = JFactory::getUser();
 				var hCbo = 400;
 			  switch( msg ){
 			  	case '1':
-			  		jQuery.colorbox({width: wCbo, height: hCbo, html:"<div class='cbomessage'><p>The combos is added to cart</p><p><a href='index.php?option=com_users&view=profile&layout=edit&tab=2&user_id=<?php echo $user->id;?>' class='btn'>View cart</a></p></div>"});
+			  		jQuery.colorbox({width: wCbo, height: hCbo, html:"<div class='cbomessage'><p>The combos is added to cart</p><p><a href='index.php?option=com_users&view=profile&layout=edit&tab=2&user_id=<?php echo $user->id;?>' class='btnStyle btn-default btn'>View cart</a></p></div>"});
 			  		
 			  		break;
 			  	case '2':
-			  		jQuery.colorbox({width: wCbo, height: hCbo, html:"<div class='cbomessage'><p>Please complete checkout firstly before purchase other combos.<br> Do you want to swap the combo?</p><p><span class='left'><a class='btn' href='index.php?option=com_combos&task=combos.changeProduct&id="+comboID+"'>Yes</a></span><span class='right'><a class='btn' href=''>Cancel</a></span></p></div>"});
+			  		jQuery.colorbox({width: wCbo, height: hCbo, html:"<div class='cbomessage'><p>Please complete checkout firstly before purchase other combos.<br><br> Do you want to swap the combo?</p><p><span class='left'><a class='btnStyle btn-default btn' href='index.php?option=com_combos&task=combos.changeProduct&id="+comboID+"'>Yes</a></span><span class='right'><a class='btnStyleCancel btn-default btn' href=''>Cancel</a></span></p></div>"});
 			  		break;
 			  	case '3':
-			  		alert('fdas');
-			  		jQuery.colorbox({width: wCbo, height: hCbo, html:"<div class='cbomessage'><p>You need to login firstly.</p><p><a class='btn' href='index.php?option=com_users&view=login&tab=2'>Login</a></p></div>"});
+			  		jQuery.colorbox({width: wCbo, height: hCbo, html:"<div class='cbomessage'><p>You need to login firstly.</p><p><a class='btnStyle btn-default btn' href='index.php?option=com_users&view=login&tab=2'>Login</a></p></div>"});
 			  		break;
 			  	case '4':
 			  		jQuery.colorbox({width: wCbo, height: hCbo, html:"<div class='cbomessage'><p>This is not a valid combo.</p></div>"});
