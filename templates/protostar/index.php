@@ -32,8 +32,8 @@ $userToken = JSession::getFormToken();
 
 ?>
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Viga" rel="stylesheet">
-
+<!-- <link href="https://fonts.googleapis.com/css?family=Viga" rel="stylesheet"> -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet">
 <!-- Bootstrap -->
 <link href="<?php echo $this->baseurl . '/templates/' . $this->template; ?>/css/bootstrap.min.css" rel="stylesheet">
 <?php
@@ -257,6 +257,6 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 	  </div>
 	</div>
 	<jdoc:include type="modules" name="footer" style="none" />
-	
+    </main>
 	</body>
 </html>
