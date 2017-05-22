@@ -220,7 +220,7 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 
 	            				<ul class="dropdown-menu" id="userMenuDrop">
 	            					<li><a href="index.php/my-account">Profile</a></li>
-	            					<li><a href="index.php?option=com_users&task=profile&tab=2">Order</a></li>
+	            					<li><a href="index.php?option=com_users&view=profile&layout=default&tab=3">Order</a></li>
 	            					<li><a href="index.php?option=com_users&task=user.logout&<?php echo $userToken;?>=1&return=<?php echo base64_encode('index.php');?>">Sign out</a></li>
 	            				</ul>
 	            			</li>
