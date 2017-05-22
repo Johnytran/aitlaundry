@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 $tab= JRequest::getVar('tab',1);
 $session = JFactory::getSession();
 $cart = $session->get('yourcart');
+$user = JFactory::getUser()
 //print_r($cart);
 ?>
 <style>
@@ -23,6 +24,18 @@ $cart = $session->get('yourcart');
     }
 
 </style>
+<script>
+	jQuery(document).ready(function(){
+		jQuery('a.deleteProduct').click(function(){
+			
+			var comboID = jQuery(this).attr('value');
+			
+			 
+			jQuery.colorbox({width: 400, height: 300, html:"<div class='cbomessage'><p>Do you want to delete?.</p><p><span class='first'><a class='btn' href='index.php?option=com_combos&task=combos.deleteProduct'>Delete</a><span class='last'><a href='index.php?option=com_users&view=profile&layout=edit&user_id=<?php echo $user->id;?>&tab=2'>Discard</a></span></p></div>"});
+
+		});
+	});
+</script>
 <div id="abouttitle" class="container-fluid">
                 <h1>My Account</h1>
             </div>
@@ -121,7 +134,7 @@ $cart = $session->get('yourcart');
 						  <div class="col-sm-4"><?php echo $value["name"];?></div>
 						  <div class="col-sm-4">1</div>
 						  <div class="col-sm-4">$<?php echo $value["price"];?></div>
-						  <div class="col-sm-4"><a class = "aLink" href="index.php?option=com_combos&task=combos.deleteProduct&id=<?php echo $value['id']?>">Delete</a></div>
+						  <div class="col-sm-4"><a class = "aLink deleteProduct" value="<?php echo $value['id']?>" href="javascript:void(0);">Delete</a></div>
 						</div>	
 					<?php	
 					}

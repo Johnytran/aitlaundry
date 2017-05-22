@@ -220,7 +220,7 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 
 	            				<ul class="dropdown-menu" id="userMenuDrop">
 	            					<li><a href="index.php/my-account">Profile</a></li>
-	            					<li><a href="index.php?option=com_users&task=profile&tab=2">Order</a></li>
+	            					<li><a href="index.php?option=com_users&view=profile&layout=default&tab=3">Order</a></li>
 	            					<li><a href="index.php?option=com_users&task=user.logout&<?php echo $userToken;?>=1&return=<?php echo base64_encode('index.php');?>">Sign out</a></li>
 	            				</ul>
 	            			</li>
@@ -256,41 +256,7 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
           </div>        
 	  </div>
 	</div>
-	<!--------------------------------- FOOTER ------------------------------------>
-	<footer style="background-color:#4d4d4d; margin-top:2px;">
-	  <div class="container-fluid">
-	    <div class="space1">
-	      <div class="col-sm-4 space2">
-	          <div>
-	              <a href="termsandconditions.html">TERMS & CONDITIONS</a>
-	          </div>
-	          <div class="row space2">
-	              <a href="privacy.html">PRIVACY POLICY</a>
-	          </div>
-	      </div>
-	      <div class="col-sm-4 space2">
-	          <div>
-	              <a href="about.html">ABOUT US</a>
-	          </div>
-	          <div class="row space2">
-	              <a href="contact.html">CONTACT US</a>
-	          </div>
-	      </div>
-	      <div class="col-sm-4 space2">
-	          <div>
-	              <a href="about.html">TESTIMONIALS</a>
-	          </div>
-	          <div class="row space2">
-	              <a href="about.html">FAQ</a>
-	          </div>
-	      </div>
-	    </div>
-	    <div class="row">
-	        <div class="col-xs-12" style="margin-top:20px;">
-	                  &copy; AIT LAUNDRY - 2017
-	        </div>
-	    </div>
-	  </div>
-	</footer>
+	<jdoc:include type="modules" name="footer" style="none" />
+	
 	</body>
 </html>

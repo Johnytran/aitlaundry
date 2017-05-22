@@ -11,63 +11,18 @@ defined('_JEXEC') or die;
 
 
 ?>
-
-<div class="item_fields">
-
-	<table class="table">
-		
-
-		<tr>
-			<th><?php echo JText::_('COM_ORDER_FORM_LBL_ORDER_ORDERNOTE'); ?></th>
-			<td><?php echo nl2br($this->item->ordernote); ?></td>
-		</tr>
-
-		<tr>
-			<th><?php echo JText::_('COM_ORDER_FORM_LBL_ORDER_COMBOID'); ?></th>
-			<td><?php echo $this->item->comboid; ?></td>
-		</tr>
-
-		<tr>
-			<th><?php echo JText::_('COM_ORDER_FORM_LBL_ORDER_PAYMENTID'); ?></th>
-			<td><?php echo $this->item->paymentid; ?></td>
-		</tr>
-
-		<tr>
-			<th><?php echo JText::_('COM_ORDER_FORM_LBL_ORDER_DATETIMECREATED'); ?></th>
-			<td><?php echo $this->item->datetimecreated; ?></td>
-		</tr>
-
-		<tr>
-			<th><?php echo JText::_('COM_ORDER_FORM_LBL_ORDER_ADDRESSPICKUP'); ?></th>
-			<td><?php echo $this->item->addresspickup; ?></td>
-		</tr>
-
-		<tr>
-			<th><?php echo JText::_('COM_ORDER_FORM_LBL_ORDER_DATE_TIMEPICKUP'); ?></th>
-			<td><?php echo $this->item->date_timepickup; ?></td>
-		</tr>
-
-		<tr>
-			<th><?php echo JText::_('COM_ORDER_FORM_LBL_ORDER_ADDRESSDELIVERY'); ?></th>
-			<td><?php echo $this->item->addressdelivery; ?></td>
-		</tr>
-
-		<tr>
-			<th><?php echo JText::_('COM_ORDER_FORM_LBL_ORDER_DATE_TIMEDELIVERY'); ?></th>
-			<td><?php echo $this->item->date_timedelivery; ?></td>
-		</tr>
-
-		<tr>
-			<th><?php echo JText::_('COM_ORDER_FORM_LBL_ORDER_DELIVERYNOTE'); ?></th>
-			<td><?php echo nl2br($this->item->deliverynote); ?></td>
-		</tr>
-
-		<tr>
-			<th><?php echo JText::_('COM_ORDER_FORM_LBL_ORDER_USERID'); ?></th>
-			<td><?php echo $this->item->userid; ?></td>
-		</tr>
-
-	</table>
-
+<form>
+<h1>Order details</h1>
+<div class="row">
+  <div class="col-sm-6">
+  	<div class="form-group">
+	    <label for="exampleInputEmail1">Email address</label>
+	    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+	    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+	</div>
+  	<button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+  <div class="col-sm-6">right</div>
 </div>
-
+  
+</form>

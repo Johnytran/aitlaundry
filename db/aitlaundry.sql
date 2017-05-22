@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2017 at 10:57 PM
+-- Generation Time: May 23, 2017 at 12:52 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -39,88 +39,90 @@ CREATE TABLE IF NOT EXISTS `fv5oz_assets` (
   UNIQUE KEY `idx_asset_name` (`name`),
   KEY `idx_lft_rgt` (`lft`,`rgt`),
   KEY `idx_parent_id` (`parent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=88 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=90 ;
 
 --
 -- Dumping data for table `fv5oz_assets`
 --
 
 INSERT INTO `fv5oz_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `title`, `rules`) VALUES
-(1, 0, 0, 149, 0, 'root.1', 'Root Asset', '{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.login.offline":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
+(1, 0, 0, 153, 0, 'root.1', 'Root Asset', '{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.login.offline":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
 (2, 1, 1, 2, 1, 'com_admin', 'com_admin', '{}'),
 (3, 1, 3, 6, 1, 'com_banners', 'com_banners', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (4, 1, 7, 8, 1, 'com_cache', 'com_cache', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
 (5, 1, 9, 10, 1, 'com_checkin', 'com_checkin', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
 (6, 1, 11, 12, 1, 'com_config', 'com_config', '{}'),
 (7, 1, 13, 16, 1, 'com_contact', 'com_contact', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(8, 1, 17, 20, 1, 'com_content', 'com_content', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(9, 1, 21, 22, 1, 'com_cpanel', 'com_cpanel', '{}'),
-(10, 1, 23, 24, 1, 'com_installer', 'com_installer', '{"core.admin":[],"core.manage":{"7":0},"core.delete":{"7":0},"core.edit.state":{"7":0}}'),
-(11, 1, 25, 26, 1, 'com_languages', 'com_languages', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(12, 1, 27, 28, 1, 'com_login', 'com_login', '{}'),
-(13, 1, 29, 30, 1, 'com_mailto', 'com_mailto', '{}'),
-(14, 1, 31, 32, 1, 'com_massmail', 'com_massmail', '{}'),
-(15, 1, 33, 34, 1, 'com_media', 'com_media', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":{"5":1}}'),
-(16, 1, 35, 40, 1, 'com_menus', 'com_menus', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(17, 1, 41, 42, 1, 'com_messages', 'com_messages', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
-(18, 1, 43, 102, 1, 'com_modules', 'com_modules', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(19, 1, 103, 106, 1, 'com_newsfeeds', 'com_newsfeeds', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(20, 1, 107, 108, 1, 'com_plugins', 'com_plugins', '{"core.admin":{"7":1},"core.manage":[],"core.edit":[],"core.edit.state":[]}'),
-(21, 1, 109, 110, 1, 'com_redirect', 'com_redirect', '{"core.admin":{"7":1},"core.manage":[]}'),
-(22, 1, 111, 112, 1, 'com_search', 'com_search', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
-(23, 1, 113, 114, 1, 'com_templates', 'com_templates', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(24, 1, 115, 118, 1, 'com_users', 'com_users', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(26, 1, 119, 120, 1, 'com_wrapper', 'com_wrapper', '{}'),
-(27, 8, 18, 19, 2, 'com_content.category.2', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(8, 1, 17, 22, 1, 'com_content', 'com_content', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(9, 1, 23, 24, 1, 'com_cpanel', 'com_cpanel', '{}'),
+(10, 1, 25, 26, 1, 'com_installer', 'com_installer', '{"core.admin":[],"core.manage":{"7":0},"core.delete":{"7":0},"core.edit.state":{"7":0}}'),
+(11, 1, 27, 28, 1, 'com_languages', 'com_languages', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(12, 1, 29, 30, 1, 'com_login', 'com_login', '{}'),
+(13, 1, 31, 32, 1, 'com_mailto', 'com_mailto', '{}'),
+(14, 1, 33, 34, 1, 'com_massmail', 'com_massmail', '{}'),
+(15, 1, 35, 36, 1, 'com_media', 'com_media', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":{"5":1}}'),
+(16, 1, 37, 42, 1, 'com_menus', 'com_menus', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(17, 1, 43, 44, 1, 'com_messages', 'com_messages', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
+(18, 1, 45, 106, 1, 'com_modules', 'com_modules', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(19, 1, 107, 110, 1, 'com_newsfeeds', 'com_newsfeeds', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(20, 1, 111, 112, 1, 'com_plugins', 'com_plugins', '{"core.admin":{"7":1},"core.manage":[],"core.edit":[],"core.edit.state":[]}'),
+(21, 1, 113, 114, 1, 'com_redirect', 'com_redirect', '{"core.admin":{"7":1},"core.manage":[]}'),
+(22, 1, 115, 116, 1, 'com_search', 'com_search', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
+(23, 1, 117, 118, 1, 'com_templates', 'com_templates', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(24, 1, 119, 122, 1, 'com_users', 'com_users', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(26, 1, 123, 124, 1, 'com_wrapper', 'com_wrapper', '{}'),
+(27, 8, 18, 21, 2, 'com_content.category.2', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
 (28, 3, 4, 5, 2, 'com_banners.category.3', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (29, 7, 14, 15, 2, 'com_contact.category.4', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(30, 19, 104, 105, 2, 'com_newsfeeds.category.5', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(32, 24, 116, 117, 1, 'com_users.category.7', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(33, 1, 121, 122, 1, 'com_finder', 'com_finder', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
-(34, 1, 123, 124, 1, 'com_joomlaupdate', 'com_joomlaupdate', '{"core.admin":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}'),
-(35, 1, 125, 126, 1, 'com_tags', 'com_tags', '{"core.admin":[],"core.manage":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}'),
-(36, 1, 127, 128, 1, 'com_contenthistory', 'com_contenthistory', '{}'),
-(37, 1, 129, 130, 1, 'com_ajax', 'com_ajax', '{}'),
-(38, 1, 131, 132, 1, 'com_postinstall', 'com_postinstall', '{}'),
-(39, 18, 44, 45, 2, 'com_modules.module.1', 'Main Menu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(40, 18, 46, 47, 2, 'com_modules.module.2', 'Login', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(41, 18, 48, 49, 2, 'com_modules.module.3', 'Popular Articles', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(42, 18, 50, 51, 2, 'com_modules.module.4', 'Recently Added Articles', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(43, 18, 52, 53, 2, 'com_modules.module.8', 'Toolbar', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(44, 18, 54, 55, 2, 'com_modules.module.9', 'Quick Icons', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(45, 18, 56, 57, 2, 'com_modules.module.10', 'Logged-in Users', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(46, 18, 58, 59, 2, 'com_modules.module.12', 'Admin Menu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(47, 18, 60, 61, 2, 'com_modules.module.13', 'Admin Submenu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(48, 18, 62, 63, 2, 'com_modules.module.14', 'User Status', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(49, 18, 64, 65, 2, 'com_modules.module.15', 'Title', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(50, 18, 66, 67, 2, 'com_modules.module.16', 'Login Form', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
-(51, 18, 68, 69, 2, 'com_modules.module.17', 'Breadcrumbs', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(52, 18, 70, 71, 2, 'com_modules.module.79', 'Multilanguage status', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(53, 18, 72, 73, 2, 'com_modules.module.86', 'Joomla Version', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(54, 16, 36, 37, 2, 'com_menus.menu.1', 'Main Menu', '{}'),
-(59, 1, 133, 134, 1, 'com_servicess', 'com_servicess', '{"core.manage":{"1":1}}'),
-(61, 1, 135, 136, 1, 'com_combos', 'com_combos', '{"core.manage":{"1":1}}'),
-(62, 1, 137, 138, 1, 'com_payment', 'com_payment', '{}'),
-(64, 1, 139, 140, 1, 'com_order', 'com_order', '{"core.manage":{"1":1}}'),
-(65, 1, 141, 142, 1, 'com_logbook', 'com_logbook', '{"core.manage":{"1":1}}'),
-(66, 1, 143, 144, 1, 'com_orderlogbook', 'com_orderlogbook', '{"core.manage":{"1":1}}'),
-(69, 1, 145, 146, 1, 'com_location', 'com_location', '{}'),
-(70, 16, 38, 39, 2, 'com_menus.menu.2', 'System Menu', '{}'),
-(72, 18, 74, 75, 2, 'com_modules.module.88', 'AITLaundry search Location', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
-(74, 18, 76, 77, 2, 'com_modules.module.89', 'JCK Manager', '{}'),
-(75, 18, 78, 79, 2, 'com_modules.module.90', 'Dashboard', '{}'),
-(76, 18, 80, 81, 2, 'com_modules.module.91', 'JCK Manager v6.4.4', '{}'),
-(77, 18, 82, 83, 2, 'com_modules.module.92', 'COM_JCKMAN_CPANEL_SLIDER_MANAGER_LABEL', '{}'),
-(78, 18, 84, 85, 2, 'com_modules.module.93', 'COM_JCKMAN_CPANEL_SLIDER_PLUGIN_LABEL', '{}'),
-(79, 18, 86, 87, 2, 'com_modules.module.94', 'COM_JCKMAN_CPANEL_SLIDER_SYSTEM_CHECK_LABEL', '{}'),
-(80, 18, 88, 89, 2, 'com_modules.module.95', 'COM_JCKMAN_CPANEL_SLIDER_SYSTEM_LAYOUT_MANAGER', '{}'),
-(81, 18, 90, 91, 2, 'com_modules.module.96', 'COM_JCKMAN_CPANEL_SLIDER_BACKUP_LABEL', '{}'),
-(82, 18, 92, 93, 2, 'com_modules.module.97', 'COM_JCKMAN_CPANEL_SLIDER_RESTORE_LABEL', '{}'),
-(83, 18, 94, 95, 2, 'com_modules.module.98', 'COM_JCKMAN_CPANEL_SLIDER_SYNC_LABEL', '{}'),
-(84, 1, 147, 148, 1, 'com_jckman', 'com_jckman', '{}'),
-(85, 18, 96, 97, 2, 'com_modules.module.99', 'Feature Photo', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
-(86, 18, 98, 99, 2, 'com_modules.module.100', 'How it works', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
-(87, 18, 100, 101, 2, 'com_modules.module.101', 'Combos', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}');
+(30, 19, 108, 109, 2, 'com_newsfeeds.category.5', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(32, 24, 120, 121, 1, 'com_users.category.7', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(33, 1, 125, 126, 1, 'com_finder', 'com_finder', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
+(34, 1, 127, 128, 1, 'com_joomlaupdate', 'com_joomlaupdate', '{"core.admin":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}'),
+(35, 1, 129, 130, 1, 'com_tags', 'com_tags', '{"core.admin":[],"core.manage":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}'),
+(36, 1, 131, 132, 1, 'com_contenthistory', 'com_contenthistory', '{}'),
+(37, 1, 133, 134, 1, 'com_ajax', 'com_ajax', '{}'),
+(38, 1, 135, 136, 1, 'com_postinstall', 'com_postinstall', '{}'),
+(39, 18, 46, 47, 2, 'com_modules.module.1', 'Main Menu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(40, 18, 48, 49, 2, 'com_modules.module.2', 'Login', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(41, 18, 50, 51, 2, 'com_modules.module.3', 'Popular Articles', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(42, 18, 52, 53, 2, 'com_modules.module.4', 'Recently Added Articles', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(43, 18, 54, 55, 2, 'com_modules.module.8', 'Toolbar', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(44, 18, 56, 57, 2, 'com_modules.module.9', 'Quick Icons', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(45, 18, 58, 59, 2, 'com_modules.module.10', 'Logged-in Users', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(46, 18, 60, 61, 2, 'com_modules.module.12', 'Admin Menu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(47, 18, 62, 63, 2, 'com_modules.module.13', 'Admin Submenu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(48, 18, 64, 65, 2, 'com_modules.module.14', 'User Status', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(49, 18, 66, 67, 2, 'com_modules.module.15', 'Title', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(50, 18, 68, 69, 2, 'com_modules.module.16', 'Login Form', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
+(51, 18, 70, 71, 2, 'com_modules.module.17', 'Breadcrumbs', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(52, 18, 72, 73, 2, 'com_modules.module.79', 'Multilanguage status', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(53, 18, 74, 75, 2, 'com_modules.module.86', 'Joomla Version', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(54, 16, 38, 39, 2, 'com_menus.menu.1', 'Main Menu', '{}'),
+(59, 1, 137, 138, 1, 'com_servicess', 'com_servicess', '{"core.manage":{"1":1}}'),
+(61, 1, 139, 140, 1, 'com_combos', 'com_combos', '{"core.manage":{"1":1}}'),
+(62, 1, 141, 142, 1, 'com_payment', 'com_payment', '{}'),
+(64, 1, 143, 144, 1, 'com_order', 'com_order', '{"core.manage":{"1":1}}'),
+(65, 1, 145, 146, 1, 'com_logbook', 'com_logbook', '{"core.manage":{"1":1}}'),
+(66, 1, 147, 148, 1, 'com_orderlogbook', 'com_orderlogbook', '{"core.manage":{"1":1}}'),
+(69, 1, 149, 150, 1, 'com_location', 'com_location', '{}'),
+(70, 16, 40, 41, 2, 'com_menus.menu.2', 'System Menu', '{}'),
+(72, 18, 76, 77, 2, 'com_modules.module.88', 'AITLaundry search Location', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
+(74, 18, 78, 79, 2, 'com_modules.module.89', 'JCK Manager', '{}'),
+(75, 18, 80, 81, 2, 'com_modules.module.90', 'Dashboard', '{}'),
+(76, 18, 82, 83, 2, 'com_modules.module.91', 'JCK Manager v6.4.4', '{}'),
+(77, 18, 84, 85, 2, 'com_modules.module.92', 'COM_JCKMAN_CPANEL_SLIDER_MANAGER_LABEL', '{}'),
+(78, 18, 86, 87, 2, 'com_modules.module.93', 'COM_JCKMAN_CPANEL_SLIDER_PLUGIN_LABEL', '{}'),
+(79, 18, 88, 89, 2, 'com_modules.module.94', 'COM_JCKMAN_CPANEL_SLIDER_SYSTEM_CHECK_LABEL', '{}'),
+(80, 18, 90, 91, 2, 'com_modules.module.95', 'COM_JCKMAN_CPANEL_SLIDER_SYSTEM_LAYOUT_MANAGER', '{}'),
+(81, 18, 92, 93, 2, 'com_modules.module.96', 'COM_JCKMAN_CPANEL_SLIDER_BACKUP_LABEL', '{}'),
+(82, 18, 94, 95, 2, 'com_modules.module.97', 'COM_JCKMAN_CPANEL_SLIDER_RESTORE_LABEL', '{}'),
+(83, 18, 96, 97, 2, 'com_modules.module.98', 'COM_JCKMAN_CPANEL_SLIDER_SYNC_LABEL', '{}'),
+(84, 1, 151, 152, 1, 'com_jckman', 'com_jckman', '{}'),
+(85, 18, 98, 99, 2, 'com_modules.module.99', 'Feature Photo', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
+(86, 18, 100, 101, 2, 'com_modules.module.100', 'How it works', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
+(87, 18, 102, 103, 2, 'com_modules.module.101', 'Combos', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
+(88, 18, 104, 105, 2, 'com_modules.module.102', 'Footer', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
+(89, 27, 19, 20, 3, 'com_content.article.1', 'TERMS & CONDITIONS', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}');
 
 -- --------------------------------------------------------
 
@@ -419,7 +421,14 @@ CREATE TABLE IF NOT EXISTS `fv5oz_content` (
   KEY `idx_featured_catid` (`featured`,`catid`),
   KEY `idx_language` (`language`),
   KEY `idx_xreference` (`xreference`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `fv5oz_content`
+--
+
+INSERT INTO `fv5oz_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`) VALUES
+(1, 89, 'TERMS & CONDITIONS', 'terms-conditions', '<p>\r\n	fdjbfsjadbfsa</p>\r\n', '', 1, 2, '2017-05-22 22:49:55', 106, '', '2017-05-22 22:49:55', 0, 0, '0000-00-00 00:00:00', '2017-05-22 22:49:55', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","info_block_show_title":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 1, 0, '', '', 1, 1, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', '');
 
 -- --------------------------------------------------------
 
@@ -1800,7 +1809,7 @@ CREATE TABLE IF NOT EXISTS `fv5oz_modules` (
   KEY `published` (`published`,`access`),
   KEY `newsfeeds` (`module`,`published`),
   KEY `idx_language` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=102 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=103 ;
 
 --
 -- Dumping data for table `fv5oz_modules`
@@ -1835,7 +1844,8 @@ INSERT INTO `fv5oz_modules` (`id`, `asset_id`, `title`, `note`, `content`, `orde
 (98, 83, 'COM_JCKMAN_CPANEL_SLIDER_SYNC_LABEL', '', 'COM_JCKMAN_CPANEL_SLIDER_SYNC_HTML', 7, 'jck_cpanel', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, '', 1, 1, '{}', 1, ''),
 (99, 85, 'Feature Photo', '', '<h2 style="margin-top: 200px; color: orange;">\r\n	IMPRESSED!</h2>\r\n<p style="box-sizing: border-box; margin: 0px 0px 10px; color: rgb(51, 51, 51); font-family: Viga, sans-serif; font-size: 14px; letter-spacing: 2px; text-align: center;">\r\n	BLA BLA BLA BLA BLA BLA BLA BLA</p>\r\n', 1, 'modFeaturePhoto', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_custom', 1, 0, '{"prepare_content":"0","backgroundimage":"","layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
 (100, 86, 'How it works', '', '<div class="container-fluid" id="how">\r\n	<h1>\r\n		How it works</h1>\r\n	<div class="row" id="how2">\r\n		<div class="col-sm-3 col-xs-12">\r\n			<img src="images/laundry-icon.png" />\r\n			<p>\r\n				CHOOSE YOUR COMBO</p>\r\n		</div>\r\n		<div class="col-sm-3 col-xs-12 leftBorder">\r\n			<img class="cke-resize" src="images/laundry-icon.png" />\r\n			<p>\r\n				SET YOUR PREFERENCES</p>\r\n		</div>\r\n		<div class="col-md-3 col-xs-12 leftBorder">\r\n			<img src="images/Delivery-Icon.png" />\r\n			<p>\r\n				WE WILL TAKE CARE OF IT</p>\r\n		</div>\r\n		<div class="col-md-3 col-xs-12 leftBorder">\r\n			<button class="btn" onclick="document.getElementById(''video'').style.display=''block''" style="padding:0; background-color:rgba(0,0,0,0);" type="button"><img id="play" src="images/play.png" /></button>\r\n			<p id="playvideo">\r\n				PLAY VIDEO</p>\r\n		</div>\r\n	</div>\r\n</div>\r\n', 1, 'modHowItWork', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_custom', 1, 1, '{"prepare_content":"0","backgroundimage":"","layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
-(101, 87, 'Combos', '', '', 1, 'modCombos', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_combos', 1, 0, '{"layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*');
+(101, 87, 'Combos', '', '', 1, 'modCombos', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_combos', 1, 0, '{"layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
+(102, 88, 'Footer', '', '<footer style="background-color:#4d4d4d; margin-top:2px;">\r\n<div class="container-fluid">\r\n	<div class="space1">\r\n		<div class="col-sm-4 space2">\r\n			<div>\r\n				<a href="termsandconditions.html">TERMS &amp; CONDITIONS</a><a href="index.php?option=com_content&amp;view=article&amp;id=1&amp;catid=2&amp;Itemid=101">TERMS &amp; CONDITIONS</a><a href="privacy.html">PRIVACY POLICY</a></div>\r\n			<div class="row space2">\r\n			</div>\r\n		</div>\r\n		<div class="col-sm-4 space2">\r\n			<div>\r\n				<a href="about.html">ABOUT US</a></div>\r\n			<div class="row space2">\r\n				<a href="contact.html">CONTACT US</a></div>\r\n		</div>\r\n		<div class="col-sm-4 space2">\r\n			<div>\r\n				<a href="about.html">TESTIMONIALS</a></div>\r\n			<div class="row space2">\r\n				<a href="about.html">FAQ</a></div>\r\n		</div>\r\n	</div>\r\n	<div class="row">\r\n		<div class="col-xs-12" style="margin-top:20px;">\r\n			&copy; AIT LAUNDRY - 2017</div>\r\n	</div>\r\n</div>\r\n</footer>', 1, 'footer', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_custom', 1, 0, '{"prepare_content":"0","backgroundimage":"","layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*');
 
 -- --------------------------------------------------------
 
@@ -1874,7 +1884,8 @@ INSERT INTO `fv5oz_modules_menu` (`moduleid`, `menuid`) VALUES
 (88, 101),
 (99, 101),
 (100, 101),
-(101, 101);
+(101, 101),
+(102, 0);
 
 -- --------------------------------------------------------
 
@@ -2156,7 +2167,8 @@ CREATE TABLE IF NOT EXISTS `fv5oz_session` (
 --
 
 INSERT INTO `fv5oz_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-('a5g1j2dam8rnpe66dhtqob82p7', 0, 0, '1495486365', 'joomla|s:1396:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo1OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aToxMDI7czo1OiJ0aW1lciI7Tzo4OiJzdGRDbGFzcyI6Mzp7czo1OiJzdGFydCI7aToxNDk1NDgwNzU2O3M6NDoibGFzdCI7aToxNDk1NDg2MzM0O3M6Mzoibm93IjtpOjE0OTU0ODYzNjU7fXM6NToidG9rZW4iO3M6MzI6Ik9HZHJOWVlVa2xIWDh5bTlpR0F4NUJRc0ZOZVNHd2xLIjt9czo4OiJyZWdpc3RyeSI7TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjI6e3M6NToidXNlcnMiO086ODoic3RkQ2xhc3MiOjE6e3M6NToibG9naW4iO086ODoic3RkQ2xhc3MiOjE6e3M6NDoiZm9ybSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJkYXRhIjthOjA6e31zOjY6InJldHVybiI7czo0NToiaW5kZXgucGhwP29wdGlvbj1jb21fdXNlcnMmdmlldz1wcm9maWxlJnRhYj0yIjt9fX1zOjEwOiJjb21fY29tYm9zIjtPOjg6InN0ZENsYXNzIjoxOntzOjY6ImNvbWJvcyI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJsaXN0IjthOjQ6e3M6NToibGltaXQiO2k6MjA7czo1OiJzdGFydCI7aTowO3M6ODoib3JkZXJpbmciO047czo5OiJkaXJlY3Rpb24iO047fX19fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjE7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fXM6NDoidXNlciI7Tzo1OiJKVXNlciI6MTp7czoyOiJpZCI7czozOiIxMDYiO31zOjg6InlvdXJjYXJ0IjthOjE6e3M6NjoiOTJkNmE2IjthOjQ6e3M6MjoiaWQiO3M6MToiMiI7czo4OiJxdWFudGl0eSI7aToxO3M6NToicHJpY2UiO3M6MzoiMTE1IjtzOjQ6Im5hbWUiO3M6NjoiU0lOR0xFIjt9fXM6MTE6ImFwcGxpY2F0aW9uIjtPOjg6InN0ZENsYXNzIjoxOntzOjU6InF1ZXVlIjtOO319fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fQ==";', 106, 'admin');
+('6av9kf6fr5u84jud8te7c24al7', 0, 0, '1495493456', 'joomla|s:2460:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo3OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTo2ODtzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTU0ODgzNDI7czo0OiJsYXN0IjtpOjE0OTU0OTM0NDc7czozOiJub3ciO2k6MTQ5NTQ5MzQ1NTt9czo1OiJ0b2tlbiI7czozMjoiaVh5WEhyMTlDZEp4UlExdGVqd0VlcU84NVRJUXdXd2IiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6MTp7czo1OiJ1c2VycyI7Tzo4OiJzdGRDbGFzcyI6MTp7czo1OiJsb2dpbiI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJmb3JtIjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6ImRhdGEiO2E6MTp7czo2OiJyZXR1cm4iO3M6Mzk6ImluZGV4LnBocD9vcHRpb249Y29tX3VzZXJzJnZpZXc9cHJvZmlsZSI7fXM6NjoicmV0dXJuIjtzOjQ1OiJpbmRleC5waHA/b3B0aW9uPWNvbV91c2VycyZ2aWV3PXByb2ZpbGUmdGFiPTEiO319fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjoxO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086NToiSlVzZXIiOjE6e3M6MjoiaWQiO3M6MzoiMTA2Ijt9czo4OiJ5b3VyY2FydCI7YToxOntzOjY6IjM4MGY4ZiI7YTo0OntzOjI6ImlkIjtzOjE6IjEiO3M6ODoicXVhbnRpdHkiO2k6MTtzOjU6InByaWNlIjtzOjM6IjEyMCI7czo0OiJuYW1lIjtzOjY6IkNPVVBMRSI7fX1zOjExOiJhcHBsaWNhdGlvbiI7Tzo4OiJzdGRDbGFzcyI6MTp7czo1OiJxdWV1ZSI7Tjt9czoxMDoiamNrcGx1Z2lucyI7YTo4OntpOjA7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjc6ImRlZmF1bHQiO3M6NDoibmFtZSI7czo5OiJkcmFnbmRyb3AiO31pOjE7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjc6ImRlZmF1bHQiO3M6NDoibmFtZSI7czoxMDoiaW5kZXguaHRtbCI7fWk6MjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NzoiZGVmYXVsdCI7czo0OiJuYW1lIjtzOjQ6InVzZXIiO31pOjM7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6NToiYmVlejUiO31pOjQ7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6MTA6ImJlZXpsYXlvdXQiO31pOjU7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6MTI6ImJlZXpwZXJzb25hbCI7fWk6NjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6MTA6InN0eWxlc2hlZXQiO3M6NDoibmFtZSI7czoxMDoiaW5kZXguaHRtbCI7fWk6NztPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6MTA6InN0eWxlc2hlZXQiO3M6NDoibmFtZSI7czoxMzoiamNrdHlwb2dyYXBoeSI7fX1zOjEwOiJjb21fbWFpbHRvIjtPOjg6InN0ZENsYXNzIjoxOntzOjU6ImxpbmtzIjthOjE6e3M6NDA6ImU1NTc0YzViNDE4MDYwM2E3ZmE2ZTdlZjc5YjRkODYyYWViMTJlZWMiO086ODoic3RkQ2xhc3MiOjI6e3M6NDoibGluayI7czo3NjoiaHR0cDovL2xvY2FsaG9zdC9BSVQvYWl0bGF1bmRyeS9pbmRleC5waHAvMi11bmNhdGVnb3Jpc2VkLzEtdGVybXMtY29uZGl0aW9ucyI7czo2OiJleHBpcnkiO2k6MTQ5NTQ5MzQ1Njt9fX19fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fQ==";', 106, 'admin'),
+('n424q6pgk2eaovhqi4atfvi9k3', 1, 0, '1495493534', 'joomla|s:5696:"TzoyNDoiSm9vbWxhXFJlZ2lzdHJ5XFJlZ2lzdHJ5IjozOntzOjc6IgAqAGRhdGEiO086ODoic3RkQ2xhc3MiOjE6e3M6OToiX19kZWZhdWx0IjtPOjg6InN0ZENsYXNzIjo2OntzOjc6InNlc3Npb24iO086ODoic3RkQ2xhc3MiOjM6e3M6NzoiY291bnRlciI7aTozMztzOjU6InRpbWVyIjtPOjg6InN0ZENsYXNzIjozOntzOjU6InN0YXJ0IjtpOjE0OTU0OTMyODY7czo0OiJsYXN0IjtpOjE0OTU0OTM1MzM7czozOiJub3ciO2k6MTQ5NTQ5MzUzMzt9czo1OiJ0b2tlbiI7czozMjoieEZMZkl4Qms4RjNPb2JLdjJPSFh2clE2Rm9seWtWMksiO31zOjg6InJlZ2lzdHJ5IjtPOjI0OiJKb29tbGFcUmVnaXN0cnlcUmVnaXN0cnkiOjM6e3M6NzoiACoAZGF0YSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMToiY29tX21vZHVsZXMiO086ODoic3RkQ2xhc3MiOjI6e3M6NDoiZWRpdCI7Tzo4OiJzdGRDbGFzcyI6MTp7czo2OiJtb2R1bGUiO086ODoic3RkQ2xhc3MiOjI6e3M6NDoiZGF0YSI7TjtzOjI6ImlkIjthOjA6e319fXM6MzoiYWRkIjtPOjg6InN0ZENsYXNzIjoxOntzOjY6Im1vZHVsZSI7Tzo4OiJzdGRDbGFzcyI6Mjp7czoxMjoiZXh0ZW5zaW9uX2lkIjtOO3M6NjoicGFyYW1zIjtOO319fXM6MTE6ImNvbV9jb250ZW50IjtPOjg6InN0ZENsYXNzIjoxOntzOjQ6ImVkaXQiO086ODoic3RkQ2xhc3MiOjE6e3M6NzoiYXJ0aWNsZSI7Tzo4OiJzdGRDbGFzcyI6MTp7czo0OiJkYXRhIjtOO319fX1zOjE0OiIAKgBpbml0aWFsaXplZCI7YjoxO3M6OToic2VwYXJhdG9yIjtzOjE6Ii4iO31zOjQ6InVzZXIiO086NToiSlVzZXIiOjE6e3M6MjoiaWQiO3M6MzoiMTA2Ijt9czoxMDoiamNrcGx1Z2lucyI7YTo0Mzp7aTowO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czoxMDoic3R5bGVzaGVldCI7czo0OiJuYW1lIjtzOjU6ImJlZXo1Ijt9aToxO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czoxMDoic3R5bGVzaGVldCI7czo0OiJuYW1lIjtzOjEwOiJiZWV6bGF5b3V0Ijt9aToyO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czoxMDoic3R5bGVzaGVldCI7czo0OiJuYW1lIjtzOjEyOiJiZWV6cGVyc29uYWwiO31pOjM7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6MTA6ImluZGV4Lmh0bWwiO31pOjQ7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjEwOiJzdHlsZXNoZWV0IjtzOjQ6Im5hbWUiO3M6MTM6Impja3R5cG9ncmFwaHkiO31pOjU7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjc6InRvb2xiYXIiO3M6NDoibmFtZSI7czoxMDoiY29tcG9uZW50cyI7fWk6NjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NzoidG9vbGJhciI7czo0OiJuYW1lIjtzOjEwOiJpbmRleC5odG1sIjt9aTo3O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo3OiJ0b29sYmFyIjtzOjQ6Im5hbWUiO3M6NjoibW9iaWxlIjt9aTo4O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo0OiJjb3JlIjtzOjQ6Im5hbWUiO3M6NjoiZWRpdG9yIjt9aTo5O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo0OiJjb3JlIjtzOjQ6Im5hbWUiO3M6MzoiZW52Ijt9aToxMDtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NDoiY29yZSI7czo0OiJuYW1lIjtzOjEwOiJpbmRleC5odG1sIjt9aToxMTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NDoiY29yZSI7czo0OiJuYW1lIjtzOjg6ImplbGVtZW50Ijt9aToxMjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NDoiY29yZSI7czo0OiJuYW1lIjtzOjc6InBsdWdpbnMiO31pOjEzO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo0OiJjb3JlIjtzOjQ6Im5hbWUiO3M6NToidG9vbHMiO31pOjE0O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo5OiIzNDd1cGRhdGUiO31pOjE1O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo5OiIzNDh1cGRhdGUiO31pOjE2O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo5OiI2MjB1cGRhdGUiO31pOjE3O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo5OiI2NTR1cGRhdGUiO31pOjE4O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo5OiI2NTh1cGRhdGUiO31pOjE5O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czozOiJhY2wiO31pOjIwO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxOToiYWxsdmlkZW9zcGFyYW1ldGVycyI7fWk6MjE7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjk6ImF1dG9mb2N1cyI7fWk6MjI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjE1OiJiYWNrZ3JvdW5kY292ZXIiO31pOjIzO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo2OiJjbGllbnQiO31pOjI0O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoyMToiZGVmYXVsdGJlZXp0eXBvZ3JhcGh5Ijt9aToyNTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTE6ImRlZmF1bHRmb250Ijt9aToyNjtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTM6ImZzYXBhcmFtZXRlcnMiO31pOjI3O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxMzoiaHRhY2Nlc3NtYWtlciI7fWk6Mjg7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjg6ImltYWdlY3NzIjt9aToyOTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTQ6ImltYWdlZHJhZ25kcm9wIjt9aTozMDtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTA6ImluZGV4Lmh0bWwiO31pOjMxO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czoxNzoibGFuZ3VhZ2VvdmVycmlkZXMiO31pOjMyO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo5OiJtYWdpY2xpbmUiO31pOjMzO086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo2OiJtb2JpbGUiO31pOjM0O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo2OiJvcHRpb24iO31pOjM1O086ODoic3RkQ2xhc3MiOjI6e3M6NDoidHlwZSI7czo2OiJlZGl0b3IiO3M6NDoibmFtZSI7czo4OiJvdmVycmlkZSI7fWk6MzY7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjEwOiJwYXJhbWV0ZXJzIjt9aTozNztPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6MTU6InBsdWdpbm92ZXJyaWRlcyI7fWk6Mzg7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjEzOiJzaWdwYXJhbWV0ZXJzIjt9aTozOTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6NzoidG9vbGJhciI7fWk6NDA7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjEwOiJ0eXBvZ3JhcGh5Ijt9aTo0MTtPOjg6InN0ZENsYXNzIjoyOntzOjQ6InR5cGUiO3M6NjoiZWRpdG9yIjtzOjQ6Im5hbWUiO3M6NzoidWljb2xvciI7fWk6NDI7Tzo4OiJzdGRDbGFzcyI6Mjp7czo0OiJ0eXBlIjtzOjY6ImVkaXRvciI7czo0OiJuYW1lIjtzOjM6InhtbCI7fX1zOjk6Impja29wdGlvbiI7czoxMToiY29tX21vZHVsZXMiO3M6MTE6ImFwcGxpY2F0aW9uIjtPOjg6InN0ZENsYXNzIjoxOntzOjU6InF1ZXVlIjtOO319fXM6MTQ6IgAqAGluaXRpYWxpemVkIjtiOjA7czo5OiJzZXBhcmF0b3IiO3M6MToiLiI7fQ==";', 106, 'admin');
 
 -- --------------------------------------------------------
 
@@ -2331,7 +2343,14 @@ CREATE TABLE IF NOT EXISTS `fv5oz_ucm_history` (
   PRIMARY KEY (`version_id`),
   KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`),
   KEY `idx_save_date` (`save_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `fv5oz_ucm_history`
+--
+
+INSERT INTO `fv5oz_ucm_history` (`version_id`, `ucm_item_id`, `ucm_type_id`, `version_note`, `save_date`, `editor_user_id`, `character_count`, `sha1_hash`, `version_data`, `keep_forever`) VALUES
+(1, 1, 1, '', '2017-05-22 22:49:55', 106, 1736, 'dc6c251b418b58f41eebd66b56d976c29c2b3704', '{"id":1,"asset_id":89,"title":"TERMS & CONDITIONS","alias":"terms-conditions","introtext":"<p>\\r\\n\\tfdjbfsjadbfsa<\\/p>\\r\\n","fulltext":"","state":1,"catid":"2","created":"2017-05-22 22:49:55","created_by":"106","created_by_alias":"","modified":"2017-05-22 22:49:55","modified_by":null,"checked_out":null,"checked_out_time":null,"publish_up":"2017-05-22 22:49:55","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"info_block_show_title\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":1,"ordering":null,"metakey":"","metadesc":"","access":"1","hits":null,"metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0);
 
 -- --------------------------------------------------------
 
@@ -2547,7 +2566,7 @@ CREATE TABLE IF NOT EXISTS `fv5oz_users` (
 --
 
 INSERT INTO `fv5oz_users` (`id`, `firstName`, `name`, `lastName`, `homePhone`, `mobilePhone`, `address`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`) VALUES
-(106, 'fdas', 'admin', 's', '', '324324', '', 'admin', 'fdas@fdas.das', '$2y$10$a/6j6HvIKqcyfPvHlVJd3.jVFMXYHepZuM36p7Kap.kOj0au7ORHa', 0, 1, '2017-04-10 22:44:44', '2017-05-22 19:34:12', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(106, 'fdas', 'admin', 's', '', '324324', '', 'admin', 'fdas@fdas.das', '$2y$10$a/6j6HvIKqcyfPvHlVJd3.jVFMXYHepZuM36p7Kap.kOj0au7ORHa', 0, 1, '2017-04-10 22:44:44', '2017-05-22 22:48:08', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
 (107, 'gfdgfds', 'manager', 'fads', 'fdsa', 'fdsa', 'fafdasfdsafdsf', 'manager', '5527@ait.nsw.edu.au', '$2y$10$4Ov8ixQreBzMTijs2HAiZ.6qq5.mflVhDeUtRtAL7cQZ/0VaLehd6', 0, 0, '2017-04-12 02:01:41', '2017-05-04 01:23:56', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
 (113, '22', '111111111 3', '3', '123456', '123456', 'sdafads', 'sss', 'sd@fda.com', '$2y$10$zn1Q5Jk4E2tQyiEENmRjN.z8EfeP9RGbTssriD0c05XRErqUu1WyC', 0, 0, '2017-05-04 22:25:20', '0000-00-00 00:00:00', '20b5407d26c2cec2e48f28f80451379d', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
 (114, '22', '22 3', '3', '123456', '123456', 'sdafads', 'sef', '1sd@fda.com', '$2y$10$h9Minaup1IipzSqZkYZUoO4BE15BkSz8whMAtVBlP7XgzwFhTEch6', 0, 0, '2017-05-04 22:33:53', '0000-00-00 00:00:00', 'd27cdeb2a95d8cb6e8d542583fd50039', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
