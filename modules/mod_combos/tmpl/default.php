@@ -16,8 +16,53 @@ $query->order("ordering ASC");
 
 $db->setQuery($query);
 $result = $db->loadObjectList();
+$user  = JFactory::getUser();
 ?>
+<script>
 
+	jQuery(document).ready(function(){
+		
+		jQuery('a.addCart').click(function(){
+			var comboID = jQuery(this).attr('value');
+			
+			var request = jQuery.ajax({
+			  url: "index.php?option=com_combos&task=combos.addCart",
+			  method: "GET",
+			  data: { id : comboID },
+			  dataType: "html"
+			});
+			 
+			request.done(function( msg ) {
+				console.log(msg);
+				var wCbo = 500;
+				var hCbo = 400;
+			  switch( msg ){
+			  	case '1':
+			  		jQuery.colorbox({width: wCbo, height: hCbo, html:"<div class='cbomessage'><p>The combos is added to cart</p></div>"});
+			  		window.location.href="index.php?option=com_users&view=profile&layout=edit&tab=2&user_id="+<?php echo $user->id;?>;
+			  		break;
+			  	case '2':
+			  		jQuery.colorbox({width: wCbo, height: hCbo, html:"<div class='cbomessage'><p>Please complete checkout firstly before purchase other combos.<br> Do you want to swap the combo?</p><p><span class='left'><a class='btn' href='index.php?option=com_combos&task=combos.changeProduct&id="+comboID+"'>Yes</a></span><span class='right'><a class='btn' href=''>Cancel</a></span></p></div>"});
+			  		break;
+			  	case '3':
+			  		alert('fdas');
+			  		jQuery.colorbox({width: wCbo, height: hCbo, html:"<div class='cbomessage'><p>You need to login firstly.</p><p><a class='btn' href='index.php?option=com_users&view=login&tab=2'>Login</a></p></div>"});
+			  		break;
+			  	case '4':
+			  		jQuery.colorbox({width: wCbo, height: hCbo, html:"<div class='cbomessage'><p>This is not a valid combo.</p></div>"});
+			  		break;
+			  }
+			});
+			 
+			request.fail(function( jqXHR, textStatus ) {
+			  alert( "Request failed: " + textStatus );
+			});
+
+			return false;
+		});
+		
+	});
+</script>
 <div id="combos" class="container-fluid" >
 	<h1>Combos</h1>
 	<div class="combosection">
@@ -75,162 +120,15 @@ $result = $db->loadObjectList();
 							?>
 							
 							<div class="selectcombo">
-								<h4><a href="index.php?option=com_combos&task=combos.addCart&id=<?php echo $value->id;?>">SELECT</a></h4>
+								<h4><a class="addCart" href="javascript:void(0);" value="<?php echo $value->id;?>">SELECT</a></h4>
 							</div>
 						</div>	
 
 				<?php } 
 				}
 				?>
-			<!--<div id="single" class="col-sm-3 combobox" style="">
-				<div class="container-fluid" style="padding:20px; background-color:white;">
-					<img src="templates/protostar/images/single.png" style="max-width:200px">
-				</div>
-				<div class="combodescription">
-					<p>DESCRIPTION</p>
-				</div>
-				<div class="title">
-					<h4>SINGLE</h4>
-				</div>
 
-				<div class="pricefrom">
-					<p style="background-color:black; color:white;">$<span style="font-size:30px;">35</span>/mo</p>
-				</div>
-				<div class="combosubbox dropdownbox">
-					<img style="max-width:40px" src="templates/protostar/images/wash.png"><br>
-					<br><p><strong>Washing</strong> - 10kg</p>
-					<div class="dropdownbox-content">
-						this is an example for my website 
-					</div>
-				</div>
-				<div class="combosubbox dropdownbox">
-					<img style="max-width:60px" src="templates/protostar/images/ironing.png">
-					<br><p><strong>Ironing</strong> - Not Included
-					</p>
-					<div class="dropdownbox-content">
-						this is an example for my website 
-					</div>
-				</div>
-				<div class="combosubbox dropdownbox">
-					<img style="max-width:40px" src="templates/protostar/images/dryclean.png"><br>
-					<br><p><strong>Dry Cleaning</strong> - 5 Itens
-					</p>
-					<div class="dropdownbox-content">
-						this is an example for my website 
-					</div>
-				</div>
-				<div class="combosubbox dropdownbox">
-					<img style="max-width:65px" src="templates/protostar/images/delivery_combo.png"><br>
-					<br><p><strong>Delivery</strong> - 1 p.w
-					</p>
-					<div class="dropdownbox-content">
-						this is an example for my website 
-					</div>
-				</div>
-				<div class="selectcombo">
-					<h4>SELECT</h4>
-				</div>
-			</div>
-			<div id="couple" class="col-sm-3 combobox" style="margin-left:12.3%">
-				<div class="container-fluid" style="padding:30px 20px; background-color:white;">
-					<img src="templates/protostar/images/couple.png" style="max-width:300px;">
-				</div>
-				<div class="combodescription">
-					<p>DESCRIPTION</p>
-				</div>
-				<div class="title">
-					<h4>COUPLE</h4>
-				</div>
-
-				<div class="pricefrom">
-					<p style="background-color:black; color:white;">$<span style="font-size:30px;">55</span>/mo</p>
-				</div>
-				<div class="combosubbox dropdownbox">
-					<img style="max-width:40px" src="templates/protostar/images/wash.png"><br>
-					<br><p><strong>Washing</strong> - 15kg</p>
-					<div class="dropdownbox-content">
-						this is an example for my website 
-					</div>
-				</div>
-				<div class="combosubbox dropdownbox">
-					<img style="max-width:60px" src="templates/protostar/images/ironing.png">
-					<br><p><strong>Ironing</strong> - Included
-					</p>
-					<div class="dropdownbox-content">
-						this is an example for my website 
-					</div>
-				</div>
-				<div class="combosubbox dropdownbox">
-					<img style="max-width:40px" src="templates/protostar/images/dryclean.png"><br>
-					<br><p><strong>Dry Cleaning</strong> - 10 Itens
-					</p>
-					<div class="dropdownbox-content">
-						this is an example for my website 
-					</div>
-				</div>
-				<div class="combosubbox dropdownbox">
-					<img style="max-width:65px" src="templates/protostar/images/delivery_combo.png"><br>
-					<br><p><strong>Delivery</strong> - 1 p.w
-					</p>
-					<div class="dropdownbox-content">
-						this is an example for my website 
-					</div>
-				</div>
-				<div class="selectcombo">
-					<h4>SELECT</h4>
-				</div>
-			</div>
-			<div id="family" class="col-sm-3 combobox" style="margin-left:12.3%">
-				<div class="container-fluid" style="padding:30px 20px; background-color:white;">
-					<img src="templates/protostar/images/family.png" style="max-width:300px">
-				</div>
-				<div class="combodescription">
-					<p>DESCRIPTION</p>
-				</div>
-				<div class="title">
-					<h4>FAMILY</h4>
-				</div>
-
-				<div class="pricefrom">
-					<p style="background-color:black; color:white;">$<span style="font-size:30px;">75</span>/mo</p>
-				</div>
-				<div class="combosubbox dropdownbox">
-					<img style="max-width:40px" src="templates/protostar/images/wash.png"><br>
-					<br><p><strong>Washing</strong> - 20kg</p>
-					<div class="dropdownbox-content">
-						this is an example for my website 
-					</div>
-				</div>
-				<div class="combosubbox dropdownbox">
-					<img style="max-width:60px" src="templates/protostar/images/ironing.png">
-					<br><p><strong>Ironing</strong> - Included
-					</p>
-					<div class="dropdownbox-content">
-						this is an example for my website 
-					</div>
-				</div>
-				<div class="combosubbox dropdownbox">
-					<img style="max-width:40px" src="templates/protostar/images/dryclean.png"><br>
-					<br><p><strong>Dry Cleaning</strong> - 20 Itens
-					</p>
-					<div class="dropdownbox-content">
-						this is an example for my website 
-					</div>
-				</div>
-				<div class="combosubbox dropdownbox">
-					<img style="max-width:65px" src="templates/protostar/images/delivery_combo.png"><br>
-					<br><p><strong>Delivery</strong> - 2 p.w
-					</p>
-					<div class="dropdownbox-content">
-						this is an example for my website 
-					</div>
-				</div>
-				<div class="selectcombo">
-					<h4>SELECT</h4>
-						</div>
-					</div>
-				</div>
-			</div>-->
+			
 		</div>
 	</div>
 </div>

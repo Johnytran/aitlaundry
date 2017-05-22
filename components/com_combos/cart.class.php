@@ -13,6 +13,9 @@ class cart{
     public function getCart(){
     	return $this->yourcart;
     }
+    public function setCart($newcart){
+        return $this->yourcart = $newcart;
+    }
     public function addProduct(){
         if(!$this->yourcart)
             $this->yourcart = array();

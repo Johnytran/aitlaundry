@@ -42,10 +42,11 @@ JHtml::_('bootstrap.framework');
 $doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/template.js');
 $doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/jquery.omniselect.js');
 $doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/bootstrap.min.js');
-
+$doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/jquery.colorbox-min.js');
 
 
 // Add Stylesheets
+$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/colorbox.css');
 $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myStyle.css');
 ?>
 <!DOCTYPE html>
