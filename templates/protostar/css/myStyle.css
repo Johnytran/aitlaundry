@@ -381,13 +381,19 @@ span#impressed {
 #abouttitle{
     margin-top:5px;
     background-color:#f2f2f2;
-    padding:0;
+    padding: 0px;
+}
+div #purpose{
+    padding-bottom: 35px;
+}
+#faq h4{
+   padding-bottom: 15px; 
 }
 #abouttitle h1 {
     margin:0;
-    padding: 20px;
     background-color:#333;
     color:#faa634;
+    padding: 35px;
 }
 #aboutcontent {
     margin:20px auto;
@@ -397,12 +403,15 @@ span#impressed {
     border-radius:10px;
     box-shadow:1px 1px 20px rgba(0,0,0,0.3);
 }
-#aboutcontent h4{
-    padding:30px;
+#aboutcontent h4{    
+    font-size: 29px;
+    padding-top: 15px;
+    padding-bottom: 20px;
 }
 #aboutcontent p {
-    padding:30px;
-    color:rgba(0,0,0,0.65);
+    font-size: 23px;
+    color:rgba(0,0,0,0.65);    
+    padding-bottom: 15px;
 }
 #aboutcontent #team h4, h5{
     margin:0;
@@ -437,7 +446,6 @@ span#impressed {
     padding:30px;
     color:rgba(0,0,0,0.65);
 }
-
 /********************************* CONTACT US *********************************/
  #contacttitle{
     margin-top:5px;
@@ -467,6 +475,15 @@ span#impressed {
     color:rgba(0,0,0,0.65);
 }
 
+#btnStyleContact{
+    background-color: #faa634;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 1%;
+    border: 2px solid black;
+}
+
 /*FORM*/
 
 
@@ -491,12 +508,12 @@ button {
     border: none;
     cursor: pointer;
     width: 100%;
-    font-size: 16px;
 }
 
 button:hover {
     opacity: 0.8;
 }
+
 
 /*for the tabs on account page*/
 
