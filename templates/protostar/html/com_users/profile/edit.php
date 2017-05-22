@@ -129,12 +129,9 @@ $cart = $session->get('yourcart');
 					<p>There is no product in your cart currently, please start choosing a <a class = "aLink" href="index.php#combos">Combo</a></p>
 					}?>
 				<p><a href="index.php?option=com_order&view=order&layout=edit">Next step</a></p>
-<<<<<<< HEAD
-				
-=======
 				<?php }
 				?>
->>>>>>> 217ed8e590d2cf504bc6e2c9c3f7a9a486d6a503
+
 			
 			</div>
 			
