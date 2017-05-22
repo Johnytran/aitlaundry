@@ -124,12 +124,14 @@ $cart = $session->get('yourcart');
 						  <div class="col-sm-4"><a href="index.php?option=com_combos&task=combos.deleteProduct&id=<?php echo $value['id']?>">Delete</a></div>
 						</div>	
 				<?php	
-					}
-				}else{?>
+					}?>
+				<p><a href="index.php?option=com_order&view=order&layout=edit">Next step</a></p>
+				<?php }else{?>
 					<p>There is no products in your cart currently, please start shoosing a combo.</p>
 				<?php 
 				}
 				?>
+			
 			</div>
 			
 			<div id="PaymentHistory" class="tabcontent">

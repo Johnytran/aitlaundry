@@ -40,7 +40,7 @@ class cart{
         $this->session->set('yourcart',$this->yourcart);
     }
     public function getPrice($combo_id){
-    	$db =&JFactory::getDBO();
+    	$db = JFactory::getDBO();
         $query = 'SELECT sum(price) as total FROM #__services where comboid ='.$combo_id;
         $db->setQuery($query);
         $total= $db->loadResult();
@@ -80,7 +80,7 @@ class cart{
         return substr(md5(time().rand(1,5)),0,6);   
     }
     private function product(){
-        $db =&JFactory::getDBO();
+        $db =JFactory::getDBO();
         $query = 'SELECT * FROM #__combos_combo where id ='.$this->id;
         $db->setQuery($query);
         $row= $db->loadAssoc();
