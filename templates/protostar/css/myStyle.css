@@ -131,11 +131,17 @@ main {
 #buttonID{
     font-size: 14px;
 }
-/***************to doooooo****************************/
 
-{
-    height: 70%;
-    background-image: url("../images/feature.jpg");
+.customfeature{
+    height: 90%;
+   
+}
+#feature{
+    background-color:rgba(255,255,255,0.9);
+}
+
+#feature .row{
+    vertical-align: middle!important;
 }
 #banner{
     width 100%;
