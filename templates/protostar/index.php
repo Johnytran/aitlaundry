@@ -256,7 +256,9 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
           </div>        
 	  </div>
 	</div>
+        
 	<jdoc:include type="modules" name="footer" style="none" />
+        
     </main>
 	</body>
 </html>
