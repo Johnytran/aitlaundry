@@ -132,7 +132,7 @@ $user = JFactory::getUser();
 				<?php 
 				if(count($cart)){?>
 					<div class="row">
-					  <div class="col-sm-4">Num</div>
+					  <div class="col-sm-4">Order Code</div>
 					  <div class="col-sm-4">Combos</div>
 					  <div class="col-sm-4">Quantity</div>
 					  <div class="col-sm-4">Price</div>

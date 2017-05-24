@@ -24,6 +24,96 @@ class OrderControllerOrder extends JControllerLegacy
 	 *
 	 * @since    1.6
 	 */
+	public function confirm(){
+		$post = JRequest::get('post');
+		//print_r($post);die;
+
+		$session = JFactory::getSession();
+		$session->set('order',$post);
+		return $this->setRedirect('index.php?option=com_order&view=orders');
+	}
+	public function cancelorder(){
+		return $this->setRedirect('index.php?option=com_order&view=orders&layout=cancel');
+	}
+	public function checkout(){
+		$post = JRequest::get('post');
+		//print_r($post);die;
+
+		$session = JFactory::getSession();
+		$session->set('order',$post);
+		$cart = $session->get('yourcart');
+		$db = JFactory::getDBO();
+
+		$query = "INSERT INTO #__order(`status`, `comboid`,`paymentid`, `datetimecreated`,`addresspickup`,`date_timepickup`, `addressdelivery`, `date_timedelivery`, `deliverynote`)";
+		
+		$comboid = 0;
+		$comboName = '';
+		$price = 0;
+		foreach($cart as $key=>$value){
+			$comboid = $value['id'];
+			$comboName = $value['name'];
+			$price = $value['price'];
+		}
+		$query.= " VALUES(
+				'0',
+				'".$comboid."',
+				'1', 
+				'".date("Y-m-d h:i:s")."', 
+				".$db->quote($post['addresspickup']).", 
+				".$db->quote($post['date_timepickup']).", 
+				".$db->quote($post['addressdeliver']).",  
+				".$db->quote($post['date_timedelivery']).", 
+				".$db->quote($post['deliverynote'])."
+				)";
+
+		$db->setQuery($query);
+		$result  = $db->query();
+		$orderid = $db->insertid();
+		if($result){
+			$notify_url = JURI::root()."index.php?option=com_order&task=paypal.ipn_complete&orderid=".$orderid."&tmp_id=0";
+	        
+	        define ('PAYPAL_VERIFIED_ONLY', '0');
+	        define ('PAYPAL_VERIFIED_STATUS', 'C');
+	        define ('PAYPAL_PENDING_STATUS', 'P');
+	        define ('PAYPAL_INVALID_STATUS', 'X');
+	        
+	        
+	        $post_variables = Array(
+	        "cmd" => "_ext-enter",
+	        "redirect_cmd" => "_xclick",
+	        "upload" => "1",
+	        "business" => 'aitlaundry@gmail.com',
+        	"receiver_email" =>'aitlaundry@gmail.com',
+	        "item_name" => $db->quote($comboName),
+	        "custom"=> $orderid,
+	        "amount" => $price,
+	        "currency_code" => 'AUD',
+	        "address_override" => "1",
+	    
+
+	        "return" =>JURI::root()."index.php?option=com_order&view=orders&layout=confirmation&orderid=".$orderid,
+	        "notify_url" => $notify_url,
+	        "cancel_return" =>JURI::root()."index.php?option=com_order&task=order.cancelorder&orderid=".$orderid,
+	        "undefined_quantity" => "0",
+
+	        "test_ipn" => 1,
+	        "pal" => "NRUBJXESJTY24",
+	        "no_shipping" => "1",
+	        "no_note" => "1"
+	        );
+	        $query_string = "?";
+	        foreach( $post_variables as $name => $value ) 
+	        {
+	            $query_string .= $name. "=" . urlencode($value) ."&";
+	        }
+
+	        return $this->setRedirect('https://www.sandbox.paypal.com/cgi-bin/webscr'.$query_string);
+		}else{
+			return $this->setRedirect('index.php?option=com_order&view=orders', 'Error in saving data.');
+		}
+	    exit;	
+		
+	}
 	public function edit()
 	{
 		$app = JFactory::getApplication();
