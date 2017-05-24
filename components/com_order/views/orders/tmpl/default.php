@@ -8,200 +8,114 @@
  */
 // No direct access
 defined('_JEXEC') or die;
-
-JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
-JHtml::_('bootstrap.tooltip');
-JHtml::_('behavior.multiselect');
-JHtml::_('formbehavior.chosen', 'select');
-
-$user       = JFactory::getUser();
-$userId     = $user->get('id');
-$listOrder  = $this->state->get('list.ordering');
-$listDirn   = $this->state->get('list.direction');
-$canCreate  = $user->authorise('core.create', 'com_order') && file_exists(JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . 'orderform.xml');
-$canEdit    = $user->authorise('core.edit', 'com_order') && file_exists(JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . 'orderform.xml');
-$canCheckin = $user->authorise('core.manage', 'com_order');
-$canChange  = $user->authorise('core.edit.state', 'com_order');
-$canDelete  = $user->authorise('core.delete', 'com_order');
 ?>
+<?php 
+	$session = JFactory::getSession();
+	$cart = $session->get('yourcart');
+	//print_r($cart);
+	$order = $session->get('order');
+	//print_r($order);
+?>
+<form action="index.php?option=com_order&task=order.confirm" method="post">
+<h1>Order Confirm</h1>
+<div class="row">
+	<div class="column span1-2">
+		<legend>Shipping Information</legend>
+		<?php if(isset($order)){?>
+	    <div class="form-group">
+	    	<div class="col-sm-8">
+	        	<label class="hasPopover required invalid">
+	       		 Address Pick Up<span class="star">&nbsp;*</span></label>
+	        </div>
+	        <div class="col-sm-8">
+	             <input type="text" name="addresspickup" value="<?php echo $order['addresspickup'];?>" class="form-control required invalid" size="30" disabled required="required" aria-required="true" aria-invalid="true">                                
+	        </div>
+	    </div>
+	    <div class="form-group">
+	    	<div class="col-sm-8">
+	        <label class="hasPopover required invalid">
+	        	Date Time Pick Up<span class="star">&nbsp;*</span></label>
+	        </div>
+	        <div class="col-sm-8">
+	             <input type="text" name="date_timepickup" value="<?php echo $order['date_timepickup'];?>" class="form-control required invalid" size="30" disabled required="required" aria-required="true" aria-invalid="true">                                
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <div class="col-sm-8">
+	        	<label class="hasPopover required invalid">
+	        Address Delivery<span class="star">&nbsp;*</span></label>
+	        </div>
+	        <div class="col-sm-8">
+	             <input type="text" name="addressdeliver" value="<?php echo $order['addressdeliver'];?>" class="form-control required invalid" size="30" disabled required="required" aria-required="true" aria-invalid="true">                                
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <div class="col-sm-8">
+	        	<label class="hasPopover required invalid">
+	        Date Time Delivery<span class="star">&nbsp;*</span></label>
+	        </div>
+	        <div class="col-sm-8">
+	             <input type="text" name="date_timedelivery" value="<?php echo $order['date_timedelivery'];?>" class="form-control required invalid" disabled size="30" required="required" aria-required="true" aria-invalid="true">                                
+	        </div>
+	    </div>
 
-<form action="<?php echo JRoute::_('index.php?option=com_order&view=orders'); ?>" method="post"
-      name="adminForm" id="adminForm">
-
+	    <div class="form-group">
+	    	<div class="col-sm-8">
+	        	<label class="hasPopover required invalid">
+	        Delivery Note<span class="star">&nbsp;*</span></label>
+	        </div>
+	        <div class="col-sm-8">
+	             <textarea type="text" name="deliverynote" disabled rows="7" cols="60">
+	             	<?php echo $order['deliverynote'];?>
+	             </textarea>                                
+	        </div>
+	    </div>
+	    <?php }else{?>
+	    	<h4>There is no contact information for delivery please turn back and add it.
+	    	</h4>
+	    <?php }?>
+		<!--Payment-->
+		<legend>Payment Information</legend>
+		<div class="radio disabled">
+		  <label>
+		  <input type="radio" name="paypal" disabled selected>
+		  <img src="images/paypal.jpg" alt="Paypal"/>
+		  </label>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<legend>Shopping Cart</legend>
 	
-	<table class="table table-striped" id="orderList">
-		<thead>
-		<tr>
-			<?php if (isset($this->items[0]->state)): ?>
-				
-			<?php endif; ?>
+</div>
+	<?php 
+		if(count($cart)){?>
+			<div class="row">
+			  <div class="col-sm-4">Order Code</div>
+			  <div class="col-sm-4">Combos</div>
+			  <div class="col-sm-4">Quantity</div>
+			  <div class="col-sm-4">Price</div>
+			</div>
+			<?php
+			//print_r($cart);
+			foreach($cart as $key=>$value){?>
+				<div class="row">
+				  <div class="col-sm-4"><?php echo $value["id"];?></div>
+				  <div class="col-sm-4"><?php echo $value["name"];?></div>
+				  <div class="col-sm-4">1</div>
+				  <div class="col-sm-4">$<?php echo $value["price"];?></div>
+				  
+				</div>	
+			<?php	
+			}
+			?>
+		<?php 
+		}else{?>
+			<div class="row">There is no product in your cart currently, please start choosing a <a class = "aLink" href="index.php#combos">Combo</a></div>
+		<?php }?>
 
-							<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_ID', 'a.id', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_ORDERNOTE', 'a.ordernote', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_COMBOID', 'a.comboid', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_PAYMENTID', 'a.paymentid', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_DATETIMECREATED', 'a.datetimecreated', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_ADDRESSPICKUP', 'a.addresspickup', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_DATE_TIMEPICKUP', 'a.date_timepickup', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_ADDRESSDELIVERY', 'a.addressdelivery', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_DATE_TIMEDELIVERY', 'a.date_timedelivery', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_DELIVERYNOTE', 'a.deliverynote', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_STATUS', 'a.status', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_USERID', 'a.userid', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_CREATED_BY', 'a.created_by', $listDirn, $listOrder); ?>
-				</th>
-				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'COM_ORDER_ORDERS_MODIFIED_BY', 'a.modified_by', $listDirn, $listOrder); ?>
-				</th>
-
-
-							<?php if ($canEdit || $canDelete): ?>
-					<th class="center">
-				<?php echo JText::_('COM_ORDER_ORDERS_ACTIONS'); ?>
-				</th>
-				<?php endif; ?>
-
-		</tr>
-		</thead>
-		<tfoot>
-		<tr>
-			<td colspan="<?php echo isset($this->items[0]) ? count(get_object_vars($this->items[0])) : 10; ?>">
-				<?php echo $this->pagination->getListFooter(); ?>
-			</td>
-		</tr>
-		</tfoot>
-		<tbody>
-		<?php foreach ($this->items as $i => $item) : ?>
-			<?php $canEdit = $user->authorise('core.edit', 'com_order'); ?>
-
-			
-			<tr class="row<?php echo $i % 2; ?>">
-
-				<?php if (isset($this->items[0]->state)) : ?>
-					<?php $class = ($canChange) ? 'active' : 'disabled'; ?>
-					
-				<?php endif; ?>
-
-								<td>
-
-					<?php echo $item->id; ?>
-				</td>
-				<td>
-				<?php if (isset($item->checked_out) && $item->checked_out) : ?>
-					<?php echo JHtml::_('jgrid.checkedout', $i, $item->uEditor, $item->checked_out_time, 'orders.', $canCheckin); ?>
-				<?php endif; ?>
-				<a href="<?php echo JRoute::_('index.php?option=com_order&view=order&id='.(int) $item->id); ?>">
-				<?php echo $this->escape($item->ordernote); ?></a>
-				</td>
-				<td>
-
-					<?php echo $item->comboid; ?>
-				</td>
-				<td>
-
-					<?php echo $item->paymentid; ?>
-				</td>
-				<td>
-
-					<?php echo $item->datetimecreated; ?>
-				</td>
-				<td>
-
-					<?php echo $item->addresspickup; ?>
-				</td>
-				<td>
-
-					<?php echo $item->date_timepickup; ?>
-				</td>
-				<td>
-
-					<?php echo $item->addressdelivery; ?>
-				</td>
-				<td>
-
-					<?php echo $item->date_timedelivery; ?>
-				</td>
-				<td>
-
-					<?php echo $item->deliverynote; ?>
-				</td>
-				<td>
-
-					<?php echo $item->status; ?>
-				</td>
-				<td>
-
-					<?php echo $item->userid; ?>
-				</td>
-				<td>
-
-							<?php echo JFactory::getUser($item->created_by)->name; ?>				</td>
-				<td>
-
-							<?php echo JFactory::getUser($item->modified_by)->name; ?>				</td>
-
-
-								<?php if ($canEdit || $canDelete): ?>
-					<td class="center">
-					</td>
-				<?php endif; ?>
-
-			</tr>
-		<?php endforeach; ?>
-		</tbody>
-	</table>
-
-	<?php if ($canCreate) : ?>
-		<a href="<?php echo JRoute::_('index.php?option=com_order&task=orderform.edit&id=0', false, 0); ?>"
-		   class="btn btn-success btn-small"><i
-				class="icon-plus"></i>
-			<?php echo JText::_('COM_ORDER_ADD_ITEM'); ?></a>
-	<?php endif; ?>
-
-	<input type="hidden" name="task" value=""/>
-	<input type="hidden" name="boxchecked" value="0"/>
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
-	<?php echo JHtml::_('form.token'); ?>
+	<div class="row">
+		<button type="submit">Check out with Paypal</a>
+	</div>
+  
 </form>
-
-<?php if($canDelete) : ?>
-<script type="text/javascript">
-
-	jQuery(document).ready(function () {
-		jQuery('.delete-button').click(deleteItem);
-	});
-
-	function deleteItem() {
-
-		if (!confirm("<?php echo JText::_('COM_ORDER_DELETE_MESSAGE'); ?>")) {
-			return false;
-		}
-	}
-</script>
-<?php endif; ?>

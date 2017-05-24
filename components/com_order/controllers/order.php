@@ -24,6 +24,14 @@ class OrderControllerOrder extends JControllerLegacy
 	 *
 	 * @since    1.6
 	 */
+	public function confirm(){
+		$post = JRequest::get('post');
+		//print_r($post);die;
+
+		$session = JFactory::getSession();
+		$session->set('order',$post);
+		return $this->setRedirect('index.php?option=com_order&view=orders');
+	}
 	public function edit()
 	{
 		$app = JFactory::getApplication();
