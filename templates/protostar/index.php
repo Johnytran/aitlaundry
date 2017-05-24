@@ -88,7 +88,7 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ui-
 	            <li><a onclick="initScroll('how'); return false;" href="#">How it Works</a></li>
 	            <li><a onclick="initScroll('combos'); return false;" href="#">Combos</a></li>
 	            <li><a onclick="initScroll('locations'); return false;" href="#">Locations</a></li>
-	            <li><a href="index.php/about-us">About</a></li>
+	            <li><a href="index.php/about-us">About us</a></li>
 	            <li><a href="index.php/contact">Contact us</a></li>
 	            <li>
 	            	<?php $registerURL =  JRoute::_('index.php?option=com_users&view=registration&Itemid=137'); ?>
@@ -114,10 +114,8 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ui-
 	      </div><!-- /.container-fluid -->
 	    </nav>	
 	    <script>
-
-            jQuery(document).ready(function(){               
-
-            jQuery(document).ready(function(){
+  
+        jQuery(document).ready(function(){
 
                 jQuery('#play').click(function(){document.getElementById('video').style.display='block'});     
                 

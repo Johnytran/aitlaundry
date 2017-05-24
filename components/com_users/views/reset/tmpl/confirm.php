@@ -40,7 +40,7 @@ JHtml::_('behavior.formvalidator');
 
 		<div class="control-group">
 			<div class="controls">
-				<button type="submit" class="btn btn-primary validate"><?php echo JText::_('JSUBMIT'); ?></button>
+				<button type="submit" class="btn btn-default btnStyle"><?php echo JText::_('JSUBMIT'); ?></button>
 			</div>
 		</div>
 		<?php echo JHtml::_('form.token'); ?>
