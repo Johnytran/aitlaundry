@@ -114,11 +114,11 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ui-
 	      </div><!-- /.container-fluid -->
 	    </nav>	
 	    <script>
-<<<<<<< HEAD
+
             jQuery(document).ready(function(){               
-=======
+
             jQuery(document).ready(function(){
->>>>>>> 2c1d06cbf8e04e9ea8ab5916cfc8b962164fe003
+
                 jQuery('#play').click(function(){document.getElementById('video').style.display='block'});     
                 
                 jQuery('.datetime').datepicker({
