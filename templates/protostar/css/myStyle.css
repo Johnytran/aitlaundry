@@ -290,8 +290,9 @@ main {
 }
 
 .customfeature{
-    height: 670px;
+    min-height: 650px;
     padding: 50px;
+    padding-top: 40px;
 }
 
 #banner{
@@ -1120,7 +1121,7 @@ div.space1{
     }
     
     .customfeature{
-        height: 650px;
+        
         background-size: 0px; 
         padding-top: 0px;
     }
