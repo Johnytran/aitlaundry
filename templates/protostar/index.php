@@ -114,12 +114,9 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ui-
 	      </div><!-- /.container-fluid -->
 	    </nav>	
 	    <script>
-            jQuery(document).ready(function(){
-<<<<<<< HEAD
-                jQuery('#play').click(function(){document.getElementById('video').style.display='block'});                
-            });                       
-=======
+            jQuery(document).ready(function(){               
                 jQuery('#play').click(function(){document.getElementById('video').style.display='block'});     
+                
                 jQuery('.datetime').datepicker({
                     dateFormat: 'yy-dd-mm',
                     onSelect: function(datetext){
@@ -141,7 +138,6 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ui-
                     }
                 });     
             });
->>>>>>> 634866c68d147f46f3659b1b6eb71dae64b242ef
         </script>
 		<!-- Login PopUP -->
 	    <div id="id01" class="modal">

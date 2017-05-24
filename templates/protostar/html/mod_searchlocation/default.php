@@ -170,7 +170,7 @@ function initialize() {
 
 </script>
 
-<div id="locations" clas="row">
+<div id="locations">
       <h1>Locations</h1>
       <p style="margin-bottom: 10px;">Now servicing in select neighbourhoods in Sydney.</p>
           <form>

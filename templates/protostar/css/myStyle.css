@@ -460,11 +460,33 @@ span#impressed {
     flex-direction: row;
 }
 
-#Combo .deleteProduct{
-   
+/*************** ORDER **********************/
+
+
+#orderDetails textarea{
+    max-width: 100%;
 }
+
+#order{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.space{
+  margin-right: 5%;
+    margin-left: 5%;
+}
+
+.checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
+    position: inherit;
+    font-size: 20px;
+}
+
+
+
 /*************** LOCATIONS **********************/
-}
+
 
 #locations{
 	width: 100%;
