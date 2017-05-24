@@ -19,6 +19,8 @@ body h2{
 	vertical-align: middle;
 	line-height: 30px; 
 	color: white;
+    font-size: 40px;
+   
 }
 
 
@@ -133,26 +135,25 @@ main {
 }
 
 .customfeature{
-    height: 90%;
-   
-}
-#feature{
-    background-color:rgba(255,255,255,0.9);
+    height: 80%;
+    padding: 50px;
 }
 
-#feature .row{
-    vertical-align: middle!important;
-}
 #banner{
+    background-color:rgba(255,255,255,0.9);
     width 100%;
     text-align:center;
-    
+    padding: 5%;
+    margin-top: 50px;
+}
+#banner h2{
+    margin-bottom: 60px;
 }
 
-#banner p{
-    padding: 20px;
-    letter-spacing: 2px;
-    font-size: 20px!important;
+#banner p{ 
+    padding: 10px;
+    letter-spacing: 1px;
+    font-size: 24px!important;
 }
 
 h3#moto{
@@ -920,13 +921,30 @@ div.space1{
     .btnStyleCancel{
         width: 230px;
     }
+    
+    .customfeature{
+        background-size: 0px; 
+        padding-top: 0px;
+    }
+
+    #banner{
+        padding: 2%;
+        margin-top: 0px;
+    }
+    #banner h2{
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+
+    #banner p{ 
+        padding: 10px;
+        letter-spacing: 1px;
+        font-size: 16px!important;
+    }
 
 }
 
 
-@media (min-width: 979px) {
-
-}
 
 
 @media screen and (max-width: 905px) {

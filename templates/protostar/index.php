@@ -229,7 +229,12 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 	        </div><!-- /.navbar-collapse -->
 	      </div><!-- /.container-fluid -->
 	    </nav>	
-	    
+	    <script>
+            jQuery(document).ready(function(){
+                jQuery('#play').click(function(){document.getElementById('video').style.display='block'});
+                
+            });
+        </script>
 		<!-- Login PopUP -->
 	    <div id="id01" class="modal">
 			<div class="modal-content animate">
