@@ -477,11 +477,18 @@ span#impressed {
   margin-right: 5%;
     margin-left: 5%;
 }
-
-.checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
-    position: inherit;
+#orderDetails .checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
+    position: inherit!important;
     font-size: 20px;
 }
+
+
+/*************** CALENDAR **********************/
+
+#ui-datepicker-div{
+    
+}
+
 
 
 
@@ -490,7 +497,6 @@ span#impressed {
 
 #locations{
 	width: 100%;
-	height: 500px;
 	background-color:gray;
 	padding:10px 10px;
 	margin-top:20px;	

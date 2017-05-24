@@ -14,7 +14,7 @@ $document->setTitle('Order Details');
 ?>
 <form id="orderDetails" action="index.php?option=com_order&task=order.confirm" method="post">
     <div id="abouttitle" class="container-fluid">
-        <h1>Order details</h1>
+        <h1>Order Details</h1>
     </div>
     <div class="row">
 	<legend>Shopping Cart</legend>
@@ -87,7 +87,7 @@ $document->setTitle('Order Details');
 	        Date Time Delivery<span class="star">&nbsp;*</span></label>
 	        </div>
 	        <div>
-	             <input type="text" name="date_timedelivery" value="" class="form-control required invalid datetime" size="30" required="required" aria-required="true" aria-invalid="true">                                
+	             <input type="text" name="date_timedelivery" value="" class="form-control required invalid datetime" size="30" required="required" aria-required="true" aria-invalid="true">          
 	        </div>
 	    </div>
 
