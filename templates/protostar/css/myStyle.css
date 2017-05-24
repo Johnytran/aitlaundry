@@ -344,6 +344,11 @@ span#impressed {
 
 /*************** COMBOS **********************/
 
+.cbomessage {
+    padding: 20px!important;
+    padding-bottom: 10px;
+}
+
 .addCart{
     font-size: 20px;
     color: black;
