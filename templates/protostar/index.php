@@ -201,11 +201,11 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 	        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	          <ul class="nav navbar-nav navbar-right">
 	            <li class="active"><a href="index.php">Home<span class="sr-only">(current)</span></a></li>
-	            <li><a href="#how">How it Works</a></li>
-	            <li><a href="#combos">Combos</a></li>
-	            <li><a href="#locations">Locations</a></li>
-	            <li><a href="index.php?option=com_content&amp;view=article&amp;id=2&amp;catid=2&amp;Itemid=101">About</a></li>
-	            <li><a href="index.php?option=com_content&amp;view=article&amp;id=4&amp;catid=2&amp;Itemid=101">Contact us</a></li>
+	            <li><a href="index.php#how">How it Works</a></li>
+	            <li><a href="index.php#combos">Combos</a></li>
+	            <li><a href="index.php#locations">Locations</a></li>
+	            <li><a href="index.php/about-us">About</a></li>
+	            <li><a href="index.php/contact">Contact us</a></li>
 	            <li>
 	            	<?php $registerURL =  JRoute::_('index.php?option=com_users&view=registration&Itemid=137'); ?>
 	            	<button type="button" class="btn btn-default btn-black" 
@@ -231,8 +231,7 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 	    </nav>	
 	    <script>
             jQuery(document).ready(function(){
-                jQuery('#play').click(function(){document.getElementById('video').style.display='block'});
-                
+                jQuery('#play').click(function(){document.getElementById('video').style.display='block'});                
             });
         </script>
 		<!-- Login PopUP -->
