@@ -122,6 +122,129 @@ navbar.less:444
     width: 158px;
     font-size: 16px;
 }
+
+
+/*LOGIN BUTTON*/
+ol.omniselect-results{
+    background: gray;
+}
+ol.omniselect-results li{
+    color: white;
+}
+ol.omniselect-results li.omniselect-active{
+    color: black;
+}
+.btn-primary:focus,
+.btn-primary.focus {
+    color: black; 
+    background-color: lightgray; 
+    border-color: gray;
+}
+.btn-primary:hover {
+    color: black; 
+    background-color: lightgray; 
+    border-color: gray;
+}
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+    color: black; 
+    background-color: lightgray; 
+    border-color: gray;
+}
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.open > .dropdown-toggle.btn-primary:hover,
+.btn-primary:active:focus,
+.btn-primary.active:focus,
+.open > .dropdown-toggle.btn-primary:focus,
+.btn-primary:active.focus,
+.btn-primary.active.focus,
+.open > .dropdown-toggle.btn-primary.focus {
+    color: black; 
+    background-color: lightgray; 
+    border-color: gray;
+}
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+    background-image: none;
+}
+
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,
+.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled.focus,
+.btn-primary[disabled].focus,
+fieldset[disabled] .btn-primary.focus {
+    color: black; 
+    background-color: lightgray; 
+    border-color: gray;
+}
+.btn-primary .badge {
+    color: black; 
+    background-color: lightgray; 
+    border-color: gray;
+}
+
+/*     MENU       */
+#userMenuDrop{
+    background-color: black;
+    color: black;
+
+}
+.dropdown-menu {
+  position: relative;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  max-width: 93px;
+  font-size: 14px;
+  text-align: center;
+  list-style: none;
+  -webkit-background-clip: padding-box;
+          background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, .15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+
+}
+
+.open{
+    margin: 0;
+    max-width: 158px;
+    padding: 0;
+}
+
+#userMenuDrop li:hover{
+    background-color: orange;
+    color: black;
+
+}
+
+
+.dropdown-menu>li>a {
+    display: block;
+    padding: 2px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+#modlgn-remember{
+    margin-left: 10px;
+}
+
+
 /*************** MAIN / MOTTO / HOW ****************************/
 main {
     letter-spacing: 2px;
@@ -137,7 +260,7 @@ main {
 }
 
 .customfeature{
-    height: 80%;
+    height: 670px;
     padding: 50px;
 }
 
@@ -169,6 +292,7 @@ span#impressed {
   background-color:#333;
   padding:20px;
   margin-top:5px;
+    top: 1500px;
 }
 #how h1 {
   margin:0;
@@ -930,6 +1054,7 @@ div.space1{
     }
     
     .customfeature{
+        height: 650px;
         background-size: 0px; 
         padding-top: 0px;
     }
@@ -939,14 +1064,14 @@ div.space1{
         margin-top: 0px;
     }
     #banner h2{
-        margin-bottom: 10px;
-        font-size: 20px;
+        margin-bottom: 30px;
+        font-size: 26px;
     }
 
     #banner p{ 
         padding: 10px;
         letter-spacing: 1px;
-        font-size: 16px!important;
+        font-size: 20px!important;
     }
 
 }

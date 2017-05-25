@@ -39,6 +39,7 @@ $userToken = JSession::getFormToken();
 <?php
 // Add JavaScript Frameworks
 JHtml::_('bootstrap.framework');
+$doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/scroll.js');
 $doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/template.js');
 $doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/jquery.omniselect.js');
 $doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/bootstrap.min.js');
@@ -61,128 +62,6 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ui-
 	<jdoc:include type="head" />
 	<!--[if lt IE 9]><script src="<?php echo JUri::root(true); ?>/media/jui/js/html5.js"></script><![endif]-->
 </head>
-    <style>
-    
-        /*LOGIN BUTTON*/
-        ol.omniselect-results{
-			background: gray;
-		}
-		ol.omniselect-results li{
-			color: white;
-		}
-		ol.omniselect-results li.omniselect-active{
-			color: black;
-		}
-        .btn-primary:focus,
-        .btn-primary.focus {
-            color: black; 
-            background-color: lightgray; 
-            border-color: gray;
-        }
-        .btn-primary:hover {
-            color: black; 
-            background-color: lightgray; 
-            border-color: gray;
-        }
-        .btn-primary:active,
-        .btn-primary.active,
-        .open > .dropdown-toggle.btn-primary {
-            color: black; 
-            background-color: lightgray; 
-            border-color: gray;
-        }
-        .btn-primary:active:hover,
-        .btn-primary.active:hover,
-        .open > .dropdown-toggle.btn-primary:hover,
-        .btn-primary:active:focus,
-        .btn-primary.active:focus,
-        .open > .dropdown-toggle.btn-primary:focus,
-        .btn-primary:active.focus,
-        .btn-primary.active.focus,
-        .open > .dropdown-toggle.btn-primary.focus {
-            color: black; 
-            background-color: lightgray; 
-            border-color: gray;
-        }
-        .btn-primary:active,
-        .btn-primary.active,
-        .open > .dropdown-toggle.btn-primary {
-            background-image: none;
-        }
-        
-        .btn-primary.disabled:hover,
-        .btn-primary[disabled]:hover,
-        fieldset[disabled] .btn-primary:hover,
-        .btn-primary.disabled:focus,
-        .btn-primary[disabled]:focus,
-        fieldset[disabled] .btn-primary:focus,
-        .btn-primary.disabled.focus,
-        .btn-primary[disabled].focus,
-        fieldset[disabled] .btn-primary.focus {
-            color: black; 
-            background-color: lightgray; 
-            border-color: gray;
-        }
-        .btn-primary .badge {
-            color: black; 
-            background-color: lightgray; 
-            border-color: gray;
-        }
-
-        /*     MENU       */
-        #userMenuDrop{
-            background-color: black;
-            color: black;
-        
-        }
-        .dropdown-menu {
-          position: relative;
-          top: 100%;
-          left: 0;
-          z-index: 1000;
-          display: none;
-          float: left;
-          max-width: 93px;
-          font-size: 14px;
-          text-align: center;
-          list-style: none;
-          -webkit-background-clip: padding-box;
-                  background-clip: padding-box;
-          border: 1px solid #ccc;
-          border: 1px solid rgba(0, 0, 0, .15);
-          border-radius: 4px;
-          -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-                  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-
-        }
-        
-        .open{
-            margin: 0;
-            max-width: 158px;
-            padding: 0;
-        }
-        
-        #userMenuDrop li:hover{
-            background-color: orange;
-            color: black;
-        
-        }
-        
-
-        .dropdown-menu>li>a {
-            display: block;
-            padding: 2px 20px;
-            clear: both;
-            font-weight: 400;
-            line-height: 1.42857143;
-            color: #333;
-            white-space: nowrap;
-        }
-        
-        #modlgn-remember{
-            margin-left: 10px;
-        }
-    </style>
 <body class="site <?php echo $option
 	. ' view-' . $view
 	. ($layout ? ' layout-' . $layout : ' no-layout')
@@ -206,9 +85,9 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ui-
 	        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	          <ul class="nav navbar-nav navbar-right">
 	            <li class="active"><a href="index.php">Home<span class="sr-only">(current)</span></a></li>
-	            <li><a href="index.php#how">How it Works</a></li>
-	            <li><a href="index.php#combos">Combos</a></li>
-	            <li><a href="index.php#locations">Locations</a></li>
+	            <li><a onclick="initScroll('how'); return false;" href="#">How it Works</a></li>
+	            <li><a onclick="initScroll('combos'); return false;" href="#">Combos</a></li>
+	            <li><a onclick="initScroll('locations'); return false;" href="#">Locations</a></li>
 	            <li><a href="index.php/about-us">About</a></li>
 	            <li><a href="index.php/contact">Contact us</a></li>
 	            <li>
@@ -236,6 +115,10 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ui-
 	    </nav>	
 	    <script>
             jQuery(document).ready(function(){
+<<<<<<< HEAD
+                jQuery('#play').click(function(){document.getElementById('video').style.display='block'});                
+            });                       
+=======
                 jQuery('#play').click(function(){document.getElementById('video').style.display='block'});     
                 jQuery('.datetime').datepicker({
                     dateFormat: 'yy-dd-mm',
@@ -258,6 +141,7 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ui-
                     }
                 });     
             });
+>>>>>>> 634866c68d147f46f3659b1b6eb71dae64b242ef
         </script>
 		<!-- Login PopUP -->
 	    <div id="id01" class="modal">
