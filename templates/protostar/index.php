@@ -137,7 +137,6 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ui-
                     }
                 });     
             });
->>>>>>> 634866c68d147f46f3659b1b6eb71dae64b242ef
         </script>
 		<!-- Login PopUP -->
 	    <div id="id01" class="modal">
