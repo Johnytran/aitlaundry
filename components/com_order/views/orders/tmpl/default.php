@@ -115,7 +115,7 @@ $document->setTitle('Confirm Order');
 		<legend>Payment Information</legend>
 		<div class="radio disabled">
 		  <label>
-		  <input type="radio" name="paypal" disabled selected>
+		  <input type="radio" name="paypal" disabled selected checked>
 		  <img src="images/paypal.jpg" alt="Paypal"/>
 		  </label>
 		</div>
