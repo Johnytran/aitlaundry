@@ -39,7 +39,6 @@ $userToken = JSession::getFormToken();
 <?php
 // Add JavaScript Frameworks
 JHtml::_('bootstrap.framework');
-$doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/scroll.js');
 $doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/template.js');
 $doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/jquery.omniselect.js');
 $doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/bootstrap.min.js');
@@ -124,6 +123,7 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ui-
 			        showTime: true,
 			        constrainInput: false
 			     });
+            
             });
         </script>
 		<!-- Login PopUP -->

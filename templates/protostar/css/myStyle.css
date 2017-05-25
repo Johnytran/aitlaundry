@@ -275,6 +275,7 @@ fieldset[disabled] .btn-primary.focus {
 }
 
 
+
 /*************** MAIN / MOTTO / HOW ****************************/
 main {
     letter-spacing: 2px;
@@ -510,7 +511,8 @@ span#impressed {
 }
 #orderDetails .checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
     position: inherit!important;
-    font-size: 20px;
+     transform: scale(2);
+    margin-right: 15px;
 }
 
 
@@ -527,6 +529,10 @@ span#impressed {
      z-index: 0;
 }
 
+
+.ui-datepicker-header {
+    padding: 0!important;
+}
 
 /*************** LOCATIONS **********************/
 
