@@ -115,10 +115,6 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ui-
 	    </nav>	
 	    <script>
             jQuery(document).ready(function(){
-<<<<<<< HEAD
-                jQuery('#play').click(function(){document.getElementById('video').style.display='block'});                
-            });                       
-=======
                 jQuery('#play').click(function(){document.getElementById('video').style.display='block'});     
                 jQuery('.datetime').datepicker({
                     dateFormat: 'yy-dd-mm',
