@@ -23,7 +23,9 @@ body h2{
    
 }
 
-
+hidden{
+    display: none;
+}
 header{
 	width: auto;
 	height: 115px;

@@ -9,7 +9,8 @@
 // No direct access
 defined('_JEXEC') or die;
 
-
+$document = JFactory::getDocument();
+$document->setTitle('Order Details');
 ?>
 <form action="index.php?option=com_order&task=order.confirm" method="post">
 <h1>Order details</h1>
@@ -32,7 +33,7 @@ defined('_JEXEC') or die;
 	        </div>
 	        <div class="col-sm-8">
 	        	
-	            <input type="text" name="date_timepickup" value="" class="form-control required invalid" size="30" required="required" aria-required="true" aria-invalid="true">                                
+	            <input type="text" name="date_timepickup" value="" class="form-control required invalid datetime" size="30" required="required" aria-required="true" aria-invalid="true">                                
 	        </div>
 	    </div>
 	    <div class="form-group">
@@ -50,7 +51,7 @@ defined('_JEXEC') or die;
 	        Date Time Delivery<span class="star">&nbsp;*</span></label>
 	        </div>
 	        <div class="col-sm-8">
-	             <input type="text" name="date_timedelivery" value="" class="form-control required invalid" size="30" required="required" aria-required="true" aria-invalid="true">                                
+	             <input type="text" name="date_timedelivery" value="" class="form-control required invalid datetime" size="30" required="required" aria-required="true" aria-invalid="true">                                
 	        </div>
 	    </div>
 

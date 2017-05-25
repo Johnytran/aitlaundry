@@ -8,6 +8,8 @@
  */
 // No direct access
 defined('_JEXEC') or die;
+$document = JFactory::getDocument();
+$document->setTitle('Confirm Order');
 ?>
 <?php 
 	$session = JFactory::getSession();
@@ -16,7 +18,7 @@ defined('_JEXEC') or die;
 	$order = $session->get('order');
 	//print_r($order);
 ?>
-<form action="index.php?option=com_order&task=order.confirm" method="post">
+<form action="index.php?option=com_order&task=order.checkout" method="post">
 <h1>Order Confirm</h1>
 <div class="row">
 	<div class="column span1-2">
@@ -28,7 +30,8 @@ defined('_JEXEC') or die;
 	       		 Address Pick Up<span class="star">&nbsp;*</span></label>
 	        </div>
 	        <div class="col-sm-8">
-	             <input type="text" name="addresspickup" value="<?php echo $order['addresspickup'];?>" class="form-control required invalid" size="30" disabled required="required" aria-required="true" aria-invalid="true">                                
+	             <input type="text" value="<?php echo $order['addresspickup'];?>" class="form-control required invalid" size="30" disabled required="required" aria-required="true" aria-invalid="true">
+	             <input type="text" name="addresspickup" value="<?php echo $order['addresspickup'];?>" class="form-control required invalid hidden" size="30">                                
 	        </div>
 	    </div>
 	    <div class="form-group">
@@ -37,7 +40,7 @@ defined('_JEXEC') or die;
 	        	Date Time Pick Up<span class="star">&nbsp;*</span></label>
 	        </div>
 	        <div class="col-sm-8">
-	             <input type="text" name="date_timepickup" value="<?php echo $order['date_timepickup'];?>" class="form-control required invalid" size="30" disabled required="required" aria-required="true" aria-invalid="true">                                
+	             <input type="text" name="date_timepickup" value="<?php echo $order['date_timepickup'];?>" class="form-control required invalid" size="30" disabled required="required" aria-required="true" aria-invalid="true">       <input type="text" name="date_timepickup" value="<?php echo $order['date_timepickup'];?>" class="form-control required invalid hidden" size="30">
 	        </div>
 	    </div>
 	    <div class="form-group">
@@ -46,7 +49,8 @@ defined('_JEXEC') or die;
 	        Address Delivery<span class="star">&nbsp;*</span></label>
 	        </div>
 	        <div class="col-sm-8">
-	             <input type="text" name="addressdeliver" value="<?php echo $order['addressdeliver'];?>" class="form-control required invalid" size="30" disabled required="required" aria-required="true" aria-invalid="true">                                
+	            <input type="text" name="addressdeliver" value="<?php echo $order['addressdeliver'];?>" class="form-control required invalid" size="30" disabled required="required" aria-required="true" aria-invalid="true">
+	            <input type="text" name="addressdeliver" value="<?php echo $order['addressdeliver'];?>" class="form-control required invalid hidden" size="30">                                
 	        </div>
 	    </div>
 	    <div class="form-group">
@@ -55,7 +59,8 @@ defined('_JEXEC') or die;
 	        Date Time Delivery<span class="star">&nbsp;*</span></label>
 	        </div>
 	        <div class="col-sm-8">
-	             <input type="text" name="date_timedelivery" value="<?php echo $order['date_timedelivery'];?>" class="form-control required invalid" disabled size="30" required="required" aria-required="true" aria-invalid="true">                                
+	            <input type="text" name="date_timedelivery" value="<?php echo $order['date_timedelivery'];?>" class="form-control required invalid" disabled size="30" required="required" aria-required="true" aria-invalid="true">
+	            <input type="text" name="date_timedelivery" value="<?php echo $order['date_timedelivery'];?>" class="form-control required invalid hidden">                                
 	        </div>
 	    </div>
 
@@ -65,7 +70,10 @@ defined('_JEXEC') or die;
 	        Delivery Note<span class="star">&nbsp;*</span></label>
 	        </div>
 	        <div class="col-sm-8">
-	             <textarea type="text" name="deliverynote" disabled rows="7" cols="60">
+	             <textarea disabled rows="7" cols="60">
+	             	<?php echo $order['deliverynote'];?>
+	             </textarea> 
+	              <textarea name="deliverynote" class="hidden" rows="7" cols="60">
 	             	<?php echo $order['deliverynote'];?>
 	             </textarea>                                
 	        </div>

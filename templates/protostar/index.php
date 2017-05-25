@@ -43,11 +43,16 @@ $doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/t
 $doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/jquery.omniselect.js');
 $doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/bootstrap.min.js');
 $doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/jquery.colorbox-min.js');
+$doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/jquery-ui-1.7.2.custom.min.js');
+$doc->addScriptVersion($this->baseurl . '/templates/' . $this->template . '/js/timepicker.js');
+
+
 
 
 // Add Stylesheets
 $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/colorbox.css');
 $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myStyle.css');
+$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ui-lightness/jquery-ui-1.7.2.custom.css');
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
@@ -231,7 +236,27 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/myS
 	    </nav>	
 	    <script>
             jQuery(document).ready(function(){
-                jQuery('#play').click(function(){document.getElementById('video').style.display='block'});                
+                jQuery('#play').click(function(){document.getElementById('video').style.display='block'});     
+                jQuery('.datetime').datepicker({
+                    dateFormat: 'yy-dd-mm',
+                    onSelect: function(datetext){
+
+                        var d = new Date(); // for now
+
+                        var h = d.getHours();
+                        h = (h < 10) ? ("0" + h) : h ;
+
+                        var m = d.getMinutes();
+                        m = (m < 10) ? ("0" + m) : m ;
+
+                        var s = d.getSeconds();
+                        s = (s < 10) ? ("0" + s) : s ;
+
+                        datetext = datetext + " " + h + ":" + m + ":" + s;
+
+                        jQuery(this).val(datetext);
+                    }
+                });     
             });
         </script>
 		<!-- Login PopUP -->
