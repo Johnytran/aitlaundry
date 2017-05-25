@@ -21,8 +21,8 @@
 $.extend($.datepicker._defaults, {
     'stepMinutes': 1, // Number of minutes to step up/down
     'stepHours': 1, // Number of hours to step up/down
-    'time24h': true, // True if 24h time
-    'showTime': true, // Show timepicker with datepicker
+    'time24h': false, // True if 24h time
+    'showTime': false, // Show timepicker with datepicker
     'altTimeField': '' // Selector for an alternate field to store time into
 });
 

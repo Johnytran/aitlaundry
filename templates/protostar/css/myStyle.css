@@ -516,11 +516,16 @@ span#impressed {
 
 /*************** CALENDAR **********************/
 
-#ui-datepicker-div{
-    
+
+ .ui-slider-handle {
+    position: relative;
+    z-index: 0;
 }
 
-
+.ui-slider {
+    position: relative;
+     z-index: 0;
+}
 
 
 /*************** LOCATIONS **********************/
@@ -779,49 +784,55 @@ div.tab button.active {
 
 
 
-table,th,td{
+#PaymentHistory table,th,td{
 	border: 1px solid black;
     padding: 10px;
 }
-th{
+#PaymentHistory th{
 	border:none;
 	width: 30px;
 }
-td{
-	background:black;	
+#PaymentHistory td{
+	background: #f1f1f1;
 	width: 150px;
 	border: 3px solid white;	
-	border-radius: 25px;
 	border-right-width: 30px;
 	color: orange;
+    text-align: center;
+    
 }
-table{
+#PaymentHistory table{
 	border:none;
 	margin: 0px;
+    border-collapse: inherit;
 }
-#table1{	
+#PaymentHistory #table1{	
 	display: flex;
     flex-direction: column;
     justify-content: center;
     width:40%;
 }
-#table2{	
+#PaymentHistory #table2{	
 	display: flex;
     flex-direction: column;
     justify-content: center;
-    width:40%;
+    width: 40%;
 }
 
-tr{
+#PaymentHistory tr{
 	border: 20px solid white; 
 }
-caption{
-	font-size: 30px;
+#PaymentHistory caption{
+	font-size: 24px;
 }
 #paymentTable td{
-	background:gray;	
+	background:#f1f1f1;	
 	color: black;	
 	width: 100px;
+}
+
+#paymentTable th{
+    text-align: center;
 }
 
 div.paymentTableHolder{
@@ -923,6 +934,7 @@ div.paymentTableHolder{
     font-size: 20px;
     padding: 10px;
     border: 2px solid black;
+    height: 53px!important;
 }
 
 
