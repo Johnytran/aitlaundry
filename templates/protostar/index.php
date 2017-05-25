@@ -85,9 +85,9 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ui-
 	        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	          <ul class="nav navbar-nav navbar-right">
 	            <li class="active"><a href="index.php">Home<span class="sr-only">(current)</span></a></li>
-	            <li><a onclick="initScroll('how'); return false;" href="#">How it Works</a></li>
-	            <li><a onclick="initScroll('combos'); return false;" href="#">Combos</a></li>
-	            <li><a onclick="initScroll('locations'); return false;" href="#">Locations</a></li>
+	            <li><a href="index.php/how-it-works">How it Works</a></li>
+	            <li><a href="index.php/#toCombos">Combos</a></li>
+	            <li><a href="index.php/#tolocations">Locations</a></li>
 	            <li><a href="index.php/about-us">About us</a></li>
 	            <li><a href="index.php/contact">Contact us</a></li>
 	            <li>

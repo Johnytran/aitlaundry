@@ -46,7 +46,7 @@ label{
 }
 
 a{
-    font-size: 16px;
+    
 }
 /*NAVIGATION*/
 
@@ -391,7 +391,7 @@ span#impressed {
 }
     
 .comboContainer a {
-    
+    font-size: 25px;
     text-decoration: none;
 }
 
@@ -620,6 +620,31 @@ span#impressed {
     color:rgba(0,0,0,0.65);
     font-size: 21px;
 }
+
+
+blockquote {
+    background: none;
+    border-left: none;
+    color: none; 
+    font: none; 
+    padding: 10px 20px;
+    margin: 0 0 20px;
+   
+    border-left: 3px solid #eee;
+    text-shadow: none;
+    width: auto; 
+    border-radius: none; 
+    
+}
+#testimonials p{
+    line-height: 1.5;
+}
+
+#faq{
+    margin-top: 550px;
+}
+
+
 /******************************* TERMS / PRIVACY *******************************/
 #termstitle{
     margin-top:5px;
@@ -1151,6 +1176,15 @@ div.space1{
     #termscontent p {
         
     }
+    
+    #faq{
+        margin-top: 20px;
+    }
+    
+    blockquote{
+        border: none;
+    }
+
 
 }
 
