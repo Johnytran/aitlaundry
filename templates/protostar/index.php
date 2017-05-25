@@ -118,6 +118,7 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ui-
                 jQuery('#play').click(function(){document.getElementById('video').style.display='block'});     
                 jQuery('.datetime').datepicker({
                     dateFormat: 'yy-dd-mm',
+                    showTime: true,
                     onSelect: function(datetext){
 
                         var d = new Date(); // for now
