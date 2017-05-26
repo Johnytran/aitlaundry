@@ -24,6 +24,7 @@ class OrderControllerOrder extends JControllerLegacy
 	 *
 	 * @since    1.6
 	 */
+
 	public function confirm(){
 		$post = JRequest::get('post');
 		//print_r($post);die;
@@ -60,15 +61,17 @@ class OrderControllerOrder extends JControllerLegacy
 				'1', 
 				'".date("Y-m-d h:i:s")."', 
 				".$db->quote($post['addresspickup']).", 
-				".$db->quote($post['date_timepickup']).", 
+				".$db->quote(JHTML::Date($post['date_timepickup'],'Y-m-d H:i:s')).", 
 				".$db->quote($post['addressdeliver']).",  
-				".$db->quote($post['date_timedelivery']).", 
+				".$db->quote(JHTML::Date($post['date_timedelivery'],'Y-m-d H:i:s')).", 
 				".$db->quote($post['deliverynote'])."
 				)";
-
+		// echo $query;
+		//  die;
 		$db->setQuery($query);
 		$result  = $db->query();
 		$orderid = $db->insertid();
+		// die;
 		if($result){
 			$notify_url = JURI::root()."index.php?option=com_order&task=paypal.ipn_complete&orderid=".$orderid."&tmp_id=0";
 	        
@@ -89,6 +92,7 @@ class OrderControllerOrder extends JControllerLegacy
 	        "amount" => $price,
 	        "currency_code" => 'AUD',
 	        "address_override" => "1",
+	        "image_url" => JURI::root()."/images/logo_impress.png",
 	    
 
 	        "return" =>JURI::root()."index.php?option=com_order&view=orders&layout=confirmation&orderid=".$orderid,
@@ -106,7 +110,8 @@ class OrderControllerOrder extends JControllerLegacy
 	        {
 	            $query_string .= $name. "=" . urlencode($value) ."&";
 	        }
-
+	        $session->set('yourcart','');
+	        $session->set('order','');
 	        return $this->setRedirect('https://www.sandbox.paypal.com/cgi-bin/webscr'.$query_string);
 		}else{
 			return $this->setRedirect('index.php?option=com_order&view=orders', 'Error in saving data.');

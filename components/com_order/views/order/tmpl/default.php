@@ -11,6 +11,9 @@ defined('_JEXEC') or die;
 
 $document = JFactory::getDocument();
 $document->setTitle('Order Details');
+$session = JFactory::getSession();
+$order = $session->get('order');
+
 ?>
 <form id="orderDetails" action="index.php?option=com_order&task=order.confirm" method="post">
     <div id="abouttitle" class="container-fluid">
@@ -59,7 +62,7 @@ $document->setTitle('Order Details');
 	       		 Address Pick Up<span class="star">&nbsp;*</span></label>
 	        </div>
 	        <div>
-	             <input type="text" name="addresspickup" value="" class="form-control required invalid" size="30" required="required" aria-required="true" aria-invalid="true">                                
+	             <input type="text" name="addresspickup" value="<?php echo $order?$order['addresspickup']:'';?>" class="form-control required invalid" size="30" required="required" aria-required="true" aria-invalid="true">                                
 	        </div>
 	    </div>
 	    <div class="form-group">
@@ -69,7 +72,7 @@ $document->setTitle('Order Details');
 	        </div>
 	        <div>
 	        	
-	            <input type="text" name="date_timepickup" value="" class="form-control required invalid datetime" size="30" required="required" aria-required="true" aria-invalid="true">                                
+	            <input type="text" name="date_timepickup" value="<?php echo $order?$order['date_timepickup']:'';?>" class="form-control required invalid datetime" size="30" required="required" aria-required="true" aria-invalid="true">                                
 	        </div>
 	    </div>
 	    <div class="form-group">
@@ -78,7 +81,7 @@ $document->setTitle('Order Details');
 	        Address Delivery<span class="star">&nbsp;*</span></label>
 	        </div>
 	        <div>
-	             <input type="text" name="addressdeliver" value="" class="form-control required invalid" size="30" required="required" aria-required="true" aria-invalid="true">                                
+	             <input type="text" name="addressdeliver" value="<?php echo $order?$order['addressdeliver']:'';?>" class="form-control required invalid" size="30" required="required" aria-required="true" aria-invalid="true">                                
 	        </div>
 	    </div>
 	    <div class="form-group">
@@ -87,7 +90,7 @@ $document->setTitle('Order Details');
 	        Date Time Delivery<span class="star">&nbsp;*</span></label>
 	        </div>
 	        <div>
-	             <input type="text" name="date_timedelivery" value="" class="form-control required invalid datetime" size="30" required="required" aria-required="true" aria-invalid="true">          
+	             <input type="text" name="date_timedelivery" value="<?php echo $order?$order['date_timedelivery']:'';?>" class="form-control required invalid datetime" size="30" required="required" aria-required="true" aria-invalid="true">          
 	        </div>
 	    </div>
 
@@ -97,7 +100,9 @@ $document->setTitle('Order Details');
 	        Delivery Note<span class="star">&nbsp;*</span></label>
 	        </div>
 	        <div>
-	             <textarea class="form-control" type="text" name="deliverynote" rows="7" cols="60"></textarea>                                
+	             <textarea class="form-control" type="text" name="deliverynote" rows="7" cols="60">
+	             	<?php echo $order?$order['deliverynote']:'';?>
+	             </textarea>                                
 	        </div>
 	    </div>
         	
