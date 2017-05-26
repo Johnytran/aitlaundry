@@ -58,15 +58,15 @@ class OrderViewOrder extends JViewLegacy
 
 		
 
-		if ($this->_layout == 'edit')
-		{
-			$authorised = $user->authorise('core.create', 'com_order');
+		// if ($this->_layout == 'edit')
+		// {
+		// 	$authorised = $user->authorise('core.create', 'com_order');
 
-			if ($authorised !== true)
-			{
-				throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
-			}
-		}
+		// 	if ($authorised !== true)
+		// 	{
+		// 		throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
+		// 	}
+		// }
 
 		$this->_prepareDocument();
 

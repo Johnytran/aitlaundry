@@ -121,6 +121,7 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/ui-
                 jQuery('.datetime').datepicker({
 			    	time24h: true,
 			        showTime: true,
+			        dateFormat: 'dd-mm-yy',
 			        constrainInput: false
 			     });
             

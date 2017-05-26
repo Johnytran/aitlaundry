@@ -123,6 +123,7 @@ class OrderControllerOrder extends JControllerLegacy
 	}
 	public function edit()
 	{
+		die('dfas');
 		$app = JFactory::getApplication();
 
 		// Get the previous edit id (if any) and the current edit id.

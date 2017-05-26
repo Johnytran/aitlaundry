@@ -41,7 +41,8 @@ JHtml::_('behavior.formvalidator');
                                 <div class="col-sm-8">
                                 <input type="text" name="jform[lastName]" id="jform_lastName" value="" class="required" size="30" required="required" aria-required="true">     </div>
                         </div>
-                        <div class="form-group">
+                        <input type="hidden" name="name" value="user"/>
+                        <!-- <div class="form-group">
                                 <label for="address" class="col-sm-4 control-label">
                                     <label id="jform_address-lbl" for="jform_address" class="hasTooltip" title="" data-original-title="<strong>Address</strong>">
 	                                   Address
@@ -50,7 +51,7 @@ JHtml::_('behavior.formvalidator');
                                 <div class="col-sm-8">
                                     <input type="text" name="jform[address]" id="jform_address" value="" size="230">                                
                                 </div>
-                            </div>
+                            </div> -->
                         <div class="form-group">
                                 <label for="username" class="col-sm-4 control-label">
                                     <label id="jform_username-lbl" for="jform_username" class="hasPopover required" title="" data-content="Enter your desired username." data-original-title="Username">Username<span class="star">&nbsp;*</span>
