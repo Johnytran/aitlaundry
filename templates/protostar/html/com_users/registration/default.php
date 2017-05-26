@@ -123,6 +123,8 @@ JHtml::_('behavior.formvalidator');
                             </div>
 							
                         <div class="form-group">
+                            <label class="hasPopover required">By registering you agree to <a href="index.php/terms-conditions" target="_blank">the terms and conditions</a> 
+                                </label>
                             <div class="col-sm-offset-4 col-sm-8">
                                 <button type="submit" class="btn btn-default btnStyle validate">Register</button>
                                     <a class="btn btn-default btnStyleCancel" href="/aitlaundry/aitlaundry/" title="Cancel">Cancel</a>
