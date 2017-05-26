@@ -167,42 +167,59 @@ $user = JFactory::getUser();
 			
 			<div id="PaymentHistory" class="tabcontent">
 				<h3>Payment History</h3>
+				<?php 
+				$db = JFactory::getDBO();
+				$user = JFactory::getUser();
+				$query = "SELECT * FROM #__order where created_by=".$user->id;
+				$db->setQuery($query);
+				$orders = $db->loadObjectList();
+
+				?>
 				<div class="paymentTableHolder">
 					<table id="paymentTable" style="width:100%";>
 						<tr>
 							<th>OrderID</th>
-							<th>Payment</th>
 							<th>Payment type</th>
 							<th>Combo Type</th>
 							<th>Pickup Date</th>
 							<th>Dropoff Date</th>
 							<th>Status</th>						
 						</tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
+						<?php 
+						if($orders){
+							foreach($orders as $key=>$value){
+							?>
+								<tr>
+									<td>#<?php echo $value->id;?></td>
+									<td>Paypal</td>
+									<td><?php 
+										$query = "Select name from #__combos_combo where id=".$value->comboid;
+										$db->setQuery($query);
+										echo $db->loadResult();
+									?></td>
+									<td><?php echo $value->date_timepickup;?></td>
+									<td><?php echo $value->date_timedelivery;?></td>
+									<td><?php 
+										switch($value->status){
+											case '1':
+												echo 'Completed';
+												break;
+											case '0':
+												echo 'Cancel';
+												break;
+											case '2':
+												echo 'Pending';
+												break;
+										}?>
+									</td>
+									
+								</tr>
+							
+							<?php
+							}
+						}
+						?>
+							
 					</table>
 				</div>
 			</div>

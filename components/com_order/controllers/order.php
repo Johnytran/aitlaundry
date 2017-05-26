@@ -39,13 +39,14 @@ class OrderControllerOrder extends JControllerLegacy
 	public function checkout(){
 		$post = JRequest::get('post');
 		//print_r($post);die;
+		$user = JFactory::getUser();
 
 		$session = JFactory::getSession();
 		$session->set('order',$post);
 		$cart = $session->get('yourcart');
 		$db = JFactory::getDBO();
 
-		$query = "INSERT INTO #__order(`status`, `comboid`,`paymentid`, `datetimecreated`,`addresspickup`,`date_timepickup`, `addressdelivery`, `date_timedelivery`, `deliverynote`)";
+		$query = "INSERT INTO #__order(`status`, `comboid`,`paymentid`, `datetimecreated`,`addresspickup`,`date_timepickup`, `addressdelivery`, `date_timedelivery`, `deliverynote`, `created_by`)";
 		
 		$comboid = 0;
 		$comboName = '';
@@ -64,7 +65,8 @@ class OrderControllerOrder extends JControllerLegacy
 				".$db->quote(JHTML::Date($post['date_timepickup'],'Y-m-d H:i:s')).", 
 				".$db->quote($post['addressdeliver']).",  
 				".$db->quote(JHTML::Date($post['date_timedelivery'],'Y-m-d H:i:s')).", 
-				".$db->quote($post['deliverynote'])."
+				".$db->quote($post['deliverynote']).",
+				".$user->id."
 				)";
 		// echo $query;
 		//  die;
