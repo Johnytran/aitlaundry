@@ -100,9 +100,7 @@ $order = $session->get('order');
 	        Delivery Note<span class="star">&nbsp;*</span></label>
 	        </div>
 	        <div>
-	             <textarea class="form-control" type="text" name="deliverynote" rows="7" cols="60">
-	             	<?php echo $order?$order['deliverynote']:'';?>
-	             </textarea>                                
+	             <textarea class="form-control" type="text" name="deliverynote" rows="7" cols="60"><?php echo $order?$order['deliverynote']:'';?></textarea>          
 	        </div>
 	    </div>
         	
@@ -112,7 +110,7 @@ $order = $session->get('order');
 		<legend>Payment Information</legend>
 		<div class="radio disabled">
 		  <label>
-		  <input type="radio" name="paypal" disabled selected>
+		  <input type="radio" name="paypal" disabled selected checked>
 		  <img src="images/paypal.jpg" alt="Paypal"/>
 		  </label>
 		</div>

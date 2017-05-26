@@ -101,12 +101,8 @@ $document->setTitle('Confirm Order');
 	        Delivery Note<span class="star">&nbsp;*</span></label>
 	        </div>
 	        <div>
-	             <textarea class="form-control" name="deliverynote"  disabled rows="7" cols="60">
-	             	<?php echo $order['deliverynote'];?>
-	             </textarea>  
-	              <textarea class="form-control hidden" name="deliverynote" rows="7" cols="60">
-	             	<?php echo $order['deliverynote'];?>
-	             </textarea>  
+	             <textarea class="form-control" name="deliverynote"  disabled rows="7" cols="60"><?php echo $order['deliverynote'];?></textarea>  
+	              <textarea class="form-control hidden" name="deliverynote" rows="7" cols="60"><?php echo $order['deliverynote'];?></textarea>  
 	        </div>
 	    </div>
 	    <?php }else{?>
@@ -119,14 +115,16 @@ $document->setTitle('Confirm Order');
 		<legend>Payment Information</legend>
 		<div class="radio disabled">
 		  <label>
-		  <input type="radio" name="paypal" disabled selected>
+		  <input type="radio" name="paypal" disabled selected checked>
 		  <img src="images/paypal.jpg" alt="Paypal"/>
 		  </label>
 		</div>
         <div class="row">
-        	<a class="btn btn-default btnStyle" href="index.php?option=com_order&view=order">Edit Order</a>
-			<button class="btn btn-default btnStyle" type="submit">Check out with Paypal</button>
+        	<a class="btn btn-default btnStyleCancel" href="index.php?option=com_order&view=order">Edit Order</a>
 	   </div>
+        <div class="row">
+            <button class="btn btn-default btnStyle" type="submit">Check out with Paypal</button>
+        </div>
 	</div>
 </div>
 

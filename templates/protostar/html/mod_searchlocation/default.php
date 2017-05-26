@@ -169,7 +169,7 @@ function initialize() {
 }
 
 </script>
-
+<span id="tolocations"></span>
 <div id="locations">
       <h1>Locations</h1>
       <p style="margin-bottom: 10px;">Now servicing in select neighbourhoods in Sydney.</p>

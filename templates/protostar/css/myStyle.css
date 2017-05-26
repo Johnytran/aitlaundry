@@ -46,7 +46,7 @@ label{
 }
 
 a{
-    font-size: 16px;
+    
 }
 /*NAVIGATION*/
 
@@ -275,6 +275,7 @@ fieldset[disabled] .btn-primary.focus {
 }
 
 
+
 /*************** MAIN / MOTTO / HOW ****************************/
 main {
     letter-spacing: 2px;
@@ -391,7 +392,7 @@ span#impressed {
 }
     
 .comboContainer a {
-    
+    font-size: 25px;
     text-decoration: none;
 }
 
@@ -510,18 +511,28 @@ span#impressed {
 }
 #orderDetails .checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
     position: inherit!important;
-    font-size: 20px;
+     transform: scale(2);
+    margin-right: 15px;
 }
 
 
 /*************** CALENDAR **********************/
 
-#ui-datepicker-div{
-    
+
+ .ui-slider-handle {
+    position: relative;
+    z-index: 0;
+}
+
+.ui-slider {
+    position: relative;
+     z-index: 0;
 }
 
 
-
+.ui-datepicker-header {
+    padding: 0!important;
+}
 
 /*************** LOCATIONS **********************/
 
@@ -575,22 +586,18 @@ span#impressed {
 
 
 /******************************* ABOUT PAGE *******************************/
+
+
 #abouttitle{
     margin-top:5px;
     background-color:#f2f2f2;
-    padding: 0px;
-}
-div #purpose{
-    padding-bottom: 35px;
-}
-#faq h4{
-   padding-bottom: 15px; 
+    padding:0;
 }
 #abouttitle h1 {
     margin:0;
+    padding:35px;
     background-color:#333;
     color:#faa634;
-    padding: 35px;
 }
 #aboutcontent {
     margin:20px auto;
@@ -600,25 +607,49 @@ div #purpose{
     border-radius:10px;
     box-shadow:1px 1px 20px rgba(0,0,0,0.3);
 }
-#aboutcontent h4{    
-    font-size: 29px;
-    padding-top: 15px;
-    padding-bottom: 20px;
+#aboutcontent h4{
+    font-size: 28px;
+    padding:20px;
 }
 #aboutcontent p {
-    font-size: 23px;
-    color:rgba(0,0,0,0.65);    
-    padding-bottom: 15px;
+    font-size: 21px;
+    padding:10px;
+    padding-bottom: 35px;
+    color:rgba(0,0,0,0.65);
 }
 #aboutcontent #team h4, h5{
     margin:0;
     padding:25px;
 }
 
-#testimonial {
-    top: 919px;
+#aboutcontent h2{
+    color:rgba(0,0,0,0.65);
+    font-size: 21px;
+}
+
+
+blockquote {
+    background: none;
+    border-left: none;
+    color: none; 
+    font: none; 
+    padding: 10px 20px;
+    margin: 0 0 20px;
+   
+    border-left: 3px solid #eee;
+    text-shadow: none;
+    width: auto; 
+    border-radius: none; 
     
 }
+#testimonials p{
+    line-height: 1.5;
+}
+
+#faq{
+    margin-top: 550px;
+}
+
 
 /******************************* TERMS / PRIVACY *******************************/
 #termstitle{
@@ -779,49 +810,55 @@ div.tab button.active {
 
 
 
-table,th,td{
+#PaymentHistory table,th,td{
 	border: 1px solid black;
     padding: 10px;
 }
-th{
+#PaymentHistory th{
 	border:none;
 	width: 30px;
 }
-td{
-	background:black;	
+#PaymentHistory td{
+	background: #f1f1f1;
 	width: 150px;
 	border: 3px solid white;	
-	border-radius: 25px;
 	border-right-width: 30px;
 	color: orange;
+    text-align: center;
+    
 }
-table{
+#PaymentHistory table{
 	border:none;
 	margin: 0px;
+    border-collapse: inherit;
 }
-#table1{	
+#PaymentHistory #table1{	
 	display: flex;
     flex-direction: column;
     justify-content: center;
     width:40%;
 }
-#table2{	
+#PaymentHistory #table2{	
 	display: flex;
     flex-direction: column;
     justify-content: center;
-    width:40%;
+    width: 40%;
 }
 
-tr{
+#PaymentHistory tr{
 	border: 20px solid white; 
 }
-caption{
-	font-size: 30px;
+#PaymentHistory caption{
+	font-size: 24px;
 }
 #paymentTable td{
-	background:gray;	
+	background:#f1f1f1;	
 	color: black;	
 	width: 100px;
+}
+
+#paymentTable th{
+    text-align: center;
 }
 
 div.paymentTableHolder{
@@ -923,6 +960,7 @@ div.paymentTableHolder{
     font-size: 20px;
     padding: 10px;
     border: 2px solid black;
+    height: 53px!important;
 }
 
 
@@ -1144,6 +1182,15 @@ div.space1{
     #termscontent p {
         
     }
+    
+    #faq{
+        margin-top: 20px;
+    }
+    
+    blockquote{
+        border: none;
+    }
+
 
 }
 
